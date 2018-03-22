@@ -1,0 +1,14 @@
+#container {
+    padding-top: 50px;
+}
+@media (max-width: 767px) {
+    #container {
+        padding-top: 190px;
+    }
+}
+#loading-screen {
+    width: 100%;
+    margin-left: 40%;
+    margin-top: 10%;
+    font-size: 5em;
+}

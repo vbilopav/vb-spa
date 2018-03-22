@@ -1,0 +1,32 @@
+<script type="text/javascript">window._app = {version: "1"};</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="vb spa demo">
+    <meta name="author" content="vb">
+
+    <title>VB-SPA app demo</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+    <script>
+        document.write('<link rel="stylesheet" href="default.css?v=' + window._app.version + '" />');
+    </script>
+</head>
+<body>        
+    <div id="loading-screen" style="display: none">
+        Loading ... 
+    </div>    
+    <script id="loading-screen-script" type="text/javascript">
+        (() => {setTimeout(() => {var e = document.getElementById("loading-screen"); if (e) e.removeAttribute("style");}, 500);})();
+    </script>
+
+    <div id="app-container" style="display: none">
+    </div>
+
+    <script>var require = {urlArgs: "v=" + _app.version}</script>
+    <script type="text/javascript" data-main="app/main.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>        
+</body>
+</html>
