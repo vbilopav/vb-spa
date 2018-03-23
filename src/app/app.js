@@ -1,5 +1,5 @@
 define([
-    "template!templates/layout.html",
+    "composite!templates/layout.html",
     "router"
 ], (
     layout,
@@ -8,24 +8,8 @@ define([
     
     var        
         container,        
-        navigation;
-
-    const 
-        body = document.body,
-        router = new Router({            
-            navigate: (options) => {
-                // template holds actual html content
-                container.innerHTML = options.template,
-                // change active class on navigation element - home doesn't have an id, other just use route name
-                navigation.querySelector(options.route ? options.route : ":not([id])").className = "active";
-            },
-            routes: {
-                "": {
-                    view: "text!views/home.html"                    
-                }
-            }
-        });
-
+        navigation,
+        body = document.body;
 
     return () => {    
         // refernce to container element
@@ -46,8 +30,22 @@ define([
         //get reference to view container
         container = app.querySelector("#container");
 
-        // start app routing
-        router.start();
+        // configure and start app routing
+        router = new Router({            
+            navigate: (options) => {
+                // template holds actual html content
+                container.innerHTML = options.template,
+                // change active class on navigation element - home doesn't have an id, other just use route name
+                options.data.nav.className = "active";    
+            },
+            leave: (options) => {
+                console.log(options);
+            },
+            routes: {
+                "": {view: "text!views/home.html", nav: navigation.querySelector(":not([id])")},
+                "parameterized": {view: "template!views/parameterized.html", nav: navigation.querySelector("#parameterized")}
+            }
+        }).start();
         
         //show app
         app.style.display = '';        
