@@ -1,7 +1,6 @@
 define([], () => { 
     return class {
-        constructor(options) {
-            this._routes = options.routes || (() => {throw new Error()})();
+        constructor(options) {            
             this._navigate = options.navigate || (() => {});
             this._leave = options.leave || (() => {});
             this._error = options.error || (() => {});
@@ -10,10 +9,28 @@ define([], () => {
             this._test = options.test || (route => /^[ A-Za-z0-9_@()/.-]*$/.test(route));            
             this._root = options.root; 
             this._test(this._root) || (() => {throw new Error()})(); 
-            this._createRoutes(options.routes);
+            let routes = options.routes || (() => {throw new Error()})();
+            this._routes = {};
+    
+            for(let route in routes) {
+                let data = routes[route];
+                this._test(route) || (() => {throw new Error()})();    
+                this._routes[route] = {
+                    id: data.id || route,
+                    name: route,
+                    view: data.view || (() => {throw new Error()})(),
+                    paramsMap: data.paramsMap || ((...args) => args.length === 0),
+                    data: data.data
+                }
+            }
             this._current = undefined; 
+            this._manager = undefined; 
         }
-        start() {            
+        useViewManager(manager=(() => {throw new Error()})()) {
+            this._manager = manager;
+            return this;
+        }
+        start() {
             this._onChange(undefined, true);
             var that = this;
             window.addEventListener('hashchange', event => {
@@ -23,33 +40,23 @@ define([], () => {
         }
         getData() {
             return Object.keys(this._routes).map(name => {
-                let data = this._routes[name].data || {};                
-                data.url = "/" + 
-                    this._hash + 
-                    (this._root ? this._root + "/" : "") +
-                    name
+                let route = this._routes[name],
+                    data = route.data || {};                
+                data.url = "/" + this._hash + (this._root ? this._root + "/" : "") + name;
+                data.id = route.id
                 if (this._current !== undefined) {
                     data.active = name === this._current;
                 }                
                 return data;
             })
         }
-        _createRoutes(routes) {
-            this._routes = {};
-            for(let route in routes) {
-                let data = routes[route];
-                this._test(route) || (() => {throw new Error()})();    
-                this._routes[route] = {
-                    name: route,
-                    view: data.view || (() => {throw new Error()})(),
-                    paramsMap: data.paramsMap || ((...args) => args.length === 0),
-                    data: data.data
-                }
-            }
-        }
         _getRouteData(hash) {
-            let route, params,
-                pieces = hash.replace(this._hash, "").split("/");
+            let route, params;
+            hash = hash.replace(this._hash, "");
+            if (hash.endsWith("/")) {
+                hash = hash.substring(0, hash.length-1);
+            }
+            let pieces = hash.split("/").map(item => decodeURIComponent(item));             
             if (this._root) {
                 [root, route, ...params] = pieces;
                 if (root !== this._root) {

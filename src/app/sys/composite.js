@@ -1,4 +1,4 @@
-﻿define(["module", "plugins/template-helpers"], (module, helper) => {
+﻿define(["module", "sys/template-helpers"], (module, helper) => {
     return {
         version: '1.0.0',
         load(name, req, onload, config) {
@@ -6,7 +6,7 @@
                 let from = 0,
                     found = [],
                     length = text.length,
-                    search = "{require(\"",
+                    search = "{require(",
                     searchLength = search.length;
                 while (from > -1) {
                     let index = text.indexOf(search, from)
@@ -14,17 +14,16 @@
                         break;
                     }
                     index = index + searchLength
-                    from = text.indexOf("\")", index);
+                    from = text.indexOf(")", index);
                     if (from !== -1) {
-                        found.push(text.substring(index, from))
-                    } else {
-                        throw Error("Error: require statement in template incorrect!");
+                        let result = text.substring(index, from);
+                        found.push(result.substring(1, result.length-1));
                     }
                 }
                 if (found.length) {
-                    require(found, () => onload(data => helper.template(text, data))); 
+                    require(found, () => onload(data => helper.parse(text, data, name))); 
                 } else {                    
-                    onload(data => helper.template(text, data));
+                    onload(data => helper.parse(text, data, name));
                 }               
             });
         }

@@ -1,11 +1,13 @@
 define([
     "composite!templates/layout.html",
     "text!templates/not-found.html",
-    "router"
+    "sys/router",
+    "sys/view-manager",
 ], (
     layout,
     notFound,
-    Router
+    Router,
+    Manager
 ) => {
 
     var
@@ -20,17 +22,28 @@ define([
         router = new Router({
             routes: {
                 "": {
+                    // id is set automatically from name, however, we use this to render id of nav element
+                    // and name of home is empty
+                    id: "home",
                     view: "text!views/home.html", 
                     data: {
-                        id: "home",
                         getNavElement: () => getNavElement("#home"),
                         title: "Home"
                     }
                 },
                 "parameterized": {
                     view: "template!views/parameterized.html", 
+                    paramsMap: (...params) => {
+                        if (params.length > 3) {
+                            return false;
+                        }                        
+                        return {
+                            first: params[0],
+                            second: Number(params[1]),
+                            third: params[2] ? params[2].split(",") : []
+                        };
+                    },
                     data: {
-                        id: "parameterized",
                         getNavElement: () => getNavElement("#parameterized"),
                         title: "Parameterized"
                     }
@@ -39,10 +52,11 @@ define([
             navigate: event => {
                 // template holds actual html content
                 container.innerHTML = event.template,
-                // change active class on navigation element - home doesn't have an id, other just use route name
+                // change active class on navigation element
                 event.route.data.getNavElement().className = "active";
             },
-            leave: event => event.route.data.getNavElement().className = "",
+            // we may leave unknown route
+            leave: event => !event.route || (event.route.data.getNavElement().className = ""),
             error: event => container.innerHTML = notFound
         });
         
@@ -67,7 +81,7 @@ define([
         container = app.querySelector("#container");
 
         // start app routing
-        router.start();
+        router.useViewManager(new Manager({container: container})).start();
 
         // show the app
         app.style.display = '';        

@@ -1,15 +1,71 @@
 <div class="">
-        <h1>Parameterized</h1>
-        <hr />
-        <p class="lead">
-            This is a parameterized view created from text template.
-            You can use this types of views to display static html content which is parameterized as string template from url
-        </p>
-        <p>
-            <hr />        
-            View location: <code>/views/parameterized.html</code>
-            <br />
-            Route definition: <code>"parameterized": {view: "text!views/home.html"}</code>        
-        </p>
-    </div>
-    
+    <h1>Parameterized</h1>
+    <hr />
+    <p class="lead">
+        This is a parameterized view created from template.
+        <br /><br />
+        You can use this types of views to parse and dispaly url parameters in view template.
+    </p>
+    <p>        
+        View location: <pre>/views/parameterized.html</pre>
+        <br />
+        Route definition:
+        <pre>
+"parameterized": {
+    view: "template!views/parameterized.html", 
+    paramsMap: (...params) => {
+        if (params.length > 3) {
+            return false;
+        }                        
+        return {
+            first: params[0],
+            second: Number(params[1]),
+            third: params[2] ? params[2].split(",") : []
+        };
+    }
+}       </pre>
+        <br />
+        View accepts max three named paramaters:
+        <ul class="list-group">
+            <li lass="list-group-item">1. name: <code>first"</code>, type: <code>string</code></li>
+            <li lass="list-group-item">2. name: <code>second</code>, type: <code>number</code></li>
+            <li lass="list-group-item">3. name: <code>third</code>, type: <code>array of strings</code></li>
+        </ul>
+        Current values:
+        <ul class="list-group">
+            <li lass="list-group-item">1. first: <code>${this.first}</code></li>
+            <li lass="list-group-item">2. second: <code>${this.second}</code></li>
+            <li lass="list-group-item">
+                3. third: <code>${this.third}</code>, rendered in select element and select value from first param:                
+                <select>
+                    ${this.template.forEach(this.third, item => 
+                        `<option ${this.first === item ? "selected": ""}>${item}</option>`
+                    )}
+                </select>
+            </li>
+        </ul>
+        Test urls:     
+        <ul class="list-group">
+            <li lass="list-group-item">
+                First string param: 
+                <a href="/#!parameterized/first param/">/#!parameterized/first param/</a>
+            </li>
+            <li lass="list-group-item">
+                Second param is parsed number: 
+                <a href="/#!parameterized/first param/second">/#!parameterized/first param/second/</a>
+            </li>
+            <li lass="list-group-item">
+                Second param is parsed number: 
+                <a href="/#!parameterized/first param/2/">/#!parameterized/first param/2/</a>
+            </li>
+            <li lass="list-group-item">
+                Third is CVS list parsed to array:
+                <a href="/#!parameterized/test/2/first,second,third,test/">/#!parameterized/test/2/first,second,third,test/</a>                
+            </li>            
+            <li lass="list-group-item">
+                Fourth parameter is not allowed:
+                <a href="/#!parameterized/1/2/3/4/">/#!parameterized/1/2/3/4/</a>
+            </li>            
+        <ul>
+    </p>
+</div>

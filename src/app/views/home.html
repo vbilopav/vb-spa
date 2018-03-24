@@ -2,13 +2,21 @@
     <h1>Home</h1>
     <hr />
     <p class="lead">
-        This is a plain-text view.      
+        This is a plain-text view.
+        <br /><br />
         You can use this types of views to display static html content.
     </p>
     <p>
         <hr />        
-        View location: <code>/views/home.html</code>
+        View location: <pre>/views/home.html</pre>
         <br />
-        Route definition: <code>"": {view: "text!views/home.html"}</code>        
+        Route definition: 
+        <pre>
+"": {
+    id: "home",
+    view: "text!views/home.html"
+}       </pre>
+        <br />
+        Home routes have empty string route.
     </p>
 </div>

@@ -7,7 +7,7 @@
     <meta name="description" content="vb spa demo">
     <meta name="author" content="vb">
 
-    <title>VB-SPA app demo</title>
+    <title>SPA app demo</title>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
@@ -20,7 +20,10 @@
         Loading ... 
     </div>    
     <script id="loading-screen-script" type="text/javascript">
-        (() => {setTimeout(() => {var e = document.getElementById("loading-screen"); if (e) e.removeAttribute("style");}, 500);})();
+        setTimeout(function(){
+            var e = document.getElementById("loading-screen"); 
+            if (e) e.removeAttribute("style");
+        }, 500);        
     </script>
 
     <div id="app-container" style="display: none">
