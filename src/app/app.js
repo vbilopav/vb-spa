@@ -53,7 +53,7 @@ define([
         // draw main layout
         app.innerHTML = layout({
             brandText: "SPA demo",
-            navData: _iterable(router.getData())
+            navData: router.getData()
         });
 
         // remove loading element and loading script
@@ -69,7 +69,7 @@ define([
         // start app routing
         router.start();
 
-        //show the app
+        // show the app
         app.style.display = '';        
     }
 });
