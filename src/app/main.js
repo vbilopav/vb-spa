@@ -5,8 +5,8 @@ requirejs.config({
         composite: "plugins/composite",
     }
 });
-define(["app"], app => {    
-
-   app();
+define(["app"], app => {
+    
+    app();
 
 });

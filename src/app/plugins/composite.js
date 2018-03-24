@@ -1,4 +1,4 @@
-﻿define(['module'], module => {
+﻿define(["module", "plugins/template-helpers"], (module, helper) => {
     return {
         version: '1.0.0',
         load(name, req, onload, config) {
@@ -22,9 +22,9 @@
                     }
                 }
                 if (found.length) {
-                    require(found, () => onload(data => new Function("return `" + text + "`;").call(data))); 
+                    require(found, () => onload(data => helper.template(text, data))); 
                 } else {                    
-                    onload(data => new Function("return `" + text + "`;").call(data));
+                    onload(data => helper.template(text, data));
                 }               
             });
         }

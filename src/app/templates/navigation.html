@@ -3,8 +3,8 @@
 </div>
 <div id="navbar">
     <ul id="navigation" class="nav navbar-nav">
-        ${this.navData.map(item => `
-        <li id="${item.id}" class=""><a href="${item.url}">${item.title}</a></li>
-        `).join('')}
+        ${this.navData.forEachTemplate(item => 
+            `<li id="${item.id}" class=""><a href="${item.url}">${item.title}</a></li>`
+        )}        
     </ul>
 </div>

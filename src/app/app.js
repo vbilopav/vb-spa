@@ -53,7 +53,7 @@ define([
         // draw main layout
         app.innerHTML = layout({
             brandText: "SPA demo",
-            navData: router.getData()
+            navData: _iterable(router.getData())
         });
 
         // remove loading element and loading script

@@ -22,7 +22,7 @@ define([], () => {
             return this;
         }
         getData() {
-            return Object.keys(this._routes).map((name) => {
+            return Object.keys(this._routes).map(name => {
                 let data = this._routes[name].data || {};                
                 data.url = "/" + 
                     this._hash + 
