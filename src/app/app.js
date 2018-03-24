@@ -1,23 +1,59 @@
 define([
     "composite!templates/layout.html",
+    "text!templates/not-found.html",
     "router"
 ], (
     layout,
+    notFound,
     Router
 ) => {
-    
-    var        
-        container,        
-        navigation,
-        body = document.body;
 
+    var
+        container,
+        navigation;        
+    
+    const
+        body = document.body,
+        //we need this callback since router must be creted before navigation element,
+        //so that nav item can be populated by router data
+        getNavElement = selector => navigation.querySelector(selector)
+        router = new Router({
+            routes: {
+                "": {
+                    view: "text!views/home.html", 
+                    data: {
+                        id: "home",
+                        getNavElement: () => getNavElement("#home"),
+                        title: "Home"
+                    }
+                },
+                "parameterized": {
+                    view: "template!views/parameterized.html", 
+                    data: {
+                        id: "parameterized",
+                        getNavElement: () => getNavElement("#parameterized"),
+                        title: "Parameterized"
+                    }
+                }
+            },
+            navigate: event => {
+                // template holds actual html content
+                container.innerHTML = event.template,
+                // change active class on navigation element - home doesn't have an id, other just use route name
+                event.route.data.getNavElement().className = "active";
+            },
+            leave: event => event.route.data.getNavElement().className = "",
+            error: event => container.innerHTML = notFound
+        });
+        
     return () => {    
-        // refernce to container element
+        // reference to container element
         const app = body.querySelector("#app-container");
         
         // draw main layout
         app.innerHTML = layout({
-            brandText: "VB-SPA demo"
+            brandText: "SPA demo",
+            navData: router.getData()
         });
 
         // remove loading element and loading script
@@ -30,24 +66,10 @@ define([
         //get reference to view container
         container = app.querySelector("#container");
 
-        // configure and start app routing
-        router = new Router({            
-            navigate: (options) => {
-                // template holds actual html content
-                container.innerHTML = options.template,
-                // change active class on navigation element - home doesn't have an id, other just use route name
-                options.data.nav.className = "active";    
-            },
-            leave: (options) => {
-                console.log(options);
-            },
-            routes: {
-                "": {view: "text!views/home.html", nav: navigation.querySelector(":not([id])")},
-                "parameterized": {view: "template!views/parameterized.html", nav: navigation.querySelector("#parameterized")}
-            }
-        }).start();
-        
-        //show app
+        // start app routing
+        router.start();
+
+        //show the app
         app.style.display = '';        
     }
 });
