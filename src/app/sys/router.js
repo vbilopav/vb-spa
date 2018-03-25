@@ -1,40 +1,41 @@
 define([], () => { 
     return class {
-        constructor(options) {            
+        constructor(options) {
             this._navigate = options.navigate || (() => {});
             this._leave = options.leave || (() => {});
             this._error = options.error || (() => {});
-            this._hash = options.hash || "#!";
+            this._hash = options.hash || "#";
             this._hash === "#" || this._hash === "#!" || (() => {throw new Error()})();
             this._test = options.test || (route => /^[ A-Za-z0-9_@()/.-]*$/.test(route));            
             this._root = options.root; 
             this._test(this._root) || (() => {throw new Error()})(); 
             let routes = options.routes || (() => {throw new Error()})();
-            this._routes = {};
-    
+            this._routes = {};    
             for(let route in routes) {
                 let data = routes[route];
                 this._test(route) || (() => {throw new Error()})();    
                 this._routes[route] = {
                     id: data.id || route,
                     name: route,
-                    view: data.view || (() => {throw new Error()})(),
+                    view: data.view,
                     paramsMap: data.paramsMap || ((...args) => args.length === 0),
                     data: data.data
                 }
             }
             this._current = undefined; 
-            this._manager = undefined; 
+            this._manager = {
+                navigate: ()=>{} //...
+            };
         }
         useViewManager(manager=(() => {throw new Error()})()) {
             this._manager = manager;
             return this;
         }
         start() {
-            this._onChange(undefined, true);
+            this._onChangeEvent(undefined, true);
             var that = this;
             window.addEventListener('hashchange', event => {
-                that._onChange.call(that, event)
+                that._onChangeEvent.call(that, event)
             });
             return this;
         }
@@ -70,30 +71,35 @@ define([], () => {
             }
             return [found, found.paramsMap(...params)]
         }
-        _onChange(event, starting=false) {
-            let route, params;
-            if (!starting) {                
-                let oldHash = event.oldURL.replace(
-                    event.newURL.replace(document.location.hash, ""), 
-                    ""
-                ), 
+        _handleLeave(event) {
+            let 
+                oldHash = event.oldURL.replace(event.newURL.replace(document.location.hash, ""), ""), 
                 [route, params] = this._getRouteData(oldHash);
-                this._leave({router: this, route: route, params: params, hash: oldHash});
+            this._leave({ router: this, route: route, params: params, hash: oldHash });
+        }
+        _onChangeEvent(event, starting=false) {            
+            if (!starting) {                
+                this._handleLeave(event);
             }
-            let hash = document.location.hash;
-            [route, params] = this._getRouteData(hash);
+
+            let hash = document.location.hash,
+                [route, params] = this._getRouteData(hash);
+            
             if (route === undefined || !params) {
                 this._current = undefined;
                 this._error({router: this, hash: hash});
                 return;
             }                                    
             this._current = route.name;
+
+            //if (route.view) ...
+
             require([route.view], view => {
                 let template;
                 if (typeof view === "string") {
                     template = view;
                 } else if (typeof view === "function") {
-                    if (route.view.startsWith("template!") || route.view.startsWith("preloaded!")) {
+                    if (route.view.startsWith("template!")) {
                         template = view(params);
                     } else {
                         let instance = new view(params);
@@ -105,7 +111,9 @@ define([], () => {
                 }
                 this._navigate({router: this, route: route, view: view, template: template, params: params});                
             })
-        }
+
+            //endif
+        }        
     }
  });
  
