@@ -5,11 +5,7 @@ requirejs.config({
     }
 });
 define(["app"], app => {
-    
-    //"sys/template-helpers"
-    //h.usePreloaded();
-    //h.add({foo: () => "bar", bar: () => "foo"});
-
+        
     app();
 
 });

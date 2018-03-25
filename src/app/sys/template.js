@@ -1,4 +1,10 @@
-﻿define(["module", "sys/template-helpers"], (module, helper) => {
+﻿define([
+    "module", 
+    "sys/template-helpers"
+], (
+    _, 
+    helper
+) => {
 
     const 
         _search = "{this.template.import(",
@@ -44,4 +50,5 @@
             });
         }
     };
+
 });
