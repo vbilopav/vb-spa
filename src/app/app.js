@@ -1,5 +1,5 @@
 define([
-    "composite!templates/layout.html",
+    "preloaded!templates/layout.html",
     "text!templates/not-found.html",
     "sys/router",
     "sys/view-manager",

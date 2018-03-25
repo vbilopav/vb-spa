@@ -93,7 +93,7 @@ define([], () => {
                 if (typeof view === "string") {
                     template = view;
                 } else if (typeof view === "function") {
-                    if (route.view.startsWith("template!") || route.view.startsWith("composite!")) {
+                    if (route.view.startsWith("template!") || route.view.startsWith("preloaded!")) {
                         template = view(params);
                     } else {
                         let instance = new view(params);

@@ -1,4 +1,4 @@
-﻿define(["module", "sys/template-helpers"], (module, helper) => {
+﻿define(["module", "sys/templating/helpers"], (module, helper) => {
     return {
         version: '1.0.0',
         load: (name, req, onload, config) => 
