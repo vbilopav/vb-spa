@@ -14,9 +14,7 @@
                 data.template = helper.helpers;
             }            
             if (locale) {
-                for (let item in locale) {
-                    data.template[item] = locale[item];
-                }
+                data.template = Object.assign(data.template, locale);
             }
             data.template.name = name;
             return new Function("return `" + text + "`;").call(data)
