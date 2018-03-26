@@ -7,7 +7,7 @@ define([], () => {
         };
 
     return {        
-        _usingPreloaded: () => _app.usePreloadedTemplates == true,
+        _usingPreloaded: () => _app.settings.usePreloadedTemplates == true,
         _prefix: "template!",
         usePreloaded: () =>  {_usePreloaded = true},        
         helpers: _helpers,
