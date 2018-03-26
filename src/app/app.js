@@ -15,11 +15,11 @@ define([
         navigation;        
     
     const
-        q = (e, s) => e.querySelector(s), // shorthand
-        body = document.body, // shorthand
+        _q = (e, s) => _app.e(e).q(s),
+        body = document.body,
         //we need this callback since router must be creted before navigation element,
         //so that nav item can be populated by router data
-        getNavElement = selector => q(navigation, selector),
+        getNavElement = selector => _q(navigation, selector),
         router = new Router({
             routes: {
                 "": {
@@ -57,7 +57,7 @@ define([
         
     return () => {    
         // reference to container element
-        const app = q(body, "#app-container");
+        const app = _q(body, "#app-container");
         
         // draw main layout
         app.innerHTML = layout({
@@ -66,17 +66,17 @@ define([
         });
 
         // remove loading element and loading script
-        q(body, "#loading-screen").remove();
-        q(body, "#loading-screen-script").remove();
+        _q(body, "#loading-screen").remove();
+        _q(body, "#loading-screen-script").remove();
 
         // get reference to navigation element
-        navigation = q(body, "#navigation");
+        navigation = _q(body, "#navigation");
         
         //get reference to view container
-        container = q(app, "#container");
+        container = _q(app, "#container");
 
         // start app routing
-        router.useViewManager(new Manager({container: container})).start();
+        router.useViewManager(new Manager(container)).start();
 
         // show the app
         app.style.display = "";

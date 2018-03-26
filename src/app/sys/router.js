@@ -28,10 +28,14 @@ define([], () => {
                 reveal: ()=>{} //id,name,params,uri
             };
         }
-        useViewManager(manager=(() => {throw manager})()) {
+
+        useViewManager(
+            manager=(() => {throw manager})()
+        ) {
             this._manager = manager;
             return this;
         }
+
         start() {
             this._onChangeEvent(undefined, true);
             var that = this;
@@ -40,6 +44,7 @@ define([], () => {
             });
             return this;
         }
+
         getData() {
             return Object.keys(this._routes).map(name => {
                 let route = this._routes[name],
@@ -52,11 +57,12 @@ define([], () => {
                 return data;
             })
         }
+
         _getRouteData(hash) {
             let route, params;
             let uri = hash.replace(this._hash, "");
             if (uri.endsWith("/")) {
-                uri = uri.substring(0, hash.length-1);
+                uri = uri.substring(0, uri.length-1);
             }
             let pieces = uri.split("/").map(item => decodeURIComponent(item));             
             if (this._root) {
@@ -70,14 +76,16 @@ define([], () => {
             if (!found) {
                 return [undefined];
             }
-            return [found, found.paramsMap(...params), uri]
+            return [found, params, uri.replace(found.name, "")]
         }
+
         _handleLeave(event) {
             let 
                 oldHash = event.oldURL.replace(event.newURL.replace(document.location.hash, ""), ""), 
-                [route, params] = this._getRouteData(oldHash);
-            this._leave({ router: this, route: route, params: params });
+                [route, params, uri] = this._getRouteData(oldHash);
+            this._leave({ router: this, route: route, old: uri });
         }
+
         _onChangeEvent(event, starting=false) {            
             if (!starting) {                
                 this._handleLeave(event);
@@ -85,6 +93,7 @@ define([], () => {
 
             let hash = document.location.hash,
                 [route, params, uri] = this._getRouteData(hash);
+            params = route.paramsMap(...params);
             
             if (route === undefined || !params) {
                 this._current = undefined;
@@ -95,14 +104,12 @@ define([], () => {
             this._manager.reveal({
                 id: route.id, 
                 name: route.view, 
-                params: 
-                params, 
+                params: params, 
                 uri: uri
             }).then(() => this._navigate({ 
                 router: this, 
                 route: route, 
-                params: 
-                params 
+                params: params 
             }));            
         }        
     }
