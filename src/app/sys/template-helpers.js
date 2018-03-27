@@ -9,7 +9,7 @@ define([], () => {
     return {        
         _usingPreloaded: () => _app.settings.usePreloadedTemplates == true,
         _prefix: "template!",
-        usePreloaded: () =>  {_usePreloaded = true},        
+        usePreloaded: () =>  {_app.settings.usePreloadedTemplates = true},        
         helpers: _helpers,
         add(globalHelpers=(() => {throw globalHelpers})()) {
             _helpers = Object.assign(_helpers, globalHelpers);

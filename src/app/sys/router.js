@@ -8,24 +8,23 @@ define([], () => {
             this._hash = options.hash || "#";
             this._hash === "#" || this._hash === "#!" || (() => {throw this._hash})();
             this._test = options.test || (route => /^[ A-Za-z0-9_@()/.-]*$/.test(route));
-            this._root = options.root; 
-            this._test(this._root) || (() => {throw this._root})(); 
             let routes = options.routes || (() => {throw options.routes})();
             this._routes = {};    
             for(let route in routes) {
                 let data = routes[route];
                 this._test(route) || (() => {throw route})();    
                 this._routes[route] = {
-                    id: data.id || route,
+                    id: data.id || route.replace("/", ""),
                     name: route,
                     view: data.view,
-                    paramsMap: data.paramsMap || ((...args) => args.length === 0),
+                    paramsMap: data.paramsMap || ((...args) => (args.length === 0 ? {} : false)),
                     data: data.data
                 }
             }
             this._current = undefined; 
             this._manager = {
-                reveal: ()=>{} //id,name,params,uri
+                reveal: ({id,name,params,uri})=>{},
+                leave: (id)=>{}
             };
         }
 
@@ -49,68 +48,62 @@ define([], () => {
             return Object.keys(this._routes).map(name => {
                 let route = this._routes[name],
                     data = route.data || {};                
-                data.url = "/" + this._hash + (this._root ? this._root + "/" : "") + name;
-                data.id = route.id
-                if (this._current !== undefined) {
-                    data.active = name === this._current;
-                }                
+                data.url = "/" + this._hash + name;
+                data.id = route.id;           
                 return data;
             })
         }
 
-        _getRouteData(hash) {
-            let route, params;
-            let uri = hash.replace(this._hash, "");
-            if (uri.endsWith("/")) {
-                uri = uri.substring(0, uri.length-1);
-            }
-            let pieces = uri.split("/").map(item => decodeURIComponent(item));             
-            if (this._root) {
-                [root, route, ...params] = pieces;
-                if (root !== this._root) {
-                    return [undefined];
-                }                
-            }
-            [route, ...params] = pieces;
-            let found = this._routes[route];
-            if (!found) {
-                return [undefined];
-            }
-            return [found, params, uri.replace(found.name, "")]
+        navigate(location) {
+            document.location.hash = this._hash + location;
+            return this;
         }
 
-        _handleLeave(event) {
-            let 
-                oldHash = event.oldURL.replace(event.newURL.replace(document.location.hash, ""), ""), 
-                [route, params, uri] = this._getRouteData(oldHash);
-            this._leave({ router: this, route: route, old: uri });
-        }
-
-        _onChangeEvent(event, starting=false) {            
-            if (!starting) {                
-                this._handleLeave(event);
+        _onChangeEvent(event, starting=false) {                        
+            let name,
+                uri = document.location.hash.replace(this._hash, ""),         
+                uriPieces = uri.split("/").map(item => decodeURIComponent(item)),
+                route, 
+                candidate,    
+                params,
+                test = "";
+                
+            let i, len, sliceIndex;
+            for (i = 0, len = uriPieces.length; i < len; i++) {     
+                let piece = uriPieces[i]; 
+                test = test.endsWith("/") ? test + piece : test + "/" + piece;
+                candidate = this._routes[test];
+                if ((candidate && !route) || (candidate && route.name.length < candidate.name.length)) {
+                    route = candidate;
+                    sliceIndex = i+1;
+                }
+            }                              
+            if (route) {
+                if (uriPieces[0] === "") {
+                    uriPieces.shift()
+                }
+                if (uriPieces[uriPieces.length - 1] == "") {
+                    uriPieces.splice(-1, 1);
+                }
+                params = route.paramsMap(...uriPieces.slice(sliceIndex));
             }
 
-            let hash = document.location.hash,
-                [route, params, uri] = this._getRouteData(hash);
-            params = route.paramsMap(...params);
-            
             if (route === undefined || !params) {
                 this._current = undefined;
-                this._error({router: this, hash: hash});
+                this._error({router: this, uri: uri});
                 return;
-            }                                    
-            this._current = route.name;
-            this._manager.reveal({
-                id: route.id, 
-                name: route.view, 
-                params: params, 
-                uri: uri
-            }).then(() => this._navigate({ 
-                router: this, 
-                route: route, 
-                params: params 
-            }));            
+            } 
+                        
+            this._manager.reveal(
+                {id: route.id, name: route.view, params: params, uri: uri}
+            ).then(() => {
+                if (!starting) {       
+                    this._manager.leave(this._current.id);         
+                    this._leave({ router: this, route: this._current});
+                }
+                this._current = route;
+                this._navigate({router: this, route: route, params: params})
+            });                        
         }        
     }
 

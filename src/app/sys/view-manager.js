@@ -1,165 +1,142 @@
-define(["sys/template-helpers", "sys/dom"], (_th, $) => {
+define(["sys/template-helpers"], (templateHelper) => {
 
     const 
-        templatePrefix = _th._prefix,
+        templatePrefix = templateHelper._prefix,
         prefix = "_view-",
         getId = (id, uriHash) => prefix + id + uriHash,
-        type = {template: 1, class: 2, object: 3, string: 4},
+        types = {template: 1, class: 2, object: 3, string: 4},
         getViewType = (view, name) => {
-            if (typeof view === "function") {
+            let t = typeof view;
+            if (t === "function") {
                 if (name.startsWith(templatePrefix)) {
-                    return type.template;
+                    return types.template;
                 }                
-                return type.class;
+                return types.class;
             }
-            if (typeof view === "object") {
-                return type.object;
+            if (t === "object") {
+                return types.object;
             }
-            return type.string;
+            return types.string;
         },
         hashCode = (s) => {
             let h = 0;
-            for (var i = 0; i < s.length; i++) {
+            for (let i = 0, len = s.length; i < len; i++) {
                 let c = s.charCodeAt(i);
                 h = ((h<<5)-h)+c;
                 h = h & h;
             }
             return h;
-        };
+        },
+        adjustWindow = (view) => window.scrollTo(view. x, view.y);         
 
     return class {    
         constructor(
-            container=(() => {throw container})()
+            container=(() => {throw container})(),
+            notFoundView
         ) {
-            this._container = $(container);
+            this._container = container;
             this._views = {} //id,uri,type,instance
+            this._current;
+        }
+
+        leave(id) {
+            let data = this._views[id]; 
+            if (!data) {
+                return
+            }
+            data.x = window.pageXOffset;
+            data.y = window.pageYOffset;
         }
 
         reveal(args) { //id,name,params,uri
             return new Promise((resolve, reject) => {
-                let found,
+                let found = this._views[args.id],
                     uriHash = hashCode(args.uri),
-                    elementId = prefix + args.id + uriHash;
+                    elementId = getId(args.id, uriHash);
 
-                for (let id in this._views) {
-                    let view = this._views[id];
-                    if (id === args.id) {
-                        found = view;
-                    }
-                    view.element.hide();
+                if (this._current) {
+                    this._current.hide();
                 }
 
                 if (found) {
-
-                    if (found.type === type.string) {
-                        found.element.show();
+                    
+                    if (found.type === types.string) {
+                        this._current = found.element.show();
+                        adjustWindow(found);                        
                         return resolve();    
                     }    
                     
-                    let element = _(this._container).q("#" + getId(elementId, uriHash)),
+                    let element = this._container.q("#" + elementId),
                         empty = false;
-                    if (!element) {                        
-                        element = _create("span")
-                        element.id = getId(elementId, uriHash);
-                        this._container.append(element);
+                    if (!element) {      
+                        element = "span".createElement(elementId).appendTo(this._container);
                         empty = true;
+                        console.warn(`view element id=${elementId} missing from dom!`);
                     }
 
-                    if (found.type === type.template) {
-                        
-                        if (uriHash !== found.uriHash) {
+                    if (found.type === types.template) {
+                        if (found.uriHash !== uriHash) {
+                            element.html(found.instance(args.params));
                             found.uriHash = uriHash;
-                            _set(found.element, found.instance(args.params));
                         }
-                        _show(found.element);
-                        return resolve();
+                        this._current = element.show();
+                        adjustWindow(found);
+                        return resolve();                        
                     }
 
-                    if (found.type === type.class || found.type === type.object) {
-                        this._showObject(found, args);    
+                    if (found.type === types.class || found.type === types.object) {
+                        if (found.uriHash !== uriHash) {
+                            let newContent = found.instance.change(args.params, element);
+                            if (newContent) {
+                                element.html(newContent)
+                            }
+                            found.uriHash = uriHash;
+                        }  
+                        this._current = element.show();
+                        adjustWindow(found);
                         return resolve();
                     }
-                    
+                    return reject("unknown type");
                 }
                 
-                return this._newView(args, reject, resolve);            
+                require([args.name], view => {
+                    let type = getViewType(view, args.name),                         
+                        element = "span".createElement(elementId),
+                        data = {
+                            type: type, 
+                            uriHash: uriHash,
+                            x: 0,
+                            y: 0
+                        };
+
+                    if (type === types.string) {          
+                        data.element = element.html(view);                                                
+                    } else if (type === types.template) {
+                        data.instance = view;
+                        element.html(view(args.params));  
+                    } else if (type === types.class) {
+                        data.instance = new view(args.id);
+                        let content = view.render(args.params, data.element);
+                        if (content) {
+                            element.html(content);
+                        }
+                    } else if (type === types.object) {
+                        view.init(args.id);
+                        data.instance = view;                        
+                        let content = data.instance.render(args.params, data.element);
+                        if (content) {
+                            element.html(content);
+                        }
+                    }
+
+                    this._views[args.id] = data;
+                    this._container.append(element);
+                    this._current = element; 
+                    adjustWindow(data);
+                    return resolve();
+                });
             });  
         }
-
-
-
-        _newView(args, reject, resolve) {
-            require([args.name], view => {
-                let content, 
-                    type = getViewType(view, args.name), 
-                    data = {
-                        type: type, 
-                        element: document.createElement("span"),
-                        uriHash: hashCode(args.uri)
-                    };
-                data.element.id = prefix + args.id;
-                _hide(data.element);
-
-                if (type === type.string) {
-                    _set(data.element, view);                    
-                }
-
-                else if (type === type.template) {
-                    data.instance = view;
-                    _set(data.element, view(args.params));
-                }
-
-                else if (type === type.class) {
-                    data.instance = new view(args.id);
-                    let content = view.create(args.params, data.element);
-                    if (content) {
-                        _set(data.element, content);
-                    }
-                }
-
-                else if (type === type.object) {
-                    data.instance = view;
-                    view.init(args.id);
-                    let content = view.create(args.params, data.element);
-                    if (content) {
-                        _set(data.element, content);
-                    }
-                }
-                else {
-                    return reject("unknown view type");
-                }
-                this._container.append(data.element);
-                _show(data.element);
-                if (type === type.class || type === type.object) {
-                    data.instance.show(args.params, data.element);
-                }
-                this._views[args.id] = data;
-                return resolve();
-            });
-        }
-
-
-
-
-
-
-        _showObject(found, args) {
-            if (found.uri !== args.uri) {
-                if (found.instance.change) {
-                    found.uri = args.uri
-                    let content = found.instance.change(args.params, found.element);
-                    if (content) {
-                        _set(found.element, content);
-                    }
-                }
-            }
-            _show(found.element);
-            if (found.instance.show) {
-                found.instance.show(args.params, found.element);
-            }
-        }
-
-
     }
 
  });
