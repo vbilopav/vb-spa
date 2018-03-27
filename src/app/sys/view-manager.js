@@ -1,23 +1,23 @@
-define(["sys/template-helpers"], t => { 
+define(["sys/template-helpers", "sys/dom"], (_th, $) => {
 
     const 
-        _templatePrefix = t._prefix,
-        _prefix = "_view-",
-        _id = (id, uriHash) => _prefix + id + uriHash,
-        _type = {template: 1, class: 2, object: 3, string: 4},
-        _getViewType = (view, name) => {
+        templatePrefix = _th._prefix,
+        prefix = "_view-",
+        getId = (id, uriHash) => prefix + id + uriHash,
+        type = {template: 1, class: 2, object: 3, string: 4},
+        getViewType = (view, name) => {
             if (typeof view === "function") {
-                if (name.startsWith(_templatePrefix)) {
-                    return _type.template;
+                if (name.startsWith(templatePrefix)) {
+                    return type.template;
                 }                
-                return _type.class;
+                return type.class;
             }
             if (typeof view === "object") {
-                return _type.object;
+                return type.object;
             }
-            return _type.string;
+            return type.string;
         },
-        _hashCode = (s) => {
+        hashCode = (s) => {
             let h = 0;
             for (var i = 0; i < s.length; i++) {
                 let c = s.charCodeAt(i);
@@ -25,52 +25,47 @@ define(["sys/template-helpers"], t => {
                 h = h & h;
             }
             return h;
-        },
-        _q = (e, s) => _app.e(e).q(s),
-        _show = e => _app.e(e).show(s), 
-        _hide = e => _app.e(e).hide(s), 
-        _set = (e, s) => _app.e(e).set(s),
-        _create = (s) => document.createElement(s);
+        };
 
     return class {    
         constructor(
             container=(() => {throw container})()
         ) {
-            this._container = container;
+            this._container = $(container);
             this._views = {} //id,uri,type,instance
         }
 
         reveal(args) { //id,name,params,uri
             return new Promise((resolve, reject) => {
                 let found,
-                    uriHash = _hashCode(args.uri),
-                    elementId = _prefix + args.id + uriHash;
+                    uriHash = hashCode(args.uri),
+                    elementId = prefix + args.id + uriHash;
 
                 for (let id in this._views) {
                     let view = this._views[id];
                     if (id === args.id) {
                         found = view;
                     }
-                    _hide(view.element);
+                    view.element.hide();
                 }
 
                 if (found) {
 
-                    if (found.type === _type.string) {
-                        _show(found.element);
+                    if (found.type === type.string) {
+                        found.element.show();
                         return resolve();    
                     }    
                     
-                    let element = _q(this._container, "#" + _id(elementId, uriHash)),
+                    let element = _(this._container).q("#" + getId(elementId, uriHash)),
                         empty = false;
                     if (!element) {                        
                         element = _create("span")
-                        element.id = _id(elementId, uriHash);
+                        element.id = getId(elementId, uriHash);
                         this._container.append(element);
                         empty = true;
                     }
 
-                    if (found.type === _type.template) {
+                    if (found.type === type.template) {
                         
                         if (uriHash !== found.uriHash) {
                             found.uriHash = uriHash;
@@ -80,7 +75,7 @@ define(["sys/template-helpers"], t => {
                         return resolve();
                     }
 
-                    if (found.type === _type.class || found.type === _type.object) {
+                    if (found.type === type.class || found.type === type.object) {
                         this._showObject(found, args);    
                         return resolve();
                     }
@@ -96,25 +91,25 @@ define(["sys/template-helpers"], t => {
         _newView(args, reject, resolve) {
             require([args.name], view => {
                 let content, 
-                    type = _getViewType(view, args.name), 
+                    type = getViewType(view, args.name), 
                     data = {
                         type: type, 
                         element: document.createElement("span"),
-                        uriHash: _hashCode(args.uri)
+                        uriHash: hashCode(args.uri)
                     };
-                data.element.id = _prefix + args.id;
+                data.element.id = prefix + args.id;
                 _hide(data.element);
 
-                if (type === _type.string) {
+                if (type === type.string) {
                     _set(data.element, view);                    
                 }
 
-                else if (type === _type.template) {
+                else if (type === type.template) {
                     data.instance = view;
                     _set(data.element, view(args.params));
                 }
 
-                else if (type === _type.class) {
+                else if (type === type.class) {
                     data.instance = new view(args.id);
                     let content = view.create(args.params, data.element);
                     if (content) {
@@ -122,7 +117,7 @@ define(["sys/template-helpers"], t => {
                     }
                 }
 
-                else if (type === _type.object) {
+                else if (type === type.object) {
                     data.instance = view;
                     view.init(args.id);
                     let content = view.create(args.params, data.element);
@@ -135,7 +130,7 @@ define(["sys/template-helpers"], t => {
                 }
                 this._container.append(data.element);
                 _show(data.element);
-                if (type === _type.class || type === _type.object) {
+                if (type === type.class || type === type.object) {
                     data.instance.show(args.params, data.element);
                 }
                 this._views[args.id] = data;
