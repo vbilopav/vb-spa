@@ -8,26 +8,35 @@ define([
     Manager
 ) => {
 
-    var
-        container,
+    var 
         navigation;        
         
-    const               
-        //we need this callback since router must be creted before navigation element,
-        //so that nav item can be populated by router data
-        getNavElement = selector => navigation.q(selector),
+    const
         router = new Router({
             routes: {
                 "/": {
                     id: "home",
-                    view: "text!views/home.html", 
+                    view: "text!views/home.html",
                     data: {
-                        getNavElement: () => getNavElement("#home"),
                         title: "Home"
                     }
                 },
+                "/plain-text": {                    
+                    view: "text!views/templates/plain-text-view.html",
+                    data: {
+                        title: "Plain text view",
+                        category: "templates"
+                    }
+                },     
+                "/keep-state": {                    
+                    view: "text!views/templates/state-view.html",
+                    data: {
+                        title: "Plain text view - state handling",
+                        category: "templates"
+                    }
+                }, 
                 "/parameterized": {
-                    view: "template!views/parameterized.html", 
+                    view: "template!views/templates/parameterized.html", 
                     paramsMap: (...params) => {
                         if (params.length > 3) {
                             return false;
@@ -38,45 +47,67 @@ define([
                             third: params[2] ? params[2].split(",") : []
                         };
                     },
-                    data: {
-                        getNavElement: () => getNavElement("#parameterized"),
-                        title: "Parameterized"
+                    data: {                        
+                        title: "Parameterized",
+                        category: "templates"
                     }
-                }
+                },
+                "/parameterized/sub-route": {
+                    view: "template!views/templates/parameterized-sub-route.html", 
+                    paramsMap: (...params) => {
+                        if (params.length > 1) {
+                            return false;
+                        }                        
+                        return {
+                            firstAndOnly: params[0]                            
+                        };
+                    },
+                    data: {                        
+                        title: "Parameterized sub route",
+                        category: "templates"
+                    }
+                },
+                "/composite": {
+                    view: "template!views/templates/composite.html",                    
+                    data: {                        
+                        title: "Composite template",
+                        category: "templates"
+                    }
+                },
+                "/composite-parametrized": {
+                    view: "template!views/templates/composite-parametrized.html",                    
+                    data: {                        
+                        title: "Composite parametrized template",
+                        category: "templates"
+                    }
+                },
+                "/not-found": {
+                    view: "text!views/not-found.html"
+                },
             },
-            "/not-found": {
-                view: "text!templates/not-found.html"
-            },
-            navigate: event => {
-                //event.route.data.getNavElement().className = "active"
-            },
-            leave: event => {
-                //!event.route || (event.route.data.getNavElement().className = "")
-            },
+            navigate: event => navigation.q("#" + event.route.id).addClass("active"),
+            leave: event => navigation.q("#" + event.route.id).removeClass("active"),                
             error: event => event.router.navigate("/not-found")
         });
         
-    return () => {    
-        // get reference to container element set content of layout template
-        const app = document.body.q("#app-container").html(layout({
-            brandText: "SPA demo",
-            navData: router.getData()
-        }));
+    return () => {        
+        routerData = router.getData();
+        const app = document.body.q("#app-container").html(
+            layout({
+                home: routerData.filter(item => item.id == "home")[0],
+                templates: routerData.filter(item => item.category == "templates")
+            })
+        );
 
-        // remove loading element and loading script
         document.body.q("#loading-screen").remove();
         document.body.q("#loading-screen-script").remove();
 
-        // get reference to navigation element
-        navigation = document.body.q("#navigation");
-        
-        //get reference to view container
-        container = document.body.q("#container");
+        navigation = document.body.q("#navigation");        
 
-        // start app routing
-        router.useViewManager(new Manager(container)).start();
+        router.useViewManager(
+            new Manager(document.body.q("#container"))
+        ).start();
 
-        // show the app
         app.show();
     }
 });

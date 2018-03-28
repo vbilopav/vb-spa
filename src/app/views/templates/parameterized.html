@@ -1,29 +1,39 @@
 <div class="">
-    <h1>Parameterized</h1>
+    
+    <h3>This view is parametrized via url!</h3>
+        
     <hr />
-    <p class="lead">
-        This is a parameterized view created from template.
+    <p>
+        Parameters are recieved trough url in format view/first/second/third/ and so on.
         <br /><br />
-        You can use this types of views to parse and dispaly url parameters in view template.
+        This example can receieve anything from zero to three parameters as defined by <code>paramsMap</code> route method.<br />
+        If <code>paramsMap</code> returns <code>false</code> or <code>undefinied</code> (default), that route can't receive any paramaters.<br />
+        If returns object, that object is considered to contained parsed parameters object. In this example, it returns string from first parameter,
+        number from second and third paremeter is parsed into string array from comma separated list.
+        <br /><br />
+        Parameters can be render in templates using standard template lietrals syntax defined by ES2015 specification.<br/>
+        See more details at: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template literals reference</a>
+        <br /><br />
+        Note that also this view example uses <code>forEach</code> global template helper to render third parameter which is parsed into array.
     </p>
     <p>    
-        View location: <pre>/views/parameterized.html</pre>
+        View location: <pre>/app/views/templates/parameterized.html</pre>
         <br />
         Route definition:
         <pre>
-"parameterized": {
-    view: "template!views/parameterized.html", 
+"/parameterized": {
+    view: "template!views/templates/parameterized.html", 
     paramsMap: (...params) => {
         if (params.length > 3) {
             return false;
         }                        
-        return {
-            first: params[0],
-            second: Number(params[1]),
-            third: params[2] ? params[2].split(",") : []
-        };
+        return {first: params[0], second: Number(params[1]), third: params[2] ? params[2].split(",") : []};
+    },
+    data: {                        
+        title: "Parameterized",
+        category: "templates"
     }
-}       </pre>
+}</pre>
         <br />
         View accepts max three named paramaters:
         <ul class="list-group">
@@ -67,12 +77,5 @@
                 <a href="/#parameterized/1/2/3/4/">/#parameterized/1/2/3/4/</a>
             </li>                    
         <ul>
-
-            <select>                        
-                <option>first</option>
-                <option>second</option>
-                <option>third</option>
-                <option>fourth</option>
-            </select>
     </p>
 </div>

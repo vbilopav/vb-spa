@@ -23,8 +23,8 @@ define([], () => {
             }
             this._current = undefined; 
             this._manager = {
-                reveal: ({id,name,params,uri})=>{}, // --> Promise
-                leave: (id)=>{}
+                reveal: ({id,name,params,uri})=>{}, // --> Promise --> elementId
+                leave: (id)=>this._manager // --> this
             };
         }
 
@@ -49,7 +49,8 @@ define([], () => {
                 let route = this._routes[name],
                     data = route.data || {};                
                 data.url = "/" + this._hash + name;
-                data.id = route.id;           
+                data.id = route.id;    
+                data.active = this._current === route
                 return data;
             })
         }
@@ -75,6 +76,7 @@ define([], () => {
                 candidate = this._routes[test];
                 if ((candidate && !route) || (candidate && route.name.length < candidate.name.length)) {
                     route = candidate;
+                    //sliceIndex = i ? i+1 : 0;
                     sliceIndex = i+1;
                 }
             }                              
@@ -88,20 +90,19 @@ define([], () => {
                 params = route.paramsMap(...uriPieces.slice(sliceIndex));
             }
 
-            if (route === undefined || !params) {
-                this._current = undefined;
-                this._error({router: this, uri: uri});
+            if (route === undefined || !params) {                
+                this._error({router: this, uri: uri});   
                 return;
             } 
                         
-            this._manager.reveal(
+            this._manager.leave(this._current ? this._current.elementId : undefined).reveal(
                 {id: route.id, name: route.view, params: params, uri: uri}
-            ).then(() => {
-                if (!starting) {       
-                    this._manager.leave(this._current.id);         
+            ).then(elementId => {
+                if (!starting) {                    
                     this._leave({ router: this, route: this._current});
                 }
                 this._current = route;
+                this._current.elementId = elementId;
                 this._navigate({router: this, route: route, params: params})
             });                        
         }        

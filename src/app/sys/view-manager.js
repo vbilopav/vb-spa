@@ -26,13 +26,12 @@ define(["sys/template-helpers"], (templateHelper) => {
                 h = h & h;
             }
             return h;
-        },
-        adjustWindow = (view) => window.scrollTo(view. x, view.y);         
+        },        
+        adjustWindow = e => window.scrollTo(e.dataset.x, e.dataset.y);         
 
     return class {    
         constructor(
-            container=(() => {throw container})(),
-            notFoundView
+            container=(() => {throw container})()
         ) {
             this._container = container;
             this._views = {} //id,uri,type,instance
@@ -40,12 +39,16 @@ define(["sys/template-helpers"], (templateHelper) => {
         }
 
         leave(id) {
-            let data = this._views[id]; 
-            if (!data) {
-                return
+            if (id === undefined) {
+                return this;
             }
-            data.x = window.pageXOffset;
-            data.y = window.pageYOffset;
+            let e = this._container.q("#" + id);
+            if (!e) {
+                return this;
+            }
+            e.dataset.x = window.pageXOffset;
+            e.dataset.y = window.pageYOffset;
+            return this;
         }
 
         reveal(args) { //id,name,params,uri
@@ -62,8 +65,8 @@ define(["sys/template-helpers"], (templateHelper) => {
                     
                     if (found.type === types.string) {
                         this._current = found.element.show();
-                        adjustWindow(found);                        
-                        return resolve();    
+                        adjustWindow(found.element);
+                        return resolve(found.element.id);    
                     }    
                     
                     let element = this._container.q("#" + elementId),
@@ -80,8 +83,8 @@ define(["sys/template-helpers"], (templateHelper) => {
                             found.uriHash = uriHash;
                         }
                         this._current = element.show();
-                        adjustWindow(found);
-                        return resolve();                        
+                        adjustWindow(element);
+                        return resolve(element.id);                        
                     }
 
                     if (found.type === types.class || found.type === types.object) {
@@ -93,8 +96,8 @@ define(["sys/template-helpers"], (templateHelper) => {
                             found.uriHash = uriHash;
                         }  
                         this._current = element.show();
-                        adjustWindow(found);
-                        return resolve();
+                        adjustWindow(element);
+                        return resolve(element.id);
                     }
                     return reject("unknown type");
                 }
@@ -102,13 +105,9 @@ define(["sys/template-helpers"], (templateHelper) => {
                 require([args.name], view => {
                     let type = getViewType(view, args.name),                         
                         element = "span".createElement(elementId),
-                        data = {
-                            type: type, 
-                            uriHash: uriHash,
-                            x: 0,
-                            y: 0
-                        };
-
+                        data = {type: type, uriHash: uriHash};
+                    element.dataset.x = 0;
+                    element.dataset.y = 0;
                     if (type === types.string) {          
                         data.element = element.html(view);                                                
                     } else if (type === types.template) {
@@ -131,9 +130,9 @@ define(["sys/template-helpers"], (templateHelper) => {
 
                     this._views[args.id] = data;
                     this._container.append(element);
-                    this._current = element; 
-                    adjustWindow(data);
-                    return resolve();
+                    this._current = element;
+                    adjustWindow(element);
+                    return resolve(element.id);
                 });
             });  
         }

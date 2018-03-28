@@ -1,25 +1,38 @@
 <div class="navbar-header">
-    <a class="navbar-brand" href="/">${this.brandText}</a>
+    <a id="${this.home.id}" class="navbar-brand" href="${this.home.url}">${this.home.title}</a>
 </div>
 <div id="navbar">
 
-    <div id="navigation" class="dropdown nav navbar-nav">
-        <button class="dropbtn">Dropdown1&nbsp;&#8675;</button>
-        <div class="dropdown-content navbar-inverse">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-    </div> 
+    <div class="nav navbar-nav">
 
-    <div id="navigation" class="dropdown nav navbar-nav">
-        <button class="dropbtn">Dropdown2&nbsp;&#8675;</button>
-        <div class="dropdown-content navbar-inverse">
-            <a href="#">Link 4</a>
-            <a href="#">Link 5</a>
-            <a href="#">Link 6</a>
-        </div>
-    </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Templates&nbsp;&#8675;</button>
+            <div class="dropdown-content navbar-inverse">
+                ${this.template.forEach(this.templates, item => 
+                    `<a id="${item.id}" href="${item.url}">${item.title}</a>`
+                )}
+            </div>
+        </div> 
 
+        <div class="dropdown">
+            <button class="dropbtn">Modules&nbsp;&#8675;</button>
+            <div class="dropdown-content navbar-inverse">
+                <a href="#">Simple text module view</a>
+                <a href="#">Class module - text rendering</a>
+                <a href="#">Class module - element manipulation</a>
+                <a href="#">Object module - text rendering</a>
+                <a href="#">Object module - element manipulation</a>
+            </div>
+        </div> 
+
+        <div class="dropdown">
+            <button class="dropbtn">Dynamic data&nbsp;&#8675;</button>
+            <div class="dropdown-content navbar-inverse">
+                <a href="#">Dynamic data</a>
+                <a href="#">Model binding</a>                
+            </div>
+        </div> 
+
+    </div>
 
 </div>
