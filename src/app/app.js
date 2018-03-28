@@ -1,11 +1,9 @@
 define([
-    "template!templates/layout.html",
-    "text!templates/not-found.html",
+    "template!templates/layout.html",    
     "sys/router",
     "sys/view-manager"    
 ], (
     layout,
-    notFound,
     Router,
     Manager
 ) => {
@@ -46,9 +44,16 @@ define([
                     }
                 }
             },
-            navigate: event => event.route.data.getNavElement().className = "active",
-            leave: event => !event.route || (event.route.data.getNavElement().className = ""),
-            error: event => container.innerHTML = notFound
+            "/not-found": {
+                view: "text!templates/not-found.html"
+            },
+            navigate: event => {
+                //event.route.data.getNavElement().className = "active"
+            },
+            leave: event => {
+                //!event.route || (event.route.data.getNavElement().className = "")
+            },
+            error: event => event.router.navigate("/not-found")
         });
         
     return () => {    

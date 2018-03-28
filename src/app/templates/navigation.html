@@ -2,9 +2,24 @@
     <a class="navbar-brand" href="/">${this.brandText}</a>
 </div>
 <div id="navbar">
-    <ul id="navigation" class="nav navbar-nav">
-        ${this.template.forEach(this.navData, item => 
-            `<li id="${item.id}" class=""><a href="${item.url}">${item.title}</a></li>`
-        )}
-    </ul>
+
+    <div id="navigation" class="dropdown nav navbar-nav">
+        <button class="dropbtn">Dropdown1&nbsp;&#8675;</button>
+        <div class="dropdown-content navbar-inverse">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div> 
+
+    <div id="navigation" class="dropdown nav navbar-nav">
+        <button class="dropbtn">Dropdown2&nbsp;&#8675;</button>
+        <div class="dropdown-content navbar-inverse">
+            <a href="#">Link 4</a>
+            <a href="#">Link 5</a>
+            <a href="#">Link 6</a>
+        </div>
+    </div> 
+
+
 </div>

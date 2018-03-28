@@ -4,4 +4,4 @@ requirejs.config({
         template: "sys/template"
     }
 });
-define(["app", "sys/dom-extensions"], app => app());
+define(["app", "sys/extensions"], app => app());

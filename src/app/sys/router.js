@@ -23,7 +23,7 @@ define([], () => {
             }
             this._current = undefined; 
             this._manager = {
-                reveal: ({id,name,params,uri})=>{},
+                reveal: ({id,name,params,uri})=>{}, // --> Promise
                 leave: (id)=>{}
             };
         }
