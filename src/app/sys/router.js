@@ -14,7 +14,7 @@ define([], () => {
                 let data = routes[route];
                 this._test(route) || (() => {throw route})();    
                 this._routes[route] = {
-                    id: data.id || route.replace("/", ""),
+                    id: data.id || route.replace(/\//g, ""),
                     name: route,
                     view: data.view,
                     paramsMap: data.paramsMap || ((...args) => (args.length === 0 ? {} : false)),
@@ -66,7 +66,7 @@ define([], () => {
         }
 
         _onChangeEvent(event={newHash: document.location.hash}, starting=false) {
-            if (!event.newHash) {
+            if (!event.newHash && event.newURL) {
                 event.newHash = event.newURL.replace(document.location.origin + "/", "");
             }
             let name,

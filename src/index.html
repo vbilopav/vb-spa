@@ -1,21 +1,35 @@
-<script type="text/javascript">window._app = {version: "1", settings: {}};</script>
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript">
+        window._app = {
+            version: "", appUrl: "app/", cssUrl: "css/", libsUrl: "libs/", settings: {usePreloadedTemplates: false}
+        };
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="vb spa demo">
     <meta name="author" content="vb">
 
     <title>SPA app demo</title>
+    <script>
+        var require = {baseUrl: _app.appUrl};
+        if (_app.version) require.urlArgs = "v=" + _app.version
+    </script>  
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
     <script>
-        document.write('<link rel="stylesheet" href="default.css?v=' + window._app.version + '" />');
+        document.write('<link rel="stylesheet" href="' + 
+            (window._app.cssUrl ? window._app.cssUrl : "") +
+            'default.css"' + 
+            (window._app.version ? "?" + window._app.version : "") + 
+            ' />'
+        );
     </script>
 </head>
 <body>        
+
     <div id="loading-screen" style="display: none">
         Loading ... 
     </div>    
@@ -27,9 +41,12 @@
     </script>
 
     <div id="app-container" style="display: none">
-    </div>
+    </div>   
 
-    <script>var require = {urlArgs: "v=" + _app.version}</script>
-    <script type="text/javascript" data-main="app/main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>        
+    <script type="text/javascript" data-main="main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script type="text/javascript">
+        window.requirejs || document.write('<script data-main="main.js" src="' + (window._app.libsUrl ? window._app.libsUrl : "") +'require.min.js">\x3C/script>')
+    </script>
+
 </body>
 </html>

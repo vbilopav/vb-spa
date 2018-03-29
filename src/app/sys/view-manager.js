@@ -2,8 +2,8 @@ define(["sys/template-helpers"], (templateHelper) => {
 
     const 
         templatePrefix = templateHelper._prefix,
-        prefix = "_view-",
-        getId = (id, uriHash) => prefix + id + uriHash,
+        prefix = "_view",
+        getId = (uriHash) => prefix + uriHash,
         types = {template: 1, class: 2, object: 3, string: 4},
         getViewType = (view, name) => {
             let t = typeof view;
@@ -18,7 +18,10 @@ define(["sys/template-helpers"], (templateHelper) => {
             }
             return types.string;
         },      
-        adjustWindow = item => window.scrollTo(item.x, item.y);         
+        showView = (item, element) => {
+            window.scrollTo(item.x, item.y);
+            element.dataset.timestamp = Date.now()
+        };
 
     return class {    
         constructor(
@@ -46,7 +49,7 @@ define(["sys/template-helpers"], (templateHelper) => {
             return new Promise((resolve, reject) => {
                 let found = this._views[args.id],
                     uriHash = args.uri.hashCode(),
-                    elementId = getId(args.id, uriHash);
+                    elementId = getId(uriHash);
 
                 if (this._current) {
                     this._current.hide();
@@ -56,7 +59,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                     
                     if (found.type === types.string) {
                         this._current = found.element.show();
-                        adjustWindow(found);
+                        showView(found, found.element);
                         return resolve(found.element.id);    
                     }    
                     
@@ -73,7 +76,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                             found.uriHash = uriHash;
                         }
                         this._current = element.show();
-                        adjustWindow(found);
+                        showView(found, element);
                         return resolve(element.id);                        
                     }
 
@@ -86,7 +89,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                             found.uriHash = uriHash;
                         }  
                         this._current = element.show();
-                        adjustWindow(found);
+                        showView(found, element);
                         return resolve(element.id);
                     }
                     return reject("unknown type");
@@ -119,7 +122,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                     this._views[args.id] = data;
                     this._container.append(element);
                     this._current = element;
-                    adjustWindow(data);
+                    showView(data, element);
                     return resolve(element.id);
                 });
             });  
