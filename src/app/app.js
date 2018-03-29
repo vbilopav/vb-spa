@@ -85,27 +85,27 @@ define([
                     view: "text!views/not-found.html"
                 },
             },
-            navigate: event => navigation.q("#" + event.route.id).addClass("active"),
-            leave: event => navigation.q("#" + event.route.id).removeClass("active"),                
-            error: event => event.router.navigate("/not-found")
+            navigate: event => navigation.find("#" + event.route.id).addClass("active"),
+            leave: event => navigation.find("#" + event.route.id).removeClass("active"),                
+            error: event => event.router.reveal("/not-found")
         });
         
     return () => {        
         routerData = router.getData();
-        const app = document.body.q("#app-container").html(
+        const app = document.body.find("#app-container").html(
             layout({
                 home: routerData.filter(item => item.id == "home")[0],
                 templates: routerData.filter(item => item.category == "templates")
             })
         );
 
-        document.body.q("#loading-screen").remove();
-        document.body.q("#loading-screen-script").remove();
+        document.body.find("#loading-screen").remove();
+        document.body.find("#loading-screen-script").remove();
 
-        navigation = document.body.q("#navigation");        
+        navigation = document.body.find("#navigation");        
 
         router.useViewManager(
-            new Manager(document.body.q("#container"))
+            new Manager(document.body.find("#container"))
         ).start();
 
         app.show();

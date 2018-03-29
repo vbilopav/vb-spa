@@ -1,7 +1,14 @@
 define([], () => {
     
-    HTMLElement.prototype.q = function(search) {
-        return this.querySelector(search) || "dummy".createElement();
+    HTMLElement.prototype.find = function(search) {
+        let e = this.querySelector(search)
+        if (!e) {
+            e = "dummy".createElement();
+            e.found = false;
+            return e;
+        }
+        e.found = true;
+        return e;
     }
 
     HTMLElement.prototype.show = function() {
@@ -42,6 +49,16 @@ define([], () => {
         return this;  
     }
 
+    HTMLElement.prototype.on = function(eventName, eventHandler) {
+        this.addEventListener(eventName, eventHandler);
+        return this;
+    }
+
+    HTMLElement.prototype.off = function(eventName, eventHandler) {
+        this.removeEventListener(eventName, eventHandler);
+        return this;
+    }
+
     String.prototype.createElement = function(id, content) {
         let e = document.createElement(this);
         if (id) {
@@ -52,4 +69,15 @@ define([], () => {
         }
         return e;
     }    
+
+    String.prototype.hashCode = function() {
+        let h = 0;
+        for (let i = 0, len = this.length; i < len; i++) {
+            let c = this.charCodeAt(i);
+            h = ((h<<5)-h)+c;
+            h = h & h;
+        }
+        return h;
+    }
+    
 });

@@ -23,8 +23,8 @@ define([], () => {
             }
             this._current = undefined; 
             this._manager = {
-                reveal: ({id,name,params,uri})=>{}, // --> Promise --> elementId
-                leave: (id)=>this._manager // --> this
+                reveal: ({id,name,params,uri}) => {}, // --> Promise --> elementId
+                leave: (viewId, elementId) => this._manager // --> this
             };
         }
 
@@ -60,9 +60,17 @@ define([], () => {
             return this;
         }
 
-        _onChangeEvent(event, starting=false) {                        
+        reveal(location) {
+            this._onChangeEvent({newHash: this._hash + location});
+            return this;
+        }
+
+        _onChangeEvent(event={newHash: document.location.hash}, starting=false) {
+            if (!event.newHash) {
+                event.newHash = event.newURL.replace(document.location.origin + "/", "");
+            }
             let name,
-                uri = document.location.hash.replace(this._hash, ""),         
+                uri = event.newHash.replace(this._hash, ""),         
                 uriPieces = uri.split("/").map(item => decodeURIComponent(item)),
                 route, 
                 candidate,    
@@ -75,15 +83,11 @@ define([], () => {
                 test = test.endsWith("/") ? test + piece : test + "/" + piece;
                 candidate = this._routes[test];
                 if ((candidate && !route) || (candidate && route.name.length < candidate.name.length)) {
-                    route = candidate;
-                    //sliceIndex = i ? i+1 : 0;
-                    sliceIndex = i+1;
+                    route = candidate;                    
+                    sliceIndex = i + 1;
                 }
             }                              
             if (route) {
-                if (uriPieces[0] === "") {
-                    uriPieces.shift()
-                }
                 if (uriPieces[uriPieces.length - 1] == "") {
                     uriPieces.splice(-1, 1);
                 }
@@ -95,7 +99,12 @@ define([], () => {
                 return;
             } 
                         
-            this._manager.leave(this._current ? this._current.elementId : undefined).reveal(
+            let viewId, elementId;
+            if (this._current) {
+                viewId = this._current.id;
+                elementId = this._current.elementId;
+            }
+            this._manager.leave(viewId, elementId).reveal(
                 {id: route.id, name: route.view, params: params, uri: uri}
             ).then(elementId => {
                 if (!starting) {                    

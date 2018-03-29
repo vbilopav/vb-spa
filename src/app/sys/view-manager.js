@@ -17,17 +17,8 @@ define(["sys/template-helpers"], (templateHelper) => {
                 return types.object;
             }
             return types.string;
-        },
-        hashCode = (s) => {
-            let h = 0;
-            for (let i = 0, len = s.length; i < len; i++) {
-                let c = s.charCodeAt(i);
-                h = ((h<<5)-h)+c;
-                h = h & h;
-            }
-            return h;
-        },        
-        adjustWindow = e => window.scrollTo(e.dataset.x, e.dataset.y);         
+        },      
+        adjustWindow = item => window.scrollTo(item.x, item.y);         
 
     return class {    
         constructor(
@@ -38,23 +29,23 @@ define(["sys/template-helpers"], (templateHelper) => {
             this._current;
         }
 
-        leave(id) {
-            if (id === undefined) {
+        leave(viewId, elementId) {
+            if (viewId === undefined) {
                 return this;
             }
-            let e = this._container.q("#" + id);
-            if (!e) {
+            let view = this._views[viewId];
+            if (!view) {
                 return this;
             }
-            e.dataset.x = window.pageXOffset;
-            e.dataset.y = window.pageYOffset;
+            view.x = window.pageXOffset;
+            view.y = window.pageYOffset;
             return this;
         }
 
         reveal(args) { //id,name,params,uri
             return new Promise((resolve, reject) => {
                 let found = this._views[args.id],
-                    uriHash = hashCode(args.uri),
+                    uriHash = args.uri.hashCode(),
                     elementId = getId(args.id, uriHash);
 
                 if (this._current) {
@@ -65,16 +56,15 @@ define(["sys/template-helpers"], (templateHelper) => {
                     
                     if (found.type === types.string) {
                         this._current = found.element.show();
-                        adjustWindow(found.element);
+                        adjustWindow(found);
                         return resolve(found.element.id);    
                     }    
                     
-                    let element = this._container.q("#" + elementId),
+                    let element = this._container.find("#" + elementId),
                         empty = false;
-                    if (!element) {      
+                    if (!element.found) {      
                         element = "span".createElement(elementId).appendTo(this._container);
-                        empty = true;
-                        console.warn(`view element id=${elementId} missing from dom!`);
+                        empty = true;                       
                     }
 
                     if (found.type === types.template) {
@@ -83,7 +73,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                             found.uriHash = uriHash;
                         }
                         this._current = element.show();
-                        adjustWindow(element);
+                        adjustWindow(found);
                         return resolve(element.id);                        
                     }
 
@@ -96,23 +86,21 @@ define(["sys/template-helpers"], (templateHelper) => {
                             found.uriHash = uriHash;
                         }  
                         this._current = element.show();
-                        adjustWindow(element);
+                        adjustWindow(found);
                         return resolve(element.id);
                     }
                     return reject("unknown type");
                 }
                 
                 require([args.name], view => {
-                    let type = getViewType(view, args.name),                         
+                    let type = getViewType(view, args.name),
                         element = "span".createElement(elementId),
-                        data = {type: type, uriHash: uriHash};
-                    element.dataset.x = 0;
-                    element.dataset.y = 0;
+                        data = {type: type, uriHash: uriHash, x: 0, y: 0};
                     if (type === types.string) {          
-                        data.element = element.html(view);                                                
+                        data.element = element.html(view);
                     } else if (type === types.template) {
                         data.instance = view;
-                        element.html(view(args.params));  
+                        element.html(view(args.params));
                     } else if (type === types.class) {
                         data.instance = new view(args.id);
                         let content = view.render(args.params, data.element);
@@ -121,7 +109,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                         }
                     } else if (type === types.object) {
                         view.init(args.id);
-                        data.instance = view;                        
+                        data.instance = view;
                         let content = data.instance.render(args.params, data.element);
                         if (content) {
                             element.html(content);
@@ -131,7 +119,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                     this._views[args.id] = data;
                     this._container.append(element);
                     this._current = element;
-                    adjustWindow(element);
+                    adjustWindow(data);
                     return resolve(element.id);
                 });
             });  
