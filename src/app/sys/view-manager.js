@@ -106,7 +106,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                         element.html(view(args.params));
                     } else if (type === types.class) {
                         data.instance = new view(args.id);
-                        let content = view.render(args.params, data.element);
+                        let content = data.instance.render(args.params, data.element);
                         if (content) {
                             element.html(content);
                         }

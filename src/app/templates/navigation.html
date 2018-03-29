@@ -17,11 +17,9 @@
         <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
             <button class="dropbtn">Modules&nbsp;&#8675;</button>
             <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
-                <a href="#">Simple text module view</a>
-                <a href="#">Class module - text rendering</a>
-                <a href="#">Class module - element manipulation</a>
-                <a href="#">Object module - text rendering</a>
-                <a href="#">Object module - element manipulation</a>
+                ${this.template.forEach(this.modules, item => 
+                    `<a id="${item.id}" href="${item.url}">${item.title}</a>`
+                )}
             </div>
         </div> 
 

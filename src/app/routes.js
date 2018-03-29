@@ -60,7 +60,22 @@ define([], () => {
                 title: "Composite template",
                 category: "templates"
             },
-            paramsMap: (...params) => params // any 
+            paramsMap: (...params) => params
+        },
+        "/module-simple-text": {
+            view: "views/modules/simple-text",
+            data: {
+                title: "Simple text from module",
+                category: "modules"
+            }
+        },
+        "/module-class-simple-text": {
+            view: "views/modules/class-module-text",
+            data: {
+                title: "Simple text from class module",
+                category: "modules"
+            },
+            paramsMap: (...params) => params
         },
         "/not-found": {
             view: "text!views/not-found.html"

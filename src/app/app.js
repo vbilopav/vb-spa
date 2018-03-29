@@ -26,7 +26,8 @@ define([
         const app = document.body.find("#app-container").html(
             layout({
                 home: routerData.filter(item => item.id == "home")[0],
-                templates: routerData.filter(item => item.category == "templates")
+                templates: routerData.filter(item => item.category == "templates"),
+                modules: routerData.filter(item => item.category == "modules")
             })
         );
 
