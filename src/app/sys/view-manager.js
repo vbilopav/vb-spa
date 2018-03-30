@@ -16,11 +16,14 @@ define(["sys/template-helpers"], (templateHelper) => {
             if (t === "object") {
                 return types.object;
             }
-            return types.string;
+            if (t === "string") {
+                return types.string;
+            }
+            throw view;
         },      
         showView = (item, element) => {
             window.scrollTo(item.x, item.y);
-            element.dataset.timestamp = Date.now()
+            //element.dataset.timestamp = Date.now();
         };
 
     return class {    
@@ -63,11 +66,15 @@ define(["sys/template-helpers"], (templateHelper) => {
                         return resolve(found.element.id);    
                     }    
                     
-                    let element = this._container.find("#" + elementId),
-                        empty = false;
+                    let element = this._container.find("#" + elementId);
                     if (!element.found) {      
-                        element = "span".createElement(elementId).appendTo(this._container);
-                        empty = true;                       
+                        element = this._container.find("[data-id='" + args.id + "']");
+                        if (element.found) {
+                            element.id = elementId;
+                        }
+                    }
+                    if (!element.found) {
+                        element = "span".createElement(elementId).appendTo(this._container);                 
                     }
 
                     if (found.type === types.template) {
@@ -82,7 +89,12 @@ define(["sys/template-helpers"], (templateHelper) => {
 
                     if (found.type === types.class || found.type === types.object) {
                         if (found.uriHash !== uriHash) {
-                            let newContent = found.instance.change(args.params, element);
+                            let newContent;
+                            if (found.instance.change) {
+                                newContent = found.instance.change(args.params, element);
+                            } else {
+                                newContent = found.instance.render(args.params, element);
+                            }
                             if (newContent) {
                                 element.html(newContent)
                             }
@@ -98,27 +110,29 @@ define(["sys/template-helpers"], (templateHelper) => {
                 require([args.name], view => {
                     let type = getViewType(view, args.name),
                         element = "span".createElement(elementId),
-                        data = {type: type, uriHash: uriHash, x: 0, y: 0};
+                        data = {type: type, uriHash: uriHash, x: 0, y: 0, id: args.id};
+                    element.dataset.id = args.id;
                     if (type === types.string) {          
                         data.element = element.html(view);
                     } else if (type === types.template) {
                         data.instance = view;
                         element.html(view(args.params));
                     } else if (type === types.class) {
-                        data.instance = new view(args.id);
-                        let content = data.instance.render(args.params, data.element);
+                        data.instance = new view(args.id, element);
+                        let content = data.instance.render(args.params, element);
                         if (content) {
                             element.html(content);
                         }
                     } else if (type === types.object) {
-                        view.init(args.id);
+                        if (view.init) {
+                            view.init(args.id, element);
+                        }                        
                         data.instance = view;
-                        let content = data.instance.render(args.params, data.element);
+                        let content = data.instance.render(args.params, element);
                         if (content) {
                             element.html(content);
                         }
                     }
-
                     this._views[args.id] = data;
                     this._container.append(element);
                     this._current = element;

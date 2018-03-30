@@ -69,14 +69,46 @@ define([], () => {
                 category: "modules"
             }
         },
-        "/module-class-simple-text": {
-            view: "views/modules/class-module-text",
+        "/class-module-simple": {
+            view: "views/modules/class-module-simple",
             data: {
                 title: "Simple text from class module",
                 category: "modules"
             },
             paramsMap: (...params) => params
         },
+        "/class-module-change-element": {
+            view: "views/modules/class-module-change-element",
+            data: {
+                title: "Class module with change method",
+                category: "modules"
+            },
+            paramsMap: (...params) => params
+        },
+        "/class-module-element-manipulation": {
+            view: "views/modules/class-module-element-manipulation",
+            data: {
+                title: "Class module - element manipulation",
+                category: "modules"
+            },
+            paramsMap: (...params) => params
+        },     
+        "/object-module-simple": {
+            view: "views/modules/object-module-simple",
+            data: {
+                title: "Simple text from object module",
+                category: "modules"
+            },
+            paramsMap: (...params) => params
+        },   
+        "/object-module-change-element": {
+            view: "views/modules/object-module-change-element",
+            data: {
+                title: "Object module with change method",
+                category: "modules"
+            },
+            paramsMap: (...params) => params
+        },                
         "/not-found": {
             view: "text!views/not-found.html"
         },

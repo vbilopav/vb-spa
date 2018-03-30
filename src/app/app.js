@@ -17,7 +17,7 @@ define([
         router = new Router({
             routes: routes,
             navigate: event => navigation.find("#" + event.route.id).addClass("active"),
-            leave: event => navigation.find("#" + event.route.id).removeClass("active"),                
+            leave: event => !event.route.id || navigation.find("#" + event.route.id).removeClass("active"),                
             error: event => event.router.reveal("/not-found")
         });
         
