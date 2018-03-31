@@ -1,6 +1,7 @@
 define([], () => {
 
     return {
+
         "/": {
             id: "home",
             view: "text!views/home.html",
@@ -8,6 +9,7 @@ define([], () => {
                 title: "Home"
             }
         },
+
         "/plain-text": {                    
             view: "text!views/templates/plain-text-view.html",
             data: {
@@ -15,6 +17,7 @@ define([], () => {
                 category: "templates"
             }
         },     
+
         "/keep-state": {                    
             view: "text!views/templates/state-view.html",
             data: {
@@ -22,6 +25,7 @@ define([], () => {
                 category: "templates"
             }
         }, 
+
         "/parameterized": {
             view: "template!views/templates/parameterized.html", 
             paramsMap: (...params) => {
@@ -39,6 +43,7 @@ define([], () => {
                 category: "templates"
             }
         },
+
         "/parameterized/sub-route": {
             view: "template!views/templates/parameterized-sub-route.html", 
             paramsMap: (...params) => {
@@ -54,6 +59,7 @@ define([], () => {
                 category: "templates"
             }
         },
+
         "/composite": {
             view: "template!views/templates/composite/template1.html", 
             data: {
@@ -62,6 +68,7 @@ define([], () => {
             },
             paramsMap: (...params) => params
         },
+
         "/module-simple-text": {
             view: "views/modules/simple-text",
             data: {
@@ -69,6 +76,7 @@ define([], () => {
                 category: "modules"
             }
         },
+ 
         "/class-module-simple": {
             view: "views/modules/class-module-simple",
             data: {
@@ -77,6 +85,7 @@ define([], () => {
             },
             paramsMap: (...params) => params
         },
+ 
         "/class-module-change-element": {
             view: "views/modules/class-module-change-element",
             data: {
@@ -85,6 +94,7 @@ define([], () => {
             },
             paramsMap: (...params) => params
         },
+ 
         "/class-module-element-manipulation": {
             view: "views/modules/class-module-element-manipulation",
             data: {
@@ -93,6 +103,7 @@ define([], () => {
             },
             paramsMap: (...params) => params
         },     
+ 
         "/object-module-simple": {
             view: "views/modules/object-module-simple",
             data: {
@@ -101,6 +112,7 @@ define([], () => {
             },
             paramsMap: (...params) => params
         },   
+ 
         "/object-module-change-element": {
             view: "views/modules/object-module-change-element",
             data: {
@@ -108,9 +120,37 @@ define([], () => {
                 category: "modules"
             },
             paramsMap: (...params) => params
-        },                
+        },    
+ 
+        "/object-module-element-manipulation": {
+            view: "views/modules/object-module-element-manipulation",
+            data: {
+                title: "Object module - element manipulation",
+                category: "modules"
+            },
+            paramsMap: (...params) => params
+        },
+ 
+        "/view-events": {
+            view: "views/modules/view-events",
+            data: {
+                title: "View events",
+                category: "modules"                
+            },
+            paramsMap: (...params) => params
+        },    
+        
+        "/events-handlings": {
+            view: "views/modules/events-handlings",
+            data: {
+                title: "Event handlings",
+                category: "modules"                
+            }            
+        }, 
+ 
         "/not-found": {
             view: "text!views/not-found.html"
-        },
+        }
+        
     }
 });

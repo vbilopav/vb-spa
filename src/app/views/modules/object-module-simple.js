@@ -22,7 +22,8 @@ define(["template!views/modules/_default.html"], template => {
             secondLine: 
                 "This is simple example with render method that is called every time " +
                 "parameters are changed or module is created and it returns simple text to be rendered.",
-            viewLocation: "/app/views/modules/class-module-simple.js",
+            viewLocation: 
+                "/app/views/modules/class-module-simple.js",
             routeDefintion: 
                 '"/object-module-simple": {\n' +                    
                 '    view: "views/modules/object-module-simple"\n' +

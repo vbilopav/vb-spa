@@ -67,6 +67,20 @@ define(["sys/template-helpers"], (templateHelper) => {
                     }    
                     
                     let element = this._container.find("#" + elementId);
+                    
+                    if (found.type === types.template) {
+                        if (!element.found) {
+                            element = "span".createElement(elementId).appendTo(this._container);                 
+                        }
+                        if (found.uriHash !== uriHash) {
+                            element.html(found.instance(args.params));
+                            found.uriHash = uriHash;
+                        }
+                        this._current = element.show();
+                        showView(found, element);
+                        return resolve(element.id);                        
+                    }
+
                     if (!element.found) {      
                         element = this._container.find("[data-id='" + args.id + "']");
                         if (element.found) {
@@ -77,26 +91,26 @@ define(["sys/template-helpers"], (templateHelper) => {
                         element = "span".createElement(elementId).appendTo(this._container);                 
                     }
 
-                    if (found.type === types.template) {
-                        if (found.uriHash !== uriHash) {
-                            element.html(found.instance(args.params));
-                            found.uriHash = uriHash;
-                        }
-                        this._current = element.show();
-                        showView(found, element);
-                        return resolve(element.id);                        
-                    }
-
                     if (found.type === types.class || found.type === types.object) {
                         if (found.uriHash !== uriHash) {
                             let newContent;
                             if (found.instance.change) {
                                 newContent = found.instance.change(args.params, element);
                             } else {
-                                newContent = found.instance.render(args.params, element);
+                                if (!found.instance.renderOnceIfChangeNotPresent) {
+                                    newContent = found.instance.render(args.params, element);
+                                }                                
                             }
                             if (newContent) {
-                                element.html(newContent)
+                                element.html(newContent);                                
+                            }
+                            element.show();
+                            if (found.instance.changed) {
+                                found.instance.changed(args.params, element);
+                            } else {
+                                if (found.instance.rendered) {
+                                    found.instance.rendered(args.params, element);
+                                }
                             }
                             found.uriHash = uriHash;
                         }  
@@ -119,19 +133,18 @@ define(["sys/template-helpers"], (templateHelper) => {
                         element.html(view(args.params));
                     } else if (type === types.class) {
                         data.instance = new view(args.id, element);
-                        let content = data.instance.render(args.params, element);
-                        if (content) {
-                            element.html(content);
-                        }
                     } else if (type === types.object) {
                         if (view.init) {
                             view.init(args.id, element);
-                        }                        
+                        }
                         data.instance = view;
+                    }
+                    if (type === types.object || type === types.class) {
                         let content = data.instance.render(args.params, element);
                         if (content) {
-                            element.html(content);
+                            element.html(content);                            
                         }
+                        !data.instance.rendered || data.instance.rendered(args.params, element);
                     }
                     this._views[args.id] = data;
                     this._container.append(element);

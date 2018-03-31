@@ -1,6 +1,7 @@
 define(["template!views/modules/_default.html"], template => {        
     
     return {
+        
         //
         // constructor is init method, and it is optional, it receives only id and newly created view element
         //
