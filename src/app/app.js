@@ -27,7 +27,8 @@ define([
             layout({
                 home: routerData.filter(item => item.id == "home")[0],
                 templates: routerData.filter(item => item.category == "templates"),
-                modules: routerData.filter(item => item.category == "modules")
+                modules: routerData.filter(item => item.category == "modules"),
+                dynamic: routerData.filter(item => item.category == "dynamic")
             })
         );
 

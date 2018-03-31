@@ -1,7 +1,7 @@
 define([], () => {
     
     HTMLElement.prototype.find = function(search) {
-        let e = this.querySelector(search)
+        let e = this.querySelector(search);
         if (!e) {
             e = "dummy".createElement();
             e.found = false;
@@ -64,6 +64,12 @@ define([], () => {
         return this;
     }
 
+    
+    HTMLElement.prototype.append = function(element) {
+        this.appendChild(element);
+        return this;
+    }
+    
     String.prototype.createElement = function(id, content) {
         let e = document.createElement(this);
         if (id) {
@@ -84,5 +90,10 @@ define([], () => {
         }
         return h;
     }
+
+    //
+    // lit-html vs code extension support
+    //
+    String.html = (pieces, ...args) => String.raw(pieces, ...args)
 
 });

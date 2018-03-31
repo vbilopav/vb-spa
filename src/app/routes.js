@@ -147,6 +147,14 @@ define([], () => {
                 category: "modules"                
             }            
         }, 
+
+        "/model-binding": {
+            view: "views/dynamic-data/model-binding",
+            data: {
+                title: "Model binding",
+                category: "dynamic"
+            }            
+        }, 
  
         "/not-found": {
             view: "text!views/not-found.html"
