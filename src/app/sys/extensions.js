@@ -3,12 +3,14 @@ define([], () => {
     HTMLElement.prototype.find = function(search) {
         let e = this.querySelector(search);
         if (!e) {
-            e = "dummy".createElement();
-            e.found = false;
-            return e;
+            return {length: 0};
         }
-        e.found = true;
+        e.length = 1;
         return e;
+    }
+
+    HTMLElement.prototype.findAll = function(search) {
+        return this.querySelectorAll(search);
     }
 
     HTMLElement.prototype.show = function() {

@@ -69,7 +69,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                     let element = this._container.find("#" + elementId);
                     
                     if (found.type === types.template) {
-                        if (!element.found) {
+                        if (!element.length) {
                             element = "span".createElement(elementId).appendTo(this._container);                 
                         }
                         if (found.uriHash !== uriHash) {
@@ -81,13 +81,13 @@ define(["sys/template-helpers"], (templateHelper) => {
                         return resolve(element.id);                        
                     }
 
-                    if (!element.found) {      
+                    if (!element.length) {      
                         element = this._container.find("[data-id='" + args.id + "']");
-                        if (element.found) {
+                        if (element.length) {
                             element.id = elementId;
                         }
                     }
-                    if (!element.found) {
+                    if (!element.length) {
                         element = "span".createElement(elementId).appendTo(this._container);                 
                     }
 

@@ -31,8 +31,7 @@ define(["template!views/modules/_default.html"], template => {
                     '        category: "modules"\n' +
                     '    },\n' +    
                     '}',
-                closingLine:
-                    `These are two buttons to be clicked here:
+                closingLine: String.html`These are two buttons to be clicked here:
                     <span>
                         <button id="button1">button1 click here!</button>
                         <button id="button2">button2 click here!</button>

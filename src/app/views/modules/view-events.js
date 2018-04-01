@@ -30,8 +30,7 @@ define(["template!views/modules/_default.html"], template => class {
                     '    },\n' +
                     '    paramsMap: (...params) => params\n' +
                     '}',
-                closingLine:
-                    `Change some parameters manually and see output in console bellow:<br /><br />
+                closingLine: String.html`Change some parameters manually and see output in console bellow:<br /><br />
                 <div class="panel panel-default">
                     <div class="panel-heading">output:</div>
                     <div class="panel-body">                   

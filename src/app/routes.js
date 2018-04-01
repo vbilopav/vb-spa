@@ -69,10 +69,18 @@ define([], () => {
             paramsMap: (...params) => params
         },
 
-        "/module-simple-text": {
-            view: "views/modules/simple-text",
+        "/module-plain-text": {
+            view: "views/modules/module-plain-text",
             data: {
-                title: "Simple text from module",
+                title: "Plain text from module",
+                category: "modules"
+            }
+        },
+
+        "/module-plain-text-template": {
+            view: "views/modules/module-plain-text-template",
+            data: {
+                title: "Template plain text from module",
                 category: "modules"
             }
         },
