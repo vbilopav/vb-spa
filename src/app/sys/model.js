@@ -1,7 +1,7 @@
 define([], () => class {
 
     constructor(model) {
-        this._model = model;  //{name: f(model)=>bool}
+        this._model = model;
     }
 
     bind(element) {
@@ -9,16 +9,14 @@ define([], () => class {
         if (!this._model) {
             element.findAll(search).forEach((e) => {this._forEachDeclarative(e)});
         } else {
-            element.findAll(search).forEach((e) => {this._forEachProgramatic(e)});
+            element.findAll(search).forEach((e) => {this._forEachProgrammatic(e)});
         }
+        return this;
     }
     
     _forEachDeclarative(element) {
-        let name = element.name || element.id; // name first, id second        
-        if (!name) {
-            return;
-        }
-        this._assignProps(name, element);
+        // name first, id second        
+        this._assignProps(element.name || element.id, element);
         for(let dataset in element.dataset) {            
             if (!dataset.startsWith("event")) {
                 continue;
@@ -27,17 +25,25 @@ define([], () => class {
         }
     }
 
-    _forEachProgramatic(element) {
+    _forEachProgrammatic(element) {
         for(let name in this._model) {
-            let f = this._model[name];
-            if (!f || !f(this)) {
-                continue;
-            }            
-            this._assignProps(name, element);                          
+            let m = this._model[name];
+            if (typeof m === "string") {
+                if (m === element.name || m === element.id) {
+                    this._assignProps(name, element);
+                }
+            } else {
+                if (m(element)) {
+                    this._assignProps(name, element);
+                }
+            }                                  
         }
     }   
 
     _assignProps(name, element) {
+        if (!name) {
+            return;
+        }
         let node = element.nodeName;        
         Object.defineProperty(this, name, {
             get: () => {
@@ -48,7 +54,11 @@ define([], () => class {
             },
             set: value => {
                 if (node === "SELECT" || node === "INPUT") {
-                    element.value = value;
+                    if (node === "INPUT" && element.type === "checkbox") {
+                        element.checked = value;
+                    } else {
+                        element.value = value;
+                    }                    
                 } else {
                     element.html(value);
                 }

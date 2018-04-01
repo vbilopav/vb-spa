@@ -156,12 +156,42 @@ define([], () => {
             }            
         }, 
 
-        "/model-binding": {
-            view: "views/dynamic-data/model-binding",
+        "/declarative-model-binding": {
+            view: "views/dynamic-data/declarative-model-binding",
             data: {
-                title: "Model binding",
+                title: "Model binding - declarative",
                 category: "dynamic"
             }            
+        }, 
+
+        "/programmatic-model-binding": {
+            view: "views/dynamic-data/programmatic-model-binding",
+            data: {
+                title: "Model binding - programmatic",
+                category: "dynamic"
+            }            
+        }, 
+
+        "/remote-data-example": {
+            view: "views/dynamic-data/remote-data-example",
+            data: {
+                title: "Remote data master detail example",
+                category: "dynamic"
+            }            
+        }, 
+
+        "/remote-data-example/details": {
+            view: "views/dynamic-data/remote-data-details",
+            paramsMap: (...params) => {
+                if (params.length !== 1) {
+                    return false;
+                }   
+                let id = Number(params[0]);
+                if (isNaN(id)) {
+                    return false;
+                }
+                return {id: id}
+            },
         }, 
  
         "/not-found": {

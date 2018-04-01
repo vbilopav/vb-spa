@@ -1,15 +1,21 @@
 define(["sys/model"], Model => {
 
     const
-        model = new Model(),
+        model = new Model({            
+            name: "name", // when value is string bind will match name or id            
+            email: e => e.name === "email", // value can be function to test element            
+            select: e => e.matches("[name=select]"), // so that selector can also be used
+            check: "check_id",
+            showButton: "showButton"
+        }),
         module = {        
             render: () => String.html`
             <div>
-                <h3>Model binding support - declarative</h3>    
+                <h3>Model binding support - programmatic</h3>    
                 <p>
-                    Demonstration for declarative bi-directional model binding support
+                    Demonstration for programmatic bi-directional model binding support
                     <br /><br />
-                    View location: <pre>/app/views/dynamic-data/declarative-model-binding.js</pre>                                
+                    View location: <pre>/app/views/dynamic-data/programmatic-model-binding.js</pre>                                
                     <br />
                     <span id="model-area">
                         <label for="name" style="width: 75px">Name: </label><input name="name" type="text"><br />
@@ -27,9 +33,9 @@ define(["sys/model"], Model => {
                             <option value="this">This framework so far... ~ 6.61K</option>
                         </select>
                         <br />
-                        <input type="checkbox" name="check">Check box can ne checked!<br />
+                        <input type="checkbox" id="check_id" name="check">Check box can ne checked!<br />
                         <br />
-                        <button name="showButton" data-event-click="showButtonClick">Check model state in console output</button>
+                        <button name="showButton">Check model state in console output</button>
                     </span>
                     <hr />
                     <button id="btn-set-name">Set new value for "name" model propery</button><br /><br />
@@ -41,13 +47,10 @@ define(["sys/model"], Model => {
             </div>`,    
 
             rendered: (params, element) => {
-                //
-                // Binds everything inside element argument, creates properties on model, first by name, then by id 
-                // If name and id don't exist it will be skipped.
-                // Binds events also with data-event-eventname
-                //
-                model.bind(element.find("#model-area"));      
-                
+                model
+                    .bind(element.find("#model-area")) // bind returns created model
+                    .showButton.on("click", model.showButtonClick) // events must be assigned manually
+                                
                 element.find("#btn-set-name").on("click", () => {
                     let value = prompt("Please enter new value for model.name", model.name.value);
                     if (value != null) {
@@ -78,7 +81,7 @@ define(["sys/model"], Model => {
                         // same as model.check.checked = value.toLowerCase() === "true";
                         model.check = value.toLowerCase() === "true";
                     }
-                });
+                });                
             }
             
         }
