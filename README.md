@@ -1,13 +1,34 @@
-# vb-spa
-Minimalistic JavaScript Single Page Application framework demo built for simplicity and speed.
+# Single-Page Application Template
+
+Application template for building your custom, amazing JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks. No transpiling, no transtranspiling, no preparsing, prepreparsing, complinig and then transpiling, no gigantic cryptic configuration files or external depencies (well, just one actually, for loading modules, and it is small). No nothing. Just JavaScript ES6.
+
+It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be.
+
+You may use this template to build your own apps without frameworks as you please. It is built with having on mind buidling of web-based tools with desktop feel, so it is perfect for that purpose.
 
 ### Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+Run this application to go trough examples. Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need. 
+
+Entire application logic, that might be considered as "framework" when minified is under 7K. See [sys dir](https://github.com/vbilopav/vb-spa/tree/master/src/app/sys)
+
+Feature list includes:
+
+- Templating engine with familiar syntax. It uses ES6 template string which are supported nativly by browsers, so it should be as fast as possible. Templating includes composition, iterators, and more...
+
+- Client side router that uses hashes or hashbangs. Hashless client side router is with normal url's is not implemented because I don't know how to do that on client side. Any help would be appritiated.
+
+- View engine that that can map routes to text html files, paramatrized templates, class or object modules, and knows how to remember view state and scroll position. It also supports dependency injection for view modules and templates.
+
+- Mixing of JavaScript and HTML inside same file with languague support for vs code without JSX and related parsing.
+
+- Model binding. Bi-directional - programmatic as well as declarative (inside HTML).
+
+- Demo also include comprehensive examples for every feature (that I've used for testing and development) and as well one more complex example with master/detail remote data fetching.
 
 ### Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+JavaScript is a mess
 
 ## Getting Started
 
@@ -15,31 +36,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisities
 
-What things you need to install the software and how to install them
+To run this demo, you will just need local web server.
 
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Stay what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Example Use
+## Features
 
 Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
 
