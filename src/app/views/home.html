@@ -1,110 +1,66 @@
-<div>
-        <h1 id="vbspa">vb-spa</h1>
-
-        <p>Minimalistic JavaScript Single Page Application framework demo built for simplicity and speed.</p>
-        
-        <h3 id="synopsis">Synopsis</h3>
-        
-        <p>At the top of the file there should be a short introduction and/ or overview that explains <strong>what</strong> the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)</p>
-        
-        <h3 id="motivation">Motivation</h3>
-        
-        <p>A short description of the motivation behind the creation and maintenance of the project. This should explain <strong>why</strong> the project exists.</p>
-        
-        <h2 id="gettingstarted">Getting Started</h2>
-        
-        <p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
-        
-        <h3 id="prerequisities">Prerequisities</h3>
-        
-        <p>What things you need to install the software and how to install them</p>
-        
-        <pre><code>Give examples
-        </code></pre>
-        
-        <h3 id="installing">Installing</h3>
-        
-        <p>A step by step series of examples that tell you have to get a development env running</p>
-        
-        <p>Stay what the step will be</p>
-        
-        <pre><code>Give the example
-        </code></pre>
-        
-        <p>And repeat</p>
-        
-        <pre><code>until finished
-        </code></pre>
-        
-        <p>End with an example of getting some data out of the system or using it for a little demo</p>
-        
-        <h2 id="exampleuse">Example Use</h2>
-        
-        <p>Show what the library does as concisely as possible, developers should be able to figure out <strong>how</strong> your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.</p>
-        
-        <h2 id="apireference">API Reference</h2>
-        
-        <p>Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.</p>
-        
-        <h2 id="runningthetests">Running the tests</h2>
-        
-        <p>Explain how to run the automated tests for this system</p>
-        
-        <h3 id="breakdownintoendtoendtests">Break down into end to end tests</h3>
-        
-        <p>Explain what these tests test and why</p>
-        
-        <pre><code>Give an example
-        </code></pre>
-        
-        <h3 id="andcodingstyletests">And coding style tests</h3>
-        
-        <p>Explain what these tests test and why</p>
-        
-        <pre><code>Give an example
-        </code></pre>
-        
-        <h2 id="deployment">Deployment</h2>
-        
-        <p>Add additional notes about how to deploy this on a live system</p>
-        
-        <h2 id="builtwith">Built With</h2>
-        
-        <ul>
-        <li>Dropwizard - Bla bla bla</li>
-        
-        <li>Maven - Maybe</li>
-        
-        <li>Atom - ergaerga</li>
-        </ul>
-        
-        <h2 id="contributing">Contributing</h2>
-        
-        <p>Please read <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> for details on our code of conduct, and the process for submitting pull requests to us.</p>
-        
-        <h2 id="versioning">Versioning</h2>
-        
-        <p>We use <a href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a href="https://github.com/your/project/tags">tags on this repository</a>. </p>
-        
-        <h2 id="authors">Authors</h2>
-        
-        <ul>
-        <li><strong>John Doe</strong> - <em>Initial work</em> - <a href="https://github.com/JohnDoe">JohnDoe</a></li>
-        </ul>
-        
-        <p>See also the list of <a href="https://github.com/your/project/contributors">contributors</a> who participated in this project.</p>
-        
-        <h2 id="license">License</h2>
-        
-        <p>This project is licensed under the <strong>BSD License</strong> - see the <a href="LICENSE.md">LICENSE.md</a> file for details.</p>
-        
-        <h2 id="acknowledgments">Acknowledgments</h2>
-        
-        <ul>
-        <li>Hat tip to anyone who's code was used</li>
-        
-        <li>Inspiration</li>
-        
-        <li>etc</li>
-        </ul>        
-</div>
+<h1><a id="SinglePage_Application_Template_0"></a>Single-Page Application Template</h1>
+<p>Application template for building your custom, amazing JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks.</p>
+<p>No transpiling, no transtranspiling, no preparsing, prepreparsing, complinig and then transpiling, no gigantic cryptic configuration files or external depencies (well, just one actually, for loading modules, and it is small). No nothing. Just pure JavaScript love in ES6.</p>
+<p>It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be. Ever.</p>
+<p>You may use this template to build your own apps without frameworks as you please. It is built with having on mind buidling of web-based tools with desktop feel, so it is perfect for that purpose.</p>
+<h3><a id="Synopsis_10"></a>Synopsis</h3>
+<p>Run this application to go trough examples.</p>
+<p>Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need.</p>
+<p>Entire application logic, that might be considered as “framework” when minified is under 7K. See <a href="https://github.com/vbilopav/vb-spa/tree/master/src/app/sys">sys dir</a></p>
+<p>Feature list includes:</p>
+<ul>
+<li>
+<p>Templating engine with familiar syntax. It uses ES6 template string which are supported nativly by browsers, so it should be as fast as possible. Templating includes composition, iterators, and more…</p>
+</li>
+<li>
+<p>Client side router that uses hashes or hashbangs. Hashless client side router is with normal url’s is not implemented because I don’t know how to do that on client side. Any help would be appritiated.</p>
+</li>
+<li>
+<p>View engine that that can map routes to text html files, paramatrized templates, class or object modules, and knows how to remember view state and scroll position. It also supports dependency injection for view modules and templates.</p>
+</li>
+<li>
+<p>Mixing of JavaScript and HTML inside same file with languague support for vs code without JSX and related parsing.</p>
+</li>
+<li>
+<p>Model binding. Bi-directional - programmatic as well as declarative (inside HTML).</p>
+</li>
+<li>
+<p>Demo also include comprehensive examples for every feature (that I’ve used for testing and development) and as well one more complex example with master/detail remote data fetching.</p>
+</li>
+<li>
+<p>Features still under construction: build tool for minifying and bundling, and feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.</p>
+</li>
+</ul>
+<h3><a id="Motivation_34"></a>Motivation</h3>
+<p>JavaScript world is a mess. Read this classic article: <a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">How it feels to learn JavaScript in 2016</a>.</p>
+<p>2017 isn’t getting any better - <a href="https://stateofjs.com/2017/introduction/">The Stateof JS 2017</a></p>
+<p>You can also hear from framework author himself, Adrian Holovaty, Django Web Frameork Author - <a href="https://www.youtube.com/watch?v=k7n2xnOiWI8">A Framework Author’s Case Against Frameworks</a></p>
+<p>And it is already 2018… I just wanted to have some set of stable, reliable tools to build fast web-based tools that would be indistinguishable from normal desktop applications, so that only way you can tell it is web app - if it is running inside browser.</p>
+<p>Cool thing about having template instead of framework is that is much easier to change. If you need to adapt soemthing to you specific need. For example event parameter is missing that forces you to change you entire app structure. No problem, you can add it easily. Bug fixing should be easier too. Code is fairly readable, so I hpe noone should have any problems in changing anything they need.</p>
+<h2><a id="Getting_Started_47"></a>Getting Started</h2>
+<p>To run this this demo, you’ll have to have local web server. Just clone the repo and point the web server to /src folder and this it.<br>
+If you don’t have web server, you can use node’s <a href="https://www.npmjs.com/package/http-server">http-server</a></p>
+<pre><code>git clone https://github.com/vbilopav/vb-spa
+npm install http-server -g
+cd .\src\
+http-server -o
+</code></pre>
+<p>And that is it, you browser should open immediately.</p>
+<h3><a id="Features_61"></a>Features</h3>
+<h2><a id="Templating_engine_63"></a>Templating engine</h2>
+<h2><a id="router_65"></a>router</h2>
+<h2><a id="View_engine_67"></a>View engine</h2>
+<h2><a id="Mixing_of_JavaScript_and_HTML_69"></a>Mixing of JavaScript and HTML</h2>
+<h2><a id="Model_binding_71"></a>Model binding</h2>
+<h2><a id="Author_73"></a>Author</h2>
+<ul>
+<li><strong>Vedran Bilopavlović</strong> - <em>Initial work</em> - <a href="https://github.com/vbilopav/">vbilopav</a></li>
+</ul>
+<h2><a id="License_78"></a>License</h2>
+<p>This project is licensed under the <strong>MIT License</strong> - see the <a href="LICENSE.md">LICENSE.md</a> file for details.</p>
+<h2><a id="Acknowledgments_82"></a>Acknowledgments</h2>
+<ul>
+<li>Hat tip to anyone who’s code was used</li>
+<li>Inspiration</li>
+<li>etc</li>
+</ul>

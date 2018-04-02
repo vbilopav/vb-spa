@@ -38,7 +38,7 @@ JavaScript world is a mess. Read this classic article: [How it feels to learn Ja
 
 2017 isn't getting any better - [The Stateof JS 2017](https://stateofjs.com/2017/introduction/)
 
-You can also hear from framework author himself, Adrian Holovaty, Django Web Frameork Author - [Adrian Holovaty, Django Web Frameork Author - A Framework Author's Case Against Frameworks](https://www.youtube.com/watch?v=k7n2xnOiWI8)
+You can also hear from framework author himself, Adrian Holovaty, Django Web Frameork Author - [A Framework Author's Case Against Frameworks](https://www.youtube.com/watch?v=k7n2xnOiWI8)
 
 And it is already 2018... I just wanted to have some set of stable, reliable tools to build fast web-based tools that would be indistinguishable from normal desktop applications, so that only way you can tell it is web app - if it is running inside browser. 
 
