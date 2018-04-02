@@ -1,14 +1,18 @@
 # Single-Page Application Template
 
-Application template for building your custom, amazing JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks. No transpiling, no transtranspiling, no preparsing, prepreparsing, complinig and then transpiling, no gigantic cryptic configuration files or external depencies (well, just one actually, for loading modules, and it is small). No nothing. Just JavaScript ES6.
+Application template for building your custom, amazing JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks. 
 
-It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be.
+No transpiling, no transtranspiling, no preparsing, prepreparsing, complinig and then transpiling, no gigantic cryptic configuration files or external depencies (well, just one actually, for loading modules, and it is small). No nothing. Just pure JavaScript love in ES6.
+
+It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be. Ever.
 
 You may use this template to build your own apps without frameworks as you please. It is built with having on mind buidling of web-based tools with desktop feel, so it is perfect for that purpose.
 
 ### Synopsis
 
-Run this application to go trough examples. Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need. 
+Run this application to go trough examples. 
+
+Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need. 
 
 Entire application logic, that might be considered as "framework" when minified is under 7K. See [sys dir](https://github.com/vbilopav/vb-spa/tree/master/src/app/sys)
 
@@ -26,69 +30,51 @@ Feature list includes:
 
 - Demo also include comprehensive examples for every feature (that I've used for testing and development) and as well one more complex example with master/detail remote data fetching.
 
+- Features still under construction: build tool for minifying and bundling, and feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
+
 ### Motivation
 
-JavaScript is a mess
+JavaScript world is a mess. Read this classic article: [How it feels to learn JavaScript in 2016](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f).
+
+2017 isn't getting any better - [The Stateof JS 2017](https://stateofjs.com/2017/introduction/)
+
+You can also hear from framework author himself, Adrian Holovaty, Django Web Frameork Author - [Adrian Holovaty, Django Web Frameork Author - A Framework Author's Case Against Frameworks](https://www.youtube.com/watch?v=k7n2xnOiWI8)
+
+And it is already 2018... I just wanted to have some set of stable, reliable tools to build fast web-based tools that would be indistinguishable from normal desktop applications, so that only way you can tell it is web app - if it is running inside browser. 
+
+Cool thing about having template instead of framework is that is much easier to change. If you need to adapt soemthing to you specific need. For example event parameter is missing that forces you to change you entire app structure. No problem, you can add it easily. Bug fixing should be easier too. Code is fairly readable, so I hpe noone should have any problems in changing anything they need.
+
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisities
-
-To run this demo, you will just need local web server.
-
-## Features
-
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-
-## API Reference
-
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+To run this this demo, you'll have to have local web server. Just clone the repo and point the web server to /src folder and this it.
+If you don't have web server, you can use node's [http-server](https://www.npmjs.com/package/http-server)
 
 ```
-Give an example
+git clone https://github.com/vbilopav/vb-spa
+npm install http-server -g
+cd .\src\
+http-server -o
 ```
 
-### And coding style tests
+And that is it, you browser should open immediately.
 
-Explain what these tests test and why
+### Features
 
-```
-Give an example
-```
+## Templating engine
 
-## Deployment
+## router
 
-Add additional notes about how to deploy this on a live system
+## View engine
 
-## Built With
+## Mixing of JavaScript and HTML
 
-* Dropwizard - Bla bla bla
-* Maven - Maybe
-* Atom - ergaerga
+## Model binding
 
-## Contributing
+## Author
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+* **Vedran Bilopavlović** - *Initial work* - [vbilopav](https://github.com/vbilopav/)
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **John Doe** - *Initial work* - [JohnDoe](https://github.com/JohnDoe)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
