@@ -2,7 +2,7 @@
 
 This is a application template for building custom, amazing and fast JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks. 
 
-No transpiling, no trans-transpiling, no parsing, preparsing, pre-preparsing, compiling, no pre-tans-comp-iling, no gigantic cryptic configuration and only one small external depency. No nothing. Just pure JavaScript love in ES6. Core infrastructure part, when minified and bundled is only 7K! If this was framowork, I think it would be smallest and fastest. Maybe one day it will. But I don't think world needs another frameowork. Or does it?
+No transpiling, no trans-transpiling, no parsing, preparsing, pre-preparsing, compiling, no pre-tans-comp-iling, no gigantic cryptic configuration and only one small external depency. No nothing. Just pure JavaScript love in ES6. Core infrastructure part, when minified and bundled is only 7K! If this was framowork, I think it would be smallest and fastest. Maybe one day it will. But I don't think world needs another framework. Or does it?
 
 It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be. Ever.
 
