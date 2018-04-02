@@ -1,8 +1,8 @@
 # Single-Page Application Template
 
-Application template for building your custom, amazing JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks. 
+This is a application template for building custom, amazing and fast JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks. 
 
-No transpiling, no transtranspiling, no preparsing, prepreparsing, complinig and then transpiling, no gigantic cryptic configuration files or external depencies (well, just one actually, for loading modules, and it is small). No nothing. Just pure JavaScript love in ES6.
+No transpiling, no trans-transpiling, no parsing, preparsing, pre-preparsing, compiling, no pre-tans-comp-iling, no gigantic cryptic configuration and only one small external depency. No nothing. Just pure JavaScript love in ES6.
 
 It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be. Ever.
 
