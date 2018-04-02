@@ -3,7 +3,9 @@ define([], () => {
     HTMLElement.prototype.find = function(search) {
         let e = this.querySelector(search);
         if (!e) {
-            return {length: 0};
+            e = "dummy".createElement();
+            e.length = 0
+            return e;
         }
         e.length = 1;
         return e;

@@ -5,7 +5,7 @@ define([], () => class {
     }
 
     bind(element) {
-        let search = "input, select, button, span, div";
+        let search = "input, select, button, span, div, a";
         if (!this._model) {
             element.findAll(search).forEach((e) => {this._forEachDeclarative(e)});
         } else {
@@ -16,7 +16,9 @@ define([], () => class {
     
     _forEachDeclarative(element) {
         // name first, id second        
-        this._assignProps(element.name || element.id, element);
+        if (!this._assignProps(element.name || element.id, element)); {
+            return;
+        }
         for(let dataset in element.dataset) {            
             if (!dataset.startsWith("event")) {
                 continue;
@@ -42,7 +44,7 @@ define([], () => class {
 
     _assignProps(name, element) {
         if (!name) {
-            return;
+            return false;
         }
         let node = element.nodeName;        
         Object.defineProperty(this, name, {
@@ -61,8 +63,12 @@ define([], () => class {
                     }                    
                 } else {
                     element.html(value);
+                    if (node === "A") {
+                        element.href = value;
+                    }
                 }
             }
-        });  
+        });
+        return true;  
     }
 });

@@ -13,20 +13,20 @@ define([], () => class {
             <p>
                 Demonstration of dependency injection mechanism into class module
                 <br />
-                This template, and all injected templates and modules are loaded at the same time asynchronously.
+                This class  module, and all injected templates and modules are loaded at the same time asynchronously.
                 <br /><br />
                 View location: <pre>/app/views/dynamic-data/di/class-module.js</pre>                                
                 <br />
                 injected template.html: 
                 ${this.template1({ 
-                    heading: "heading of injected template.html",
-                    body: "body of injected template.html",
+                    heading: "heading of injected injected/template.html to class-module",
+                    body: "body of injected injected/template.html to class-module",
                 })} 
                 <br />            
                 injected custom-module1: 
                 ${this.module1.getHtmlContent( 
-                    "heading of injected custom-module1",
-                    "body of injected custom-module1",
+                    "heading of injected injected/custom-module1 to class-module",
+                    "body of injected injected/custom-module1 to class-module",
                 )}   
                 <hr />
             </p>

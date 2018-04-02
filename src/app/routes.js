@@ -218,7 +218,7 @@ define([], () => {
         }, 
 
         "/remote-data-example": {
-            view: "views/dynamic-data/remote-data-example",
+            view: "views/dynamic-data/remote-data-example/frameworks",
             data: {
                 title: "Remote data - master detail example",
                 category: "dynamic"
@@ -226,12 +226,12 @@ define([], () => {
         }, 
 
         "/remote-data-example/details": {
-            view: "views/dynamic-data/remote-data-details",
+            view: "views/dynamic-data/remote-data-example/framework-details",
             paramsMap: (...params) => {
                 if (params.length !== 1) {
                     return false;
                 }
-                return iparams[0];
+                return params[0];
             },
         }, 
  
