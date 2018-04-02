@@ -16,7 +16,7 @@ define([], () => class {
     
     _forEachDeclarative(element) {
         // name first, id second        
-        if (!this._assignProps(element.name || element.id, element)); {
+        if (!this._assignProps(element.name || element.id, element)) {
             return;
         }
         for(let dataset in element.dataset) {            
