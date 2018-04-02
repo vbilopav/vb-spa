@@ -14,7 +14,7 @@
     <title>SPA app demo</title>
     <script>
         var require = {baseUrl: _app.appUrl};
-        if (_app.version) require.urlArgs = "v=" + _app.version
+        if (window._app && window._app.version) require.urlArgs = "v=" + window._app.version
     </script>  
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >

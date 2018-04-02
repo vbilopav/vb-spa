@@ -23,7 +23,7 @@ define([], () => {
             }
             this._current = undefined; 
             this._manager = {
-                reveal: ({id,name,params,uri}) => {}, // --> Promise --> elementId
+                reveal: ({id,view,params,uri}) => {}, // --> Promise --> elementId
                 leave: (viewId, elementId) => this._manager // --> this
             };
         }
@@ -105,7 +105,7 @@ define([], () => {
                 elementId = this._current.elementId;
             }
             this._manager.leave(viewId, elementId).reveal(
-                {id: route.id, name: route.view, params: params, uri: uri}
+                {id: route.id, view: route.view, params: params, uri: uri}
             ).then(elementId => {
                 if (!starting) {                    
                     this._leave({ router: this, route: this._current});

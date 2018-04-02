@@ -156,8 +156,53 @@ define([], () => {
             }            
         }, 
 
+        "/dependency-injection-template": {
+            view: {
+                name: "template!views/dynamic-data/di/template.html",
+                inject: [
+                    "template!views/dynamic-data/di/injected/template.html",
+                    "views/dynamic-data/di/injected/custom-module1",
+                    "views/dynamic-data/di/injected/custom-module2"
+                ] 
+            },
+            data: {
+                title: "Dependency injection - template",
+                category: "dynamic"
+            }            
+        }, 
+
+        "/dependency-injection-object-module": {
+            view: {
+                name: "views/dynamic-data/di/object-module",
+                inject: [
+                    "template!views/dynamic-data/di/injected/template.html",
+                    "views/dynamic-data/di/injected/custom-module1",
+                    "views/dynamic-data/di/injected/custom-module2"
+                ]
+            },
+            data: {
+                title: "Dependency injection - object module",
+                category: "dynamic"
+            }            
+        }, 
+
+        "/dependency-injection-class-module": {            
+            view: {
+                name: "views/dynamic-data/di/class-module",
+                inject: [
+                    "template!views/dynamic-data/di/injected/template.html",
+                    "views/dynamic-data/di/injected/custom-module1",
+                    "views/dynamic-data/di/injected/custom-module2"
+                ]
+            },
+            data: {
+                title: "Dependency injection - class module",
+                category: "dynamic"
+            }            
+        },
+
         "/declarative-model-binding": {
-            view: "views/dynamic-data/declarative-model-binding",
+            view: "views/dynamic-data/model-binding/declarative",
             data: {
                 title: "Model binding - declarative",
                 category: "dynamic"
@@ -165,7 +210,7 @@ define([], () => {
         }, 
 
         "/programmatic-model-binding": {
-            view: "views/dynamic-data/programmatic-model-binding",
+            view: "views/dynamic-data/model-binding/programmatic",
             data: {
                 title: "Model binding - programmatic",
                 category: "dynamic"
@@ -175,7 +220,7 @@ define([], () => {
         "/remote-data-example": {
             view: "views/dynamic-data/remote-data-example",
             data: {
-                title: "Remote data master detail example",
+                title: "Remote data - master detail example",
                 category: "dynamic"
             }            
         }, 
@@ -185,12 +230,8 @@ define([], () => {
             paramsMap: (...params) => {
                 if (params.length !== 1) {
                     return false;
-                }   
-                let id = Number(params[0]);
-                if (isNaN(id)) {
-                    return false;
                 }
-                return {id: id}
+                return iparams[0];
             },
         }, 
  

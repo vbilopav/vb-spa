@@ -1,0 +1,68 @@
+{
+    "Ember 2.2.0": {
+        "size": "435K",
+        "web": "https://www.emberjs.com/",        
+        "description": "Ember.js is an open-source JavaScript web framework, based on the Model–view–viewmodel (MVVM) pattern. It allows developers to create scalable single-page web applications by incorporating common idioms and best practices into the framework.",
+        "remarks": ""
+    }, 
+    "Ember 1.13.8": {
+        "size": "486K",
+        "web": "https://www.emberjs.com/",        
+        "description": "Ember.js is an open-source JavaScript web framework, based on the Model–view–viewmodel (MVVM) pattern. It allows developers to create scalable single-page web applications by incorporating common idioms and best practices into the framework.",
+        "remarks": ""
+    },
+    "Angular 2": {
+        "size": "566K",
+        "web": "https://angular.io/",
+        "description": "Angular is a TypeScript-based open-source front-end web application platform led by the Angular Team at Google and by a community of individuals and corporations. Angular is a complete rewrite from the same team that built AngularJS.",
+        "remarks": ""
+    },
+    "Angular 2 + Rx": {
+        "size": "766K",
+        "web": "http://blog.rangle.io/observables-and-reactive-programming-in-angular-2/",        
+        "description": "Observables and Reactive Programming in Angular 2",
+        "remarks": "I have no idea what zhis is and why it is so big."
+    },
+    "Angular 1.4.5": {
+        "size": "143K",
+        "web": "https://angularjs.org/",        
+        "description": "",
+        "remarks": ""
+    },
+    "Vue 2.4.2": {
+        "size": "58.8K",
+        "web": "",
+        "description": "",
+        "remarks": ""
+    },
+    "": {
+        "size": "",
+        "web": "",        
+        "description": "",
+        "remarks": ""
+    },
+    "": {
+        "size": "",
+        "web": "",        
+        "description": "",
+        "remarks": ""
+    },
+    "": {
+        "size": "",
+        "web": "",        
+        "description": "",
+        "remarks": ""
+    },
+    "": {
+        "size": "",
+        "web": "",
+        "description": "",
+        "remarks": ""
+    },
+    "": {
+        "size": "",
+        "web": "",        
+        "description": "",
+        "remarks": ""
+    }    
+}

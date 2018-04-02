@@ -1,41 +1,34 @@
 define(["sys/model"], Model => {
 
     const
-        model = new Model({            
-            name: "name", // when value is string bind will match name or id            
-            email: e => e.name === "email", // value can be function to test element            
-            select: e => e.matches("[name=select]"), // so that selector can also be used
-            check: "check_id",
-            showButton: "showButton"
-        }),
+        model = new Model(),
         module = {        
             render: () => String.html`
             <div>
-                <h3>Model binding support - programmatic</h3>    
+                <h3>Model binding support - declarative</h3>    
                 <p>
-                    Demonstration for programmatic bi-directional model binding support
+                    Demonstration for declarative bi-directional model binding support
                     <br /><br />
-                    View location: <pre>/app/views/dynamic-data/programmatic-model-binding.js</pre>                                
+                    View location: <pre>/app/views/dynamic-data/model-binding/declarative.js</pre>                                
                     <br />
                     <span id="model-area">
-                        <label for="name" style="width: 75px">Name: </label><input name="name" type="text"><br />
-                        <label for="email" style="width: 75px">Email: </label><input name="email" type="email"><br />
-                        <label for="frameworks" style="width: 71px">Select: </label>
+                        <label for="name" style="width: 50px">Name: </label><input name="name" type="text"><br />
+                        <label for="email" style="width: 50px">Email: </label><input name="email" type="email"><br />
+                        <label for="frameworks">Frameworks: </label>
                         <select name="select">
-                            <option value="">select framework...</option>
-                            <option value="ember">Ember 1.13.8 ~ 486K</option>
-                            <option value="angular2">Angular 2 ~ 566K</option>                                                    
-                            <option value="angular">Angular 1.4.5 ~ 143K</option>
-                            <option value="vue">Vue 2.4.2 ~ 58.8K</option>
-                            <option value="inferno">Inferno 1.2.2 ~ 48K</option>
-                            <option value="preact">Preact 7.2.0 ~ 16K</option>
-                            <option value="react">React 16.2.0 + React DOM ~ 97.5K</option>
-                            <option value="this">This framework so far... ~ 6.61K</option>
+                            <option value="">select framework ...</option>
+                            <option value="Ember">Ember</option>
+                            <option value="Angular2">Angular2</option>
+                            <option value="AngularJS">AngularJS</option>
+                            <option value="Vue">Vue</option>
+                            <option value="Inferno">Inferno</option>
+                            <option value="Preact">Preact</option>
+                            <option value="React">React</option>                            
                         </select>
                         <br />
-                        <input type="checkbox" id="check_id" name="check">Check box can ne checked!<br />
+                        <input type="checkbox" name="check" checked>&nbsp;&nbsp;Yes, I might not need those frameworks!<br />
                         <br />
-                        <button name="showButton">Check model state in console output</button>
+                        <button name="showButton" data-event-click="showButtonClick">Check model state in console output</button>
                     </span>
                     <hr />
                     <button id="btn-set-name">Set new value for "name" model propery</button><br /><br />
@@ -47,10 +40,13 @@ define(["sys/model"], Model => {
             </div>`,    
 
             rendered: (params, element) => {
-                model
-                    .bind(element.find("#model-area")) // bind returns created model
-                    .showButton.on("click", model.showButtonClick) // events must be assigned manually
-                                
+                //
+                // Binds everything inside element argument, creates properties on model, first by name, then by id 
+                // If name and id don't exist it will be skipped.
+                // Binds events also with data-event-eventname
+                //
+                model.bind(element.find("#model-area"));      
+                
                 element.find("#btn-set-name").on("click", () => {
                     let value = prompt("Please enter new value for model.name", model.name.value);
                     if (value != null) {
@@ -81,7 +77,7 @@ define(["sys/model"], Model => {
                         // same as model.check.checked = value.toLowerCase() === "true";
                         model.check = value.toLowerCase() === "true";
                     }
-                });                
+                });
             }
             
         }

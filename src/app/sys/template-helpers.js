@@ -7,10 +7,13 @@ define([], () => {
             if: (condition, templateTrue, templateFalse) => (condition ? templateTrue : templateFalse)
         };
 
+    var 
+        _usePreloadedTemplates = ((window._app  && window._app.settings) ? (window._app.settings.usePreloadedTemplates == true) : false); 
+       
     return {        
-        _usingPreloaded: () => _app.settings.usePreloadedTemplates == true,
+        _usingPreloaded: () => _usePreloadedTemplates,
         _prefix: "template!",
-        usePreloaded: () =>  {_app.settings.usePreloadedTemplates = true},        
+        usePreloaded: () =>  {_usePreloadedTemplates = true},        
         helpers: _helpers
         //add global template helpers method here              
     }

@@ -48,7 +48,7 @@ define(["sys/template-helpers"], (templateHelper) => {
             return this;
         }
 
-        reveal(args) { //id,name,params,uri
+        reveal(args) { //id,view,params,uri
             return new Promise((resolve, reject) => {
                 let found = this._views[args.id],
                     uriHash = args.uri.hashCode(),
@@ -120,9 +120,25 @@ define(["sys/template-helpers"], (templateHelper) => {
                     }
                     return reject("unknown type");
                 }
-                
-                require([args.name], view => {
-                    let type = getViewType(view, args.name),
+
+                let viewName, modules;
+                if (typeof args.view === "string") {
+                    viewName = args.view;
+                    modules = [args.view]
+                } else if (typeof args.view === "object") {
+                    viewName = args.view.name;
+                    if (args.view.inject) {
+                        modules = [viewName].concat(args.view.inject)
+                    } else {
+                        modules = [viewName];
+                    }
+                }
+                if (!viewName || !modules) {
+                    throw new Error("View definition incorrect!");
+                }
+
+                require(modules, (view, ...injected) => {
+                    let type = getViewType(view, viewName),
                         element = "span".createElement(elementId),
                         data = {type: type, uriHash: uriHash, x: 0, y: 0, id: args.id};
                     element.dataset.id = args.id;
@@ -130,12 +146,12 @@ define(["sys/template-helpers"], (templateHelper) => {
                         data.element = element.html(view);
                     } else if (type === types.template) {
                         data.instance = view;
-                        element.html(view(args.params));
+                        element.html(view(args.params, {injected: injected}));
                     } else if (type === types.class) {
-                        data.instance = new view(args.id, element);
+                        data.instance = new view(args.id, element, ...injected);
                     } else if (type === types.object) {
                         if (view.init) {
-                            view.init(args.id, element);
+                            view.init(args.id, element, ...injected);
                         }
                         data.instance = view;
                     }
