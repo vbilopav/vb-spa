@@ -78,7 +78,7 @@ And that is it, you browser should open immediately.
 
 ## License
 
-This project is licensed under the **BSD License** - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
 
