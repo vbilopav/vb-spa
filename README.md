@@ -1,6 +1,6 @@
-# Single-Page Application Template
+# Single-Page Application (SPA) Template
 
-This is a application template for building custom, amazing and fast JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbloated frameworks. 
+This is a application template for your building custom, amazing and fast JavaScript/HTML5 - Single-Page Applications (SPA)[https://en.wikipedia.org/wiki/Single-page_application] 
 
 No transpiling, no trans-transpiling, no parsing, preparsing, pre-preparsing, compiling, no pre-tans-comp-iling, no gigantic cryptic configuration and only one small external depency. No nothing. Just pure JavaScript love in ES6. Core infrastructure part, when minified and bundled is only 7K! If this was framework, I think it would be smallest and fastest. Maybe one day it will. But I don't think world needs another framework. Or does it?
 
@@ -30,7 +30,10 @@ Feature list includes:
 
 - Demo also include comprehensive examples for every feature (that I've used for testing and development) and as well one more complex example with master/detail remote data fetching.
 
-- Features still under construction: build tool for minifying and bundling, and feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
+- Features still under construction: 
+-- Custom module loader to get rid of RequireJS dependency
+-- Build tool for minifying and bundling
+-- Feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
 
 
 ## Getting Started
