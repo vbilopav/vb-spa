@@ -32,18 +32,6 @@ Feature list includes:
 
 - Features still under construction: build tool for minifying and bundling, and feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
 
-### Motivation
-
-JavaScript world is a mess. Read this classic article: [How it feels to learn JavaScript in 2016](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f).
-
-2017 isn't getting any better - [The Stateof JS 2017](https://stateofjs.com/2017/introduction/)
-
-You can also hear from framework author himself, Adrian Holovaty, Django Web Frameork Author - [A Framework Author's Case Against Frameworks](https://www.youtube.com/watch?v=k7n2xnOiWI8)
-
-And it is already 2018... I just wanted to have some set of stable, reliable tools to build fast web-based tools that would be indistinguishable from normal desktop applications, so that only way you can tell it is web app - if it is running inside browser. 
-
-Cool thing about having template instead of framework is that is much easier to change. If you need to adapt soemthing to you specific need. For example event parameter is missing that forces you to change you entire app structure. No problem, you can add it easily. Bug fixing should be easier too. Code is fairly readable, so I hpe noone should have any problems in changing anything they need.
-
 
 ## Getting Started
 
@@ -57,31 +45,6 @@ cd .\src\
 http-server -o
 ```
 
-And that is it, you browser should open immediately.
-
-### Features
-
-## Templating engine
-
-## router
-
-## View engine
-
-## Mixing of JavaScript and HTML
-
-## Model binding
-
-## Author
-
-* **Vedran Bilopavlović** - *Initial work* - [vbilopav](https://github.com/vbilopav/)
-
-
 ## License
 
 This project is licensed under the **MIT License** - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
