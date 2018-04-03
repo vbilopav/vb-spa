@@ -31,9 +31,9 @@ Feature list includes:
 - Demo also include comprehensive examples for every feature (that I've used for testing and development) and as well one more complex example with master/detail remote data fetching.
 
 - Features still under construction: 
--- Custom module loader to get rid of RequireJS dependency
--- Build tool for minifying and bundling
--- Feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
+1. Custom module loader to get rid of RequireJS dependency
+2. Build tool for minifying and bundling
+3. Feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
 
 
 ## Getting Started
