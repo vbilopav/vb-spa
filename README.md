@@ -14,7 +14,7 @@ Run this application to go trough examples.
 
 Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need. 
 
-Entire application logic, that might be considered as "framework" when minified is under 7K. See [sys dir](https://github.com/vbilopav/vb-spa/tree/master/src/app/sys)
+Entire application logic, that might be considered as "framework" when minified is under **7K**. See [sys dir](https://github.com/vbilopav/vb-spa/tree/master/src/app/sys)
 
 Feature list includes:
 
@@ -30,11 +30,29 @@ Feature list includes:
 
 - Demo also include comprehensive examples for every feature (that I've used for testing and development) and as well one more complex example with master/detail remote data fetching.
 
-- Features still under construction: 
-1. Custom module loader to get rid of RequireJS dependency
-2. Build tool for minifying and bundling
-3. Feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
+## Still under construction: 
 
+- Custom module loader to get rid of RequireJS dependency. It should be faster and smaller and it will have 0 dependencies.
+
+- Build tool for minifying and bundling. Custom build tool needs to include fine tuning option. Menaing, there has to be way to bundle region of application separatly (once used frequently from those that will be loaded when needed.) Also, I want to make it as simple as possible. It will be probably another SPA web app that will run build tool.
+
+- Feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
+
+## About transpiling
+
+As far as I understand - transpiling is a process of automatically converting JavaScript code from ECMA6 (ECMAScript 2015 or ES6) syntax to older ECMA5 syntax, usually with help of other JAvaScript frameworks for that purpose, such as Babel for example. 
+
+This template/framework doesn't use any transpiling, it doesn't need to.
+
+This current browser (compatibility table for ES6)[https://kangax.github.io/compat-table/es6/].
+
+So, only reason why people still doing transpiling is to support for Internet Explorer. There are couple of reasons, in my opinion, why there no need to do that, for example:
+
+- If you are building web based tools like I do, then users need you tools, not the other way around. I can understand need to be available for every user with every old browser on planet - if you are, for example, news portal or that kind of web site. But if you are not, perhaps it is much easier to have feature detection script, and if user browser is not compatible, simply show him or her kindly the meesage to update their browser to stop using IE.
+
+- I am aware that (March 2018) desktop browser market share is still pretty significant for Internet Explorer. Second place with 12.46%. That is unlikely going to change very fast in future if everybody keeps transpiling. Users won't switch browser if they don't have to. Stop appease it, and it (IE) will go away! 
+
+- I'm not sure that some features in this template/frameork even can be transpiled into ECMA5. They are using ECMA6 features dynamically to achieve speed and simlicity. So, transpiler would probably interpret those as just another string and it wouldn't work. However, if somone like to give it a try, I'd like to see that.
 
 ## Getting Started
 
@@ -47,6 +65,10 @@ npm install http-server -g
 cd .\src\
 http-server -o
 ```
+
+## Contribution
+
+Feel free to create pull requests.
 
 ## License
 

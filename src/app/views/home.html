@@ -1,66 +1,80 @@
-<h1><a id="SinglePage_Application_Template_0"></a>Single-Page Application Template</h1>
-<p>Application template for building your custom, amazing JavaScript/HTML5 - Single-Page Applications that have desktop look and feel and without any of the overbolated frameworks.</p>
-<p>No transpiling, no transtranspiling, no preparsing, prepreparsing, complinig and then transpiling, no gigantic cryptic configuration files or external depencies (well, just one actually, for loading modules, and it is small). No nothing. Just pure JavaScript love in ES6.</p>
+<h1 id="singlepageapplicationspatemplate">Single-Page Application (SPA) Template</h1>
+
+<p>This is a application template for your building custom, amazing and fast JavaScript/HTML5 - Single-Page Applications (SPA)[https://en.wikipedia.org/wiki/Single-page_application] </p>
+
+<p>No transpiling, no trans-transpiling, no parsing, preparsing, pre-preparsing, compiling, no pre-tans-comp-iling, no gigantic cryptic configuration and only one small external depency. No nothing. Just pure JavaScript love in ES6. Core infrastructure part, when minified and bundled is only 7K! If this was framework, I think it would be smallest and fastest. Maybe one day it will. But I don't think world needs another framework. Or does it?</p>
+
 <p>It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be. Ever.</p>
+
 <p>You may use this template to build your own apps without frameworks as you please. It is built with having on mind buidling of web-based tools with desktop feel, so it is perfect for that purpose.</p>
-<h3><a id="Synopsis_10"></a>Synopsis</h3>
-<p>Run this application to go trough examples.</p>
-<p>Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need.</p>
-<p>Entire application logic, that might be considered as “framework” when minified is under 7K. See <a href="https://github.com/vbilopav/vb-spa/tree/master/src/app/sys">sys dir</a></p>
+
+<h3 id="synopsis">Synopsis</h3>
+
+<p>Run this application to go trough examples. </p>
+
+<p>Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need. </p>
+
+<p>Entire application logic, that might be considered as "framework" when minified is under <strong>7K</strong>. See <a href="https://github.com/vbilopav/vb-spa/tree/master/src/app/sys">sys dir</a></p>
+
 <p>Feature list includes:</p>
+
 <ul>
-<li>
-<p>Templating engine with familiar syntax. It uses ES6 template string which are supported nativly by browsers, so it should be as fast as possible. Templating includes composition, iterators, and more…</p>
-</li>
-<li>
-<p>Client side router that uses hashes or hashbangs. Hashless client side router is with normal url’s is not implemented because I don’t know how to do that on client side. Any help would be appritiated.</p>
-</li>
-<li>
-<p>View engine that that can map routes to text html files, paramatrized templates, class or object modules, and knows how to remember view state and scroll position. It also supports dependency injection for view modules and templates.</p>
-</li>
-<li>
-<p>Mixing of JavaScript and HTML inside same file with languague support for vs code without JSX and related parsing.</p>
-</li>
-<li>
-<p>Model binding. Bi-directional - programmatic as well as declarative (inside HTML).</p>
-</li>
-<li>
-<p>Demo also include comprehensive examples for every feature (that I’ve used for testing and development) and as well one more complex example with master/detail remote data fetching.</p>
-</li>
-<li>
-<p>Features still under construction: build tool for minifying and bundling, and feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.</p>
-</li>
+<li><p>Templating engine with familiar syntax. It uses ES6 template string which are supported nativly by browsers, so it should be as fast as possible. Templating includes composition, iterators, and more...</p></li>
+
+<li><p>Client side router that uses hashes or hashbangs. Hashless client side router is with normal url's is not implemented because I don't know how to do that on client side. Any help would be appritiated.</p></li>
+
+<li><p>View engine that that can map routes to text html files, paramatrized templates, class or object modules, and knows how to remember view state and scroll position. It also supports dependency injection for view modules and templates.</p></li>
+
+<li><p>Mixing of JavaScript and HTML inside same file with languague support for vs code without JSX and related parsing.</p></li>
+
+<li><p>Model binding. Bi-directional - programmatic as well as declarative (inside HTML).</p></li>
+
+<li><p>Demo also include comprehensive examples for every feature (that I've used for testing and development) and as well one more complex example with master/detail remote data fetching.</p></li>
 </ul>
-<h3><a id="Motivation_34"></a>Motivation</h3>
-<p>JavaScript world is a mess. Read this classic article: <a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">How it feels to learn JavaScript in 2016</a>.</p>
-<p>2017 isn’t getting any better - <a href="https://stateofjs.com/2017/introduction/">The Stateof JS 2017</a></p>
-<p>You can also hear from framework author himself, Adrian Holovaty, Django Web Frameork Author - <a href="https://www.youtube.com/watch?v=k7n2xnOiWI8">A Framework Author’s Case Against Frameworks</a></p>
-<p>And it is already 2018… I just wanted to have some set of stable, reliable tools to build fast web-based tools that would be indistinguishable from normal desktop applications, so that only way you can tell it is web app - if it is running inside browser.</p>
-<p>Cool thing about having template instead of framework is that is much easier to change. If you need to adapt soemthing to you specific need. For example event parameter is missing that forces you to change you entire app structure. No problem, you can add it easily. Bug fixing should be easier too. Code is fairly readable, so I hpe noone should have any problems in changing anything they need.</p>
-<h2><a id="Getting_Started_47"></a>Getting Started</h2>
-<p>To run this this demo, you’ll have to have local web server. Just clone the repo and point the web server to /src folder and this it.<br>
-If you don’t have web server, you can use node’s <a href="https://www.npmjs.com/package/http-server">http-server</a></p>
+
+<h2 id="stillunderconstruction">Still under construction:</h2>
+
+<ul>
+<li><p>Custom module loader to get rid of RequireJS dependency. It should be faster and smaller and it will have 0 dependencies.</p></li>
+
+<li><p>Build tool for minifying and bundling. Custom build tool needs to include fine tuning option. Menaing, there has to be way to bundle region of application separatly (once used frequently from those that will be loaded when needed.) Also, I want to make it as simple as possible. It will be probably another SPA web app that will run build tool.</p></li>
+
+<li><p>Feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.</p></li>
+</ul>
+
+<h2 id="abouttranspiling">About transpiling</h2>
+
+<p>As far as I understand - transpiling is a process of automatically converting JavaScript code from ECMA6 (ECMAScript 2015 or ES6) syntax to older ECMA5 syntax, usually with help of other JAvaScript frameworks for that purpose, such as Babel for example. </p>
+
+<p>This template/framework doesn't use any transpiling, it doesn't need to.</p>
+
+<p>This current browser (compatibility table for ES6)[https://kangax.github.io/compat-table/es6/].</p>
+
+<p>So, only reason why people still doing transpiling is to support for Internet Explorer. There are couple of reasons, in my opinion, why there no need to do that, for example:</p>
+
+<ul>
+<li><p>If you are building web based tools like I do, then users need you tools, not the other way around. I can understand need to be available for every user with every old browser on planet - if you are, for example, news portal or that kind of web site. But if you are not, perhaps it is much easier to have feature detection script, and if user browser is not compatible, simply show him or her kindly the meesage to update their browser to stop using IE.</p></li>
+
+<li><p>I am aware that (March 2018) desktop browser market share is still pretty significant for Internet Explorer. Second place with 12.46%. That is unlikely going to change very fast in future if everybody keeps transpiling. Users won't switch browser if they don't have to. Stop appease it, and it (IE) will go away! </p></li>
+
+<li><p>I'm not sure that some features in this template/frameork even can be transpiled into ECMA5. They are using ECMA6 features dynamically to achieve speed and simlicity. So, transpiler would probably interpret those as just another string and it wouldn't work. However, if somone like to give it a try, I'd like to see that.</p></li>
+</ul>
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<p>To run this this demo, you'll have to have local web server. Just clone the repo and point the web server to /src folder and this it.
+If you don't have web server, you can use node's <a href="https://www.npmjs.com/package/http-server">http-server</a></p>
+
 <pre><code>git clone https://github.com/vbilopav/vb-spa
 npm install http-server -g
 cd .\src\
 http-server -o
 </code></pre>
-<p>And that is it, you browser should open immediately.</p>
-<h3><a id="Features_61"></a>Features</h3>
-<h2><a id="Templating_engine_63"></a>Templating engine</h2>
-<h2><a id="router_65"></a>router</h2>
-<h2><a id="View_engine_67"></a>View engine</h2>
-<h2><a id="Mixing_of_JavaScript_and_HTML_69"></a>Mixing of JavaScript and HTML</h2>
-<h2><a id="Model_binding_71"></a>Model binding</h2>
-<h2><a id="Author_73"></a>Author</h2>
-<ul>
-<li><strong>Vedran Bilopavlović</strong> - <em>Initial work</em> - <a href="https://github.com/vbilopav/">vbilopav</a></li>
-</ul>
-<h2><a id="License_78"></a>License</h2>
+
+<h2 id="contribution">Contribution</h2>
+
+<p>Feel free to create pull requests.</p>
+
+<h2 id="license">License</h2>
+
 <p>This project is licensed under the <strong>MIT License</strong> - see the <a href="LICENSE.md">LICENSE.md</a> file for details.</p>
-<h2><a id="Acknowledgments_82"></a>Acknowledgments</h2>
-<ul>
-<li>Hat tip to anyone who’s code was used</li>
-<li>Inspiration</li>
-<li>etc</li>
-</ul>
