@@ -61,6 +61,12 @@ If you don't have web server, you can use node's [http-server](https://www.npmjs
 
 ```
 git clone https://github.com/vbilopav/vb-spa
+npm install
+```
+
+To install http server and open in browser:
+
+```
 npm install http-server -g
 cd .\src\
 http-server -o
