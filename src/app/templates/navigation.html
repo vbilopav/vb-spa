@@ -6,7 +6,7 @@
     <div class="nav navbar-nav">
 
         <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-            <button class="dropbtn">Templates&nbsp;&#8675;</button>
+            <button class="dropbtn">Templates&nbsp;&#11206;</button>
             <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
                 ${this.template.forEach(this.templates, item => 
                     `<a id="${item.id}" href="${item.url}">${item.title}</a>`
@@ -15,7 +15,7 @@
         </div> 
 
         <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-            <button class="dropbtn">Modules&nbsp;&#8675;</button>
+            <button class="dropbtn">Modules&nbsp;&#11206;</button>
             <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
                 ${this.template.forEach(this.modules, item => 
                     `<a id="${item.id}" href="${item.url}">${item.title}</a>`
@@ -24,7 +24,7 @@
         </div> 
 
         <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-            <button class="dropbtn">Dynamic data&nbsp;&#8675;</button>
+            <button class="dropbtn">Dynamic data&nbsp;&#11206;</button>
             <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">                
                 ${this.template.forEach(this.dynamic, item => 
                     `<a id="${item.id}" href="${item.url}">${item.title}</a>`
