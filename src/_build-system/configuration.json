@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+
+  "sourceDir": null,
+  "targetDir": null,
+  
+  "index": {
+    "file": "index.html",
+    "copy": true,
+    "minify": true,
+    "globalScript": {
+      "id": "_spa-obj",
+      "mode": "always"
+    }
+  },
+  
+  "libs": {
+    "dir": "libs/",
+    "minify": false
+  },
+
+  "css": {
+    "dir": "css/",
+    "minify": true,
+    "scriptId": "_spa-css",
+    "bundle": {
+      "result": "default.css",
+      "mode": "all"
+    }
+  }
+
+}

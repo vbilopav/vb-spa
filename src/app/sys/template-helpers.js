@@ -8,7 +8,7 @@ define([], () => {
         };
 
     var 
-        _usePreloadedTemplates = ((window._app  && window._app.settings) ? (window._app.settings.usePreloadedTemplates == true) : false); 
+        _usePreloadedTemplates = ((window._spa  && window._spa.settings) ? (window._spa.settings.usePreloadedTemplates == true) : false); 
        
     return {        
         _usingPreloaded: () => _usePreloadedTemplates,

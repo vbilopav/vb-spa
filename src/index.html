@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript">
-        window._app = {
+    <script type="text/javascript" id="_spa-obj">
+        window._spa = {
             version: "", appUrl: "app/", cssUrl: "css/", libsUrl: "libs/", settings: {usePreloadedTemplates: false}
         };
     </script>
@@ -13,17 +13,18 @@
 
     <title>SPA app demo</title>
     <script>
-        var require = {baseUrl: _app.appUrl};
-        if (window._app && window._app.version) require.urlArgs = "v=" + window._app.version
+        var require = {baseUrl: window._spa.appUrl};
+        if (window._spa && window._spa.version) require.urlArgs = "v=" + window._spa.version
     </script>  
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
-    <script>
-        document.write('<link rel="stylesheet" href="' + 
-            (window._app.cssUrl ? window._app.cssUrl : "") +
+    <script id="_spa-css">
+        document.write(
+            '<link rel="stylesheet" href="' + 
+            (window._spa.cssUrl ? window._spa.cssUrl : "") +
             'default.css"' + 
-            (window._app.version ? "?" + window._app.version : "") + 
+            (window._spa.version ? "?" + window._spa.version : "") + 
             ' />'
         );
     </script>
@@ -43,9 +44,17 @@
     <div id="app-container" style="display: none">
     </div>   
 
-    <script type="text/javascript" data-main="main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script type="text/javascript" 
+            data-main="main.js" 
+            src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js">
+    </script>
     <script type="text/javascript">
-        window.requirejs || document.write('<script data-main="main.js" src="' + (window._app.libsUrl ? window._app.libsUrl : "") +'require.js">\x3C/script>')
+        window.requirejs || 
+        document.write(
+            '<script data-main="main.js" src="' + 
+            (window._spa.libsUrl ? window._spa.libsUrl : "") +
+            'require.js">\x3C/script>'
+        );
     </script>
 
 </body>
