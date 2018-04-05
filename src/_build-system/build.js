@@ -4,14 +4,15 @@ const
     uglifyEs = require("uglify-es"),
     cleanCss = require("clean-css"),
     jsdom = require("jsdom");
-    fs = require("./fs-util"),
+    fsutil = require("./fs-util"),
     configUtil = require("./config"),
-    log = fs.log;
+    fs = fsutil.fs,
+    log = fsutil.log;
 
 var config;
 
 log("reading configuration.json...");
-config = fs.read("default-config.json");
+config = fsutil.read("default-config.json");
 if (!config)  {
     return;
 }   
@@ -21,11 +22,12 @@ config = configUtil.parse(config);
 
 log("running on configuration: " + JSON.stringify(config, null, 4));
 log("****************************************************************************");
-log(configUtil.buildDir)
-log(configUtil.targetDir);
+log(config.buildDir)
+log(config.targetDir);
 
 log("finished!");
 
+//fs.writeFileSync("test.txt", "hai", 'utf8');
 /*
 if (fs.existsSync(config.targetDir)) {
     log(`removing ${config.targetDir} ...`)

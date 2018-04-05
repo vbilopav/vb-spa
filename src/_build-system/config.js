@@ -1,14 +1,11 @@
 const
     fs = require("./fs-util"),
     path = fs.path,
-    sep = fs.sep,
-    homeSep = "." + sep,
+    sep = fs.sep,    
     log = fs.log,
     splitted = __dirname.split(sep);
 
 var 
-    targetDirFull,
-    buildDirFull,
     autoDirName = new Date().toISOString().replace(/-/g, '').substring(0, 8);
 
 const parse = config => {
@@ -19,26 +16,15 @@ const parse = config => {
     }
 
     if (!config.buildDir) {    
-        config.buildDir = homeSep + "build";
+        config.buildDir =  path.join(config.sourceDir, "build");
         log("config.buildDir set to default " + config.buildDir)
     }
 
     if (!config.targetDir) {    
-        config.targetDir = homeSep + path.join(config.buildDir, autoDirName)
+        config.targetDir = path.join(config.buildDir, autoDirName)
         log("config.targetDir set to default " + config.targetDir)
     }
 
-    if (config.buildDir.indexOf(homeSep) != -1) {
-        buildDirFull = path.join(__dirname, config.buildDir.replace(homeSep, ""));
-    } else {
-        buildDirFull = config.buildDir
-    }  
-
-    if (config.targetDir.indexOf(homeSep) != -1) {
-        targetDirFull = path.join(__dirname, config.targetDir.replace(homeSep, ""));
-    } else {
-        targetDirFull = config.targetDir
-    }    
 
 /*
     if (!config.index) {
@@ -114,11 +100,5 @@ const parse = config => {
 }
 
 module.exports = {
-    get targetDir() {
-        return targetDirFull;
-    },
-    get buildDir() {
-        return buildDirFull;
-    },
     parse: parse
 }
