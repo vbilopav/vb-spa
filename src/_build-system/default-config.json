@@ -2,12 +2,20 @@
   "version": "1.0.0",
 
   "sourceDir": null,
+  "buildDir": null,
   "targetDir": null,
   
   "index": {
     "file": "index.html",
     "copy": true,
-    "minify": true,
+    "minify": {
+      "minifyJS": true, 
+      "minifyCSS": true, 
+      "removeAttributeQuotes": true, 
+      "removeComments": true, 
+      "removeEmptyAttributes": true, 
+      "collapseWhitespace": true
+    },
     "globalScript": {
       "id": "_spa-obj",
       "mode": "always"
@@ -15,12 +23,12 @@
   },
   
   "libs": {
-    "dir": "libs/",
+    "dir": "libs",
     "minify": false
   },
 
   "css": {
-    "dir": "css/",
+    "dir": "css",
     "minify": true,
     "scriptId": "_spa-css",
     "bundle": {
