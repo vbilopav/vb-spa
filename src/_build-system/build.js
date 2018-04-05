@@ -1,59 +1,85 @@
 const
-    htmlMinifier = require("html-minifier"),
-    uglifyJs = require("uglify-js"),
     uglifyEs = require("uglify-es"),
     cleanCss = require("clean-css"),
-    jsdom = require("jsdom");
+
     fsutil = require("./fs-util"),
     configUtil = require("./config"),
-    fs = fsutil.fs,
-    log = fsutil.log;
+    fs = require("fs"),
+    log = fsutil.log,
+    indexBuilder = require("./index"),
+    libsBuilder = require("./libs");
 
 var config;
 
 log("reading configuration.json...");
-config = fsutil.read("default-config.json");
+config = fsutil.read("default-config.json"); //or arg
 if (!config)  {
     return;
 }   
 log("parsing configuration...");
 
-config = configUtil.parse(config);
+configUtil.parse(config);
 
 log("running on configuration: " + JSON.stringify(config, null, 4));
 log("****************************************************************************");
-log(config.buildDir)
-log(config.targetDir);
+
+
+if (!fs.existsSync(config.buildDir)) {
+    log(`creating ${config.buildDir} ...`)
+    fsutil.mkDirByPathSync(config.buildDir);
+}
+
+if (fs.existsSync(config.targetDir)) {
+    log(`destroying ${config.targetDir} ...`)
+    fsutil.rmdirSync(config.targetDir);    
+}
+log(`creating ${config.targetDir} ...`)
+fsutil.mkDirByPathSync(config.targetDir);
+
+indexBuilder.build(config);
+libsBuilder.build(config);
+
 
 log("finished!");
 
-//fs.writeFileSync("test.txt", "hai", 'utf8');
-/*
-if (fs.existsSync(config.targetDir)) {
-    log(`removing ${config.targetDir} ...`)
-    rmdirSync(config.targetDir);    
-} 
-log(`creating ${config.targetDir} ...`)
-mkDirByPathSync(config.targetDir);
-*/
 
-//log("finished!");
+
+
 /*
-if (copyIndex) {
-    var targetIndexHtml = targetDir + "/" + indexHtml.split('/').pop();
-    if (minifyIndex) {
-        //var htmlMinifier = require("html-minifier"),
-        var result = htmlMinifier.minify(fs.readFileSync(indexHtml, "utf8"), {
-                minifyJS: true, 
-                minifyCSS: true, 
-                removeAttributeQuotes: true, 
-                removeComments: true, 
-                removeEmptyAttributes: true, 
-                collapseWhitespace: true
-            });
-            fs.writeFileSync(targetIndexHtml, result, 'utf8');
-    } else {
-        fs.copyFileSync(indexHtml, targetIndexHtml);
-    }
+var fs = require("fs");
+var uglify = require("uglify-js");
+
+var result;
+
+result = uglify.minify(fs.readFileSync("./node_modules/requirejs/require.js", "utf8"));
+
+if (result.error) {
+    console.log("require.js could not be minified!");
+    console.log(result.error);
+    return
+}
+
+try {
+    fs.writeFileSync("./src/libs/require.js", result.code, 'utf8');
+} catch (error) {
+    console.log("minified require.js could not be written!");
+    console.log(error);
+    return
+}
+
+result = uglify.minify(fs.readFileSync("./node_modules/requirejs-text/text.js", "utf8"));
+
+if (result.error) {
+    console.log("text.js could not be minified!");
+    console.log(result.error);
+    return
+}
+
+try {
+    fs.writeFileSync("./src/libs/text.js", result.code, 'utf8');
+} catch (error) {
+    console.log("minified text.js could not be written!");
+    console.log(error);
+    return
 }
 */

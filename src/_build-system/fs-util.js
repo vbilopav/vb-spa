@@ -1,7 +1,7 @@
 const 
     fs = require("fs");
     path = require("path"),
-    log = msg => console.log(`\n build.js > ${msg}`),
+    log = msg => console.log(`build.js > ${msg}`),
     parse = s => {
         try {
             return JSON.parse(s);
@@ -18,7 +18,7 @@ const
             return null;
         }
     },
-    read = name => parse(fs.readFileSync(path.join(__dirname, name))),
+    read = name => parse(readFileSync(path.join(__dirname, name))),
     rmdirSync = pathName => {
         if (fs.existsSync(pathName)) {
             fs.readdirSync(pathName).forEach(function(file, index) {
@@ -45,16 +45,24 @@ const
             }
             return curDir;
         }, initDir);      
+    },
+    dir = (pathname, extname) => {
+        let result = [];
+        fs.readdirSync(pathname).forEach(f => {
+            if (path.extname(f) === extname) {
+                result.push(f);
+            }
+        });
+        return result;
     }
 
+
 module.exports = {
-    fs: fs,  
-    path: path,
-    sep: path.sep,
     log: log,
     readFileSync: readFileSync,
     parse: parse,
     read: read,
     rmdirSync: rmdirSync, 
-    mkDirByPathSync: mkDirByPathSync
+    mkDirByPathSync: mkDirByPathSync,
+    dir: dir
 };

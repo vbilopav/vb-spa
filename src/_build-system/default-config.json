@@ -4,10 +4,11 @@
   "sourceDir": null,
   "buildDir": null,
   "targetDir": null,
-  
+  "autoTargetDirExp": "new Date().toISOString().replace(/-/g, '').substring(0, 8)",
+
   "index": {
-    "file": "index.html",
-    "copy": true,
+    "sourceFile": "index.html",
+    "targetFile": "index.html",
     "minify": {
       "minifyJS": true, 
       "minifyCSS": true, 
@@ -15,26 +16,34 @@
       "removeComments": true, 
       "removeEmptyAttributes": true, 
       "collapseWhitespace": true
-    },
-    "globalScript": {
+    },  
+    "updateGlobalObjectScript": {
       "id": "_spa-obj",
-      "mode": "always"
+      "mode": "always",
+      "content": "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', settings: {usePreloadedTemplates: false}};"
     }
   },
   
   "libs": {
-    "dir": "libs",
-    "minify": false
+    "sourceDir": "libs",
+    "targetDir": "libs",
+    "minify": true
   },
 
   "css": {
-    "dir": "css",
-    "minify": true,
-    "scriptId": "_spa-css",
+    "sourceDir": "css",
+    "targetDir": "css",
+    "minify": true,    
     "bundle": {
-      "result": "default.css",
-      "mode": "all"
+      "targetFile": "default.css",
+      "mode": "all",
+      "scriptId": "_spa-css"
     }
+  },
+
+  "app": {
+    "sourceDir": "app",
+    "targetDir": "app"
   }
 
 }
