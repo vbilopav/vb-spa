@@ -7,7 +7,7 @@ const
     configutil = require("./config"),
     log = fsutil.log;
 
-const getSourceFiles = (config, from) => {
+const getSourceFiles = (config, from, to) => {
     let jsonFile = configutil.configFile("libs.json");    
     if (fs.existsSync(jsonFile)) {
         log(`reading ${jsonFile} ...`);
@@ -20,14 +20,29 @@ const getSourceFiles = (config, from) => {
         for (let item in result) {
             configutil.parseLibsItem(result[item], item);
         }
+        for (let i in result) {
+            let dir = path.dirname(path.join(to, i));
+            if (!fs.existsSync(dir)) {
+                log(`creating ${dir} ...`)
+                fsutil.mkDirByPathSync(dir);
+            }
+        }
         return result;
     }
 
-    let files = dir(from, ".js"),
+    let files = walkSync(from, ".js"),
         result = {};
 
     for (let i in files) {
-        let file = files[i];
+        let fileObj = files[i];
+        let file = fileObj.full.replace(from + path.sep, "");
+        if (file !== fileObj.file) {
+            let newDir = path.join(to, fileObj.dir.replace(from, ""));
+            if (!fs.existsSync(newDir)) {
+                log(`creating ${newDir} ...`)
+                fsutil.mkDirByPathSync(newDir);
+            }
+        }
         result[file] = {
             minify: config.libs.minify,
             minifyEngine: config.libs.minifyEngine,
@@ -48,13 +63,14 @@ module.exports = {
         let 
             from = path.join(config.sourceDir, config.libs.sourceDir),
             to = path.join(config.targetDir, config.libs.targetDir),
-            files = getSourceFiles(config, from);
+            files = getSourceFiles(config, from, to);
             
         if (!fs.existsSync(to)) {
             log(`creating ${to} ...`)
             fsutil.mkDirByPathSync(to);
         }
 
+        
         for (let file in files) {
             let fileValue = files[file];                        
             
@@ -85,6 +101,7 @@ module.exports = {
             }
             
         }
+        
     }    
 }
 
