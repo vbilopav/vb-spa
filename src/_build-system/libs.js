@@ -98,7 +98,7 @@ module.exports = {
                 log(`copying ${path.join(from, file)} ...`);
                 fs.copyFileSync(path.join(from, file), path.join(to, file));  
 
-            }
+            }ž
             
         }
         
