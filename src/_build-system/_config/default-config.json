@@ -37,8 +37,11 @@
     "minify": true,    
     "bundle": {
       "targetFile": "default.css",
-      "mode": "all",
-      "scriptId": "_spa-css"
+      "files": "all"
+    },
+    "index": {
+      "name": "${this.index.targetFile}",
+      "id": "_spa-css"
     }
   },
 

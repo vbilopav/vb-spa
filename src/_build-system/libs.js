@@ -1,12 +1,14 @@
 const
-    uglify = require("uglify-js"),
+    uglifyEs = require("uglify-es"),  
+    uglifyJs = require("uglify-js"),
     fs = require("fs"),
     path = require("path"),
     fsutil = require("./fs-util"),
+    configutil = require("./config"),
     log = fsutil.log;
 
 const getSourceFiles = (config, from) => {
-    let jsonFile = path.join(__dirname, "libs.json");    
+    let jsonFile = configutil.configFile("libs.json");    
     if (fs.existsSync(jsonFile)) {
         log(`reading ${jsonFile} ...`);
         let content = fsutil.readFileSync(jsonFile);
@@ -14,7 +16,11 @@ const getSourceFiles = (config, from) => {
             log(`${jsonFile} empty, skipping libs processing ...`)
             return {};
         }        
-        return fsutil.parse(content);
+        let result = fsutil.parse(content);
+        for (let item in result) {
+            configutil.parseLibsItem(result[item], item);
+        }
+        return result;
     }
 
     let files = dir(from, ".js"),
@@ -51,12 +57,17 @@ module.exports = {
 
         for (let file in files) {
             let fileValue = files[file];                        
-            let content = fs.readFileSync(path.join(from, file), "utf8");
-
+            
             if (fileValue.minify !== false) {
                 
+                let content = fs.readFileSync(path.join(from, file), "utf8");    
                 log(`minifying ${path.join(from, file)} ...`);
-                result = uglify.minify(content, fileValue.minify);
+                let result;
+                if (fileValue.minifyEngine === "uglify-js") {
+                    result = uglifyJs.minify(content, fileValue.minify);
+                } else {
+                    result = uglifyEs.minify(content, fileValue.minify);
+                }                    
 
                 if (result.error) {
                     log(`warning: file ${path.join(from, file)} could not be minified, copying instead...`);

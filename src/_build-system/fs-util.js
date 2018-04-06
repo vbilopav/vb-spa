@@ -17,8 +17,7 @@ const
             log(error);
             return null;
         }
-    },
-    read = name => parse(readFileSync(path.join(__dirname, name))),
+    },    
     rmdirSync = pathName => {
         if (fs.existsSync(pathName)) {
             fs.readdirSync(pathName).forEach(function(file, index) {
@@ -61,7 +60,6 @@ module.exports = {
     log: log,
     readFileSync: readFileSync,
     parse: parse,
-    read: read,
     rmdirSync: rmdirSync, 
     mkDirByPathSync: mkDirByPathSync,
     dir: dir

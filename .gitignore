@@ -262,3 +262,6 @@ __pycache__/
 src/libs/require.js
 src/libs/text.js
 src/_build-system/build/
+src/_build-system/_config/user-config.json
+src/_build-system/_config/css.json
+src/_build-system/_config/libs.json

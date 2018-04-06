@@ -7,6 +7,8 @@ const
     splitted = __dirname.split(sep);
 
 const
+    configPath = path.join(__dirname, "_config"),
+    configFile = name => path.join(configPath, name),
     validateEngineOpt = value => ["uglify-js", "uglify-es"].indexOf(value) !== -1;
 
 const parseRoot = config => {
@@ -97,6 +99,19 @@ const parseIndex = config => {
     }
 }
 
+const parseLibsItem = (item, name) => {
+    if (typeof item.minify !== "boolean" && typeof item.minify !== "object") {
+        item.minify = true;
+        log(name + ".minify set to default " + item.minify);
+    }
+
+    if (!validateEngineOpt(item.minifyEngine)) {
+        item.minifyEngine = "uglify-js";
+        log(name + ".minifyEngine set to default " + item.minifyEngine);
+        log("minifyEngine options are uglify-js and uglify-es");
+    }  
+}
+
 const parseLibs = config => {
 
     if (!config.libs) {
@@ -120,16 +135,14 @@ const parseLibs = config => {
         log("config.libs.targetDir set to default " + config.libs.targetDir);
     }
 
-    if (typeof config.libs.minify !== "boolean" && typeof config.libs.minify !== "object") {
-        config.libs.minify = true;
-        log("config.libs.minify set to default " + config.libs.minify);
-    }
+    parseLibsItem(config.libs, "config.libs");
+}
 
-    if (!validateEngineOpt(config.libs.minifyEngine)) {
-        config.libs.minifyEngine = "uglify-js";
-        log("config.libs.minifyEngine set to default " + config.libs.minifyEngine);
-        log("minifyEngine options are uglify-js and uglify-es");
-    }    
+const parseCssItem = (item, name) => {
+    if (typeof item.minify !== "boolean" && typeof item.minify !== "object") {
+        item.minify = true;
+        log(name + ".minify set to default " + item.minify);
+    }
 }
 
 const parseCss = config => {
@@ -159,13 +172,14 @@ const parseCss = config => {
         config.css.minify = true;
         log("config.css.minify set to default " + config.css.minify);
     }
+    parseCssItem(config.css, "config.css");
 
     if (!config.css.bundle) {
         config.css.bundle = false;
         log("config.css.bundle set to false, it will be skipped.");
     } else {
         if (typeof config.css.bundle !== "object") {
-            config.css.bundle = {result: "default.css", mode: "all", scriptId: "_spa-css"}
+            config.css.bundle = {result: "default.css", files: "all", scriptId: "_spa-css"}
             log("config.css.bundle  set to default " + JSON.stringify(config.css.bundle ));
         } else {
 
@@ -174,14 +188,24 @@ const parseCss = config => {
                 log("config.css.bundle.targetFile set to default " + config.css.bundle.targetFile);
             }
 
-            if (!(config.css.bundle.mode === "all" || (config.css.bundle.mode instanceof Array))) {
-                config.css.bundle.mode = "all";
-                log("config.css.bundle.mode set to default " + config.css.bundle.mode);
+            if (!(config.css.bundle.files === "all" || (config.css.bundle.files instanceof Array))) {
+                config.css.bundle.files = "all";
+                log("config.css.bundle.files set to default " + config.css.bundle.files);
             }
 
-            if (!config.css.bundle.scriptId || typeof config.css.bundle.scriptId !== "string") {
-                config.css.bundle.scriptId = "_spa-css";
-                log("config.css.scriptId set to default " + config.css.bundle.scriptId)
+            if (config.css.index && typeof config.css.index !== "object") {
+                config.css.index = {name: "${this.index.targetFile}", id: "_spa-css"};
+                log("config.css.index set to default " + config.css.index);
+            }
+
+            if (config.css.index && typeof config.css.index.name !== "string") {
+                config.css.index.name = "${this.index.targetFile}";
+                log("config.css.index.name set to default " + config.css.index.name);
+            }
+
+            if (config.css.index && typeof config.css.index.id !== "string") {
+                config.css.index.id = "_spa-css";
+                log("config.css.index.id set to default " + config.css.index.id);
             }
         }
     }
@@ -206,5 +230,14 @@ module.exports = {
 
         parseCss(config);
            
-    }
+    },
+    configFile: configFile,
+    read: name => fsutil.parse(fsutil.readFileSync(configFile(name))),    
+    parseLibsItem: parseLibsItem,
+    parseCssItem: parseCssItem,
+    templateStr: (s, o) => (
+        s.indexOf("$") !== -1 ? 
+        new Function("return `" + s + "`;").call(o) :
+        s
+    )
 }

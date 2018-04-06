@@ -2,6 +2,7 @@ const
     htmlMinifier = require("html-minifier"),    
     jsdom = require("jsdom"),
     fsutil = require("./fs-util"),    
+    configutil = require("./config"),
     fs = require("fs"),
     path = require("path"),    
     log = fsutil.log;
@@ -24,7 +25,7 @@ module.exports = {
         
         } else {
 
-            log(`Minifying from ${from} to ${to} ...`);
+            log(`minifying from ${from} to ${to} ...`);
             let opts = typeof config.index.minify === "object" ? config.index.minify : undefined;
             var result = htmlMinifier.minify(fs.readFileSync(from, "utf8"), opts);
             fs.writeFileSync(to, result, "utf8");
@@ -38,7 +39,7 @@ module.exports = {
         var obj = config.index.updateGlobalObjectScript,
             dom = new jsdom.JSDOM(fs.readFileSync(to, "utf8")),
             scr = dom.window.document.querySelector("#" + obj.id),
-            content = new Function("return `" + obj.content + "`;").call(config);
+            content = configutil.templateStr(obj.content, config),
             changed = false;
         
         if (obj.mode === "always") {
@@ -56,9 +57,9 @@ module.exports = {
                 changed = true;
             }
         }        
-        if (changed) {
-            log(`Updating header script content #${obj.id} with content ${content}`);
+        if (changed) {            
             fs.writeFileSync(to, dom.serialize(), "utf8");
+            log(`updating header script content #${obj.id} of file ${to} with content ${content}`);
         }        
     }
 }
