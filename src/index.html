@@ -2,6 +2,7 @@
 <html>
 <head>
     <script type="text/javascript" id="_spa-obj">
+        // recrated by builder
         window._spa = {
             version: "", 
             appUrl: "app/", 
@@ -18,19 +19,21 @@
     <title>SPA app demo</title>
     <script>
         var require = {baseUrl: window._spa.appUrl};
-        if (window._spa && window._spa.version) require.urlArgs = "v=" + window._spa.version
+        if (window._spa && window._spa.version) {
+            require.urlArgs = "v=" + window._spa.version;
+        }
     </script>  
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-
     <script id="_spa-css">
-        document.write(
-            '<link rel="stylesheet" href="' + 
-            (window._spa.cssUrl ? window._spa.cssUrl : "") +
-            'default.css"' + 
-            (window._spa.version ? "?" + window._spa.version : "") + 
-            ' />'
-        );
+        // recrated by builder
+        (function () {
+            var u = window._spa.cssUrl ? window._spa.cssUrl : "", q = window._spa.version ? "?" + require.urlArgs : "";
+            document.write(
+                '<link rel="stylesheet" href="' + u + 'bootstrap.css"' + q + '" />' +
+                '<link rel="stylesheet" href="' + u + 'default.css"' + q + '" />' +
+                '<link rel="stylesheet" href="' + u + 'navigation.css"' + q + '" />'
+            );
+        })();       
     </script>
 </head>
 <body>        

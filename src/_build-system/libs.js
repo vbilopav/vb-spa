@@ -1,9 +1,36 @@
 const
     uglify = require("uglify-js"),
     fs = require("fs"),
-    path = require("path"),  
-    fsutil = require("./fs-util"),  
+    path = require("path"),
+    fsutil = require("./fs-util"),
     log = fsutil.log;
+
+const getSourceFiles = (config, from) => {
+    let jsonFile = path.join(__dirname, "libs.json");    
+    if (fs.existsSync(jsonFile)) {
+        log(`reading ${jsonFile} ...`);
+        let content = fsutil.readFileSync(jsonFile);
+        if (!content)  {
+            log(`${jsonFile} empty, skipping libs processing ...`)
+            return {};
+        }        
+        return fsutil.parse(content);
+    }
+
+    let files = dir(from, ".js"),
+        result = {};
+
+    for (let i in files) {
+        let file = files[i];
+        result[file] = {
+            minify: config.libs.minify,
+            minifyEngine: config.libs.minifyEngine,
+        }
+    }
+    log(`creating ${jsonFile} ...`);
+    fs.writeFileSync(jsonFile, JSON.stringify(result, null, 4), "utf8");    
+    return result;
+}
 
 module.exports = {
     build: config => {
@@ -15,28 +42,22 @@ module.exports = {
         let 
             from = path.join(config.sourceDir, config.libs.sourceDir),
             to = path.join(config.targetDir, config.libs.targetDir),
-            files = dir(from, ".js");
-        let opts;
-
-
+            files = getSourceFiles(config, from);
+            
         if (!fs.existsSync(to)) {
             log(`creating ${to} ...`)
             fsutil.mkDirByPathSync(to);
         }
 
-        if (typeof config.libs.minify === "object") {
-            opts = config.libs.minify
-        }
-        for (let i in files) {
-            let file = files[i];
+        for (let file in files) {
+            let fileValue = files[file];                        
             let content = fs.readFileSync(path.join(from, file), "utf8");
-            if (config.libs.minify) {                
+
+            if (fileValue.minify !== false) {
+                
                 log(`minifying ${path.join(from, file)} ...`);
-                if (opts) {
-                    result = uglify.minify(content, opts);
-                } else {
-                    result = uglify.minify(content);
-                }
+                result = uglify.minify(content, fileValue.minify);
+
                 if (result.error) {
                     log(`warning: file ${path.join(from, file)} could not be minified, copying instead...`);
                     console.log(result.error);
@@ -44,10 +65,14 @@ module.exports = {
                 } else {                    
                     fs.writeFileSync(path.join(to, file), result.code, "utf8");
                 }
+
             } else {
+
                 log(`copying ${path.join(from, file)} ...`);
-                fs.copyFileSync(path.join(from, file), path.join(to, file));                
+                fs.copyFileSync(path.join(from, file), path.join(to, file));  
+
             }
+            
         }
     }
 }

@@ -6,6 +6,9 @@ const
     log = fsutil.log,
     splitted = __dirname.split(sep);
 
+const
+    validateEngineOpt = value => ["uglify-js", "uglify-es"].indexOf(value) !== -1;
+
 const parseRoot = config => {
     if (!config.sourceDir) {    
         config.sourceDir = splitted.slice(0, splitted.length-1).join(sep) + sep;
@@ -83,7 +86,7 @@ const parseIndex = config => {
             obj.id = "_spa-obj";
             log("config.index.updateGlobalObjectScript.id set to default " + obj.id);    
         }
-        if (["always", "not-exists"].indexOf(obj.mode)) {
+        if (["always", "not-exists"].indexOf(obj.mode) === -1) {
             obj.id = "always";
             log("config.index.updateGlobalObjectScript.mode set to always. Allowed modes are ['always', 'not-exists'] " + obj.id);
         }
@@ -121,6 +124,12 @@ const parseLibs = config => {
         config.libs.minify = true;
         log("config.libs.minify set to default " + config.libs.minify);
     }
+
+    if (!validateEngineOpt(config.libs.minifyEngine)) {
+        config.libs.minifyEngine = "uglify-js";
+        log("config.libs.minifyEngine set to default " + config.libs.minifyEngine);
+        log("minifyEngine options are uglify-js and uglify-es");
+    }    
 }
 
 const parseCss = config => {

@@ -24,7 +24,7 @@ const
             fs.readdirSync(pathName).forEach(function(file, index) {
                 var curPath = pathName + path.sep + file;
                 if (fs.lstatSync(curPath).isDirectory()) { // recurse
-                    deleteFolderRecursive(curPath);
+                    rmdirSync(curPath);
                 } else { // delete file
                 fs.unlinkSync(curPath);
                 }

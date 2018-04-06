@@ -27,7 +27,8 @@
   "libs": {
     "sourceDir": "libs",
     "targetDir": "libs",
-    "minify": true
+    "minify": true,
+    "minifyEngine": "uglify-js"
   },
 
   "css": {
