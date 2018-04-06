@@ -100,8 +100,7 @@ module.exports = {
                 let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
                 let content = new cleanCss(opts).minify(fs.readFileSync(path.join(from, file), "utf8"));
                 fs.writeFileSync(toFile, content.styles, "utf8"); 
-                overallFiles.push(bundleFile);
-
+                
             } else {
 
                 log(`copying ${path.join(from, file)} ...`);
@@ -118,19 +117,17 @@ module.exports = {
             let scr = dom.window.document.querySelector("#" + config.css.index.id);
             if (scr) {
                 let content = 
-                scr.innerHTML = `(function () {
-                    var u = window._spa.cssUrl ? window._spa.cssUrl : "", q = window._spa.version ? "?" + require.urlArgs : "";
-                    document.write(`;       
+                scr.innerHTML = `(function () {var u = window._spa.cssUrl ? window._spa.cssUrl : "", q = window._spa.version ? "?" + require.urlArgs : ""; document.write(`;
                 for (let idx in overallFiles) { 
                     let file = overallFiles[idx];
                     content = content + `'<link rel="stylesheet" href="' + u + '${file}"' + q + '" />'`;
                     if (idx < overallFiles.length - 1) {
-                        content = content + " + \n";
+                        content = content + " + ";
                     }
                 } 
                 content = content + ");})();";
                 scr.innerHTML = content;  
-                fs.writeFileSync(index, dom.serialize(), "utf8");
+                fs.writeFileSync(path.join(config.targetDir, index), dom.serialize(), "utf8");
                 log(`updating header script content #${scr.id} of file ${path.join(config.targetDir, index)} with content ${content}`);
             }         
         }
