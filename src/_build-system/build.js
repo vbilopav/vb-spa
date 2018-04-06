@@ -10,7 +10,7 @@ const
 var config;
 
 log("reading configuration.json...");
-config = fsutil.read("default-config.json"); //or arg
+config = fsutil.read("default.json"); //or arg
 if (!config)  {
     return;
 }   
