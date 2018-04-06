@@ -53,7 +53,21 @@ const
             }
         });
         return result;
-    }
+    },
+    walkSync = function(dir, filelist) {
+        var fs = fs || require('fs'),
+            files = fs.readdirSync(dir);
+        var filelist = filelist || [];
+        files.forEach(function(file) {
+          if (fs.statSync(path.join(dir, file)).isDirectory()) {
+            filelist = walkSync(path.join(dir, file) + path.sep, filelist);
+          }
+          else {
+            filelist.push({file: file, dir: dir, full: path.join(dir, file)});
+          }
+        });
+        return filelist;
+      };
 
 
 module.exports = {
@@ -62,5 +76,6 @@ module.exports = {
     parse: parse,
     rmdirSync: rmdirSync, 
     mkDirByPathSync: mkDirByPathSync,
-    dir: dir
+    dir: dir,
+    walkSync: walkSync
 };

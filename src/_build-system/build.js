@@ -9,6 +9,8 @@ const
 
 var config;
 
+//console.log(walkSync(__dirname));
+
 log("reading user-config.json...");
 let defaultConfig = false;
 config = configutil.read("user-config.json"); //or arg
