@@ -54,17 +54,22 @@ const
         });
         return result;
     },
-    walkSync = function(dir, filelist) {
+    walkSync = function(dir, pathnames, filelist) {
         var fs = fs || require('fs'),
             files = fs.readdirSync(dir);
         var filelist = filelist || [];
-        files.forEach(function(file) {
-          if (fs.statSync(path.join(dir, file)).isDirectory()) {
-            filelist = walkSync(path.join(dir, file) + path.sep, filelist);
-          }
-          else {
-            filelist.push({file: file, dir: dir, full: path.join(dir, file)});
-          }
+        if (pathnames) {
+            pathnames = (pathnames instanceof Array ? pathnames : [pathnames]);
+        }
+        files.forEach(function(file) {        
+            if (fs.statSync(path.join(dir, file)).isDirectory()) {
+                filelist = walkSync(path.join(dir, file) + path.sep, pathnames, filelist);
+            }
+            else {
+                if (!pathnames || pathnames.indexOf(path.extname(file)) !== -1) {
+                    filelist.push({file: file, dir: dir, full: path.join(dir, file)});
+                }
+            }            
         });
         return filelist;
       };

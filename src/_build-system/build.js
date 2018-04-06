@@ -9,7 +9,7 @@ const
 
 var config;
 
-//console.log(walkSync(__dirname));
+//console.log(walkSync(__dirname, [".js", ".json"]));
 
 log("reading user-config.json...");
 let defaultConfig = false;
