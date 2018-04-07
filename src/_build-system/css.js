@@ -12,7 +12,7 @@ const getSourceFiles = (config, from) => {
         log(`reading ${jsonFile} ...`);
         let content = fsutil.readFileSync(jsonFile);
         if (!content)  {
-            log(`${jsonFile} empty, skipping css processing ...`)
+            log(`Warning: ${jsonFile} empty, skipping css processing ...`)
             return {};
         }        
         let result = fsutil.parse(content);

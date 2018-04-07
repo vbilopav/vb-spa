@@ -17,11 +17,22 @@ module.exports = {
             from = path.join(config.sourceDir, config.index.sourceFile),
             to = path.join(config.targetDir, config.index.targetFile);
 
+        if (!fs.existsSync(config.index.sourceFile)) {
+            log(`Error: file ${config.index.sourceFile} doesn't seem to exist, skipping index processing...`);
+            return;
+        }
+
         if (!config.index.minify) {
 
             log(`Copying from ${from} to ${to} ...`);
-            fs.copyFileSync(from, to);
-        
+
+            try {
+                fs.copyFileSync(from, to);  
+            } catch (error) {
+                log(error);
+                return;
+            }
+                    
         } else {
 
             log(`minifying from ${from} to ${to} ...`);

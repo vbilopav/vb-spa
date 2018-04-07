@@ -12,7 +12,7 @@ const getSourceFiles = (config, from, to) => {
         log(`reading ${jsonFile} ...`);
         let content = fsutil.readFileSync(jsonFile);
         if (!content)  {
-            log(`${jsonFile} empty, skipping libs processing ...`)
+            log(`warning: ${jsonFile} empty, skipping libs processing ...`)
             return {};
         }        
         let result = fsutil.parse(content);
@@ -86,7 +86,7 @@ module.exports = {
                 }                    
 
                 if (result.error) {
-                    log(`warning: file ${path.join(from, file)} could not be minified, copying instead...`);
+                    log(`Warning: file ${path.join(from, file)} could not be minified, copying instead...`);
                     console.log(result.error);
                     fs.writeFileSync(path.join(to, file), content.toString(), "utf8");
                 } else {                    
