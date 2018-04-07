@@ -1,7 +1,16 @@
+var logContent = "";
+
 const 
     fs = require("fs");
-    path = require("path"),
-    log = msg => console.log(`build.js > ${msg}`),
+    path = require("path"),   
+    os = require('os'),
+    log = msg => {           
+        logContent = logContent + new Date().toISOString()+  " > " + msg + os.EOL;
+        console.log(`build.js > ${msg}`)
+    },
+    dumpLog = file => {
+        fs.writeFileSync(file, logContent);
+    }
     parse = s => {
         try {
             return JSON.parse(s);
@@ -77,6 +86,7 @@ const
 
 module.exports = {
     log: log,
+    dumpLog: dumpLog,
     readFileSync: readFileSync,
     parse: parse,
     rmdirSync: rmdirSync, 

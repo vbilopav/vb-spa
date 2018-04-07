@@ -4,8 +4,7 @@ const
     fs = require("fs"),
     path = require("path"),
     fsutil = require("./fs-util"),
-    configutil = require("./config"),
-    log = fsutil.log;
+    configutil = require("./config");
 
 const getSourceFiles = (config, from, to) => {
     let jsonFile = configutil.configFile("libs.json");    
@@ -19,9 +18,7 @@ const getSourceFiles = (config, from, to) => {
         let result = fsutil.parse(content);
         for (let item in result) {
             configutil.parseLibsItem(result[item], item);
-        }
-        for (let i in result) {
-            let dir = path.dirname(path.join(to, i));
+            let dir = path.dirname(path.join(to, item));
             if (!fs.existsSync(dir)) {
                 log(`creating ${dir} ...`)
                 fsutil.mkDirByPathSync(dir);
@@ -76,19 +73,22 @@ module.exports = {
             
             if (fileValue.minify !== false) {
                 
-                let content = fs.readFileSync(path.join(from, file), "utf8");    
+                let content = fsutil.readFileSync(path.join(from, file), "utf8");   
+                if (content == null) {
+                    continue;
+                }
                 log(`minifying ${path.join(from, file)} ...`);
                 let result;
                 if (fileValue.minifyEngine === "uglify-js") {
-                    result = uglifyJs.minify(content, fileValue.minify);
+                    result = uglifyJs.minify(content.toString(), fileValue.minify);
                 } else {
-                    result = uglifyEs.minify(content, fileValue.minify);
+                    result = uglifyEs.minify(content.toString(), fileValue.minify);
                 }                    
 
                 if (result.error) {
                     log(`warning: file ${path.join(from, file)} could not be minified, copying instead...`);
                     console.log(result.error);
-                    fs.writeFileSync(path.join(to, file), content, "utf8");
+                    fs.writeFileSync(path.join(to, file), content.toString(), "utf8");
                 } else {                    
                     fs.writeFileSync(path.join(to, file), result.code, "utf8");
                 }
@@ -96,9 +96,14 @@ module.exports = {
             } else {
 
                 log(`copying ${path.join(from, file)} ...`);
-                fs.copyFileSync(path.join(from, file), path.join(to, file));  
+                try {
+                    fs.copyFileSync(path.join(from, file), path.join(to, file));  
+                } catch (error) {
+                    log(error);
+                    continue;
+                }
 
-            }ž
+            }
             
         }
         

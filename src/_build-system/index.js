@@ -4,8 +4,7 @@ const
     fsutil = require("./fs-util"),    
     configutil = require("./config"),
     fs = require("fs"),
-    path = require("path"),    
-    log = fsutil.log;
+    path = require("path");
 
 module.exports = {
     build: config => {
@@ -39,7 +38,7 @@ module.exports = {
         var obj = config.index.updateGlobalObjectScript,
             dom = new jsdom.JSDOM(fs.readFileSync(to, "utf8")),
             scr = dom.window.document.querySelector("#" + obj.id),
-            content = configutil.templateStr(obj.content, config),
+            content = configutil.templateStr(obj.contentExp, config),
             changed = false;
         
         if (obj.mode === "always") {

@@ -4,7 +4,7 @@
   "sourceDir": null,
   "buildDir": null,
   "targetDir": null,
-  "autoTargetDirExp": "new Date().toISOString().replace(/-/g, '').substring(0, 8)",
+  "autoTargetDirExp": "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}",
 
   "index": {
     "sourceFile": "index.html",
@@ -20,7 +20,7 @@
     "updateGlobalObjectScript": {
       "id": "_spa-obj",
       "mode": "always",
-      "content": "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', settings: {usePreloadedTemplates: false}};"
+      "contentExp": "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', settings: {usePreloadedTemplates: false}};"
     }
   },
   
@@ -40,7 +40,7 @@
       "files": "all"
     },
     "index": {
-      "name": "${this.index.targetFile}",
+      "nameExp": "${this.index.targetFile}",
       "id": "_spa-css"
     }
   },

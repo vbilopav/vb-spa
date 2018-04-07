@@ -2,18 +2,16 @@ const
     fs = require("fs"),
     fsutil = require("./fs-util"),
     path = require("path"),
-    sep = path.sep,    
-    log = fsutil.log,
-    splitted = __dirname.split(sep);
+    splitted = __dirname.split(path.sep);
 
-const
-    configPath = path.join(__dirname, "_config"),
-    configFile = name => path.join(configPath, name),
-    validateEngineOpt = value => ["uglify-js", "uglify-es"].indexOf(value) !== -1;
+const configPath = path.join(__dirname, "_config");
+const configFile = name => path.join(configPath, name);
+const validateEngineOpt = value => ["uglify-js", "uglify-es"].indexOf(value) !== -1;
+const templateStr = (s, o) => (s.indexOf("$") !== -1 ? new Function("return `" + s + "`;").call(o) : s);
 
 const parseRoot = config => {
     if (!config.sourceDir) {    
-        config.sourceDir = splitted.slice(0, splitted.length-1).join(sep) + sep;
+        config.sourceDir = splitted.slice(0, splitted.length-1).join(path.sep) + path.sep;
         log("config.sourceDir set to default " + config.sourceDir)
     }
 
@@ -26,13 +24,13 @@ const parseRoot = config => {
         log("config.buildDir set to default " + config.buildDir)
     }
 
-    if (!config.autoTargetDirExp && !config.autoTargetDirExp) {
-        config.autoTargetDirExp = "'output'";
+    if (!config.autoTargetDirExp || typeof config.autoTargetDirExp !== "string") {
+        config.autoTargetDirExp = "output";
         log("config.autoTargetDirExp set to default " + config.autoTargetDirExp)
     }
 
     if (!config.targetDir) {    
-        config.targetDir = path.join(config.buildDir, eval(config.autoTargetDirExp));
+        config.targetDir = path.join(config.buildDir, templateStr(config.autoTargetDirExp));
         log("config.targetDir set to auto " + config.targetDir)
     }
 }
@@ -92,9 +90,9 @@ const parseIndex = config => {
             obj.id = "always";
             log("config.index.updateGlobalObjectScript.mode set to always. Allowed modes are ['always', 'not-exists'] " + obj.id);
         }
-        if (typeof obj.content !== "string") {
-            obj.content = "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', settings: {usePreloadedTemplates: false}};";
-            log("config.index.updateGlobalObjectScript.content set to default " + obj.content);    
+        if (typeof obj.contentExp !== "string") {
+            obj.contentExp = "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', settings: {usePreloadedTemplates: false}};";
+            log("config.index.updateGlobalObjectScript.contentExp set to default " + obj.contentExp);    
         }
     }
 }
@@ -198,9 +196,9 @@ const parseCss = config => {
                 log("config.css.index set to default " + config.css.index);
             }
 
-            if (config.css.index && typeof config.css.index.name !== "string") {
-                config.css.index.name = "${this.index.targetFile}";
-                log("config.css.index.name set to default " + config.css.index.name);
+            if (config.css.index && typeof config.css.index.nameExp !== "string") {
+                config.css.index.nameExp = "${this.index.targetFile}";
+                log("config.css.index.nameExp set to default " + config.css.index.nameExp);
             }
 
             if (config.css.index && typeof config.css.index.id !== "string") {

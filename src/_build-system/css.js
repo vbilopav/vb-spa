@@ -4,8 +4,7 @@ const
     path = require("path"),
     fsutil = require("./fs-util"),
     configutil = require("./config"),
-    jsdom = require("jsdom"),
-    log = fsutil.log;
+    jsdom = require("jsdom");
 
 const getSourceFiles = (config, from) => {
     let jsonFile = configutil.configFile("css.json");    
@@ -111,7 +110,7 @@ module.exports = {
         }
 
         if (config.css.index) {                        
-            let index = configutil.templateStr(config.css.index.name, config);  
+            let index = configutil.templateStr(config.css.index.nameExp, config);  
             let fcontent = fs.readFileSync(path.join(config.targetDir, index), "utf8");
             let dom = new jsdom.JSDOM(fcontent);
             let scr = dom.window.document.querySelector("#" + config.css.index.id);
