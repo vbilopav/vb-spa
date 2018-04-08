@@ -1,19 +1,18 @@
-const
-    cleanCss = require("clean-css"),
-    fs = require("fs"),
-    path = require("path"),
-    fsutil = require("./fs-util"),
-    configutil = require("./config"),
-    jsdom = require("jsdom");
+const cleanCss = require("clean-css");
+const fs = require("fs");
+const path = require("path");
+const fsutil = require("./fs-util");
+const configutil = require("./config");
+const jsdom = require("jsdom");
 
-
+const log = fsutil.log;
 const configFile = configutil.configFile("css.json");
 const configExists = () => fs.existsSync(configFile);
 
 const createConfig = config => {
     const from = path.join(config.sourceDir, config.css.sourceDir);
     const to = path.join(config.targetDir, config.css.targetDir);
-    const files = walkSync(from, ".css");    
+    const files = fsutil.walkSync(from, ".css");    
     const result = {};
 
     for (let i in files) {

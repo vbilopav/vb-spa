@@ -1,10 +1,11 @@
-const
-    htmlMinifier = require("html-minifier"),    
-    jsdom = require("jsdom"),
-    fsutil = require("./fs-util"),    
-    configutil = require("./config"),
-    fs = require("fs"),
-    path = require("path");
+const htmlMinifier = require("html-minifier");
+const jsdom = require("jsdom");
+const fsutil = require("./fs-util");
+const configutil = require("./config");
+const fs = require("fs");
+const path = require("path");
+
+const log = fsutil.log;
 
 module.exports = {
     build: config => {

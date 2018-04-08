@@ -1,18 +1,18 @@
-const
-    uglifyEs = require("uglify-es"),  
-    uglifyJs = require("uglify-js"),
-    fs = require("fs"),
-    path = require("path"),
-    fsutil = require("./fs-util"),
-    configutil = require("./config");
+const uglifyEs = require("uglify-es");
+const uglifyJs = require("uglify-js");
+const fs = require("fs");
+const path = require("path");
+const fsutil = require("./fs-util");
+const configutil = require("./config");
 
+const log = fsutil.log;
 const configFile = configutil.configFile("libs.json");
 const configExists = () => fs.existsSync(configFile);
 
 const createConfig = config => {
     const from = path.join(config.sourceDir, config.libs.sourceDir);
     const to = path.join(config.targetDir, config.libs.targetDir);
-    const files = walkSync(from, ".js");
+    const files = fsutil.walkSync(from, ".js");
     const result = {};
 
     for (let i in files) {

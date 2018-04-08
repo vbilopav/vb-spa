@@ -1,14 +1,13 @@
-const      
-    fsutil = require("./fs-util"),
-    configutil = require("./config"),
-    fs = require("fs"),    
-    indexBuilder = require("./index"),
-    libsBuilder = require("./libs"),
-    cssBuilder = require("./css");
+const fsutil = require("./fs-util");
+const configutil = require("./config");
+const fs = require("fs");
+const indexBuilder = require("./index");
+const libsBuilder = require("./libs");
+const cssBuilder = require("./css");
 
-var config, 
-    silent = false;
+const log = fsutil.log;
 
+var config;
 
 log("");
 log("reading user-config.json...");
@@ -57,15 +56,15 @@ if (!libsBuilder.configExists() || !cssBuilder.configExists()) {
     fsutil.mkDirByPathSync(config.targetDir);
 
     log("");
-    indexBuilder.build(config, silent);
+    indexBuilder.build(config);
     log("");
-    libsBuilder.build(config, silent);
+    libsBuilder.build(config);
     log("");
-    cssBuilder.build(config, silent);
+    cssBuilder.build(config);
 
 }
 
 log("");
 log("finished!");
 
-dumpLog(config.targetDir + ".log");
+fsutil.dumpLog(config.targetDir + ".log");

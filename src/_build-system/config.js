@@ -1,8 +1,9 @@
-const
-    fs = require("fs"),
-    fsutil = require("./fs-util"),
-    path = require("path"),
-    splitted = __dirname.split(path.sep);
+const fs = require("fs");
+const fsutil = require("./fs-util");
+const path = require("path");
+
+const log = fsutil.log;
+const splitted = __dirname.split(path.sep);
 
 const configPath = path.join(__dirname, "_config");
 const configFile = name => path.join(configPath, name);
@@ -212,21 +213,9 @@ const parseCss = config => {
 
 module.exports = {
     parse: config => {
-
-        // root
-    
         parseRoot(config);
-            
-        // index
-    
         parseIndex(config);
-
-        // libs
-    
         parseLibs(config);
-
-        // css
-
         parseCss(config);
            
     },
@@ -234,9 +223,5 @@ module.exports = {
     read: name => fsutil.parse(fsutil.readFileSync(configFile(name))),    
     parseLibsItem: parseLibsItem,
     parseCssItem: parseCssItem,
-    templateStr: (s, o) => (
-        s.indexOf("$") !== -1 ? 
-        new Function("return `" + s + "`;").call(o) :
-        s
-    )
+    templateStr: templateStr
 }
