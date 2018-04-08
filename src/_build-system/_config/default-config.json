@@ -60,7 +60,7 @@
       "removeEmptyAttributes": true, 
       "collapseWhitespace": true
     },
-    "bundles": []
+    "bundles": ["main.js"]
   }
 
 }

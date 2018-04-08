@@ -5,6 +5,7 @@ const indexBuilder = require("./index");
 const libsBuilder = require("./libs");
 const cssBuilder = require("./css");
 const appBuilder = require("./app");
+const bundlerBuilder = require("./app-bundles");
 
 const log = fsutil.log;
 
@@ -34,7 +35,11 @@ try {
         fs.writeFileSync(configutil.configFile("user-config.json"), JSON.stringify(config, null, 4), "utf8");    
     }
 
-    if (!libsBuilder.configExists() || !cssBuilder.configExists() || !appBuilder.configExists()) {
+    if (!libsBuilder.configExists() || 
+        !cssBuilder.configExists() || 
+        !appBuilder.configExists() ||
+        !bundlerBuilder.configExists(config)
+    ) {
         
         log(`Warning: some config files are missing, they will be recretaed first...`);    
         if (!libsBuilder.configExists()) {
@@ -45,6 +50,9 @@ try {
         }
         if (!appBuilder.configExists()) {
             appBuilder.createConfig(config);
+        }
+        if (!bundlerBuilder.configExists(config)) {
+            bundlerBuilder.createConfig(config);
         }
         
     } else {
@@ -69,7 +77,7 @@ try {
         log("");
         cssBuilder.build(config);
         log("");
-        appBuilder.build(config);
+        //appBuilder.build(config);
     }
 
     log("");
