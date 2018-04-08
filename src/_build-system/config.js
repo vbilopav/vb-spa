@@ -18,6 +18,7 @@ const parseRoot = config => {
     if (!fs.existsSync(config.sourceDir)) {
         throw new Error(`error: config.sourceDir ${config.sourceDir} doesn't seem to exist!`);
     }
+    fsutil.setSourceDir(config.sourceDir)
 
     if (!config.buildDir) {    
         config.buildDir =  path.join(__dirname, "build");

@@ -1,11 +1,18 @@
-var logContent = "";
+var 
+    logContent = "",
+    sourceDir;
 
 const 
     fs = require("fs");
     path = require("path"),   
     os = require('os'),
-    log = msg => {           
-        logContent = logContent + new Date().toISOString()+  " > " + msg + os.EOL;
+    log = msg => {     
+        if (msg) {
+            if (sourceDir) {                
+                msg = msg.split(sourceDir).join("." + path.sep);
+            }
+            logContent += new Date().toISOString()+  " > " + msg + os.EOL;
+        }              
         console.log(`build.js > ${msg}`)
     },
     dumpLog = file => {
@@ -92,5 +99,8 @@ module.exports = {
     rmdirSync: rmdirSync, 
     mkDirByPathSync: mkDirByPathSync,
     dir: dir,
-    walkSync: walkSync
+    walkSync: walkSync,
+    setSourceDir: dir => {
+        sourceDir = dir;
+    }
 };
