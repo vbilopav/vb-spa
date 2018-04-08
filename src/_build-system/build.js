@@ -79,8 +79,8 @@ try {
 
 } catch (error) {
 
-    log("");
-    log("finished with errors!");    
+    log(error, true);
+    log("finished prematurely due the exception!!!");    
     fsutil.dumpLog(config.targetDir + ".log");    
 
     throw error;

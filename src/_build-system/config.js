@@ -213,7 +213,7 @@ const parseCss = config => {
 }
 
 const parseAppItem = (item, name) => {
-    if (typeof item.minify !== "boolean" && typeof item.minify !== "object") {
+    if (typeof item.minify !== "boolean") {
         item.minify = true;
         log(name + ".minify set to default " + item.minify);
     }
@@ -223,6 +223,34 @@ const parseAppItem = (item, name) => {
         log(name + ".minifyEngine set to default " + item.minifyEngine);
         log("minifyEngine options are: auto, html-minifier, uglify-js and uglify-es");
     }  
+
+    if (item.minifyJsOptions && typeof item.minifyJsOptions !== "object") {
+        item.minifyJsOptions = undefined;
+        log(name + ".minifyJsOptions set to default undefined ");
+    }
+    if (item.minifyJsOptions == null) {
+        item.minifyJsOptions = undefined;
+    }
+
+    if (item.minifyEsOptions && typeof item.minifyJsOptions !== "object") {
+        item.minifyEsOptions = undefined;
+        log(name + ".minifyEsOptions set to default undefined ");
+    }
+    if (item.minifyEsOptions == null) {
+        item.minifyEsOptions = undefined;
+    }
+
+    if (item.htmlMinifierOptions !== "object") {
+        item.htmlMinifierOptions = {
+            minifyJS: true, 
+            minifyCSS: true, 
+            removeAttributeQuotes: true, 
+            removeComments: true, 
+            removeEmptyAttributes: true, 
+            collapseWhitespace: true
+        };
+        log(name + ".htmlMinifierOptions set to default " + JSON.stringify(item.htmlMinifierOptions));
+    }
 }
 
 const parseApp = config => {

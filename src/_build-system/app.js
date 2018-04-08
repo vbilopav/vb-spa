@@ -37,7 +37,10 @@ const createConfig = config => {
         }
         result[file] = {
             minify: config.app.minify,
-            minifyEngine: engine
+            minifyEngine: engine,
+            minifyJsOptions: config.app.minifyJsOptions ? config.app.minifyJsOptions : null,
+            minifyEsOptions: config.app.minifyEsOptions ? config.app.minifyEsOptions : null,
+            htmlMinifierOptions: config.app.htmlMinifierOptions
         }
     }
     log(`creating ${configFile} ...`);
@@ -104,21 +107,28 @@ const build = config => {
             }
             log(`minifying ${fromFile} ...`);
 
-            let result;            
-            if (fileValue.minifyEngine === "uglify-js") {
-                result = uglifyJs.minify(content.toString(), fileValue.minify);
-            } else if (fileValue.minifyEngine === "uglify-es") {
-                result = uglifyEs.minify(content.toString(), fileValue.minify);
-            } else if (fileValue.minifyEngine === "html-minifier") {
-                let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
-                result = {
-                    code: htmlMinifier.minify(content.toString(), opts) 
-                }                
+            let result;
+            try {            
+                if (fileValue.minifyEngine === "uglify-js") {
+                    result = uglifyJs.minify(content.toString(), fileValue.minifyJsOptions);
+                } else if (fileValue.minifyEngine === "uglify-es") {
+                    result = uglifyEs.minify(content.toString(), fileValue.minifyEsOptions);
+                } else if (fileValue.minifyEngine === "html-minifier") {
+                    let opts = typeof fileValue.htmlMinifierOptions === "object" ? fileValue.htmlMinifierOptions : undefined;
+                    result = {
+                        code: htmlMinifier.minify(content.toString(), opts) 
+                    }                
+                }
+            } catch (error) {
+                result = {error: true};
+                log(error);
             }
 
             if (result.error) {
                 log(`Warning: file ${path.join(from, file)} could not be minified, copying instead...`);
-                console.log(result.error);
+                if (result.error != true) {
+                    console.log(result.error);
+                }                
                 fs.writeFileSync(fileValue.fileFull, content.toString(), "utf8");
             } else {                    
                 fs.writeFileSync(fileValue.fileFull, result.code, "utf8");

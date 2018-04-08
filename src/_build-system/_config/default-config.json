@@ -50,6 +50,16 @@
     "targetDir": "app",
     "minify": true,
     "minifyEngine": "auto",
+    "minifyJsOptions": null,
+    "minifyEsOptions": null,
+    "htmlMinifierOptions": {
+      "minifyJS": true, 
+      "minifyCSS": true, 
+      "removeAttributeQuotes": true, 
+      "removeComments": true, 
+      "removeEmptyAttributes": true, 
+      "collapseWhitespace": true
+    },
     "bundles": []
   }
 

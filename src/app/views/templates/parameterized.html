@@ -56,8 +56,10 @@
         <br />
         3. third: <code>${this.third}</code>, rendered in select element and select value from first param:                
         <select>
-            ${this.template.forEach(this.third, item => 
-                `<option ${this.first === item ? "selected": ""}>${item}</option>`
+            ${this.template.forEach(this.third, item => {
+                    let selected = this.first === item ? "selected": "";
+                    return `<option ${selected}>${item}</option>`
+                }                
             )}
         </select>
         <br /><br />

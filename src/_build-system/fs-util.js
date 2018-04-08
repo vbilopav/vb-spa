@@ -5,17 +5,19 @@ const os = require('os');
 var logContent = "";
 var sourceDir;
 
-const log = msg => {
+const log = (msg, fileOnly=false) => {
     if (msg) {
         if (typeof msg === "object") {
-            msg = msg.message;
+            msg = msg.message + os.EOL; + msg.stack;
         }
         if (sourceDir) {
             msg = msg.split(sourceDir).join("." + path.sep);
         }
         logContent += new Date().toISOString() + " > " + msg + os.EOL;
     }
-    console.log(`build.js > ${msg}`)
+    if (!fileOnly) {
+        console.log(`build.js > ${msg}`)
+    }    
 };
     
 const dumpLog = file => {
