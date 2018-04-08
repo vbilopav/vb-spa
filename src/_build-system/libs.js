@@ -43,7 +43,7 @@ const getSourceFiles = (config, to) => {
     let result = fsutil.parse(content);
     for (let name in result) {        
         item = result[name];
-        configutil.parseLibsItem(item, name);
+        //configutil.parseLibsItem(item, name);
         item.fileClean = name.split("/").join(path.sep); 
         item.fileFull = path.join(to, item.fileClean); 
         item.dirTo = path.dirname(item.fileFull);

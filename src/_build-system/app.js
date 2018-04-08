@@ -62,7 +62,7 @@ const getSourceFiles = (config, to) => {
     let result = fsutil.parse(content);
     for (let name in result) {        
         item = result[name];
-        configutil.parseAppItem(item, name);
+        //configutil.parseAppItem(item, name);
         if (item.engine === "auto") {
             item.engine = getEngineFromName(fileObj.file);
         }

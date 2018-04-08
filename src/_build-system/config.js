@@ -240,7 +240,7 @@ const parseAppItem = (item, name) => {
         item.minifyEsOptions = undefined;
     }
 
-    if (item.htmlMinifierOptions !== "object") {
+    if (typeof item.htmlMinifierOptions !== "object") {
         item.htmlMinifierOptions = {
             minifyJS: true, 
             minifyCSS: true, 

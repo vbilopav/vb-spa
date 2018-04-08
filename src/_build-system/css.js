@@ -43,7 +43,7 @@ const getSourceFiles = (config, to) => {
     let result = fsutil.parse(content);
     for (let name in result) {        
         item = result[name];
-        configutil.parseCssItem(result[name], name);
+        //configutil.parseCssItem(result[name], name);
         item.fileClean = name.split("/").join(path.sep); 
         item.fileFull = path.join(to, item.fileClean); 
         item.dirTo = path.dirname(item.fileFull);
@@ -77,6 +77,7 @@ const build = config => {
     
     const files = getSourceFiles(config, to); 
     const bundleList = [];
+    const realBundleList = [];
     const overallFiles = [];
         
 
@@ -93,18 +94,23 @@ const build = config => {
         }
         let bundleFile = path.join(to, config.css.bundle.targetFile);
         for (let idx in bundleList) {
-            let file = bundleList[idx];
-            let fileValue = files[file];
-            let fromFile = path.join(from, fileValue.fileClean); 
-            let content = fs.readFileSync(fromFile, "utf8");
-            if (fileValue.minify !== false) {
-                let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
-                log(`minifying ${file} for bundle ${bundleFile} ...`)
-                let result = new cleanCss(opts).minify(content);
-                content = result.styles;
-            } else
-            log(`writing bundle ${bundleFile} segment ${file}`)
-            fs.appendFileSync(bundleFile, content);
+            try{
+                let file = bundleList[idx];
+                let fileValue = files[file];
+                let fromFile = path.join(from, fileValue.fileClean); 
+                let content = fs.readFileSync(fromFile, "utf8");
+                if (fileValue.minify !== false) {
+                    let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
+                    log(`minifying ${file} for bundle ${bundleFile} ...`)
+                    let result = new cleanCss(opts).minify(content);
+                    content = result.styles;
+                }
+                log(`writing bundle ${bundleFile} segment ${file}`)
+                fs.appendFileSync(bundleFile, content);
+                realBundleList.push(file);
+            } catch (error) {
+                log(error);
+            }
         }      
         overallFiles.push(config.css.bundle.targetFile);     
     }
