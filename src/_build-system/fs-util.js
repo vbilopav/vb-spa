@@ -8,6 +8,9 @@ const
     os = require('os'),
     log = msg => {     
         if (msg) {
+            if (typeof msg === "object") {
+                msg = msg.message;
+            }
             if (sourceDir) {                
                 msg = msg.split(sourceDir).join("." + path.sep);
             }
