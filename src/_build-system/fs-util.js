@@ -8,7 +8,7 @@ var sourceDir;
 const log = (msg, fileOnly=false) => {
     if (msg) {
         if (typeof msg === "object") {
-            msg = msg.message + os.EOL; + msg.stack;
+            msg = msg.message + os.EOL + msg.stack;
         }
         if (sourceDir) {
             msg = msg.split(sourceDir).join("." + path.sep);

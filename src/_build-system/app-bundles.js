@@ -10,7 +10,7 @@ const configExists = config => {
         return true;
     }
     for (let idx in config.app.bundles) {
-        if (!fs.existsSync(configutil.configFile("bundle-" + idx + ".json"))) {
+        if (!fs.existsSync(configutil.configFile("bundle-" + idx + ".js"))) {
             return false;
         }
     }
@@ -36,7 +36,7 @@ const createConfig = config => {
             }
         }
         log(`creating ${configFile} ...`);
-        fs.writeFileSync(configFile, JSON.stringify(result, null, 4), "utf8");
+        configutil.write(configFile);
         */
     }
 }

@@ -14,14 +14,14 @@ var config;
 try {
 
     log("");
-    log("reading user-config.json...");
+    log("reading user-config.js...");
     let defaultConfig = false;
-    config = configutil.read("user-config.json"); //or arg
+    config = configutil.read("user-config.js", true); //or arg
     if (!config)  {
-        log("falling back to reading default-config.json...");
-        config = configutil.read("default-config.json");    
+        log("falling back to reading default-config.js...");
+        config = configutil.read("default-config.js", true);    
         if (!config) {
-            log("neither user-config.json or default-config.json couldn't be found, now exiting...");
+            log("neither user-config.js or default-config.js couldn't be found, now exiting...");
             return;
         }
         defaultConfig = true;
@@ -31,14 +31,14 @@ try {
     log("parsing configuration...");
     configutil.parse(config);
     if (defaultConfig) {
-        log(`creating new config -> ${configutil.configFile("user-config.json")}...`);
-        fs.writeFileSync(configutil.configFile("user-config.json"), JSON.stringify(config, null, 4), "utf8");    
+        log(`creating new config -> ${configutil.configFile("user-config.js")}...`);  
+        configutil.write("user-config.js", config, true);
     }
 
     if (!libsBuilder.configExists() || 
         !cssBuilder.configExists() || 
-        !appBuilder.configExists() ||
-        !bundlerBuilder.configExists(config)
+        !appBuilder.configExists()
+        //|| !bundlerBuilder.configExists(config)
     ) {
         
         log(`Warning: some config files are missing, they will be recretaed first...`);    
@@ -51,10 +51,11 @@ try {
         if (!appBuilder.configExists()) {
             appBuilder.createConfig(config);
         }
+        /*
         if (!bundlerBuilder.configExists(config)) {
             bundlerBuilder.createConfig(config);
         }
-        
+        */        
     } else {
 
         log("");
@@ -77,7 +78,7 @@ try {
         log("");
         cssBuilder.build(config);
         log("");
-        //appBuilder.build(config);
+        appBuilder.build(config);
     }
 
     log("");

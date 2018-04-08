@@ -6,7 +6,7 @@ const fsutil = require("./fs-util");
 const configutil = require("./config");
 
 const log = fsutil.log;
-const configFile = configutil.configFile("libs.json");
+const configFile = configutil.configFile("libs.js");
 const configExists = () => fs.existsSync(configFile);
 
 const createConfig = config => {
@@ -19,13 +19,13 @@ const createConfig = config => {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
-        result[file] = {
+        result["'" + file + "'"] = {
             minify: config.libs.minify,
             minifyEngine: config.libs.minifyEngine,
         }
     }
     log(`creating ${configFile} ...`);
-    fs.writeFileSync(configFile, JSON.stringify(result, null, 4), "utf8");
+    configutil.write(configFile, result);
 }
 
 const getSourceFiles = (config, to) => {    
@@ -35,15 +35,13 @@ const getSourceFiles = (config, to) => {
     }
 
     log(`reading ${configFile} ...`);
-    let content = fsutil.readFileSync(configFile);
-    if (!content)  {
+    let result = configutil.read(configFile);
+    if (!result)  {
         log(`warning: ${configFile} empty, skipping libs processing ...`)
         return {};
-    }        
-    let result = fsutil.parse(content);
+    }
     for (let name in result) {        
         item = result[name];
-        //configutil.parseLibsItem(item, name);
         item.fileClean = name.split("/").join(path.sep); 
         item.fileFull = path.join(to, item.fileClean); 
         item.dirTo = path.dirname(item.fileFull);

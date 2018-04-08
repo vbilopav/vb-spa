@@ -7,7 +7,7 @@ const fsutil = require("./fs-util");
 const configutil = require("./config");
 
 const log = fsutil.log;
-const configFile = configutil.configFile("app.json");
+const configFile = configutil.configFile("app.js");
 const configExists = () => fs.existsSync(configFile);
 
 const getEngineFromName = name => {
@@ -35,7 +35,7 @@ const createConfig = config => {
         if (engine === "auto") {
             engine = getEngineFromName(fileObj.file);           
         }
-        result[file] = {
+        result["'" + file + "'"] = {
             minify: config.app.minify,
             minifyEngine: engine,
             minifyJsOptions: config.app.minifyJsOptions ? config.app.minifyJsOptions : null,
@@ -44,7 +44,7 @@ const createConfig = config => {
         }
     }
     log(`creating ${configFile} ...`);
-    fs.writeFileSync(configFile, JSON.stringify(result, null, 4), "utf8");
+    configutil.write(configFile, result);
 }
 
 const getSourceFiles = (config, to) => {    
@@ -54,15 +54,13 @@ const getSourceFiles = (config, to) => {
     }
 
     log(`reading ${configFile} ...`);
-    let content = fsutil.readFileSync(configFile);
-    if (!content)  {
+    let result = configutil.read(configFile);
+    if (!result)  {
         log(`warning: ${configFile} empty, skipping app processing ...`)
         return {};
-    }        
-    let result = fsutil.parse(content);
+    }            
     for (let name in result) {        
         let item = result[name];
-        //configutil.parseAppItem(item, name);
         if (item.engine === "auto") {
             item.engine = getEngineFromName(fileObj.file);
         }

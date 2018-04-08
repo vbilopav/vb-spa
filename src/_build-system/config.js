@@ -6,9 +6,33 @@ const log = fsutil.log;
 const splitted = __dirname.split(path.sep);
 
 const configPath = path.join(__dirname, "_config");
+
 const configFile = name => path.join(configPath, name);
+
+const read = (name, addPath=false) => {
+    if (addPath) {
+        name = configFile(name);
+    }
+    try {        
+        return eval(fs.readFileSync(name).toString())
+    } catch (error) {
+        log(error.message);
+        return null;
+    }
+};
+
+const write = (name, value, addPath=false) => {
+    var json = JSON.stringify(value, null, 4).replace(/\"([^(\")"]+)\":/g,"$1:");
+    if (addPath) {
+        name = configFile(name);
+    }
+    fs.writeFileSync(name, "(" + json + ")", "utf8");
+};
+
 const validateEngineOpt = value => ["uglify-js", "uglify-es"].indexOf(value) !== -1;
+
 const validateAllEnginesOpt = value => ["auto", "html-minifier", "uglify-js", "uglify-es"].indexOf(value) !== -1;
+
 const templateStr = (s, o) => (s.indexOf("$") !== -1 ? new Function("return `" + s + "`;").call(o) : s);
 
 const parseRoot = config => {
@@ -293,7 +317,8 @@ module.exports = {
         parseApp(config);
     },
     configFile: configFile,
-    read: name => fsutil.parse(fsutil.readFileSync(configFile(name))),    
+    read: read,
+    write: write,   
     parseLibsItem: parseLibsItem,
     parseCssItem: parseCssItem,
     parseAppItem: parseAppItem,
