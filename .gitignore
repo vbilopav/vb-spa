@@ -266,3 +266,4 @@ src/_build-system/_config/user-config.json
 src/_build-system/_config/css.json
 src/_build-system/_config/libs.json
 .vscode/launch.json
+src/_build-system/_config/app.json

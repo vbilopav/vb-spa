@@ -1,3 +1,4 @@
+const htmlMinifier = require("html-minifier");
 const uglifyEs = require("uglify-es");
 const uglifyJs = require("uglify-js");
 const fs = require("fs");
@@ -6,22 +7,37 @@ const fsutil = require("./fs-util");
 const configutil = require("./config");
 
 const log = fsutil.log;
-const configFile = configutil.configFile("libs.json");
+const configFile = configutil.configFile("app.json");
 const configExists = () => fs.existsSync(configFile);
 
+const getEngineFromName = name => {
+    let ext = path.extname(name);
+    if (ext === ".js") {
+        return "uglify-es";
+    }
+    if (ext === ".html") {
+        return "html-minifier";
+    } 
+    throw new Error("Unknown extension, can't set minify engine...");      
+}
+
 const createConfig = config => {
-    const from = path.join(config.sourceDir, config.libs.sourceDir);
-    const to = path.join(config.targetDir, config.libs.targetDir);
-    const files = fsutil.walkSync(from, ".js");
+    const from = path.join(config.sourceDir, config.app.sourceDir);
+    const to = path.join(config.targetDir, config.app.targetDir);
+    const files = fsutil.walkSync(from, [".js", ".html"]);
     const result = {};
 
     for (let i in files) {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
+        let engine = config.app.minifyEngine;
+        if (engine === "auto") {
+            engine = getEngineFromName(fileObj.file);           
+        }
         result[file] = {
-            minify: config.libs.minify,
-            minifyEngine: config.libs.minifyEngine,
+            minify: config.app.minify,
+            minifyEngine: engine
         }
     }
     log(`creating ${configFile} ...`);
@@ -30,20 +46,23 @@ const createConfig = config => {
 
 const getSourceFiles = (config, to) => {    
     if (!configExists()) {
-        log(`${configFile} is missing, skipping libs processing ...`);
+        log(`${configFile} is missing, skipping app processing ...`);
         return {};
     }
 
     log(`reading ${configFile} ...`);
     let content = fsutil.readFileSync(configFile);
     if (!content)  {
-        log(`warning: ${configFile} empty, skipping libs processing ...`)
+        log(`warning: ${configFile} empty, skipping app processing ...`)
         return {};
     }        
     let result = fsutil.parse(content);
     for (let name in result) {        
         item = result[name];
-        configutil.parseLibsItem(item, name);
+        configutil.parseAppItem(item, name);
+        if (item.engine === "auto") {
+            item.engine = getEngineFromName(fileObj.file);
+        }
         item.fileClean = name.split("/").join(path.sep); 
         item.fileFull = path.join(to, item.fileClean); 
         item.dirTo = path.dirname(item.fileFull);
@@ -55,13 +74,14 @@ const getSourceFiles = (config, to) => {
     return result;
 }
 
+
 const build = config => {
-    if (!config.libs) {
+    if (!config.app) {
         return;
     }
-
-    const from = path.join(config.sourceDir, config.libs.sourceDir);
-    const to = path.join(config.targetDir, config.libs.targetDir);
+    
+    const from = path.join(config.sourceDir, config.app.sourceDir);
+    const to = path.join(config.targetDir, config.app.targetDir);
                 
     if (!fs.existsSync(to)) {
         log(`creating ${to} ...`);
@@ -73,7 +93,8 @@ const build = config => {
     
     for (let file in files) {
         let fileValue = files[file];    
-        let fromFile = path.join(from, fileValue.fileClean);                    
+        let fromFile = path.join(from, fileValue.fileClean);         
+        let toFile = fileValue.fileFull;           
         
         if (fileValue.minify !== false) {
             
@@ -83,12 +104,17 @@ const build = config => {
             }
             log(`minifying ${fromFile} ...`);
 
-            let result;
+            let result;            
             if (fileValue.minifyEngine === "uglify-js") {
                 result = uglifyJs.minify(content.toString(), fileValue.minify);
             } else if (fileValue.minifyEngine === "uglify-es") {
                 result = uglifyEs.minify(content.toString(), fileValue.minify);
-            }                    
+            } else if (fileValue.minifyEngine === "html-minifier") {
+                let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
+                result = {
+                    code: htmlMinifier.minify(content.toString(), opts) 
+                }                
+            }
 
             if (result.error) {
                 log(`Warning: file ${path.join(from, file)} could not be minified, copying instead...`);
@@ -102,15 +128,15 @@ const build = config => {
 
             log(`copying ${fromFile} ...`);
             try {
-                fs.copyFileSync(fromFile, fileValue.fileFull);  
+                fs.copyFileSync(fromFile, toFile);  
             } catch (error) {
                 log(error);
                 continue;
             }
 
-        }
-        
+        }        
     }
+    
 }
 
 module.exports = {

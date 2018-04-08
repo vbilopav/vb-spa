@@ -8,6 +8,7 @@ const splitted = __dirname.split(path.sep);
 const configPath = path.join(__dirname, "_config");
 const configFile = name => path.join(configPath, name);
 const validateEngineOpt = value => ["uglify-js", "uglify-es"].indexOf(value) !== -1;
+const validateAllEnginesOpt = value => ["auto", "html-minifier", "uglify-js", "uglify-es"].indexOf(value) !== -1;
 const templateStr = (s, o) => (s.indexOf("$") !== -1 ? new Function("return `" + s + "`;").call(o) : s);
 
 const parseRoot = config => {
@@ -108,7 +109,7 @@ const parseLibsItem = (item, name) => {
     if (!validateEngineOpt(item.minifyEngine)) {
         item.minifyEngine = "uglify-js";
         log(name + ".minifyEngine set to default " + item.minifyEngine);
-        log("minifyEngine options are uglify-js and uglify-es");
+        log("minifyEngine options are: uglify-js and uglify-es");
     }  
 }
 
@@ -211,17 +212,62 @@ const parseCss = config => {
     }
 }
 
+const parseAppItem = (item, name) => {
+    if (typeof item.minify !== "boolean" && typeof item.minify !== "object") {
+        item.minify = true;
+        log(name + ".minify set to default " + item.minify);
+    }
+
+    if (!validateAllEnginesOpt(item.minifyEngine)) {
+        item.minifyEngine = "auto";
+        log(name + ".minifyEngine set to default " + item.minifyEngine);
+        log("minifyEngine options are: auto, html-minifier, uglify-js and uglify-es");
+    }  
+}
+
+const parseApp = config => {
+
+    if (!config.app) {
+        config.app = false;
+        log("config.app section will be skipped! ");
+        return;
+    }
+
+    if (!config.app.sourceDir || typeof config.app.sourceDir !== "string") {
+        config.app.sourceDir = "app";
+        log("config.app.sourceDir set to default " + config.app.sourceDir)
+    }
+
+    var check = path.join(config.sourceDir, config.app.sourceDir)
+    if (!fs.existsSync(check)) {
+        throw new Error(`error: config.app.sourceDir ${check} doesn't seem to exist!`);
+    }
+
+    if (!config.app.targetDir || typeof config.app.targetDir !== "string") {
+        config.app.targetDir = "app";
+        log("config.app.targetDir set to default " + config.app.targetDir);
+    }
+
+    parseAppItem(config.app, "config.app");
+
+    if (!(config.app.bundles instanceof Array)) {
+        config.app.bundles = [];
+        log("config.app.bundles set to default empty array");
+    }
+}
+
 module.exports = {
     parse: config => {
         parseRoot(config);
         parseIndex(config);
         parseLibs(config);
         parseCss(config);
-           
+        parseApp(config);
     },
     configFile: configFile,
     read: name => fsutil.parse(fsutil.readFileSync(configFile(name))),    
     parseLibsItem: parseLibsItem,
     parseCssItem: parseCssItem,
+    parseAppItem: parseAppItem,
     templateStr: templateStr
 }

@@ -1,9 +1,9 @@
 const htmlMinifier = require("html-minifier");
 const jsdom = require("jsdom");
-const fsutil = require("./fs-util");
-const configutil = require("./config");
 const fs = require("fs");
 const path = require("path");
+const fsutil = require("./fs-util");
+const configutil = require("./config");
 
 const log = fsutil.log;
 

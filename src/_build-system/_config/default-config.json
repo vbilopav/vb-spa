@@ -47,7 +47,10 @@
 
   "app": {
     "sourceDir": "app",
-    "targetDir": "app"
+    "targetDir": "app",
+    "minify": true,
+    "minifyEngine": "auto",
+    "bundles": []
   }
 
 }

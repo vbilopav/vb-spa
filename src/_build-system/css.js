@@ -71,7 +71,7 @@ const build = config => {
     const to = path.join(config.targetDir, config.css.targetDir);
 
     if (!fs.existsSync(to)) {
-        log(`creating ${to} ...`)
+        log(`creating ${to} ...`);
         fsutil.mkDirByPathSync(to);
     }
     
