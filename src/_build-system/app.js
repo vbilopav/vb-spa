@@ -40,9 +40,8 @@ const createConfig = config => {
         if (engine === "auto") {
             engine = getEngineFromName(fileObj.file);           
         }
-        modules["'" +  configutil.getModule(fileObj.full, file, config) + "'"] = {
-            source: ("./" + config.app.targetDir + "/" + file)
-        }
+        modules["'" +  configutil.getModule(fileObj.full, file, config) + "'"] = 
+            ("./" + config.app.targetDir + "/" + file);        
         result["'" + file + "'"] = {
             minify: config.app.minify,
             minifyEngine: engine
@@ -59,11 +58,7 @@ const createConfig = config => {
     
     log(`writting ${configutil.modulesFile} ...`);
     configutil.write(configutil.modulesFile, modules, false, 
-`{
-    'module id': {
-        source: source file name relative to target dir                
-    }
-}, ...`);
+        `'module id': source file name relative to target dir ...`);
 }
 
 const getSourceFiles = (config, to) => {    

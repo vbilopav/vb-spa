@@ -24,9 +24,8 @@ const createConfig = config => {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
-        modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file) + "'"] = {
-            source: ("./" + config.libs.targetDir + "/" + file)
-        }
+        modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file) + "'"] = 
+            ("./" + config.libs.targetDir + "/" + file);        
         let opts = 
         result["'" + file + "'"] = {            
             minify: config.libs.minify,
@@ -44,11 +43,7 @@ const createConfig = config => {
 
     log(`writting ${configutil.modulesFile} ...`);
     configutil.write(configutil.modulesFile, modules, false, 
-`{
-    'module id': {
-        source: source file name relative to target dir                
-    }
-}, ...`);
+        `'module id': source file name relative to target dir ...`);
 }
 
 const getSourceFiles = (config, to) => {    
