@@ -38,10 +38,15 @@ try {
     if (!libsBuilder.configExists() || 
         !cssBuilder.configExists() || 
         !appBuilder.configExists()
+        
         //|| !bundlerBuilder.configExists(config)
+
     ) {
         
-        log(`Warning: some config files are missing, they will be recretaed first...`);    
+        log(`Warning:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
+        
+        configutil.touchModulesFile();
+
         if (!libsBuilder.configExists()) {
             libsBuilder.createConfig(config);
         }
@@ -55,7 +60,7 @@ try {
         if (!bundlerBuilder.configExists(config)) {
             bundlerBuilder.createConfig(config);
         }
-        */        
+        */
     } else {
 
         log("");

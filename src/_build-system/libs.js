@@ -14,18 +14,29 @@ const createConfig = config => {
     const to = path.join(config.targetDir, config.libs.targetDir);
     const files = fsutil.walkSync(from, ".js");
     const result = {};
+    let modules = configutil.read(configutil.modulesFile) || {};
+    Object.keys(modules).forEach(name => {
+        modules["'" + name + "'"] = modules[name];
+        delete modules[name];
+    });
 
     for (let i in files) {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
-        result["'" + file + "'"] = {
+        modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file) + "'"] = {
+            source: ("./" + config.libs.targetDir + "/" + file)
+        }
+        result["'" + file + "'"] = {            
             minify: config.libs.minify,
             minifyEngine: config.libs.minifyEngine,
         }
     }
     log(`creating ${configFile} ...`);
     configutil.write(configFile, result);
+
+    log(`writting ${configutil.modulesFile} ...`);
+    configutil.write(configutil.modulesFile, modules);
 }
 
 const getSourceFiles = (config, to) => {    
@@ -71,7 +82,7 @@ const build = config => {
     
     for (let file in files) {
         let fileValue = files[file];    
-        let fromFile = path.join(from, fileValue.fileClean);                    
+        let fromFile = path.join(from, fileValue.fileClean); 
         
         if (fileValue.minify !== false) {
             

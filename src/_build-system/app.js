@@ -26,6 +26,11 @@ const createConfig = config => {
     const to = path.join(config.targetDir, config.app.targetDir);
     const files = fsutil.walkSync(from, [".js", ".html"]);
     const result = {};
+    let modules = configutil.read(configutil.modulesFile) || {};
+    Object.keys(modules).forEach(name => {
+        modules["'" + name + "'"] = modules[name];
+        delete modules[name];
+    });
 
     for (let i in files) {
         let fileObj = files[i];
@@ -34,6 +39,9 @@ const createConfig = config => {
         let engine = config.app.minifyEngine;
         if (engine === "auto") {
             engine = getEngineFromName(fileObj.file);           
+        }
+        modules["'" +  configutil.getModule(fileObj.full, file, config) + "'"] = {
+            source: ("./" + config.app.targetDir + "/" + file)
         }
         result["'" + file + "'"] = {
             minify: config.app.minify,
@@ -45,6 +53,9 @@ const createConfig = config => {
     }
     log(`creating ${configFile} ...`);
     configutil.write(configFile, result);
+    
+    log(`writting ${configutil.modulesFile} ...`);
+    configutil.write(configutil.modulesFile, modules);
 }
 
 const getSourceFiles = (config, to) => {    

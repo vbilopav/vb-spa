@@ -5,12 +5,14 @@ const configutil = require("./config");
 
 const log = fsutil.log;
 
+const fileName = idx => configutil.configFile("bundle-" + idx + ".js");
+
 const configExists = config => {
     if (!config.app || !config.app.bundles || !config.app.bundles.length) {
         return true;
     }
     for (let idx in config.app.bundles) {
-        if (!fs.existsSync(configutil.configFile("bundle-" + idx + ".js"))) {
+        if (!fs.existsSync(fileName(idx))) {
             return false;
         }
     }
@@ -21,24 +23,35 @@ const createConfig = config => {
     if (!config.app || !config.app.bundles || !config.app.bundles.length) {
         return true;
     }
+    const from = path.join(config.targetDir, config.app.targetDir);
+    const files = fsutil.walkSync(from, [".js", ".html"]);
+
     for (let idx in config.app.bundles) {  
-        /*
+        let bundleFile = config.app.bundles[idx];
+        let bundleConfigName = fileName(idx);
+        let result = {
+            targetFile: bundleFile,
+            includes: []
+        }
         for (let i in files) {
             let fileObj = files[i];
-            let file = fileObj.full.replace(from + path.sep, "");
+            let file = fileObj.full.replace(config.targetDir + path.sep, "");
             file = file.split(path.sep).join("/");
-            result[file] = {
-                minify: config.app.minify,
-                minifyEngine: engine,
-                minifyJsOptions: config.app.minifyJsOptions ? config.app.minifyJsOptions : null,
-                minifyEsOptions: config.app.minifyEsOptions ? config.app.minifyEsOptions : null,
-                htmlMinifierOptions: config.app.htmlMinifierOptions
+            if (file === bundleFile) {
+                continue; // add at the end
             }
+            result.includes.push({
+                source: file,
+                module: "..."
+            });            
         }
-        log(`creating ${configFile} ...`);
-        configutil.write(configFile);
-        */
-    }
+        result.includes.push({
+            source: bundleFile,
+            module: "..."
+        });
+        log(`creating ${bundleConfigName} ...`);
+        configutil.write(bundleConfigName, result);
+    }    
 }
 
 module.exports = {

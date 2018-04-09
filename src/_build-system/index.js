@@ -18,8 +18,8 @@ module.exports = {
             from = path.join(config.sourceDir, config.index.sourceFile),
             to = path.join(config.targetDir, config.index.targetFile);
 
-        if (!fs.existsSync(config.index.sourceFile)) {
-            log(`Error: file ${config.index.sourceFile} doesn't seem to exist, skipping index processing...`);
+        if (!fs.existsSync(from)) {
+            log(`Error: file ${from} doesn't seem to exist, skipping index processing...`);
             return;
         }
 
@@ -43,20 +43,20 @@ module.exports = {
 
         }
 
-        if (!config.index.updateGlobalObjectScript) {
+        if (!config.index.globalObject) {
             return;
         }
         
-        var obj = config.index.updateGlobalObjectScript,
-            dom = new jsdom.JSDOM(fs.readFileSync(to, "utf8")),
-            scr = dom.window.document.querySelector("#" + obj.id),
-            content = configutil.templateStr(obj.contentExp, config),
-            changed = false;
+        let obj = config.index.globalObject;
+        let dom = new jsdom.JSDOM(fs.readFileSync(to, "utf8"));
+        let scr = dom.window.document.querySelector("#" + obj.scriptContainerId);
+        let content = `window.${obj.name}=${configutil.templateStr(obj.expression, config)};`;
+        let changed = false;
         
         if (obj.mode === "always") {
             if (!scr) {
                 scr = dom.window.document.createElement("script");
-                scr.id = obj.id;
+                scr.id = obj.scriptContainerId;
                 let head = dom.window.document.querySelector("head")
                 head.insertBefore(scr, head.firstChild);
             }
@@ -70,7 +70,7 @@ module.exports = {
         }        
         if (changed) {            
             fs.writeFileSync(to, dom.serialize(), "utf8");
-            log(`updating header script content #${obj.id} of file ${to} with content ${content}`);
+            log(`updating header script content #${obj.scriptContainerId} of file ${to} with content ${content}`);
         }        
     }
 }
