@@ -27,16 +27,28 @@ const createConfig = config => {
         modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file) + "'"] = {
             source: ("./" + config.libs.targetDir + "/" + file)
         }
+        let opts = 
         result["'" + file + "'"] = {            
             minify: config.libs.minify,
             minifyEngine: config.libs.minifyEngine,
         }
     }
     log(`creating ${configFile} ...`);
-    configutil.write(configFile, result);
+    configutil.write(configFile, result, false, 
+`{
+    'file name relative to libs dir': {
+        minify: false to copy, true for default minify config or minify options object,
+        minifyEngine: uglify-es, uglify-js     
+    }
+}, ...`);
 
     log(`writting ${configutil.modulesFile} ...`);
-    configutil.write(configutil.modulesFile, modules);
+    configutil.write(configutil.modulesFile, modules, false, 
+`{
+    'module id': {
+        source: source file name relative to target dir                
+    }
+}, ...`);
 }
 
 const getSourceFiles = (config, to) => {    
@@ -94,9 +106,11 @@ const build = config => {
 
             let result;
             if (fileValue.minifyEngine === "uglify-js") {
-                result = uglifyJs.minify(content.toString(), fileValue.minify);
+                let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyJsOptions;
+                result = uglifyJs.minify(content.toString(), opts);
             } else if (fileValue.minifyEngine === "uglify-es") {
-                result = uglifyEs.minify(content.toString(), fileValue.minify);
+                let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyEsOptions;
+                result = uglifyEs.minify(content.toString(), opts);
             }                    
 
             if (result.error) {

@@ -25,7 +25,12 @@ const createConfig = config => {
     }
 
     log(`creating ${configFile} ...`);
-    configutil.write(configFile, result);
+    configutil.write(configFile, result, false, 
+`{
+    'file name relative to css dir': {
+        minify: false to copy, true for default minify config or minify options object,        
+    }
+}, ...`);
 }
 
 const getSourceFiles = (config, to) => {    

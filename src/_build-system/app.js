@@ -45,17 +45,25 @@ const createConfig = config => {
         }
         result["'" + file + "'"] = {
             minify: config.app.minify,
-            minifyEngine: engine,
-            minifyJsOptions: config.app.minifyJsOptions ? config.app.minifyJsOptions : null,
-            minifyEsOptions: config.app.minifyEsOptions ? config.app.minifyEsOptions : null,
-            htmlMinifierOptions: config.app.htmlMinifierOptions
+            minifyEngine: engine
         }
     }
     log(`creating ${configFile} ...`);
-    configutil.write(configFile, result);
+    configutil.write(configFile, result, false, 
+`{
+    'file name relative to app dir': {
+        minify: false to copy, true for default minify config or minify options object,
+        minifyEngine: uglify-es, uglify-js or html-minifier
+    }
+}, ...`);
     
     log(`writting ${configutil.modulesFile} ...`);
-    configutil.write(configutil.modulesFile, modules);
+    configutil.write(configutil.modulesFile, modules, false, 
+`{
+    'module id': {
+        source: source file name relative to target dir                
+    }
+}, ...`);
 }
 
 const getSourceFiles = (config, to) => {    
@@ -119,11 +127,14 @@ const build = config => {
             let result;
             try {            
                 if (fileValue.minifyEngine === "uglify-js") {
-                    result = uglifyJs.minify(content.toString(), fileValue.minifyJsOptions);
+                    let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyJsOptions;
+                    result = uglifyJs.minify(content.toString(), opts);
                 } else if (fileValue.minifyEngine === "uglify-es") {
-                    result = uglifyEs.minify(content.toString(), fileValue.minifyEsOptions);
-                } else if (fileValue.minifyEngine === "html-minifier") {
-                    let opts = typeof fileValue.htmlMinifierOptions === "object" ? fileValue.htmlMinifierOptions : undefined;
+                    let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyEsOptions;
+                    result = uglifyEs.minify(content.toString(), opts);
+                } else if (fileValue.minifyEngine === "html-minifier") {                    
+                    let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.htmlMinifierOptions;                    
+                    opts = typeof opts === "object" ? opts : undefined;
                     result = {
                         code: htmlMinifier.minify(content.toString(), opts) 
                     }                

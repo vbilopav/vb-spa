@@ -24,6 +24,8 @@
       sourceDir: "libs",
       targetDir: "libs",
       minify: true,
+      minifyJsOptions: null,
+      minifyEsOptions: null,
       minifyEngine: "uglify-js"
   },
   css: {
