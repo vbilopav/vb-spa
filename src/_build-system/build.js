@@ -32,7 +32,7 @@ try {
     configutil.parse(config);
     if (defaultConfig) {
         log(`creating new config -> ${configutil.configFile("user-config.js")}...`);  
-        configutil.write("user-config.js", config, false, "copy of default-config.js");
+        configutil.write("user-config.js", config, true, "copy of default-config.js");
     }
 
     if (!libsBuilder.configExists() || 
