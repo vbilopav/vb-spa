@@ -8,23 +8,13 @@ define([
 
     const 
         _search = "{this.template.import(",
-        _length = _search.length,
-        _parse = (name, text, data, locale) => {
-            if (!data.template) {
-                data.template = helper.helpers;
-            }            
-            if (locale) {
-                data.template = Object.assign(data.template, locale);
-            }
-            data.template.name = name;
-            return new Function("return `" + text + "`;").call(data)
-        }
+        _length = _search.length;
     
     return {
         version: '1.0.0',
         load(name, req, onload, config) {
             if (helper._usingPreloaded()) {
-                return req(["text!" + name], text => onload((data, locale) => _parse(name, text, data, locale)))
+                return req(["text!" + name], text => onload((data, locale) => helper.parse(name, text, data, locale)))
             }
             return req(["text!" + name], text => {
                 let from = 0, found = [], length = text.length;
@@ -41,9 +31,9 @@ define([
                     }
                 }
                 if (found.length) {
-                    require(found, () => onload((data, locale) => _parse(name, text, data, locale))); 
+                    require(found, () => onload((data, locale) => helper.parse(name, text, data, locale))); 
                 } else {                    
-                    onload((data, locale) => _parse(name, text, data, locale));
+                    onload((data, locale) => helper.parse(name, text, data, locale));
                 }               
             });
         }

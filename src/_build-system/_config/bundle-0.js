@@ -10,11 +10,8 @@ includes: [] list of modules to bundle - reorder, rearange, remove or add freely
 */
 ({
     targetFile: "main.js",
-    includes: [
-        "../libs/text",
-        
+    includes: [        
         "sys/template-helpers",
-        "sys/template",
         "sys/extensions",
         "sys/model",
 

@@ -79,11 +79,25 @@ const build = config => {
                 continue;                
             }
             content = content.toString();
-            if (moduleId.startsWith("text!") || moduleId.startsWith("template!")) {
-                content = "define('" + moduleId + "',[],()=> '" + content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "');" + os.EOL;
+            
+            if (moduleId.startsWith("text!")) {
+            
+                content = "define('" + moduleId + "',[],()=> '" + 
+                    content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "');" + 
+                    os.EOL;
+            
+            } else if (moduleId.startsWith("template!")) {
+
+                content = "define('" + moduleId + "',['sys/template-helpers'], helper => { var name = '" + 
+                    moduleId + "'.replace('template!', '');  return (data, locale) => helper.parse(name, '" + 
+                    content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "', data, locale);});" + 
+                    os.EOL;
+
             } else {
+
                 content = content.replace("define([", "define('" + moduleId + "',[");
                 content = content + os.EOL;
+
             }
             log(`adding to bundle ${config.app.bundles[i]} module ${moduleId}...`);
             fs.appendFileSync(temp, content);          

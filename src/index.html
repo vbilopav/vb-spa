@@ -57,11 +57,15 @@
     </script>
     <script type="text/javascript">
         window.requirejs || 
-        document.write(
-            '<script data-main="main.js" src="' + 
-            (window._spa.libsUrl ? window._spa.libsUrl : "") +
-            'require.js">\x3C/script>'
-        );
+            document.write(
+                '<script data-main="main.js" src="' + (window._spa.libsUrl ? window._spa.libsUrl : "") + 'require.js">\x3C/script>'
+            );
+        requirejs.config({
+            paths: {
+                text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", (window._spa.libsUrl ? "../" + window._spa.libsUrl : "") + "text"],
+                template: "sys/template"
+            }
+        });
     </script>
 
 </body>
