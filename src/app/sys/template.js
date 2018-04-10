@@ -1,4 +1,4 @@
-﻿define([
+define([
     "module", 
     "sys/template-helpers"
 ], (

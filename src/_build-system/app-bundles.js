@@ -1,4 +1,5 @@
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const fsutil = require("./fs-util");
 const configutil = require("./config");
@@ -53,8 +54,47 @@ includes: [] list of modules to bundle - reorder, rearange, remove or add freely
     }    
 }
 
+const build = config => {
+    if (!config.app || !config.app.bundles || !config.app.bundles.length) {
+        return
+    }
+    const appDir = path.join(config.targetDir, config.app.targetDir);
+    const modules = configutil.read(configutil.modulesFile) || {};
+
+    for (let i in config.app.bundles) {        
+        let bundle = configutil.read(fileName(i));
+        if (!bundle) {
+            continue;
+        }
+        let t = bundle.targetFile.split("/").join(path.sep);
+        let bundleTarget = path.join(appDir, t);
+        let temp = path.join(os.tmpdir(), t);
+        fs.unlinkSync(temp);
+        for (let j in bundle.includes) {
+            const moduleId = bundle.includes[j];
+            const include = modules[moduleId].replace("./", config.targetDir + path.sep).split("/").join(path.sep);
+            var content = fsutil.readFileSync(include);
+            if (!content) {
+                log(`warning: skipping ${moduleId} in bundle ${j}`);
+                continue;                
+            }
+            content = content.toString();
+            if (moduleId.startsWith("text!") || moduleId.startsWith("template!")) {
+                content = "define('" + moduleId + "',[],()=> '" + content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "');" + os.EOL;
+            } else {
+                content = content.replace("define([", "define('" + moduleId + "',[");
+                content = content + os.EOL;
+            }
+            log(`adding to bundle ${config.app.bundles[i]} module ${moduleId}...`);
+            fs.appendFileSync(temp, content);          
+        }
+        log(`writting bundle ${config.app.bundles[i]} ...`);
+        fs.copyFileSync(temp, bundleTarget);
+    }
+}
+
 module.exports = {
-    //build: build,
+    build: build,
     configExists: configExists,
     createConfig: createConfig
 }

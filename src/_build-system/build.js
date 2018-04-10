@@ -60,7 +60,7 @@ try {
         }
         
     } else {
-
+        
         log("");
         if (!fs.existsSync(config.buildDir)) {
             log(`creating ${config.buildDir} ...`)
@@ -81,7 +81,9 @@ try {
         log("");
         cssBuilder.build(config);
         log("");
-        appBuilder.build(config);
+        appBuilder.build(config);        
+        log("");
+        bundlerBuilder.build(config);
     }
 
     log("");

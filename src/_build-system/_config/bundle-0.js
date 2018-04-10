@@ -11,19 +11,16 @@ includes: [] list of modules to bundle - reorder, rearange, remove or add freely
 ({
     targetFile: "main.js",
     includes: [
-        "../libs/require",
         "../libs/text",
-        "app",
-        "main",
-        "routes",
-        "sys/extensions",
-        "sys/model",
-        "sys/router",
+        
         "sys/template-helpers",
         "sys/template",
-        "sys/view-manager",
-        "template!templates/layout.html",
+        "sys/extensions",
+        "sys/model",
+
         "template!templates/navigation.html",
+        "template!templates/layout.html",
+
         "views/dynamic-data/di/class-module",
         "views/dynamic-data/di/injected/custom-module1",
         "views/dynamic-data/di/injected/custom-module2",
@@ -57,6 +54,13 @@ includes: [] list of modules to bundle - reorder, rearange, remove or add freely
         "template!views/templates/parameterized-sub-route.html",
         "template!views/templates/parameterized.html",
         "text!views/templates/plain-text-view.html",
-        "text!views/templates/state-view.html"
+        "text!views/templates/state-view.html",
+        
+        "sys/router",
+        "sys/view-manager",
+        "routes",
+        
+        "app",
+        "main"
     ]
 })
