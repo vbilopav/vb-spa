@@ -24,7 +24,7 @@ const createConfig = config => {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
-        modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file) + "'"] = 
+        modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config) + "'"] = 
             ("./" + config.libs.targetDir + "/" + file);        
         let opts = 
         result["'" + file + "'"] = {            

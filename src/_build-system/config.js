@@ -63,6 +63,11 @@ const getModule = (sourceFile, file, config) => {
     } else {
         file = "text!" + file;
     }
+    if (config.app.sysPath) {
+        if (file.startsWith(config.app.sysPath)) {
+            file = file.replace(config.app.sysPath, "sys");
+        }
+    }
     return file;
 }
 
