@@ -69,6 +69,30 @@ define([], () => {
             paramsMap: (...params) => params
         },
 
+        "/unbundled-text-view": {
+            view: "text!views/templates/unbundled-text-view.html", 
+            data: {
+                title: "Unbundled text template",
+                category: "templates"
+            }            
+        },
+
+        "/unbundled-parametrized-view": {
+            view: "template!views/templates/unbundled-parametrized-view.html", 
+            data: {
+                title: "Unbundled parametrized view template",
+                category: "templates"
+            },         
+            paramsMap: (...params) => {
+                if (params.length > 1) {
+                    return false;
+                }                        
+                return {
+                    param: params[0]                            
+                };
+            },  
+        },
+
         "/module-plain-text": {
             view: "views/modules/module-plain-text",
             data: {

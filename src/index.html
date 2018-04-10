@@ -8,7 +8,7 @@
             appUrl: "app/", 
             cssUrl: "css/", 
             libsUrl: "libs/", 
-            sysPath: "spa/",
+            sysPath: "spa",
             settings: {usePreloadedTemplates: false}
         };
     </script>
@@ -65,7 +65,7 @@
             paths: {
                 text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", (window._spa.libsUrl ? "../" + window._spa.libsUrl : "") + "text"],
                 sys: (window._spa.sysPath ? window._spa.sysPath : "sys/"),
-                template: (window._spa.sysPath ? window._spa.sysPath : "sys/") + "template"
+                template: (window._spa.sysPath ? window._spa.sysPath + "/" : "sys/") + "template"
             }
         });
     </script>

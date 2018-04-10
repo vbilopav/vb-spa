@@ -191,5 +191,13 @@ Change it freely to change your build configuration. To rebuild this file, delet
     'views/templates/state-view.html': {
         minify : true,
         minifyEngine: "html-minifier"
+    },
+    'views/templates/unbundled-text-view.html': {
+        minify : true,
+        minifyEngine: "html-minifier"
+    },
+    'views/templates/unbundled-parametrized-view.html': {
+        minify : true,
+        minifyEngine: "html-minifier"
     }
 })

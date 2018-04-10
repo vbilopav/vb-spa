@@ -143,7 +143,7 @@ const parseIndex = config => {
             scriptContainerId: "_spa-obj",
             name: "_spa",
             mode: "always",
-            expression: "{version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', settings: {usePreloadedTemplates: false}}"
+            expression: "{version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', sysPath: '${this.app.sysPath ? this.app.sysPath : 'spa'}', settings: {usePreloadedTemplates: false}}"
         };
         log("config.index.globalObject set to default " + JSON.stringify(config.index.globalObject));
     }
@@ -164,7 +164,7 @@ const parseIndex = config => {
             log("config.index.globalObject.mode set to always. Allowed modes are ['always', 'not-exists'] " + obj.id);
         }
         if (typeof obj.expression !== "string") {
-            obj.expression = "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', settings: {usePreloadedTemplates: false}};";
+            obj.expression = "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', sysPath: '${this.app.sysPath ? this.app.sysPath : 'spa'}', settings: {usePreloadedTemplates: false}};";
             log("config.index.globalObject.expression set to default " + obj.expression);    
         }
     }
