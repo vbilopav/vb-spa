@@ -96,6 +96,11 @@ const parseRoot = config => {
         config.targetDir = path.join(config.buildDir, templateStr(config.autoTargetDirExp));
         log("config.targetDir set to auto " + config.targetDir)
     }
+
+    if (!(typeof config.copy === "string" || (config.copy instanceof Array))) {
+        config.copy = "all";
+        log("config.copy set to default " + config.copy);
+    }
 }
 
 const parseIndex = config => {

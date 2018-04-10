@@ -1,6 +1,7 @@
-const fsutil = require("./fs-util");
-const configutil = require("./config");
 const fs = require("fs");
+const path = require("path");
+const configutil = require("./config");
+const fsutil = require("./fs-util");
 const indexBuilder = require("./index");
 const libsBuilder = require("./libs");
 const cssBuilder = require("./css");
@@ -74,6 +75,53 @@ try {
         log(`creating ${config.targetDir} ...`)
         fsutil.mkDirByPathSync(config.targetDir);
 
+        let fileMask;
+        if (config.copy === "all") {
+            fileMask = [];
+        } else if (typeof config.copy === "string") {
+            fileMask = config.copy;
+        }
+        const files = fsutil.walkSync(config.sourceDir, fileMask);
+        for (let i in files) {
+            let fileObj = files[i];
+            if (fileObj.dir.indexOf("_build-system") !== -1) {
+                continue;
+            }
+            if (config.app && fileObj.full.startsWith(path.join(config.sourceDir, config.app.sourceDir))) {
+                continue;
+            }
+            if (config.libs && fileObj.full.startsWith(path.join(config.sourceDir, config.libs.sourceDir))) {
+                continue;
+            }
+            if (config.css && fileObj.full.startsWith(path.join(config.sourceDir, config.css.sourceDir))) {
+                continue;
+            }
+            if (config.index && (fileObj.file === config.index.sourceFile || fileObj.file === config.index.targetFile)) {
+                continue;
+            }
+            if (config.copy instanceof Array) {
+                let f = "./" + fileObj.full.replace(config.sourceDir, "").split(path.sep).join("/");
+                if (config.copy.indexOf(f) === -1) {
+                    continue
+                }
+            }
+            let targetFile = path.join(config.targetDir, fileObj.full.replace(config.sourceDir, ""));
+            let targetDir = path.dirname(targetFile);
+            if (!fs.existsSync(targetDir)) {
+                log(`creating ${targetDir} ...`)
+                fsutil.mkDirByPathSync(targetDir);
+            }
+
+            log(`copying ${targetFile} ...`);
+            try {
+                fs.copyFileSync(fileObj.full, targetFile);  
+            } catch (error) {
+                log(error);
+                continue;
+            }
+
+        }
+        
         log("");
         indexBuilder.build(config);
         log("");
@@ -83,7 +131,7 @@ try {
         log("");
         appBuilder.build(config);        
         log("");
-        bundlerBuilder.build(config);
+        bundlerBuilder.build(config);        
     }
 
     log("");

@@ -86,7 +86,7 @@ const walkSync = function (dir, pathnames, filelist) {
             filelist = walkSync(path.join(dir, file) + path.sep, pathnames, filelist);
         }
         else {
-            if (!pathnames || pathnames.indexOf(path.extname(file)) !== -1) {
+            if (!pathnames || !pathnames.length || pathnames.indexOf(path.extname(file)) !== -1) {
                 filelist.push({ file: file, dir: dir, full: path.join(dir, file) });
             }
         }

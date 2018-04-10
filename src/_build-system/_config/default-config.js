@@ -3,6 +3,7 @@
   buildDir: null,
   targetDir: null,
   autoTargetDirExp: "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}",
+  copy: "all",
   index: {
       sourceFile: "index.html",
       targetFile: "index.html",
