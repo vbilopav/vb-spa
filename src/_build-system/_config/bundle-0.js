@@ -4,12 +4,15 @@
 Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.
          
 targetFile: target file relative to app, will be overwritten by this bundle
+targetModule: module of target file
 includes: [] list of modules to bundle - reorder, rearange, remove or add freely - by default all modules are included
+replacementExp: template expression that will return replacement for targetFile module or null to use targetFile content
 
 
 */
 ({
     targetFile: "main.js",
+    targetModule: "main",
     includes: [        
         "sys/template-helpers",
         "sys/extensions",
@@ -59,5 +62,6 @@ includes: [] list of modules to bundle - reorder, rearange, remove or add freely
         
         "app",
         "main"
-    ]
+    ],
+    replacementExp: "define('${this.targetModule}', [${\"'\" + this.includes.join(\"','\") + \"'\"}], () => { require('app')(); });"
 })

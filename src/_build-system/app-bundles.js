@@ -40,16 +40,26 @@ const createConfig = config => {
             continue;
         }
         let bundleConfigName = fileName(idx);
-
+        let targetModule;
+        let f = "./" + config.app.targetDir + "/" + bundleFile;
+        for(let m in modules) {
+            if (modules[m] === f) {
+                targetModule = m;
+            }
+        }
         let result = {
             targetFile: bundleFile,
-            includes: modulesList
+            targetModule: targetModule,
+            includes: modulesList,
+            replacementExp: null
         }
        
         log(`creating ${bundleConfigName} ...`);
         configutil.write(bundleConfigName, result, false, 
 `targetFile: target file relative to app, will be overwritten by this bundle
+targetModule: module of target file
 includes: [] list of modules to bundle - reorder, rearange, remove or add freely - by default all modules are included
+replacementExp: template expression that will return replacement for targetFile module or null to use targetFile content
 `);
     }    
 }
@@ -69,36 +79,45 @@ const build = config => {
         let t = bundle.targetFile.split("/").join(path.sep);
         let bundleTarget = path.join(appDir, t);
         let temp = path.join(os.tmpdir(), t);
-        fs.unlinkSync(temp);
+        try{ fs.unlinkSync(temp); } catch (e) {}            
         for (let j in bundle.includes) {
             const moduleId = bundle.includes[j];
-            const include = modules[moduleId].replace("./", config.targetDir + path.sep).split("/").join(path.sep);
-            var content = fsutil.readFileSync(include);
-            if (!content) {
-                log(`warning: skipping ${moduleId} in bundle ${j}`);
-                continue;                
-            }
-            content = content.toString();
+            var content;
+            if (moduleId === bundle.targetModule && bundle.replacementExp) {
+                
+                content = configutil.templateStr(bundle.replacementExp, bundle);
             
-            if (moduleId.startsWith("text!")) {
-            
-                content = "define('" + moduleId + "',[],()=> '" + 
-                    content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "');" + 
-                    os.EOL;
-            
-            } else if (moduleId.startsWith("template!")) {
-
-                content = "define('" + moduleId + "',['sys/template-helpers'], helper => { var name = '" + 
-                    moduleId + "'.replace('template!', '');  return (data, locale) => helper.parse(name, '" + 
-                    content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "', data, locale);});" + 
-                    os.EOL;
-
             } else {
+                
+                const include = modules[moduleId].replace("./", config.targetDir + path.sep).split("/").join(path.sep);                                    
+                content = fsutil.readFileSync(include);
+                if (!content) {
+                    log(`warning: skipping ${moduleId} in bundle ${j}`);
+                    continue;                
+                }
+                content = content.toString();
+                
+                if (moduleId.startsWith("text!")) {
+                
+                    content = "define('" + moduleId + "',[],()=> '" + 
+                        content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "');" + 
+                        os.EOL;
+                
+                } else if (moduleId.startsWith("template!")) {
 
-                content = content.replace("define([", "define('" + moduleId + "',[");
-                content = content + os.EOL;
+                    content = "define('" + moduleId + "',['sys/template-helpers'], helper => { var name = '" + 
+                        moduleId + "'.replace('template!', '');  return (data, locale) => helper.parse(name, '" + 
+                        content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "', data, locale);});" + 
+                        os.EOL;
 
+                } else {
+
+                    content = content.replace("define([", "define('" + moduleId + "',[");
+                    content = content + os.EOL;
+
+                }
             }
+
             log(`adding to bundle ${config.app.bundles[i]} module ${moduleId}...`);
             fs.appendFileSync(temp, content);          
         }
