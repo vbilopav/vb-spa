@@ -4,6 +4,7 @@ const path = require("path");
 const fsutil = require("./fs-util");
 const configutil = require("./config");
 const appBuilder = require("./app");
+const libsBuilder = require("./libs");
 
 const log = fsutil.log;
 
@@ -21,7 +22,7 @@ const configExists = config => {
     return true;
 }
 
-const createConfig = config => {
+const createConfig = (config, libs, app) => {
     if (!config.app || !config.app.bundles || !config.app.bundles.length) {
         return true;
     }
@@ -30,9 +31,16 @@ const createConfig = config => {
     if (!files) {
         return;
     }
-    const modules = configutil.read(configutil.modulesFile) || {};
-    const modulesList = Object.keys(modules);
-    
+    const modulesList = [];
+    const modules = {};
+    for (let key in libs) {  
+        modulesList.push(libs[key].module);
+        modules["./" + config.libs.targetDir + "/" + key] = libs[key].module;
+    }
+    for (let key in app) {  
+        modulesList.push(app[key].module);
+        modules["./" + config.app.targetDir + "/" + key] = app[key].module;
+    }
     for (let idx in config.app.bundles) {  
         let bundleFile = config.app.bundles[idx];        
         if (!files[bundleFile]) {
@@ -46,13 +54,9 @@ const createConfig = config => {
         }
 
         let targetModule;
-        let f = "./" + config.app.targetDir + "/" + bundleFile;
-        for(let m in modules) {
-            if (modules[m] === f) {
-                targetModule = m;
-                continue;
-            }
-        }
+        let fApp = "./" + config.app.targetDir + "/" + bundleFile;
+        let fLibs = "./" + config.libs.targetDir + "/" + bundleFile;
+        targetModule = modules[fApp] || modules[fLibs];
         let result = {
             targetFile: bundleFile,
             targetModule: targetModule,
@@ -75,7 +79,15 @@ const build = config => {
         return
     }
     const appDir = path.join(config.targetDir, config.app.targetDir);
-    const modules = configutil.read(configutil.modulesFile) || {};
+    const app = configutil.read(appBuilder.configFile);
+    const libs = configutil.read(libsBuilder.configFile);
+    const modules = {};
+    for (let key in libs) {  
+        modules[libs[key].module] = path.join(config.targetDir, path.join(config.libs.targetDir, key.split("/").join(path.sep)));
+    }
+    for (let key in app) {          
+        modules[app[key].module] = path.join(config.targetDir, path.join(config.app.targetDir, key.split("/").join(path.sep)));
+    }
 
     for (let i in config.app.bundles) {        
         let bundle = configutil.read(fileName(i));
@@ -95,7 +107,7 @@ const build = config => {
             
             } else {
                 
-                const include = modules[moduleId].replace("./", config.targetDir + path.sep).split("/").join(path.sep);                                    
+                const include = modules[moduleId];                                    
                 content = fsutil.readFileSync(include);
                 if (!content) {
                     log(`warning: skipping ${moduleId} in bundle ${j}`);

@@ -26,15 +26,6 @@ const createConfig = (config, createModuleMap) => {
     const to = path.join(config.targetDir, config.app.targetDir);
     const files = fsutil.walkSync(from, [".js", ".html"]);
     const result = {};
-    let modules = {};
-    if (createModuleMap) {
-        let modules = configutil.read(configutil.modulesFile) || {};
-        Object.keys(modules).forEach(name => {
-            modules["'" + name + "'"] = modules[name];
-            delete modules[name];
-        });
-    }
-
     for (let i in files) {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
@@ -43,14 +34,11 @@ const createConfig = (config, createModuleMap) => {
         if (engine === "auto") {
             engine = getEngineFromName(fileObj.file);           
         }
-        if (createModuleMap) {
-            modules["'" +  configutil.getModule(fileObj.full, file, config) + "'"] = 
-                ("./" + config.app.targetDir + "/" + file);
-        }
         result["'" + file + "'"] = {
             minify: config.app.minify,
             minifyInlineHtml: (engine === "html-minifier" || !config.app.minifyInlineHtml ? false : true),
-            minifyEngine: engine
+            minifyEngine: engine,
+            module: configutil.getModule(fileObj.full, file, config)
         }
     }
     log(`creating ${configFile} ...`);
@@ -62,12 +50,11 @@ const createConfig = (config, createModuleMap) => {
         minifyEngine: uglify-es, uglify-js or html-minifier
     }
 }, ...`);
-    
-    if (createModuleMap) {
-        log(`writting ${configutil.modulesFile} ...`);
-        configutil.write(configutil.modulesFile, modules, false, 
-            `'module id': source file name relative to target dir ...`);
-    }
+    Object.keys(result).forEach(name => {
+        result[name.replace(/(')/mg, "")] = result[name];
+        delete result[name];
+    });
+    return result;
 }
 
 const getSourceFiles = (config, to) => {    

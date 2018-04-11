@@ -14,10 +14,12 @@ Change it freely to change your build configuration. To rebuild this file, delet
 ({
     'require.js': {
         minify: true,
-        minifyEngine: "uglify-js"
+        minifyEngine: "uglify-js",
+        module: "../libs/require"
     },
     'text.js': {
         minify: true,
-        minifyEngine: "uglify-js"
+        minifyEngine: "uglify-js",
+        module: "../libs/text"
     }
 })

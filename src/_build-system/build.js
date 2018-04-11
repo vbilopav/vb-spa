@@ -44,22 +44,25 @@ try {
         
         log(`Warning:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
         
+        /*
         var createModuleMap = false;
         if (!fs.existsSync(configutil.modulesFile)) {
             configutil.touchModulesFile();
             createModuleMap = true;
         }
+        */
+       let libs, app;
         if (!libsBuilder.configExists()) {
-            libsBuilder.createConfig(config, createModuleMap);
+            libs = libsBuilder.createConfig(config);
         }
         if (!cssBuilder.configExists()) {
             cssBuilder.createConfig(config);
         }
         if (!appBuilder.configExists()) {
-            appBuilder.createConfig(config, createModuleMap);
+            app = appBuilder.createConfig(config);
         }        
         if (!bundlerBuilder.configExists(config)) {
-            bundlerBuilder.createConfig(config);
+            bundlerBuilder.createConfig(config, libs, app);
         }
         
     } else {

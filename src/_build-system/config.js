@@ -6,14 +6,7 @@ const log = fsutil.log;
 const splitted = __dirname.split(path.sep);
 
 const configPath = path.join(__dirname, "_config");
-
-const touchModulesFile = () => {
-    fs.closeSync(fs.openSync(modulesFile, 'w'));
-};
-
 const configFile = name => path.join(configPath, name);
-const modulesFile = configFile("module-map.js");
-
 
 const read = (name, addPath=false) => {
     if (addPath) {
@@ -379,7 +372,5 @@ module.exports = {
     parseCssItem: parseCssItem,
     parseAppItem: parseAppItem,
     templateStr: templateStr,
-    getModule: getModule,
-    touchModulesFile: touchModulesFile,
-    modulesFile: modulesFile
+    getModule: getModule
 }

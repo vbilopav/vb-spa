@@ -9,32 +9,19 @@ const log = fsutil.log;
 const configFile = configutil.configFile("libs.js");
 const configExists = () => fs.existsSync(configFile);
 
-const createConfig = (config, createModuleMap) => {
+const createConfig = config => {
     const from = path.join(config.sourceDir, config.libs.sourceDir);
     const to = path.join(config.targetDir, config.libs.targetDir);
     const files = fsutil.walkSync(from, ".js");
     const result = {};
-    let modules = {};
-    if (createModuleMap) {
-        modules = configutil.read(configutil.modulesFile) || {};
-        Object.keys(modules).forEach(name => {
-            modules["'" + name + "'"] = modules[name];
-            delete modules[name];
-        });
-    }
-
     for (let i in files) {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
-        if (createModuleMap) {
-            modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config) + "'"] = 
-                ("./" + config.libs.targetDir + "/" + file);        
-        }
-        let opts = 
         result["'" + file + "'"] = {            
             minify: config.libs.minify,
             minifyEngine: config.libs.minifyEngine,
+            module: configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config)
         }
     }
     log(`creating ${configFile} ...`);
@@ -45,12 +32,11 @@ const createConfig = (config, createModuleMap) => {
         minifyEngine: uglify-es, uglify-js     
     }
 }, ...`);
-
-    if (createModuleMap) {
-        log(`writting ${configutil.modulesFile} ...`);
-        configutil.write(configutil.modulesFile, modules, false, 
-            `'module id': source file name relative to target dir ...`);
-    }
+    Object.keys(result).forEach(name => {
+        result[name.replace(/(')/mg, "")] = result[name];
+        delete result[name];
+    });
+    return result;
 }
 
 const getSourceFiles = (config, to) => {    
