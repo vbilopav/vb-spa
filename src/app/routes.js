@@ -266,6 +266,30 @@ define([], () => {
                 return params[0];
             },
         }, 
+
+        "/crossdomain-module-example": {
+            view: "http://localhost:8080/module.js",
+            data: {
+                title: "Crossdomain module example",
+                category: "dynamic"
+            }            
+        }, 
+
+        "/crossdomain-template-example": {
+            view: "cors-template!http://localhost:8080/template.html",
+            data: {
+                title: "Crossdomain template example",
+                category: "dynamic"
+            }            
+        }, 
+
+        "/crossdomain-text-example": {
+            view: "cors-text!http://localhost:8080/template.html",
+            data: {
+                title: "Crossdomain text example",
+                category: "dynamic"
+            }            
+        }, 
  
         "/not-found": {
             view: "text!views/not-found.html"

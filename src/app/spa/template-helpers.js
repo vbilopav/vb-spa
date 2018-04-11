@@ -23,7 +23,7 @@ define([], () => {
        
     return {        
         _usingPreloaded: () => _usePreloadedTemplates,
-        _prefix: "template!",
+        _prefixes: ["template!", "cors-template!"],        
         parse: _parse,                
         usePreloaded: () =>  {_usePreloadedTemplates = true},        
         helpers: _helpers        

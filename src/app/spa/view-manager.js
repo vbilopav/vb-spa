@@ -1,14 +1,21 @@
 define(["sys/template-helpers"], (templateHelper) => {
 
     const 
-        templatePrefix = templateHelper._prefix,
+        nameStartsWithPrefix = name => {
+            for (let p in templateHelper._prefixes) {
+                if (name.startsWith(templateHelper._prefixes[p])) {
+                    return true;
+                }                
+            }
+            return false;
+        },
         prefix = "_view",
         getId = (uriHash) => prefix + uriHash,
         types = {template: 1, class: 2, object: 3, string: 4},
         getViewType = (view, name) => {
             let t = typeof view;
             if (t === "function") {
-                if (name.startsWith(templatePrefix)) {
+                if (nameStartsWithPrefix(name)) {
                     return types.template;
                 }                
                 return types.class;
