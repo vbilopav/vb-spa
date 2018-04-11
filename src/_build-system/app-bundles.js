@@ -34,17 +34,23 @@ const createConfig = config => {
     const modulesList = Object.keys(modules);
     
     for (let idx in config.app.bundles) {  
-        let bundleFile = config.app.bundles[idx];
+        let bundleFile = config.app.bundles[idx];        
         if (!files[bundleFile]) {
             log(`Error: ${bundleFile} couldn't be found in app config ${appBuilder.configFile}, skipping...`);
             continue;
         }
         let bundleConfigName = fileName(idx);
+
+        if (fs.existsSync(bundleConfigName)) {
+            continue;
+        }
+
         let targetModule;
         let f = "./" + config.app.targetDir + "/" + bundleFile;
         for(let m in modules) {
             if (modules[m] === f) {
                 targetModule = m;
+                continue;
             }
         }
         let result = {
@@ -78,7 +84,7 @@ const build = config => {
         }
         let t = bundle.targetFile.split("/").join(path.sep);
         let bundleTarget = path.join(appDir, t);
-        let temp = path.join(os.tmpdir(), t);
+        let temp = path.join(os.tmpdir(), t.replace(new RegExp(path.sep, "g"), "-"));
         try{ fs.unlinkSync(temp); } catch (e) {}            
         for (let j in bundle.includes) {
             const moduleId = bundle.includes[j];

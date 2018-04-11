@@ -180,6 +180,14 @@ define([], () => {
             }            
         }, 
 
+        "/new-bundle": {
+            view: "views/modules/new-bundle/module-view",
+            data: {
+                title: "New bundle",
+                category: "modules"                
+            }            
+        }, 
+
         "/dependency-injection-template": {
             view: {
                 name: "template!views/dynamic-data/di/template.html",

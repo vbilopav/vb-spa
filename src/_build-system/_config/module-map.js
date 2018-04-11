@@ -7,8 +7,6 @@ Change it freely to change your build configuration. To rebuild this file, delet
 
 */
 ({
-    '../libs/require': "./libs/require.js",
-    '../libs/text': "./libs/text.js",
     'app': "./app/app.js",
     'main': "./app/main.js",
     'routes': "./app/routes.js",
@@ -39,6 +37,8 @@ Change it freely to change your build configuration. To rebuild this file, delet
     'views/modules/events-handlings': "./app/views/modules/events-handlings.js",
     'views/modules/module-plain-text-template': "./app/views/modules/module-plain-text-template.js",
     'views/modules/module-plain-text': "./app/views/modules/module-plain-text.js",
+    'views/modules/new-bundle/module-view': "./app/views/modules/new-bundle/module-view.js",
+    'text!views/modules/new-bundle/template.html': "./app/views/modules/new-bundle/template.html",
     'views/modules/object-module-change-element': "./app/views/modules/object-module-change-element.js",
     'views/modules/object-module-element-manipulation': "./app/views/modules/object-module-element-manipulation.js",
     'views/modules/object-module-simple': "./app/views/modules/object-module-simple.js",

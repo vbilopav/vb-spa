@@ -26,14 +26,13 @@ const createConfig = (config, createModuleMap) => {
     const to = path.join(config.targetDir, config.app.targetDir);
     const files = fsutil.walkSync(from, [".js", ".html"]);
     const result = {};
+    let modules = {};
     if (createModuleMap) {
         let modules = configutil.read(configutil.modulesFile) || {};
         Object.keys(modules).forEach(name => {
             modules["'" + name + "'"] = modules[name];
             delete modules[name];
         });
-    } else {
-        let modules;
     }
 
     for (let i in files) {

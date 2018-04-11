@@ -62,7 +62,8 @@
           collapseWhitespace: true
       },
       bundles: [
-          "main.js"
+          "main.js",
+          "views/modules/new-bundle/module-view.js"
       ]
   }
 })

@@ -7,6 +7,7 @@ define([], () => {
             if: (condition, templateTrue, templateFalse) => (condition ? templateTrue : templateFalse)
         },
         _parse = (name, text, data, locale) => {
+            data = data || {};
             if (!data.template) {
                 data.template = _helpers;
             }            

@@ -128,6 +128,11 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
+    'views/modules/_default.html': {
+        minify: true,
+        minifyInlineHtml: false,
+        minifyEngine: "html-minifier"
+    },
     'views/modules/class-module-change-element.js': {
         minify: true,
         minifyInlineHtml: true,
@@ -158,6 +163,16 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
+    'views/modules/new-bundle/module-view.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es"
+    },
+    'views/modules/new-bundle/template.html': {
+        minify: true,
+        minifyInlineHtml: false,
+        minifyEngine: "html-minifier"
+    },
     'views/modules/object-module-change-element.js': {
         minify: true,
         minifyInlineHtml: true,
@@ -177,11 +192,6 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es"
-    },
-    'views/modules/_default.html': {
-        minify: true,
-        minifyInlineHtml: false,
-        minifyEngine: "html-minifier"
     },
     'views/not-found.html': {
         minify: true,
