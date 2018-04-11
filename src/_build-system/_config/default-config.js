@@ -49,6 +49,7 @@
       targetDir: "app",
       sysPath: "spa",
       minify: true,
+      minifyInlineHtml: true,
       minifyEngine: "auto",
       minifyJsOptions: null,
       minifyEsOptions: null,

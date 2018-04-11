@@ -53,5 +53,7 @@ Change it freely to change your build configuration. To rebuild this file, delet
     'template!views/templates/parameterized-sub-route.html': "./app/views/templates/parameterized-sub-route.html",
     'template!views/templates/parameterized.html': "./app/views/templates/parameterized.html",
     'text!views/templates/plain-text-view.html': "./app/views/templates/plain-text-view.html",
-    'text!views/templates/state-view.html': "./app/views/templates/state-view.html"
+    'text!views/templates/state-view.html': "./app/views/templates/state-view.html",
+    'template!views/templates/unbundled-parametrized-view.html': "./app/views/templates/unbundled-parametrized-view.html",
+    'text!views/templates/unbundled-text-view.html': "./app/views/templates/unbundled-text-view.html"
 })

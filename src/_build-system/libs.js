@@ -9,23 +9,29 @@ const log = fsutil.log;
 const configFile = configutil.configFile("libs.js");
 const configExists = () => fs.existsSync(configFile);
 
-const createConfig = config => {
+const createConfig = (config, createModuleMap) => {
     const from = path.join(config.sourceDir, config.libs.sourceDir);
     const to = path.join(config.targetDir, config.libs.targetDir);
     const files = fsutil.walkSync(from, ".js");
     const result = {};
-    let modules = configutil.read(configutil.modulesFile) || {};
-    Object.keys(modules).forEach(name => {
-        modules["'" + name + "'"] = modules[name];
-        delete modules[name];
-    });
+    if (createModuleMap) {
+        let modules = configutil.read(configutil.modulesFile) || {};
+        Object.keys(modules).forEach(name => {
+            modules["'" + name + "'"] = modules[name];
+            delete modules[name];
+        });
+    } else {
+        let modules;
+    }
 
     for (let i in files) {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
-        modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config) + "'"] = 
-            ("./" + config.libs.targetDir + "/" + file);        
+        if (createModuleMap) {
+            modules["'" + configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config) + "'"] = 
+                ("./" + config.libs.targetDir + "/" + file);        
+        }
         let opts = 
         result["'" + file + "'"] = {            
             minify: config.libs.minify,
@@ -41,9 +47,11 @@ const createConfig = config => {
     }
 }, ...`);
 
-    log(`writting ${configutil.modulesFile} ...`);
-    configutil.write(configutil.modulesFile, modules, false, 
-        `'module id': source file name relative to target dir ...`);
+    if (createModuleMap) {
+        log(`writting ${configutil.modulesFile} ...`);
+        configutil.write(configutil.modulesFile, modules, false, 
+            `'module id': source file name relative to target dir ...`);
+    }
 }
 
 const getSourceFiles = (config, to) => {    

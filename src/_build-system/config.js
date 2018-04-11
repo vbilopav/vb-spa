@@ -293,6 +293,11 @@ const parseAppItem = (item, name) => {
         log(name + ".minify set to default " + item.minify);
     }
 
+    if (typeof item.minifyInlineHtml !== "boolean") {
+        item.minifyInlineHtml = true;
+        log(name + ".minifyInlineHtml set to default " + item.minifyInlineHtml);
+    }
+
     if (!validateAllEnginesOpt(item.minifyEngine)) {
         item.minifyEngine = "auto";
         log(name + ".minifyEngine set to default " + item.minifyEngine);

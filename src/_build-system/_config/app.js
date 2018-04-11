@@ -6,6 +6,7 @@ Change it freely to change your build configuration. To rebuild this file, delet
 {
     'file name relative to app dir': {
         minify: false to copy, true for default minify config or minify options object,
+        minifyInlineHtml: minify inline html inside js file
         minifyEngine: uglify-es, uglify-js or html-minifier
     }
 }, ...
@@ -13,191 +14,238 @@ Change it freely to change your build configuration. To rebuild this file, delet
 */
 ({
     'app.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'main.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'routes.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'spa/extensions.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'spa/model.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'spa/router.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'spa/template-helpers.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'spa/template.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'spa/view-manager.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'templates/layout.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'templates/navigation.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/dynamic-data/di/class-module.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/di/injected/custom-module1.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/di/injected/custom-module2.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/di/injected/template.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/dynamic-data/di/object-module.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/di/template.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/dynamic-data/model-binding/declarative.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/model-binding/programmatic.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/remote-data-example/data.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/remote-data-example/framework-details.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/dynamic-data/remote-data-example/frameworks.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/home.html': {
-        minify : true,
-        minifyEngine: "html-minifier"
-    },
-    'views/modules/_default.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/modules/class-module-change-element.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/class-module-element-manipulation.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/class-module-simple.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/events-handlings.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/module-plain-text-template.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/module-plain-text.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/object-module-change-element.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/object-module-element-manipulation.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/object-module-simple.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
     'views/modules/view-events.js': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es"
     },
+    'views/modules/_default.html': {
+        minify: true,
+        minifyInlineHtml: false,
+        minifyEngine: "html-minifier"
+    },
     'views/not-found.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/composite/template1.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/composite/template2.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/composite/template3.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/composite/template4.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/composite/template5.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/composite/template6.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/parameterized-sub-route.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/parameterized.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/plain-text-view.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/state-view.html': {
-        minify : true,
-        minifyEngine: "html-minifier"
-    },
-    'views/templates/unbundled-text-view.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     },
     'views/templates/unbundled-parametrized-view.html': {
-        minify : true,
+        minify: true,
+        minifyInlineHtml: false,
+        minifyEngine: "html-minifier"
+    },
+    'views/templates/unbundled-text-view.html': {
+        minify: true,
+        minifyInlineHtml: false,
         minifyEngine: "html-minifier"
     }
 })

@@ -21,16 +21,20 @@ const getEngineFromName = name => {
     throw new Error("Unknown extension, can't set minify engine...");      
 }
 
-const createConfig = config => {
+const createConfig = (config, createModuleMap) => {
     const from = path.join(config.sourceDir, config.app.sourceDir);
     const to = path.join(config.targetDir, config.app.targetDir);
     const files = fsutil.walkSync(from, [".js", ".html"]);
     const result = {};
-    let modules = configutil.read(configutil.modulesFile) || {};
-    Object.keys(modules).forEach(name => {
-        modules["'" + name + "'"] = modules[name];
-        delete modules[name];
-    });
+    if (createModuleMap) {
+        let modules = configutil.read(configutil.modulesFile) || {};
+        Object.keys(modules).forEach(name => {
+            modules["'" + name + "'"] = modules[name];
+            delete modules[name];
+        });
+    } else {
+        let modules;
+    }
 
     for (let i in files) {
         let fileObj = files[i];
@@ -40,10 +44,13 @@ const createConfig = config => {
         if (engine === "auto") {
             engine = getEngineFromName(fileObj.file);           
         }
-        modules["'" +  configutil.getModule(fileObj.full, file, config) + "'"] = 
-            ("./" + config.app.targetDir + "/" + file);        
+        if (createModuleMap) {
+            modules["'" +  configutil.getModule(fileObj.full, file, config) + "'"] = 
+                ("./" + config.app.targetDir + "/" + file);
+        }
         result["'" + file + "'"] = {
             minify: config.app.minify,
+            minifyInlineHtml: (engine === "html-minifier" || !config.app.minifyInlineHtml ? false : true),
             minifyEngine: engine
         }
     }
@@ -52,13 +59,16 @@ const createConfig = config => {
 `{
     'file name relative to app dir': {
         minify: false to copy, true for default minify config or minify options object,
+        minifyInlineHtml: minify inline html inside js file
         minifyEngine: uglify-es, uglify-js or html-minifier
     }
 }, ...`);
     
-    log(`writting ${configutil.modulesFile} ...`);
-    configutil.write(configutil.modulesFile, modules, false, 
-        `'module id': source file name relative to target dir ...`);
+    if (createModuleMap) {
+        log(`writting ${configutil.modulesFile} ...`);
+        configutil.write(configutil.modulesFile, modules, false, 
+            `'module id': source file name relative to target dir ...`);
+    }
 }
 
 const getSourceFiles = (config, to) => {    
@@ -89,6 +99,27 @@ const getSourceFiles = (config, to) => {
     return result;
 }
 
+const minifyInlineHtml = (content, htmlMinifyOpts) => {
+    const tag = "String.html`";
+    var result = "", len = tag.length, from = 0;
+    while (true) {
+        let i = content.indexOf(tag, from);
+        if (i === -1) {
+            break;
+        }
+        let j = content.indexOf("`", i + len);
+        if (j === -1) {
+            break;
+        }        
+        let html = htmlMinifier.minify(content.substring(i + len, j), htmlMinifyOpts)
+        result = result + content.substring(from, i + len) + html + "`";
+        from = j + 1;
+    }
+    if (from < content.length) {
+        result = result + content.substring(from, content.length);
+    }
+    return result;
+}
 
 const build = config => {
     if (!config.app) {
@@ -120,6 +151,7 @@ const build = config => {
             log(`minifying ${fromFile} ...`);
 
             let result;
+            let htmlMinifyOpts = typeof fileValue.minify === "object" ? fileValue.minify : config.app.htmlMinifierOptions;
             try {            
                 if (fileValue.minifyEngine === "uglify-js") {
                     let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyJsOptions;
@@ -127,11 +159,9 @@ const build = config => {
                 } else if (fileValue.minifyEngine === "uglify-es") {
                     let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyEsOptions;
                     result = uglifyEs.minify(content.toString(), opts);
-                } else if (fileValue.minifyEngine === "html-minifier") {                    
-                    let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.htmlMinifierOptions;                    
-                    opts = typeof opts === "object" ? opts : undefined;
+                } else if (fileValue.minifyEngine === "html-minifier") {                  
                     result = {
-                        code: htmlMinifier.minify(content.toString(), opts) 
+                        code: htmlMinifier.minify(content.toString(), htmlMinifyOpts)
                     }                
                 }
             } catch (error) {
@@ -145,8 +175,14 @@ const build = config => {
                     console.log(result.error);
                 }                
                 fs.writeFileSync(fileValue.fileFull, content.toString(), "utf8");
-            } else {                    
-                fs.writeFileSync(fileValue.fileFull, result.code, "utf8");
+            } else {   
+                let final;
+                if (fileValue.minifyEngine === "uglify-js" || fileValue.minifyEngine === "uglify-es") {
+                    final = minifyInlineHtml(result.code, htmlMinifyOpts);
+                } else {
+                    final = result.code;
+                }                
+                fs.writeFileSync(fileValue.fileFull, final, "utf8");
             }
 
         } else {

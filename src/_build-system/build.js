@@ -44,17 +44,19 @@ try {
         
         log(`Warning:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
         
+        var createModuleMap = false;
         if (!fs.existsSync(configutil.modulesFile)) {
             configutil.touchModulesFile();
+            createModuleMap = true;
         }
         if (!libsBuilder.configExists()) {
-            libsBuilder.createConfig(config);
+            libsBuilder.createConfig(config, createModuleMap);
         }
         if (!cssBuilder.configExists()) {
             cssBuilder.createConfig(config);
         }
         if (!appBuilder.configExists()) {
-            appBuilder.createConfig(config);
+            appBuilder.createConfig(config, createModuleMap);
         }        
         if (!bundlerBuilder.configExists(config)) {
             bundlerBuilder.createConfig(config);
