@@ -1,4 +1,6 @@
-# Single-Page Application (SPA) Template
+# VBSPA Single-Page Application Framework
+
+
 
 This is a application template for your building custom, amazing and fast JavaScript/HTML5 - Single-Page Applications (SPA)[https://en.wikipedia.org/wiki/Single-page_application] 
 

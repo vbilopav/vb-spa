@@ -1,5 +1,17 @@
 define([], () => {
     
+    testPrototypeExtension = (object, extensions) => {
+        extensions.forEach(e => {
+            if (object.prototype[e] !== undefined) {
+                throw new Error(`Error: Name collision - object ${object} already have defined "${e}" !`);
+            }
+        });
+    }
+
+    testPrototypeExtension(HTMLElement, [
+        "find", "findAll", "show", "hide", "html", "appendTo", "addClass", "removeClass", "on", "off", "createElement"
+    ]);
+
     HTMLElement.prototype.find = function(search) {
         let e = this.querySelector(search);
         if (!e) {
@@ -84,6 +96,8 @@ define([], () => {
         }
         return e;
     }    
+
+    testPrototypeExtension(String, ["hashCode", "html"]);
 
     String.prototype.hashCode = function() {
         let h = 0;
