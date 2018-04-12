@@ -1,26 +1,25 @@
 /*
     
 *** This configurationfile is automatically generated! ***
-Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.
-         
-targetFile: target file relative to app, will be overwritten by this bundle
-targetModule: module of target file
-includes: [] list of modules to bundle - reorder, rearange, remove or add freely - by default all modules are included
-replacementExp: template expression that will return replacement for targetFile module or null to use targetFile content
+Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.         
 
+targetModule: target module which will be replace dby this bundle
+includes: [] list of modules to bundle
 
 */
 ({
-    targetFile: "main.js",
     targetModule: "main",
     includes: [
-        "sys/template-helpers",
+        "app",
+        "main",
+        "routes",
         "sys/extensions",
         "sys/model",
-
-        "template!templates/navigation.html",
+        "sys/router",
+        "sys/template-helpers",
+        "sys/view-manager",
         "template!templates/layout.html",
-
+        "template!templates/navigation.html",
         "views/dynamic-data/di/class-module",
         "views/dynamic-data/di/injected/custom-module1",
         "views/dynamic-data/di/injected/custom-module2",
@@ -54,14 +53,8 @@ replacementExp: template expression that will return replacement for targetFile 
         "template!views/templates/parameterized-sub-route.html",
         "template!views/templates/parameterized.html",
         "text!views/templates/plain-text-view.html",
-        "text!views/templates/state-view.html",
-        
-        "sys/router",
-        "sys/view-manager",
-        "routes",
-        
-        "app",
-        "main"
+        "text!views/templates/state-view.html"
     ],
+    entryPoint: true,
     replacementExp: "define('${this.targetModule}', [${\"'\" + this.includes.join(\"','\") + \"'\"}], () => { require('app')(); });"
 })

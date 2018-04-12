@@ -1,8 +1,8 @@
 /*
     
 *** This configurationfile is automatically generated! ***
-Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.
-         
+Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.         
+
 {
     'file name relative to app dir': {
         minify: false to copy, true for default minify config or minify options object,
@@ -10,7 +10,6 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minifyEngine: uglify-es, uglify-js or html-minifier
     }
 }, ...
-
 */
 ({
     'app.js': {
@@ -158,6 +157,11 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minifyEngine: "html-minifier",
         module: "text!views/home.html"
     },
+    'views/modules/_default.html': {
+        minify: true,
+        minifyEngine: "html-minifier",
+        module: "template!views/modules/_default.html"
+    },
     'views/modules/class-module-change-element.js': {
         minify: true,
         minifyInlineHtml: true,
@@ -228,11 +232,6 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
         module: "views/modules/view-events"
-    },
-    'views/modules/_default.html': {
-        minify: true,
-        minifyEngine: "html-minifier",
-        module: "template!views/modules/_default.html"
     },
     'views/not-found.html': {
         minify: true,

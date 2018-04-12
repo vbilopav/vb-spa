@@ -21,6 +21,12 @@ const read = (name, addPath=false) => {
 };
 
 const write = (name, value, addPath=false, additionalComment="") => {
+    if (value.app && value.app.moduleBundles) {
+        for (let b in value.app.moduleBundles) {
+            value.app.moduleBundles["'" + b + "'"] = value.app.moduleBundles[b];
+            delete value.app.moduleBundles[b];
+        }
+    }
     var json = JSON.stringify(value, null, 4).replace(/\"([^(\")"]+)\":/g,"$1:");
     if (addPath) {
         name = configFile(name);
@@ -28,10 +34,9 @@ const write = (name, value, addPath=false, additionalComment="") => {
     let header = `/*
     
 *** This configurationfile is automatically generated! ***
-Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.
-         
-${additionalComment}
+Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.         
 
+${additionalComment}
 */
 `
     fs.writeFileSync(name, header + "(" + json + ")", "utf8");
@@ -78,6 +83,10 @@ const parseRoot = config => {
     if (!config.buildDir) {    
         config.buildDir =  path.join(__dirname, "build");
         log("config.buildDir set to default " + config.buildDir)
+        if (!fs.existsSync(config.buildDir)) {
+            log(`creating ${config.buildDir} ...`)
+            fsutil.mkDirByPathSync(config.buildDir);
+        }
     }
 
     if (!config.autoTargetDirExp || typeof config.autoTargetDirExp !== "string") {

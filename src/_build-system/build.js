@@ -6,15 +6,32 @@ const indexBuilder = require("./index");
 const libsBuilder = require("./libs");
 const cssBuilder = require("./css");
 const appBuilder = require("./app");
-const bundlerBuilder = require("./app-bundles");
+const bundlerBuilder = require("./module-bundles");
 
 const log = fsutil.log;
 
 var config;
 
-const recrateApp = process.argv.indexOf("app") !== -1;
-const recrateLibs = process.argv.indexOf("libs") !== -1;
-const recrateCss = process.argv.indexOf("css") !== -1;
+var recrateApp = (process.argv.indexOf("--app") !== -1 || process.argv.indexOf("-a") !== -1);
+var recrateLibs = (process.argv.indexOf("--libs") !== -1 || process.argv.indexOf("-l") !== -1);
+var recrateCss = (process.argv.indexOf("--css") !== -1 || process.argv.indexOf("-c") !== -1);
+var recrateBundles = (process.argv.indexOf("--bundles") !== -1 || process.argv.indexOf("-b") !== -1);
+const recrateAll = (process.argv.indexOf("--force") !== -1 || process.argv.indexOf("-f") !== -1);
+
+if (recrateAll) {
+    recrateApp = true;
+    recrateLibs = true;
+    recrateCss = true;
+    recrateBundles = true;
+}
+
+var targetDirArg;
+
+process.argv.forEach(val => {
+    if (val.startsWith("--target=")) {
+        targetDirArg = val.split("=")[1];
+    }    
+});
 
 try {
 
@@ -30,6 +47,9 @@ try {
             return;
         }
         defaultConfig = true;
+    }
+    if (targetDirArg) {
+        config.autoTargetDirExp = targetDirArg;
     }
 
     log("");
@@ -53,7 +73,11 @@ try {
         log(`force recreating ${appBuilder.configFile}...`);
         app = appBuilder.createConfig(config);
     }
-
+    if (recrateBundles) {
+        log(`force recreating all bundle files...`);
+        bundlerBuilder.createConfig(config);
+    }
+    
     if (!libsBuilder.configExists() ||
         !cssBuilder.configExists() ||
         !appBuilder.configExists() ||
@@ -78,11 +102,6 @@ try {
     } else {
         
         log("");
-        if (!fs.existsSync(config.buildDir)) {
-            log(`creating ${config.buildDir} ...`)
-            fsutil.mkDirByPathSync(config.buildDir);
-        }
-
         if (fs.existsSync(config.targetDir)) {
             log(`destroying ${config.targetDir} ...`)
             fsutil.rmdirSync(config.targetDir);
