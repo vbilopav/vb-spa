@@ -18,7 +18,7 @@ const getEngineFromName = name => {
     if (ext === ".html") {
         return "html-minifier";
     } 
-    throw new Error("Unknown extension, can't set minify engine...");      
+    throw new Error("Unknown extension, can't set minify engine...");
 }
 
 const createConfig = (config, createModuleMap) => {
@@ -32,11 +32,11 @@ const createConfig = (config, createModuleMap) => {
         file = file.split(path.sep).join("/");
         let engine = config.app.minifyEngine;
         if (engine === "auto") {
-            engine = getEngineFromName(fileObj.file);           
+            engine = getEngineFromName(fileObj.file);
         }
         result["'" + file + "'"] = {
             minify: config.app.minify,
-            minifyInlineHtml: (engine === "html-minifier" || !config.app.minifyInlineHtml ? false : true),
+            minifyInlineHtml: (engine === "html-minifier" || !config.app.minifyInlineHtml ? undefined : true),
             minifyEngine: engine,
             module: configutil.getModule(fileObj.full, file, config)
         }
@@ -57,7 +57,7 @@ const createConfig = (config, createModuleMap) => {
     return result;
 }
 
-const getSourceFiles = (config, to) => {    
+const getSourceFiles = (config, to) => {
     if (!configExists()) {
         log(`${configFile} is missing, skipping app processing ...`);
         return {};
@@ -69,7 +69,7 @@ const getSourceFiles = (config, to) => {
         log(`warning: ${configFile} empty, skipping app processing ...`)
         return {};
     }            
-    for (let name in result) {        
+    for (let name in result) {
         let item = result[name];
         if (item.engine === "auto") {
             item.engine = getEngineFromName(fileObj.file);
@@ -114,7 +114,7 @@ const build = config => {
     
     const from = path.join(config.sourceDir, config.app.sourceDir);
     const to = path.join(config.targetDir, config.app.targetDir);
-                
+
     if (!fs.existsSync(to)) {
         log(`creating ${to} ...`);
         fsutil.mkDirByPathSync(to);
@@ -145,10 +145,10 @@ const build = config => {
                 } else if (fileValue.minifyEngine === "uglify-es") {
                     let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyEsOptions;
                     result = uglifyEs.minify(content.toString(), opts);
-                } else if (fileValue.minifyEngine === "html-minifier") {                  
+                } else if (fileValue.minifyEngine === "html-minifier") {
                     result = {
                         code: htmlMinifier.minify(content.toString(), htmlMinifyOpts)
-                    }                
+                    }
                 }
             } catch (error) {
                 result = {error: true};
@@ -181,7 +181,7 @@ const build = config => {
                 continue;
             }
 
-        }        
+        }
     }
     
 }

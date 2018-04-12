@@ -8,14 +8,16 @@ const libsBuilder = require("./libs");
 
 const log = fsutil.log;
 
-const fileName = idx => configutil.configFile("bundle-" + idx + ".js");
+const fileName = (idx, name) => configutil.configFile(
+    "bundle-" + idx + "-" + name.replace(RegExp("/", "g"), "-")
+);
 
 const configExists = config => {
     if (!config.app || !config.app.bundles || !config.app.bundles.length) {
         return true;
     }
     for (let idx in config.app.bundles) {
-        if (!fs.existsSync(fileName(idx))) {
+        if (!fs.existsSync(fileName(idx, config.app.bundles[idx]))) {
             return false;
         }
     }
@@ -33,21 +35,27 @@ const createConfig = (config, libs, app) => {
     }
     const modulesList = [];
     const modules = {};
-    for (let key in libs) {  
+    if (!libs) {
+        libs = configutil.read(libsBuilder.configFile);
+    }
+    if (!app) {
+        app = configutil.read(appBuilder.configFile);
+    }
+    for (let key in libs) {
         modulesList.push(libs[key].module);
         modules["./" + config.libs.targetDir + "/" + key] = libs[key].module;
     }
-    for (let key in app) {  
+    for (let key in app) {
         modulesList.push(app[key].module);
         modules["./" + config.app.targetDir + "/" + key] = app[key].module;
     }
     for (let idx in config.app.bundles) {  
-        let bundleFile = config.app.bundles[idx];        
+        let bundleFile = config.app.bundles[idx];
         if (!files[bundleFile]) {
             log(`Error: ${bundleFile} couldn't be found in app config ${appBuilder.configFile}, skipping...`);
             continue;
         }
-        let bundleConfigName = fileName(idx);
+        let bundleConfigName = fileName(idx, bundleFile);
 
         if (fs.existsSync(bundleConfigName)) {
             continue;
@@ -85,19 +93,19 @@ const build = config => {
     for (let key in libs) {  
         modules[libs[key].module] = path.join(config.targetDir, path.join(config.libs.targetDir, key.split("/").join(path.sep)));
     }
-    for (let key in app) {          
+    for (let key in app) {
         modules[app[key].module] = path.join(config.targetDir, path.join(config.app.targetDir, key.split("/").join(path.sep)));
     }
 
-    for (let i in config.app.bundles) {        
-        let bundle = configutil.read(fileName(i));
+    for (let i in config.app.bundles) {
+        let bundle = configutil.read(fileName(i, config.app.bundles[i]));
         if (!bundle) {
             continue;
         }
         let t = bundle.targetFile.split("/").join(path.sep);
         let bundleTarget = path.join(appDir, t);
-        let temp = path.join(os.tmpdir(), t.replace(new RegExp(path.sep, "g"), "-"));
-        try{ fs.unlinkSync(temp); } catch (e) {}            
+        let temp = path.join(os.tmpdir(), t.replace(new RegExp(path.sep === "\\" ? "\\" + path.sep : path.sep, "g"), "-"));
+        try{ fs.unlinkSync(temp); } catch (e) {}
         for (let j in bundle.includes) {
             const moduleId = bundle.includes[j];
             var content;
@@ -107,11 +115,11 @@ const build = config => {
             
             } else {
                 
-                const include = modules[moduleId];                                    
+                const include = modules[moduleId];
                 content = fsutil.readFileSync(include);
                 if (!content) {
                     log(`warning: skipping ${moduleId} in bundle ${j}`);
-                    continue;                
+                    continue;
                 }
                 content = content.toString();
                 

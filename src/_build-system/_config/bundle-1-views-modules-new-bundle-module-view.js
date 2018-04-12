@@ -15,7 +15,7 @@ replacementExp: template expression that will return replacement for targetFile 
     targetModule: "views/modules/new-bundle/module-view",
     includes: [
         "text!views/modules/new-bundle/template.html",
-        "views/modules/new-bundle/module-view"                
+        "views/modules/new-bundle/module-view"
     ],
     replacementExp: null
 })

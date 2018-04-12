@@ -12,6 +12,10 @@ const log = fsutil.log;
 
 var config;
 
+const recrateApp = process.argv.indexOf("app") !== -1;
+const recrateLibs = process.argv.indexOf("libs") !== -1;
+const recrateCss = process.argv.indexOf("css") !== -1;
+
 try {
 
     log("");
@@ -20,13 +24,13 @@ try {
     config = configutil.read("user-config.js", true); //or arg
     if (!config)  {
         log("falling back to reading default-config.js...");
-        config = configutil.read("default-config.js", true);    
+        config = configutil.read("default-config.js", true);
         if (!config) {
             log("neither user-config.js or default-config.js couldn't be found, now exiting...");
             return;
         }
         defaultConfig = true;
-    }   
+    }
 
     log("");
     log("parsing configuration...");
@@ -36,22 +40,28 @@ try {
         configutil.write("user-config.js", config, true, "copy of default-config.js");
     }
 
-    if (!libsBuilder.configExists() || 
-        !cssBuilder.configExists() || 
-        !appBuilder.configExists() || 
+    let libs, app;
+    if (recrateLibs) {
+        log(`force recreating ${libsBuilder.configFile}...`);
+        libs = libsBuilder.createConfig(config);
+    }
+    if (recrateCss) {
+        log(`force recreating ${cssBuilder.configFile}...`);
+        cssBuilder.createConfig(config);
+    }
+    if (recrateApp) {
+        log(`force recreating ${appBuilder.configFile}...`);
+        app = appBuilder.createConfig(config);
+    }
+
+    if (!libsBuilder.configExists() ||
+        !cssBuilder.configExists() ||
+        !appBuilder.configExists() ||
         !bundlerBuilder.configExists(config)
     ) {
-        
+
         log(`Warning:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
         
-        /*
-        var createModuleMap = false;
-        if (!fs.existsSync(configutil.modulesFile)) {
-            configutil.touchModulesFile();
-            createModuleMap = true;
-        }
-        */
-       let libs, app;
         if (!libsBuilder.configExists()) {
             libs = libsBuilder.createConfig(config);
         }
@@ -60,7 +70,7 @@ try {
         }
         if (!appBuilder.configExists()) {
             app = appBuilder.createConfig(config);
-        }        
+        }
         if (!bundlerBuilder.configExists(config)) {
             bundlerBuilder.createConfig(config, libs, app);
         }
@@ -75,7 +85,7 @@ try {
 
         if (fs.existsSync(config.targetDir)) {
             log(`destroying ${config.targetDir} ...`)
-            fsutil.rmdirSync(config.targetDir);    
+            fsutil.rmdirSync(config.targetDir);
         }
         log(`creating ${config.targetDir} ...`)
         fsutil.mkDirByPathSync(config.targetDir);
@@ -126,7 +136,7 @@ try {
             }
 
         }
-        
+
         log("");
         indexBuilder.build(config);
         log("");
@@ -134,9 +144,9 @@ try {
         log("");
         cssBuilder.build(config);
         log("");
-        appBuilder.build(config);        
+        appBuilder.build(config);
         log("");
-        bundlerBuilder.build(config);        
+        bundlerBuilder.build(config);
     }
 
     log("");
@@ -147,8 +157,8 @@ try {
 } catch (error) {
 
     log(error, true);
-    log("finished prematurely due the exception!!!");    
-    fsutil.dumpLog(config.targetDir + ".log");    
+    log("finished prematurely due the exception!!!");
+    fsutil.dumpLog(config.targetDir + ".log");
 
     throw error;
 }

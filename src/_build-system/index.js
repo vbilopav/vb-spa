@@ -33,7 +33,7 @@ module.exports = {
                 log(error);
                 return;
             }
-                    
+
         } else {
 
             log(`minifying from ${from} to ${to} ...`);
@@ -67,11 +67,10 @@ module.exports = {
                 scr.innerHTML = content;
                 changed = true;
             }
-        }        
-        if (changed) {            
+        }
+        if (changed) {
             fs.writeFileSync(to, dom.serialize(), "utf8");
             log(`updating header script content #${obj.scriptContainerId} of file ${to} with content ${content}`);
-        }        
+        }
     }
 }
-    

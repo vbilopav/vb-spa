@@ -31,6 +31,18 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minifyEngine: "uglify-es",
         module: "routes"
     },
+    'spa/cors-template.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es",
+        module: "sys/cors-template"
+    },
+    'spa/cors-text.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es",
+        module: "sys/cors-text"
+    },
     'spa/extensions.js': {
         minify: true,
         minifyInlineHtml: true,
@@ -69,13 +81,11 @@ Change it freely to change your build configuration. To rebuild this file, delet
     },
     'templates/layout.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!templates/layout.html"
     },
     'templates/navigation.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!templates/navigation.html"
     },
@@ -99,7 +109,6 @@ Change it freely to change your build configuration. To rebuild this file, delet
     },
     'views/dynamic-data/di/injected/template.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/dynamic-data/di/injected/template.html"
     },
@@ -111,7 +120,6 @@ Change it freely to change your build configuration. To rebuild this file, delet
     },
     'views/dynamic-data/di/template.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/dynamic-data/di/template.html"
     },
@@ -147,15 +155,8 @@ Change it freely to change your build configuration. To rebuild this file, delet
     },
     'views/home.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "text!views/home.html"
-    },
-    'views/modules/_default.html': {
-        minify: true,
-        minifyInlineHtml: false,
-        minifyEngine: "html-minifier",
-        module: "template!views/modules/_default.html"
     },
     'views/modules/class-module-change-element.js': {
         minify: true,
@@ -201,7 +202,6 @@ Change it freely to change your build configuration. To rebuild this file, delet
     },
     'views/modules/new-bundle/template.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "text!views/modules/new-bundle/template.html"
     },
@@ -229,81 +229,73 @@ Change it freely to change your build configuration. To rebuild this file, delet
         minifyEngine: "uglify-es",
         module: "views/modules/view-events"
     },
+    'views/modules/_default.html': {
+        minify: true,
+        minifyEngine: "html-minifier",
+        module: "template!views/modules/_default.html"
+    },
     'views/not-found.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "text!views/not-found.html"
     },
     'views/templates/composite/template1.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/composite/template1.html"
     },
     'views/templates/composite/template2.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/composite/template2.html"
     },
     'views/templates/composite/template3.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/composite/template3.html"
     },
     'views/templates/composite/template4.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/composite/template4.html"
     },
     'views/templates/composite/template5.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/composite/template5.html"
     },
     'views/templates/composite/template6.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/composite/template6.html"
     },
     'views/templates/parameterized-sub-route.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/parameterized-sub-route.html"
     },
     'views/templates/parameterized.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/parameterized.html"
     },
     'views/templates/plain-text-view.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "text!views/templates/plain-text-view.html"
     },
     'views/templates/state-view.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "text!views/templates/state-view.html"
     },
     'views/templates/unbundled-parametrized-view.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "template!views/templates/unbundled-parametrized-view.html"
     },
     'views/templates/unbundled-text-view.html': {
         minify: true,
-        minifyInlineHtml: false,
         minifyEngine: "html-minifier",
         module: "text!views/templates/unbundled-text-view.html"
     }
