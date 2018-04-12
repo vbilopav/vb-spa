@@ -75,7 +75,7 @@
                     "text!views/modules/new-bundle/template.html",
                     "views/modules/new-bundle/module-view"
                 ],
-                entryPoint: true                
+                entryPoint: true
             },
             'views/modules/new-bundle/module-view': {
                 includes: [

@@ -1,7 +1,6 @@
 /*
-    
-*** This configurationfile is automatically generated! ***
-Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.         
+***     auto-generated at 2018-04-12T18:32:11.806Z      ***
+***     to re-create delete run build.js --force        ***
 
 targetModule: target module which will be replace dby this bundle
 includes: [] list of modules to bundle

@@ -1,7 +1,6 @@
 /*
-    
-*** This configurationfile is automatically generated! ***
-Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.         
+***     auto-generated at 2018-04-12T18:32:11.803Z      ***
+***     to re-create delete run build.js --force        ***
 
 targetModule: target module which will be replace dby this bundle
 includes: [] list of modules to bundle
@@ -32,7 +31,6 @@ includes: [] list of modules to bundle
         "views/dynamic-data/remote-data-example/framework-details",
         "views/dynamic-data/remote-data-example/frameworks",
         "text!views/home.html",
-        "template!views/modules/_default.html",
         "views/modules/class-module-change-element",
         "views/modules/class-module-element-manipulation",
         "views/modules/class-module-simple",
@@ -43,6 +41,7 @@ includes: [] list of modules to bundle
         "views/modules/object-module-element-manipulation",
         "views/modules/object-module-simple",
         "views/modules/view-events",
+        "template!views/modules/_default.html",
         "text!views/not-found.html",
         "template!views/templates/composite/template1.html",
         "template!views/templates/composite/template2.html",

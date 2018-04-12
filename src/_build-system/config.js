@@ -12,7 +12,7 @@ const read = (name, addPath=false) => {
     if (addPath) {
         name = configFile(name);
     }
-    try {        
+    try {
         return eval(fs.readFileSync(name).toString())
     } catch (error) {
         log(error.message);
@@ -32,9 +32,8 @@ const write = (name, value, addPath=false, additionalComment="") => {
         name = configFile(name);
     }
     let header = `/*
-    
-*** This configurationfile is automatically generated! ***
-Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.         
+***     auto-generated at ${new Date().toISOString()}      ***
+***     to re-create delete run build.js --force        ***
 
 ${additionalComment}
 */
@@ -43,9 +42,7 @@ ${additionalComment}
 };
 
 const validateEngineOpt = value => ["uglify-js", "uglify-es"].indexOf(value) !== -1;
-
 const validateAllEnginesOpt = value => ["auto", "html-minifier", "uglify-js", "uglify-es"].indexOf(value) !== -1;
-
 const templateStr = (s, o) => (s.indexOf("$") !== -1 ? new Function("return `" + s + "`;").call(o) : s);
 
 const getModule = (sourceFile, file, config) => {
@@ -80,7 +77,7 @@ const parseRoot = config => {
     }
     fsutil.setSourceDir(config.sourceDir)
 
-    if (!config.buildDir) {    
+    if (!config.buildDir) {
         config.buildDir =  path.join(__dirname, "build");
         log("config.buildDir set to default " + config.buildDir)
         if (!fs.existsSync(config.buildDir)) {
@@ -94,7 +91,7 @@ const parseRoot = config => {
         log("config.autoTargetDirExp set to default " + config.autoTargetDirExp)
     }
 
-    if (!config.targetDir) {    
+    if (!config.targetDir) {
         config.targetDir = path.join(config.buildDir, templateStr(config.autoTargetDirExp));
         log("config.targetDir set to auto " + config.targetDir)
     }
@@ -110,7 +107,7 @@ const parseIndex = config => {
         config.index = false;
         log("config.index section will be skipped! ");
         return;
-    }    
+    }
 
     if (!config.index.sourceFile || typeof config.index.sourceFile !== "string") {
         config.index.sourceFile = "index.html";

@@ -1,3 +1,17 @@
+if (process.argv.indexOf("--help") !== -1 || process.argv.indexOf("-h") !== -1) {
+    console.log(
+`Usage: node build.js [options]
+
+Options:
+  -a, --app                  recreate _config/app.js configuration file
+  -l, --libs                 recreate _config/libs.js configuration file
+  -c, --css                  recreate _config/css.js configuration file
+  -b, --bundles              recreate all bundle configuration files in _config dir
+  -f, --force                force recreate all configuration files in _config dir
+`)
+    return;
+}
+
 const fs = require("fs");
 const path = require("path");
 const configutil = require("./config");
@@ -7,10 +21,6 @@ const libsBuilder = require("./libs");
 const cssBuilder = require("./css");
 const appBuilder = require("./app");
 const bundlerBuilder = require("./module-bundles");
-
-const log = fsutil.log;
-
-var config;
 
 var recrateApp = (process.argv.indexOf("--app") !== -1 || process.argv.indexOf("-a") !== -1);
 var recrateLibs = (process.argv.indexOf("--libs") !== -1 || process.argv.indexOf("-l") !== -1);
@@ -25,6 +35,8 @@ if (recrateAll) {
     recrateBundles = true;
 }
 
+const log = fsutil.log;
+var config;
 var targetDirArg;
 
 process.argv.forEach(val => {

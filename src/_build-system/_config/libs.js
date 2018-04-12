@@ -1,7 +1,6 @@
 /*
-    
-*** This configurationfile is automatically generated! ***
-Change it freely to change your build configuration. To rebuild this file, delete it first and rerun build script.         
+***     auto-generated at 2018-04-12T18:40:20.157Z      ***
+***     to re-create delete run build.js --force        ***
 
 {
     'file name relative to libs dir': {

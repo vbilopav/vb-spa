@@ -17,13 +17,13 @@ const log = (msg, fileOnly=false) => {
     }
     if (!fileOnly) {
         console.log(`build.js > ${msg}`)
-    }    
+    }
 };
-    
+
 const dumpLog = file => {
     fs.writeFileSync(file, logContent);
 };
-    
+
 const parse = s => {
     try {
         return JSON.parse(s);
@@ -32,7 +32,7 @@ const parse = s => {
         return null;
     }
 };
-    
+
 const readFileSync = name => {
     try {
         return fs.readFileSync(name);
@@ -72,8 +72,6 @@ const mkDirByPathSync = targetDir => {
     }, initDir);
 };
 
-
-
 const walkSync = function (dir, pathnames, filelist) {
     var fs = fs || require('fs'),
         files = fs.readdirSync(dir);
@@ -93,7 +91,6 @@ const walkSync = function (dir, pathnames, filelist) {
     });
     return filelist;
 };
-
 
 module.exports = {
     log: log,
