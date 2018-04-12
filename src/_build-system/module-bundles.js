@@ -75,11 +75,11 @@ const createConfig = (config, libs, app) => {
         let bundleConfigName = fileName(bundleName)
         log(`creating ${bundleConfigName} ...`);
         configutil.write(bundleConfigName, result, false, 
-`targetModule: target module which will be replace dby this bundle
+`targetModule: target module which will be replace by this bundle
 includes: [] list of modules to bundle
 `);
 
-    }    
+    }
 }
 
 const build = config => {
