@@ -8,6 +8,7 @@ Options:
   -c, --css                  recreate _config/css.js configuration file
   -b, --bundles              recreate all bundle configuration files in _config dir
   -f, --force                force recreate all configuration files in _config dir
+  -t=str, --target=str       set target dir inside build dir, or set target dir expession (same as autoTargetDirExp config)
 `)
     return;
 }
@@ -28,7 +29,8 @@ var recrateCss = (process.argv.indexOf("--css") !== -1 || process.argv.indexOf("
 var recrateBundles = (process.argv.indexOf("--bundles") !== -1 || process.argv.indexOf("-b") !== -1);
 const recrateAll = (process.argv.indexOf("--force") !== -1 || process.argv.indexOf("-f") !== -1);
 
-if (recrateAll) {
+//if (recrateAll) {
+if (true) {
     recrateApp = true;
     recrateLibs = true;
     recrateCss = true;
@@ -50,7 +52,7 @@ try {
     log("");
     log("reading user-config.js...");
     let defaultConfig = false;
-    config = configutil.read("user-config.js", true); //or arg
+    config = configutil.read("user-config.js", true);
     if (!config)  {
         log("falling back to reading default-config.js...");
         config = configutil.read("default-config.js", true);
@@ -110,7 +112,7 @@ try {
         if (!bundlerBuilder.configExists(config)) {
             bundlerBuilder.createConfig(config, libs, app);
         }
-        
+
     } else {
         
         log("");

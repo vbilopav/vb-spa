@@ -18,6 +18,10 @@ const configExists = config => {
     if (!config.app || !config.app.moduleBundles || !Object.keys(config.app.moduleBundles).length) {
         return true;
     }
+    Object.keys(config.app.moduleBundles).forEach(name => {
+        config.app.moduleBundles[name.replace(/(')/mg, "")] = config.app.moduleBundles[name];
+        delete config.app.moduleBundles[name];
+    });
     for (let moduleName in config.app.moduleBundles) {
         if (!fs.existsSync(fileName(moduleName))) {
             return false;
@@ -30,7 +34,7 @@ const createConfig = (config, libs, app) => {
     if (!config.app || !config.app.moduleBundles || !Object.keys(config.app.moduleBundles).length) {
         return true;
     }
-    const from = path.join(config.targetDir, config.app.targetDir);    
+    const from = path.join(config.targetDir, config.app.targetDir);
     const modulesList = [];
     const modules = {};
     if (!libs) {
