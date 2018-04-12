@@ -4,7 +4,7 @@ define(["template!views/modules/_default.html"], template => class {
     // constructor is optional, it receives only id and newly created view element
     //
 
-    constructor(id, element) {        
+    constructor(id, element) {
         console.log(id + " created");
         // remember element reference (note: element is also second parameter in render and change)
         this.element = element
@@ -46,7 +46,7 @@ define(["template!views/modules/_default.html"], template => class {
         // search of params element and cache it so we can use it in change
         this.paramsElement = this.element.find("#params");
     }
-    
+
     change(params) {
         this.paramsElement.html(params.join("<br />"))
     }

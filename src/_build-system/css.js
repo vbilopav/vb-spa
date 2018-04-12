@@ -45,7 +45,7 @@ const getSourceFiles = (config, to) => {
         log(`Warning: ${configFile} empty, skipping css processing ...`)
         return {};
     }
-    for (let name in result) {        
+    for (let name in result) {
         item = result[name];
         item.fileClean = name.split("/").join(path.sep); 
         item.fileFull = path.join(to, item.fileClean); 
@@ -65,7 +65,7 @@ const getSourceFiles = (config, to) => {
     return result;
 }
 
-const build = config => {    
+const build = config => {
     if (!config.css) {
         return;
     }
@@ -82,9 +82,9 @@ const build = config => {
     const bundleList = [];
     const realBundleList = [];
     const overallFiles = [];
-        
 
-    if (config.css.bundle) {            
+
+    if (config.css.bundle) {
         if (config.css.bundle.files === "all") {
             for (let file in files) {
                 bundleList.push(file);
@@ -115,14 +115,14 @@ const build = config => {
                 log(error);
             }
         }      
-        overallFiles.push(config.css.bundle.targetFile);     
+        overallFiles.push(config.css.bundle.targetFile);
     }
     
     for (let file in files) {
-        let fileValue = files[file];    
-        let fromFile = path.join(from, fileValue.fileClean);      
+        let fileValue = files[file];
+        let fromFile = path.join(from, fileValue.fileClean);
         let toFile = fileValue.fileFull;
-    
+
         if (bundleList.indexOf(file) !== -1) {
             continue;
         }
@@ -132,29 +132,29 @@ const build = config => {
             
         if (fileValue.minify !== false) {
     
-            log(`minifying ${fromFile} ...`);                            
+            log(`minifying ${fromFile} ...`);
             let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
             let content = new cleanCss(opts).minify(fs.readFileSync(fromFile, "utf8"));
             fs.writeFileSync(toFile, content.styles, "utf8"); 
-            
+
         } else {
 
             log(`copying ${path.join(from, file)} ...`);
             fs.copyFileSync(path.join(from, file), toFile);  
 
         }
-        overallFiles.push(file);    
+        overallFiles.push(file);
     }
 
-    if (config.css.index) {                        
+    if (config.css.index) {
         let index = configutil.templateStr(config.css.index.nameExp, config);  
         let fcontent = fs.readFileSync(path.join(config.targetDir, index), "utf8");
         let dom = new jsdom.JSDOM(fcontent);
         let scr = dom.window.document.querySelector("#" + config.css.index.id);
         if (scr) {
-            let content = 
+            let content =
             scr.innerHTML = `(function () {var u = window._spa.cssUrl ? window._spa.cssUrl : "", q = window._spa.version ? "?" + require.urlArgs : ""; document.write(`;
-            for (let idx in overallFiles) { 
+            for (let idx in overallFiles) {
                 let file = overallFiles[idx];
                 content = content + `'<link rel="stylesheet" href="' + u + '${file}"' + q + '" />'`;
                 if (idx < overallFiles.length - 1) {
@@ -165,8 +165,8 @@ const build = config => {
             scr.innerHTML = content;  
             fs.writeFileSync(path.join(config.targetDir, index), dom.serialize(), "utf8");
             log(`updating header script content #${scr.id} of file ${path.join(config.targetDir, index)} with content ${content}`);
-        }         
-    }    
+        }
+    }
 }
 
 module.exports = {
@@ -174,4 +174,4 @@ module.exports = {
     configExists: configExists,
     configFile: configFile,
     createConfig: createConfig
-}    
+}

@@ -4,10 +4,10 @@
     <script type="text/javascript" id="_spa-obj">
         // recrated by builder
         window._spa = {
-            version: "", 
-            appUrl: "app/", 
-            cssUrl: "css/", 
-            libsUrl: "libs/", 
+            version: "",
+            appUrl: "app/",
+            cssUrl: "css/",
+            libsUrl: "libs/",
             sysPath: "spa",
             settings: {usePreloadedTemplates: false}
         };
@@ -23,7 +23,7 @@
         if (window._spa && window._spa.version) {
             require.urlArgs = "v=" + window._spa.version;
         }
-    </script>  
+    </script>
 
     <script id="_spa-css">
         // recrated by builder
@@ -34,23 +34,23 @@
                 '<link rel="stylesheet" href="' + u + 'default.css"' + q + '" />' +
                 '<link rel="stylesheet" href="' + u + 'navigation.css"' + q + '" />'
             );
-        })();       
+        })();
     </script>
 </head>
-<body>        
+<body>
 
     <div id="loading-screen" style="display: none">
-        Loading ... 
-    </div>    
+        Loading ...
+    </div>
     <script id="loading-screen-script" type="text/javascript">
         setTimeout(function(){
             var e = document.getElementById("loading-screen"); 
             if (e) e.removeAttribute("style");
-        }, 500);        
+        }, 500);
     </script>
 
     <div id="app-container" style="display: none">
-    </div>   
+    </div>
 
     <script type="text/javascript" 
             data-main="main.js" 

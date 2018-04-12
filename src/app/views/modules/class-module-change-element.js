@@ -1,10 +1,10 @@
-define(["template!views/modules/_default.html"], template => class {        
-    
+define(["template!views/modules/_default.html"], template => class {
+
     //
     // constructor is optional, it receives only id and newly created view element
     //
 
-    constructor(id, element) {        
+    constructor(id, element) {
         console.log(id + " created");
         // remember element reference (note: element is also second parameter in render and change)
         this.element = element
@@ -43,7 +43,7 @@ define(["template!views/modules/_default.html"], template => class {
                 params.join("<br />") + "</span>"
         });
     }
-    
+
     //
     // The change method is called every time parameters are changed.
     // If we return string here, it will replace entire content.

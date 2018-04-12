@@ -1,5 +1,5 @@
-define(["template!views/modules/_default.html"], template => class {        
-    
+define(["template!views/modules/_default.html"], template => class {
+
     //
     // if renderOnceIfChangeNotPresent view option is set to true (false is default)
     // render method will be called only once, first time reagrdless of parameters change 
@@ -16,13 +16,13 @@ define(["template!views/modules/_default.html"], template => class {
                 header: 
                     "View events",
                 firstLine: 
-                    "Demonstration of view event handlings.<br />",                
+                    "Demonstration of view event handlings.<br />",
                 secondLine: 
-                    "There are two predefined events on each view - rendered and changed.<br />",                
+                    "There are two predefined events on each view - rendered and changed.<br />",
                 viewLocation: 
                     "/app/views/modules/view-events.js",
                 routeDefintion: 
-                    '"/view-events": {\n' +                    
+                    '"/view-events": {\n' +
                     '    view: "views/modules/view-events",\n' +
                     '    data: {\n' +
                     '        title: "View events",\n' +
@@ -33,13 +33,13 @@ define(["template!views/modules/_default.html"], template => class {
                 closingLine: String.html`Change some parameters manually and see output in console bellow:<br /><br />
                 <div class="panel panel-default">
                     <div class="panel-heading">output:</div>
-                    <div class="panel-body">                   
+                    <div class="panel-body">
                     </div>
                 </div>
                 `
             })
         );
-        // render is executed only once, regardless on parameter change, so we will take reference for output panel here 
+        // render is executed only once, regardless on parameter change, so we will take reference for output panel here
         this.panel = element.find(".panel-body");
     }
 

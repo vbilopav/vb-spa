@@ -7,7 +7,7 @@ define(["template!views/modules/_default.html"], template => {
             console.log(msg);
         }
 
-    const moduleClass = class {   
+    const moduleClass = class {
         
         constructor() {
             module = this;
@@ -20,16 +20,16 @@ define(["template!views/modules/_default.html"], template => {
                 firstLine: 
                     "Demonstration of different element event handling tehniques.",
                 secondLine: 
-                    "",                
-                viewLocation: 
+                    "",
+                viewLocation:
                     "/app/views/modules/view-events.js",
-                routeDefintion: 
-                    '"/view-events": {\n' +                    
+                routeDefintion:
+                    '"/view-events": {\n' +
                     '    view: "views/modules/view-events",\n' +
                     '    data: {\n' +
                     '        title: "View events",\n' +
                     '        category: "modules"\n' +
-                    '    },\n' +    
+                    '    },\n' +
                     '}',
                 closingLine: String.html`These are two buttons to be clicked here:
                     <span>

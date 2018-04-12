@@ -5,9 +5,9 @@
 //
 define([], () => String.html`
 <div>
-    <h3>This is module view that returns plain-text</h3>    
+    <h3>This is module view that returns plain-text</h3>
     <p>
-        Modules can return plain text.        
+        Modules can return plain text.
         <br /><br />
         View location: <pre>/app/views/modules/simple-text</pre>
         <br />

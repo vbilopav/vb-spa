@@ -3,6 +3,6 @@ define([], () => {
         sayHiToConsole: () => {
             console.log("hi from custom-module2.js");
             return "";
-        }     
+        }
     }
 })

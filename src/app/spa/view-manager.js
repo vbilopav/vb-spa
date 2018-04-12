@@ -5,7 +5,7 @@ define(["sys/template-helpers"], (templateHelper) => {
             for (let p in templateHelper._prefixes) {
                 if (name.startsWith(templateHelper._prefixes[p])) {
                     return true;
-                }                
+                }
             }
             return false;
         },
@@ -17,7 +17,7 @@ define(["sys/template-helpers"], (templateHelper) => {
             if (t === "function") {
                 if (nameStartsWithPrefix(name)) {
                     return types.template;
-                }                
+                }
                 return types.class;
             }
             if (t === "object") {
@@ -27,13 +27,12 @@ define(["sys/template-helpers"], (templateHelper) => {
                 return types.string;
             }
             throw view;
-        },      
+        },
         showView = (item, element) => {
             window.scrollTo(item.x, item.y);
-            //element.dataset.timestamp = Date.now();
         };
 
-    return class {    
+    return class {
         constructor(
             container=(() => {throw container})()
         ) {
@@ -66,18 +65,18 @@ define(["sys/template-helpers"], (templateHelper) => {
                 }
 
                 if (found) {
-                    
+
                     if (found.type === types.string) {
                         this._current = found.element.show();
                         showView(found, found.element);
-                        return resolve(found.element.id);    
-                    }    
-                    
+                        return resolve(found.element.id);
+                    }
+
                     let element = this._container.find("#" + elementId);
-                    
+
                     if (found.type === types.template) {
                         if (!element.length) {
-                            element = "span".createElement(elementId).appendTo(this._container);                 
+                            element = "span".createElement(elementId).appendTo(this._container);
                         }
                         if (found.uriHash !== uriHash) {
                             element.html(found.instance(args.params));
@@ -85,17 +84,17 @@ define(["sys/template-helpers"], (templateHelper) => {
                         }
                         this._current = element.show();
                         showView(found, element);
-                        return resolve(element.id);                        
+                        return resolve(element.id);
                     }
 
-                    if (!element.length) {      
+                    if (!element.length) {
                         element = this._container.find("[data-id='" + args.id + "']");
                         if (element.length) {
                             element.id = elementId;
                         }
                     }
                     if (!element.length) {
-                        element = "span".createElement(elementId).appendTo(this._container);                 
+                        element = "span".createElement(elementId).appendTo(this._container);
                     }
 
                     if (found.type === types.class || found.type === types.object) {
@@ -106,10 +105,10 @@ define(["sys/template-helpers"], (templateHelper) => {
                             } else {
                                 if (!found.instance.renderOnceIfChangeNotPresent) {
                                     newContent = found.instance.render(args.params, element);
-                                }                                
+                                }
                             }
                             if (newContent) {
-                                element.html(newContent);                                
+                                element.html(newContent);
                             }
                             element.show();
                             if (found.instance.changed) {
@@ -165,7 +164,7 @@ define(["sys/template-helpers"], (templateHelper) => {
                     if (type === types.object || type === types.class) {
                         let content = data.instance.render(args.params, element);
                         if (content) {
-                            element.html(content);                            
+                            element.html(content);
                         }
                         !data.instance.rendered || data.instance.rendered(args.params, element);
                     }
@@ -180,4 +179,3 @@ define(["sys/template-helpers"], (templateHelper) => {
     }
 
  });
- 

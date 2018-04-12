@@ -10,15 +10,15 @@ define([], () => {
             }
         },
 
-        "/plain-text": {                    
+        "/plain-text": {
             view: "text!views/templates/plain-text-view.html",
             data: {
                 title: "Plain text view",
                 category: "templates"
             }
-        },     
+        },
 
-        "/keep-state": {                    
+        "/keep-state": {
             view: "text!views/templates/state-view.html",
             data: {
                 title: "Plain text view - state handling",
@@ -31,14 +31,14 @@ define([], () => {
             paramsMap: (...params) => {
                 if (params.length > 3) {
                     return false;
-                }                        
+                }
                 return {
                     first: params[0],
                     second: Number(params[1]),
                     third: params[2] ? params[2].split(",") : []
                 };
             },
-            data: {                        
+            data: {
                 title: "Parameterized",
                 category: "templates"
             }
@@ -49,12 +49,12 @@ define([], () => {
             paramsMap: (...params) => {
                 if (params.length > 1) {
                     return false;
-                }                        
+                }
                 return {
-                    firstAndOnly: params[0]                            
+                    firstAndOnly: params[0]
                 };
             },
-            data: {                        
+            data: {
                 title: "Parameterized sub route",
                 category: "templates"
             }
@@ -74,7 +74,7 @@ define([], () => {
             data: {
                 title: "Unbundled text template",
                 category: "templates"
-            }            
+            }
         },
 
         "/unbundled-parametrized-view": {
@@ -86,11 +86,11 @@ define([], () => {
             paramsMap: (...params) => {
                 if (params.length > 1) {
                     return false;
-                }                        
+                }
                 return {
-                    param: params[0]                            
+                    param: params[0]
                 };
-            },  
+            },
         },
 
         "/module-plain-text": {
@@ -134,7 +134,7 @@ define([], () => {
                 category: "modules"
             },
             paramsMap: (...params) => params
-        },     
+        },
  
         "/object-module-simple": {
             view: "views/modules/object-module-simple",
@@ -143,7 +143,7 @@ define([], () => {
                 category: "modules"
             },
             paramsMap: (...params) => params
-        },   
+        },
  
         "/object-module-change-element": {
             view: "views/modules/object-module-change-element",
@@ -152,7 +152,7 @@ define([], () => {
                 category: "modules"
             },
             paramsMap: (...params) => params
-        },    
+        },
  
         "/object-module-element-manipulation": {
             view: "views/modules/object-module-element-manipulation",
@@ -162,30 +162,30 @@ define([], () => {
             },
             paramsMap: (...params) => params
         },
- 
+
         "/view-events": {
             view: "views/modules/view-events",
             data: {
                 title: "View events",
-                category: "modules"                
+                category: "modules"
             },
             paramsMap: (...params) => params
-        },    
-        
+        },
+
         "/events-handlings": {
             view: "views/modules/events-handlings",
             data: {
                 title: "Event handlings",
-                category: "modules"                
-            }            
+                category: "modules"
+            }
         }, 
 
         "/new-bundle": {
             view: "views/modules/new-bundle/module-view",
             data: {
                 title: "New bundle",
-                category: "modules"                
-            }            
+                category: "modules"
+            }
         }, 
 
         "/dependency-injection-template": {
@@ -200,7 +200,7 @@ define([], () => {
             data: {
                 title: "Dependency injection - template",
                 category: "dynamic"
-            }            
+            }
         }, 
 
         "/dependency-injection-object-module": {
@@ -215,10 +215,10 @@ define([], () => {
             data: {
                 title: "Dependency injection - object module",
                 category: "dynamic"
-            }            
-        }, 
+            }
+        },
 
-        "/dependency-injection-class-module": {            
+        "/dependency-injection-class-module": {
             view: {
                 name: "views/dynamic-data/di/class-module",
                 inject: [
@@ -230,7 +230,7 @@ define([], () => {
             data: {
                 title: "Dependency injection - class module",
                 category: "dynamic"
-            }            
+            }
         },
 
         "/declarative-model-binding": {
@@ -238,7 +238,7 @@ define([], () => {
             data: {
                 title: "Model binding - declarative",
                 category: "dynamic"
-            }            
+            }
         }, 
 
         "/programmatic-model-binding": {
@@ -246,7 +246,7 @@ define([], () => {
             data: {
                 title: "Model binding - programmatic",
                 category: "dynamic"
-            }            
+            }
         }, 
 
         "/remote-data-example": {
@@ -254,7 +254,7 @@ define([], () => {
             data: {
                 title: "Remote data - master detail example",
                 category: "dynamic"
-            }            
+            }
         }, 
 
         "/remote-data-example/details": {
@@ -272,7 +272,7 @@ define([], () => {
             data: {
                 title: "Crossdomain module example",
                 category: "dynamic"
-            }            
+            }
         }, 
 
         "/crossdomain-template-example": {
@@ -280,7 +280,7 @@ define([], () => {
             data: {
                 title: "Crossdomain template example",
                 category: "dynamic"
-            }            
+            }
         }, 
 
         "/crossdomain-text-example": {
@@ -288,12 +288,12 @@ define([], () => {
             data: {
                 title: "Crossdomain text example",
                 category: "dynamic"
-            }            
+            }
         }, 
- 
+
         "/not-found": {
             view: "text!views/not-found.html"
         }
-        
+
     }
 });

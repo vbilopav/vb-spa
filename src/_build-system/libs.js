@@ -18,7 +18,7 @@ const createConfig = config => {
         let fileObj = files[i];
         let file = fileObj.full.replace(from + path.sep, "");
         file = file.split(path.sep).join("/");
-        result["'" + file + "'"] = {            
+        result["'" + file + "'"] = {
             minify: config.libs.minify,
             minifyEngine: config.libs.minifyEngine,
             module: configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config)
@@ -29,7 +29,7 @@ const createConfig = config => {
 `{
     'file name relative to libs dir': {
         minify: false to copy, true for default minify config or minify options object,
-        minifyEngine: uglify-es, uglify-js     
+        minifyEngine: uglify-es, uglify-js
     }
 }, ...`);
     Object.keys(result).forEach(name => {
@@ -39,7 +39,7 @@ const createConfig = config => {
     return result;
 }
 
-const getSourceFiles = (config, to) => {    
+const getSourceFiles = (config, to) => {
     if (!configExists()) {
         log(`${configFile} is missing, skipping libs processing ...`);
         return {};
@@ -51,10 +51,10 @@ const getSourceFiles = (config, to) => {
         log(`warning: ${configFile} empty, skipping libs processing ...`)
         return {};
     }
-    for (let name in result) {        
+    for (let name in result) {
         item = result[name];
-        item.fileClean = name.split("/").join(path.sep); 
-        item.fileFull = path.join(to, item.fileClean); 
+        item.fileClean = name.split("/").join(path.sep);
+        item.fileFull = path.join(to, item.fileClean);
         item.dirTo = path.dirname(item.fileFull);
         if (!fs.existsSync(item.dirTo)) {
             log(`creating ${item.dirTo} ...`)
@@ -81,12 +81,12 @@ const build = config => {
         files = getSourceFiles(config, to);
     
     for (let file in files) {
-        let fileValue = files[file];    
-        let fromFile = path.join(from, fileValue.fileClean); 
+        let fileValue = files[file];
+        let fromFile = path.join(from, fileValue.fileClean);
         
         if (fileValue.minify !== false) {
             
-            let content = fsutil.readFileSync(fromFile, "utf8");   
+            let content = fsutil.readFileSync(fromFile, "utf8");
             if (content == null) {
                 continue;
             }
@@ -99,13 +99,13 @@ const build = config => {
             } else if (fileValue.minifyEngine === "uglify-es") {
                 let opts =  typeof fileValue.minify === "object" ? fileValue.minify : config.app.minifyEsOptions;
                 result = uglifyEs.minify(content.toString(), opts);
-            }                    
+            }
 
             if (result.error) {
                 log(`Warning: file ${path.join(from, file)} could not be minified, copying instead...`);
                 console.log(result.error);
                 fs.writeFileSync(fileValue.fileFull, content.toString(), "utf8");
-            } else {                    
+            } else {
                 fs.writeFileSync(fileValue.fileFull, result.code, "utf8");
             }
 
@@ -113,14 +113,13 @@ const build = config => {
 
             log(`copying ${fromFile} ...`);
             try {
-                fs.copyFileSync(fromFile, fileValue.fileFull);  
+                fs.copyFileSync(fromFile, fileValue.fileFull);
             } catch (error) {
                 log(error);
                 continue;
             }
 
         }
-        
     }
 }
 

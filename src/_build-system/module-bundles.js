@@ -147,7 +147,7 @@ const build = config => {
             }
 
             log(`adding to bundle ${bundleName} module ${moduleId}...`);
-            fs.appendFileSync(temp, content);          
+            fs.appendFileSync(temp, content);
         }
         log(`writting bundle file ${bundleTarget} ...`);
         fs.copyFileSync(temp, bundleTarget);

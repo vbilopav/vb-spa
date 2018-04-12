@@ -31,10 +31,10 @@
     paramsMap: (...params) => {
         if (params.length > 3) {
             return false;
-        }                        
+        }
         return {first: params[0], second: Number(params[1]), third: params[2] ? params[2].split(",") : []};
     },
-    data: {                        
+    data: {
         title: "Parameterized",
         category: "templates"
     }
@@ -47,7 +47,7 @@
         2. name: <code>second</code>, type: <code>number</code>
         <br />
         3. name: <code>third</code>, type: <code>array of strings</code>
-        <br /><br />        
+        <br /><br />
         Current values:
         <br />
         1. first: <code>${this.first}</code>
@@ -59,12 +59,12 @@
             ${this.template.forEach(this.third, item => {
                     let selected = this.first === item ? "selected": "";
                     return `<option ${selected}>${item}</option>`
-                }                
+                }
             )}
         </select>
         <br /><br />
-        Test urls:     
-        <br />        
+        Test urls:
+        <br />
         First string param: 
         <a href="/#parameterized/first param/">/#parameterized/first param/</a>
         <br />
@@ -79,7 +79,7 @@
         <br />
         Fourth parameter is not allowed:
         <a href="/#parameterized/1/2/3/4/">/#parameterized/1/2/3/4/</a>
-        <br /><br />       
+        <br /><br />
         You may also change url to test current parameter values...
         <br /><br />
         <hr />

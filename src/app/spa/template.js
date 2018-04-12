@@ -6,7 +6,7 @@ define([
     helper
 ) => {
 
-    const 
+    const
         _search = "{this.template.import(",
         _length = _search.length;
     
@@ -32,9 +32,9 @@ define([
                 }
                 if (found.length) {
                     require(found, () => onload((data, locale) => helper.parse(name, text, data, locale))); 
-                } else {                    
+                } else {
                     onload((data, locale) => helper.parse(name, text, data, locale));
-                }               
+                }
             });
         }
     };

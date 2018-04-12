@@ -11,7 +11,7 @@ define([
 ) => {
 
     var 
-        navigation;        
+        navigation;
         
     const
         router = new Router({
@@ -21,7 +21,7 @@ define([
             error: event => event.router.reveal("/not-found")
         });
         
-    return () => {        
+    return () => {
         routerData = router.getData();
         const app = document.body.find("#app-container").html(
             layout({
@@ -35,7 +35,7 @@ define([
         document.body.find("#loading-screen").remove();
         document.body.find("#loading-screen-script").remove();
 
-        navigation = document.body.find("#navigation");        
+        navigation = document.body.find("#navigation");
 
         router.useViewManager(
             new Manager(document.body.find("#container"))

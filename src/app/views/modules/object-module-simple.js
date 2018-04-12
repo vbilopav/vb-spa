@@ -1,7 +1,7 @@
 define(["template!views/modules/_default.html"], template => {
 
-    return {        
-        
+    return {
+
         //
         // constructor is init method, and it is optional, it receives view id and view element
         //
@@ -13,7 +13,7 @@ define(["template!views/modules/_default.html"], template => {
         // It receives params object and view element (in this example, we remembered in constructor)
         // The render will render any string it returns ... if it is returned
         //
-        
+
         render: params => template({
             header: 
                 "This is simple object module.",
@@ -25,7 +25,7 @@ define(["template!views/modules/_default.html"], template => {
             viewLocation: 
                 "/app/views/modules/class-module-simple.js",
             routeDefintion: 
-                '"/object-module-simple": {\n' +                    
+                '"/object-module-simple": {\n' +
                 '    view: "views/modules/object-module-simple"\n' +
                 '    data: {\n' +
                 '        title: "Simple text from object module",\n' +

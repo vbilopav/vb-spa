@@ -1,12 +1,12 @@
 define(["template!views/modules/_default.html"], template => {        
-    
+
     return {
-        
+
         //
         // constructor is init method, and it is optional, it receives only id and newly created view element
         //
 
-        init: (id, element) => {        
+        init: (id, element) => {
             console.log(id + " created");
             // remember element reference (note: element is also second parameter in render and change)
             this.element = element
@@ -43,8 +43,8 @@ define(["template!views/modules/_default.html"], template => {
                 "Here is the list of current params for this view (type them in address bar manually):<br /><span id='params'>" +
                 params.join("<br />") + "</span>"
         }),
-        
-        
+
+
         //
         // The change method is called every time parameters are changed.
         // If we return string here, it will replace entire content.
@@ -54,5 +54,5 @@ define(["template!views/modules/_default.html"], template => {
         change: params => {
             this.element.find("#params").html(params.join("<br />"));
         }
-    }   
+    }
 });

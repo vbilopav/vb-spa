@@ -1,10 +1,10 @@
 define(["template!views/modules/_default.html"], template => class {        
-    
+
     //
     // constructor is optional, it receives view id and view element
     //
 
-    constructor(id) {        
+    constructor(id) {
         console.log(id + " created");
     }
 
@@ -13,7 +13,7 @@ define(["template!views/modules/_default.html"], template => class {
     // It receives params object and view element (in this example, we remembered in constructor)
     // The render will render any string it returns ... if it is returned
     //
-    
+
     render(params) {
         return template({
             header: 
@@ -26,7 +26,7 @@ define(["template!views/modules/_default.html"], template => class {
             viewLocation: 
                 "/app/views/modules/class-module-simple.js",
             routeDefintion: 
-                '"/class-module-simple": {\n' +                    
+                '"/class-module-simple": {\n' +
                 '    view: "views/modules/class-module-simple",\n' +
                 '    data: {\n' +
                 '        title: "Simple text from class module",\n' +
@@ -34,7 +34,7 @@ define(["template!views/modules/_default.html"], template => class {
                 '    },\n' +
                 '    paramsMap: (...params) => params\n' +
                 '}',
-            closingLine: 
+            closingLine:
                 "For more info see comments in module js code...<br /><br />" +
                 "Here is the list of current params for this view (type them in address bar manually):<br /><span id='params'>" +
                 params.join("<br />") + "</span>"

@@ -9,7 +9,7 @@ define([
     render() { 
         return String.html`
         <div>
-            <h3>Master/detail example with fetcing remote data</h3>    
+            <h3>Master/detail example with fetcing remote data</h3>
             <p>
                 List of JavaScript frameworks:
                 <br /><hr />
@@ -20,7 +20,7 @@ define([
     }
     
     //
-    //  
+    //
     //
     async rendered(params, element) {
         let 
@@ -30,7 +30,7 @@ define([
             ).join("");
 
         // rendered event will only be triggered once since this view doesn't allow params
-        new Model().bind(element).anchors = anchorsHtml;                
+        new Model().bind(element).anchors = anchorsHtml;
     }
     
 })

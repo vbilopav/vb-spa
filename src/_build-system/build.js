@@ -29,8 +29,7 @@ var recrateCss = (process.argv.indexOf("--css") !== -1 || process.argv.indexOf("
 var recrateBundles = (process.argv.indexOf("--bundles") !== -1 || process.argv.indexOf("-b") !== -1);
 const recrateAll = (process.argv.indexOf("--force") !== -1 || process.argv.indexOf("-f") !== -1);
 
-//if (recrateAll) {
-if (true) {
+if (recrateAll) {
     recrateApp = true;
     recrateLibs = true;
     recrateCss = true;
@@ -44,7 +43,7 @@ var targetDirArg;
 process.argv.forEach(val => {
     if (val.startsWith("--target=")) {
         targetDirArg = val.split("=")[1];
-    }    
+    }
 });
 
 try {
@@ -99,7 +98,7 @@ try {
     ) {
 
         log(`Warning:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
-        
+
         if (!libsBuilder.configExists()) {
             libs = libsBuilder.createConfig(config);
         }
@@ -114,7 +113,7 @@ try {
         }
 
     } else {
-        
+
         log("");
         if (fs.existsSync(config.targetDir)) {
             log(`destroying ${config.targetDir} ...`)

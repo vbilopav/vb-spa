@@ -54,9 +54,9 @@ define([], () => {
         if (this.classList) {
             this.classList.add(className);
         } else {
-            this.className += " " + className;    
+            this.className += " " + className;
         }
-        return this;  
+        return this;
     }
 
     HTMLElement.prototype.removeClass = function(className) {
@@ -67,7 +67,7 @@ define([], () => {
                 new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " "
             );
         }        
-        return this;  
+        return this;
     }
 
     HTMLElement.prototype.on = function(eventName, eventHandler) {

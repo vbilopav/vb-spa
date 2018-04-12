@@ -15,11 +15,11 @@ define([], () => class {
     }
     
     _forEachDeclarative(element) {
-        // name first, id second        
+        // name first, id second
         if (!this._assignProps(element.name || element.id, element)) {
             return;
         }
-        for(let dataset in element.dataset) {            
+        for(let dataset in element.dataset) {
             if (!dataset.startsWith("event")) {
                 continue;
             }
@@ -38,15 +38,15 @@ define([], () => class {
                 if (m(element)) {
                     this._assignProps(name, element);
                 }
-            }                                  
+            }
         }
-    }   
+    }
 
     _assignProps(name, element) {
         if (!name) {
             return false;
         }
-        let node = element.nodeName;        
+        let node = element.nodeName;
         Object.defineProperty(this, name, {
             get: () => {
                 if (node === "SELECT") {
@@ -60,7 +60,7 @@ define([], () => class {
                         element.checked = value;
                     } else {
                         element.value = value;
-                    }                    
+                    }
                 } else {
                     element.html(value);
                     if (node === "A") {
@@ -69,6 +69,6 @@ define([], () => class {
                 }
             }
         });
-        return true;  
+        return true;
     }
 });

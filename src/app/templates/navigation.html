@@ -25,12 +25,12 @@
 
         <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
             <button class="dropbtn">Dynamic data&nbsp;&#11206;</button>
-            <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">                
-                ${this.template.forEach(this.dynamic, item => 
+            <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
+                ${this.template.forEach(this.dynamic, item =>
                     `<a id="${item.id}" href="${item.url}">${item.title}</a>`
                 )}
             </div>
-        </div> 
+        </div>
 
     </div>
 

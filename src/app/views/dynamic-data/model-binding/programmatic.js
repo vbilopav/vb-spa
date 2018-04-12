@@ -1,21 +1,21 @@
 define(["sys/model"], Model => {
 
     const
-        model = new Model({            
-            name: "name", // when value is string bind will match name or id            
-            email: e => e.name === "email", // value can be function to test element            
+        model = new Model({
+            name: "name", // when value is string bind will match name or id
+            email: e => e.name === "email", // value can be function to test element
             select: e => e.matches("[name=select]"), // so that selector can also be used
             check: "check_id",
             showButton: "showButton"
         }),
-        module = {        
+        module = {
             render: () => String.html`
             <div>
-                <h3>Model binding support - programmatic</h3>    
+                <h3>Model binding support - programmatic</h3>
                 <p>
                     Demonstration for programmatic bi-directional model binding support
                     <br /><br />
-                    View location: <pre>/app/views/dynamic-data/model-binding/programmatic.js</pre>                                
+                    View location: <pre>/app/views/dynamic-data/model-binding/programmatic.js</pre>
                     <br />
                     <span id="model-area">
                         <label for="name" style="width: 50px">Name: </label><input name="name" type="text"><br />
@@ -29,7 +29,7 @@ define(["sys/model"], Model => {
                             <option value="Vue">Vue</option>
                             <option value="Inferno">Inferno</option>
                             <option value="Preact">Preact</option>
-                            <option value="React">React</option>                             
+                            <option value="React">React</option>
                         </select>
                         <br />
                         <input type="checkbox" name="check" id="check_id" checked>&nbsp;&nbsp;Yes, I might not need those frameworks!<br />
@@ -80,7 +80,7 @@ define(["sys/model"], Model => {
                         // same as model.check.checked = value.toLowerCase() === "true";
                         model.check = value.toLowerCase() === "true";
                     }
-                });                
+                });
             }
             
         }
@@ -94,6 +94,6 @@ define(["sys/model"], Model => {
         console.log("model.check.checked: " + model.check.checked);
         console.log("----------------------------------------------------------");
     }
-    
+
     return module;
 });

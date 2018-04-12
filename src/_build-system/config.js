@@ -184,7 +184,7 @@ const parseLibsItem = (item, name) => {
         item.minifyEngine = "uglify-js";
         log(name + ".minifyEngine set to default " + item.minifyEngine);
         log("minifyEngine options are: uglify-js and uglify-es");
-    }  
+    }
 }
 
 const parseLibs = config => {

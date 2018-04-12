@@ -79,7 +79,7 @@ targetModule: module of target file
 includes: [] list of modules to bundle - reorder, rearange, remove or add freely - by default all modules are included
 replacementExp: template expression that will return replacement for targetFile module or null to use targetFile content
 `);
-    }    
+    }
 }
 
 const build = config => {
@@ -110,11 +110,11 @@ const build = config => {
             const moduleId = bundle.includes[j];
             var content;
             if (moduleId === bundle.targetModule && bundle.replacementExp) {
-                
+
                 content = configutil.templateStr(bundle.replacementExp, bundle);
-            
+
             } else {
-                
+
                 const include = modules[moduleId];
                 content = fsutil.readFileSync(include);
                 if (!content) {
@@ -122,13 +122,13 @@ const build = config => {
                     continue;
                 }
                 content = content.toString();
-                
+
                 if (moduleId.startsWith("text!")) {
                 
                     content = "define('" + moduleId + "',[],()=> '" + 
                         content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "');" + 
                         os.EOL;
-                
+
                 } else if (moduleId.startsWith("template!")) {
 
                     content = "define('" + moduleId + "',['sys/template-helpers'], helper => { var name = '" + 

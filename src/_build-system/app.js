@@ -159,15 +159,15 @@ const build = config => {
                 log(`Warning: file ${path.join(from, file)} could not be minified, copying instead...`);
                 if (result.error != true) {
                     console.log(result.error);
-                }                
+                }
                 fs.writeFileSync(fileValue.fileFull, content.toString(), "utf8");
-            } else {   
+            } else {
                 let final;
                 if (fileValue.minifyEngine === "uglify-js" || fileValue.minifyEngine === "uglify-es") {
                     final = minifyInlineHtml(result.code, htmlMinifyOpts);
                 } else {
                     final = result.code;
-                }                
+                }
                 fs.writeFileSync(fileValue.fileFull, final, "utf8");
             }
 

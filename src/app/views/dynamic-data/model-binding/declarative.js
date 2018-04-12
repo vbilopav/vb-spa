@@ -2,14 +2,14 @@ define(["sys/model"], Model => {
 
     const
         model = new Model(),
-        module = {        
+        module = {
             render: () => String.html`
             <div>
-                <h3>Model binding support - declarative</h3>    
+                <h3>Model binding support - declarative</h3>
                 <p>
                     Demonstration for declarative bi-directional model binding support
                     <br /><br />
-                    View location: <pre>/app/views/dynamic-data/model-binding/declarative.js</pre>                                
+                    View location: <pre>/app/views/dynamic-data/model-binding/declarative.js</pre>
                     <br />
                     <span id="model-area">
                         <label for="name" style="width: 50px">Name: </label><input name="name" type="text"><br />
@@ -23,7 +23,7 @@ define(["sys/model"], Model => {
                             <option value="Vue">Vue</option>
                             <option value="Inferno">Inferno</option>
                             <option value="Preact">Preact</option>
-                            <option value="React">React</option>                            
+                            <option value="React">React</option>
                         </select>
                         <br />
                         <input type="checkbox" name="check" checked>&nbsp;&nbsp;Yes, I might not need those frameworks!<br />
@@ -37,7 +37,7 @@ define(["sys/model"], Model => {
                     <button id="btn-set-check">Set new value for "check" model propery (true or false)</button><br /><br />
                     <hr />
                 </p>
-            </div>`,    
+            </div>`,
 
             rendered: (params, element) => {
                 //
@@ -81,7 +81,7 @@ define(["sys/model"], Model => {
             }
             
         }
-    
+
     model.showButtonClick = () => {
         console.log("*** current model state ***");
         console.log("model.name.value: " + model.name.value);
@@ -91,6 +91,6 @@ define(["sys/model"], Model => {
         console.log("model.check.checked: " + model.check.checked);
         console.log("----------------------------------------------------------");
     }
-    
+
     return module;
 });
