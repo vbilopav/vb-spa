@@ -52,7 +52,7 @@ const createConfig = (config, libs, app) => {
         modules["./" + config.app.targetDir + "/" + key] = app[key].module;
     }
 
-    for (let bundleName in config.app.moduleBundles) {                          
+    for (let bundleName in config.app.moduleBundles) {
         let bundleObj = config.app.moduleBundles[bundleName];
         if (modulesList.indexOf(bundleName) === -1) {
             log(`Error: ${bundleName} couldn't be found in app config ${appBuilder.configFile}, skipping...`);
@@ -62,7 +62,7 @@ const createConfig = (config, libs, app) => {
         var includes = bundleObj.includes === "all" ? modulesList : bundleObj.includes;
         if (bundleObj.excludes && bundleObj.excludes.length) {
             bundleObj.excludes.forEach(val => { 
-                includes = includes.filter(item => item !== val);                
+                includes = includes.filter(item => item !== val);
             });
         }
 
@@ -74,7 +74,7 @@ const createConfig = (config, libs, app) => {
         }
         let bundleConfigName = fileName(bundleName)
         log(`creating ${bundleConfigName} ...`);
-        configutil.write(bundleConfigName, result, false, 
+        configutil.write(bundleConfigName, result, false,
 `targetModule: target module which will be replace by this bundle
 includes: [] list of modules to bundle
 `);
@@ -85,7 +85,7 @@ includes: [] list of modules to bundle
 const build = config => {
     if (!config.app || !config.app.moduleBundles || !Object.keys(config.app.moduleBundles).length) {
         return true;
-    }    
+    }
     const appDir = path.join(config.targetDir, config.app.targetDir);    
     const app = configutil.read(appBuilder.configFile);
     const libs = configutil.read(libsBuilder.configFile);    
@@ -103,7 +103,7 @@ const build = config => {
         if (!bundle) {
             continue;
         }
-        
+
         let bundleTarget = modules[bundle.targetModule];
         let temp = path.join(os.tmpdir(), bundle.targetModule.replace(new RegExp("/", "g"), "-"));
         try{ fs.unlinkSync(temp); } catch (e) {}
@@ -114,9 +114,9 @@ const build = config => {
             if (moduleId === bundle.targetModule && bundle.replacementExp) {
                 
                 content = configutil.templateStr(bundle.replacementExp, bundle) + os.EOL;
-            
+
             } else {
-                
+
                 const include = modules[moduleId];
                 content = fsutil.readFileSync(include);
                 if (!content) {
@@ -126,7 +126,7 @@ const build = config => {
                 content = content.toString();
                 
                 if (moduleId.startsWith("text!")) {
-                
+
                     content = "define('" + moduleId + "',[],()=> '" + 
                         content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "');" + 
                         os.EOL;
@@ -152,7 +152,7 @@ const build = config => {
         log(`writting bundle file ${bundleTarget} ...`);
         fs.copyFileSync(temp, bundleTarget);
     }
-    
+
 }
 
 module.exports = {
