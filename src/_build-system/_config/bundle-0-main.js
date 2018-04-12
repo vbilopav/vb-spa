@@ -13,7 +13,7 @@ replacementExp: template expression that will return replacement for targetFile 
 ({
     targetFile: "main.js",
     targetModule: "main",
-    includes: [        
+    includes: [
         "sys/template-helpers",
         "sys/extensions",
         "sys/model",
