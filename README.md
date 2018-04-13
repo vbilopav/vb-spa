@@ -1,6 +1,6 @@
 # VBSPA Single-Page Application Framework
 
-VBSPA is JavaScript framework that allows you to easily create amazing fast and slick Single-Page Web Applications (SPA)[https://en.wikipedia.org/wiki/Single-page_application].
+VBSPA is JavaScript framework that allows you to easily create amazing fast and slick Single-Page Web Applications [SPA](https://en.wikipedia.org/wiki/Single-page_application).
 
 SPA web applications don't require reload on every request. As result they are extremly fast and slick and user session is preserved. 
 That means that SPA application provide user with full, native, desktop-like user experiencem, without annoying reloads and without loosing user session or work.
@@ -10,10 +10,10 @@ of pages. That is common myth about SPA applications. Views (text templates and/
 
 This framework is built for simplicity and speed. Doesn't need or use any transpiling or parsing. Runtime code, when minified is around **7.5KB**.
 
-It also doesn't introduce any new syntax, special markup or anything like that. So learning curve should be shallow and you can get started fast. For example, if you already know JavaScript (ES6 template strings syntax)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals] then you already know template syntax for this framework.
+It also doesn't introduce any new syntax, special markup or anything like that. So learning curve should be shallow and you can get started fast. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework.
 
 To achieve all of this - framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically, 
-again, to achieve simplicity and speed. But that also means that it cannot be transpiled into old JavaScript ES5. Good news is that doesn't have to. Here is curent (compatibility table for ES6)[https://kangax.github.io/compat-table/es6/]. This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to 
+again, to achieve simplicity and speed. But that also means that it cannot be transpiled into old JavaScript ES5. Good news is that doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to 
 use different browser. 
 
 ## Feature list
@@ -71,11 +71,14 @@ something to be loaded on demand or you just want to left out some portions of a
 
 #### Node.js
 
-- Intstall node.js to restore dependend modules and to run build tool
+- [Intstall node.js](https://nodejs.org/en/download/) to restore dependend modules and to run build tool
 
 #### Local web server
 
-- If you don't have one, install node [http-server](https://www.npmjs.com/package/http-server)
+- If you don't have one, install node's [http-server](https://www.npmjs.com/package/http-server) with
+```
+npm install http-server -g
+```
 
 ### Steps:
 
