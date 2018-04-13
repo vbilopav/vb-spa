@@ -1,82 +1,117 @@
 # VBSPA Single-Page Application Framework
 
+VBSPA is JavaScript framework that allows you to easily create amazing fast and slick Single-Page Web Applications (SPA)[https://en.wikipedia.org/wiki/Single-page_application].
 
+SPA web applications don't require reload on every request. As result they are extremly fast and slick and user session is preserved. 
+That means that SPA application provide user with full, native, desktop-like user experiencem, without annoying reloads and without loosing user session or work.
 
-This is a application template for your building custom, amazing and fast JavaScript/HTML5 - Single-Page Applications (SPA)[https://en.wikipedia.org/wiki/Single-page_application] 
+That doesn't mean that SPA applications are not suitable for large and complex webs like news portals or blogs that need to server thousands 
+of pages. That is common myth about SPA applications. Views (text templates and/or modules) can be loaded dynamically and when needed.
 
-No transpiling, no trans-transpiling, no parsing, preparsing, pre-preparsing, compiling, no pre-tans-comp-iling, no gigantic cryptic configuration and only one small external depency. No nothing. Just pure JavaScript love in ES6. Core infrastructure part, when minified and bundled is only 7K! If this was framework, I think it would be smallest and fastest. Maybe one day it will. But I don't think world needs another framework. Or does it?
+This framework is built for simplicity and speed. Doesn't need or use any transpiling or parsing. Runtime code, when minified is around **7.5KB**.
 
-It works amazingly smooth on latest Chrome, Firefox and Edge. IE is not supported nor it will be. Ever.
+It also doesn't introduce any new syntax, special markup or anything like that. So learning curve should be shallow and you can get started fast. For example, if you already know JavaScript (ES6 template strings syntax)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals] then you already know template syntax for this framework.
 
-You may use this template to build your own apps without frameworks as you please. It is built with having on mind buidling of web-based tools with desktop feel, so it is perfect for that purpose.
+To achieve all of this - framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically, 
+again, to achieve simplicity and speed. But that also means that it cannot be transpiled into old JavaScript ES5. Good news is that doesn't have to. Here is curent (compatibility table for ES6)[https://kangax.github.io/compat-table/es6/]. This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to 
+use different browser. 
 
-### Synopsis
+## Feature list
 
-Run this application to go trough examples. 
+#### JavaScript modularity without transpilation
 
-Every view (or page) is demonstration of another feature. If you want use it in you project, just copy what you need and that is it. You may customize it or adapt it to your specific need. 
+It just uses RequireJS module loader directly. AMD (Asynchronous Module Definition), and its most popular implementation RequireJS is favored to CommonJS because of its asynchronous features to achieve effeciency. This is only dependency (6KB).
 
-Entire application logic, that might be considered as "framework" when minified is under **7K**. See [sys dir](https://github.com/vbilopav/vb-spa/tree/master/src/app/sys)
+#### Templating engine with familiar syntax. 
 
-Feature list includes:
+It uses ES6 template string which are supported nativly by browsers. Templating includes processing custom data and template composition (ability to import another template into specific place. See wiki for more information.
 
-- Templating engine with familiar syntax. It uses ES6 template string which are supported nativly by browsers, so it should be as fast as possible. Templating includes composition, iterators, and more...
+#### Client side router 
 
-- Client side router that uses hashes or hashbangs. Hashless client side router is with normal url's is not implemented because I don't know how to do that on client side. Any help would be appritiated.
+With hashes or with hashbangs. For example `yourwebsite.com#/route1/param1/.../` is hash route. That is how single page applications work, since they have to implement entire framework, including routing on client. There is also possibility of hasbangs, for example `yourwebsite.com#!/route1/param1/.../`. Hashbang routes have better search engine optimization. More info in wiki...
 
-- View engine that that can map routes to text html files, paramatrized templates, class or object modules, and knows how to remember view state and scroll position. It also supports dependency injection for view modules and templates.
+####  View engine that works seamlessly with router to map:
 
-- Mixing of JavaScript and HTML inside same file with languague support for vs code without JSX and related parsing.
+- Appropriate html text template, 
+- Parametrized html text template that can process custom data parameters from router using templating engine,
+- Custom module that can be JavaScript object or class. That module can then import other modules or templates, etc.
+- Remote, crossdomain module or remote, crossdomain template that uses cors internally and works like any other module or template to support extreme
+vertical scalability with composite web pages and microservices.
 
-- Model binding. Bi-directional - programmatic as well as declarative (inside HTML).
+It also supports dependency injection of another template or module trough router definition. For more details see wiki pages.
 
-- Demo also include comprehensive examples for every feature (that I've used for testing and development) and as well one more complex example with master/detail remote data fetching.
+#### Mixing of JavaScript and HTML inside module
 
-## Still under construction: 
+If you prefer this style of frontend architecture (I do), there is ability to seamlessly mix your JavaScript code with HTML without 
+having to use JSX parsing and still have full languague support for HTML (for Visual Studio Code and JetBrains development enviorments).
+Wiki pages...
 
-- Custom module loader to get rid of RequireJS dependency. It should be faster and smaller and it will have 0 dependencies.
+#### Bi-directional model binding
 
-- Build tool for minifying and bundling. Custom build tool needs to include fine tuning option. Menaing, there has to be way to bundle region of application separatly (once used frequently from those that will be loaded when needed.) Also, I want to make it as simple as possible. It will be probably another SPA web app that will run build tool.
+Model binding means ability to declare some data model in you model and when you change some value in your data model, 
+some UI should change also. That means that model and UI model are bind. Bi-directional means when you change value in your 
+UI element, model should change too. This can be achieved declaratively (trough HTML, without any special syntax) or 
+programmatically (trough code telling your model with whom to bind). More info on wiki...
 
-- Feature detection script so that older browser and IE users can see nice little message to upgrade their browsers or quit using IE.
+#### Build tool
 
-## About transpiling
+Build tool is also included that allows you to:
 
-As far as I understand - transpiling is a process of automatically converting JavaScript code from ECMA6 (ECMAScript 2015 or ES6) syntax to older ECMA5 syntax, usually with help of other JAvaScript frameworks for that purpose, such as Babel for example. 
+- Minify and copy your modules, html and css
+- Create bundles for your your modules, html or css
+- Fine tune and tweak your SPA application
 
-This template/framework doesn't use any transpiling, it doesn't need to.
-
-This current browser (compatibility table for ES6)[https://kangax.github.io/compat-table/es6/].
-
-So, only reason why people still doing transpiling is to support for Internet Explorer. There are couple of reasons, in my opinion, why there no need to do that, for example:
-
-- If you are building web based tools like I do, then users need you tools, not the other way around. I can understand need to be available for every user with every old browser on planet - if you are, for example, news portal or that kind of web site. But if you are not, perhaps it is much easier to have feature detection script, and if user browser is not compatible, simply show him or her kindly the meesage to update their browser to stop using IE.
-
-- I am aware that (March 2018) desktop browser market share is still pretty significant for Internet Explorer. Second place with 12.46%. That is unlikely going to change very fast in future if everybody keeps transpiling. Users won't switch browser if they don't have to. Stop appease it, and it (IE) will go away! 
-
-- I'm not sure that some features in this template/frameork even can be transpiled into ECMA5. They are using ECMA6 features dynamically to achieve speed and simlicity. So, transpiler would probably interpret those as just another string and it wouldn't work. However, if somone like to give it a try, I'd like to see that.
+Bundling is important process in SPA applications because of its modular nature. 
+Modular fronted application need to be bundled to avoid high netowork traffic when loading all of those bundles. On the other side, you don't want everything to be bundled, perhaps you want
+something to be loaded on demand or you just want to left out some portions of application used rarely. In other words - fine tuning. More info on this on wiki. 
 
 ## Getting Started
 
-To run this this demo, you'll have to have local web server. Just clone the repo and point the web server to /src folder and this it.
-If you don't have web server, you can use node's [http-server](https://www.npmjs.com/package/http-server)
+### Prerequisite
+
+#### Node.js
+
+- Intstall node.js to restore dependend modules and to run build tool
+
+#### Local web server
+
+- If you don't have one, install node [http-server](https://www.npmjs.com/package/http-server)
+
+### Steps:
+
+- Clone this repo:
 
 ```
-git clone https://github.com/vbilopav/vb-spa
-npm install
+$ git clone https://github.com/vbilopav/vb-spa
 ```
 
-To install http server and open in browser:
+- Restore npm modules:
 
 ```
-npm install http-server -g
-cd .\src\
-http-server -o
+$ npm install
 ```
 
-## Contribution
+- To open source code example web site in you browser just point your local web server to
+`src` dir, or using http-server:
 
-Feel free to create pull requests.
+```
+$ cd src/
+$ http-server -o
+```
+
+- To build and open minified and bundled version:
+```
+$ cd src/_build-system/
+$ node build.js --target=mybuild
+
+...
+
+build.js >
+build.js > finished!
+
+$ cd build/mybuild/
+$ http-server -o
+```
 
 ## License
 

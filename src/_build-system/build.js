@@ -63,12 +63,14 @@ try {
     }
     if (targetDirArg) {
         config.autoTargetDirExp = targetDirArg;
+        config.targetDir = null;
     }
+    console.log(config.autoTargetDirExp);
 
     log("");
     log("parsing configuration...");
     configutil.parse(config);
-    if (defaultConfig) {
+    if (defaultConfig || targetDirArg) {
         log(`creating new config -> ${configutil.configFile("user-config.js")}...`);  
         configutil.write("user-config.js", config, true, "copy of default-config.js");
     }
