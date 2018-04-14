@@ -280,7 +280,12 @@ define([], () => {
             data: {
                 title: "Crossdomain template example",
                 category: "dynamic"
-            }
+            },
+            paramsMap: (...params) => {
+                return {
+                    foo: "bar"
+                }
+            },
         }, 
 
         "/crossdomain-text-example": {
