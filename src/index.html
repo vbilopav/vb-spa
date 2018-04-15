@@ -46,24 +46,15 @@
     </script>
     <script id="loading-screen-script" type="text/javascript">
         (function() {
-            var supported = true;
             for (var feature in Modernizr) {
-                if (typeof Modernizr[feature] === "boolean" && Modernizr[feature] == false) {
-                    supported = false;
-                    break;
+                if (!Modernizr[feature]) {
+                    window.location = "/not-supported.html";
+                    return;
                 }
-            }
-            if (!supported) {
-                window.location = "/not-supported.html";
-                return;
             }
             var e = document.getElementById("loading-screen");
             e.innerHTML = "Loading...";
-            setTimeout(function(){
-                if (e) { 
-                    e.removeAttribute("style");
-                }
-            }, 500);
+            setTimeout(function(){e.removeAttribute("style")}, 500);
         })()
     </script>
 
