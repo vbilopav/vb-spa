@@ -33,7 +33,7 @@ const write = (name, value, addPath=false, additionalComment="") => {
     }
     let header = `/*
 ***     auto-generated at ${new Date().toISOString()}      ***
-***     to re-create delete run build.js --force        ***
+***     to re-create delete or run build.js --force        ***
 
 ${additionalComment}
 */
