@@ -1,19 +1,22 @@
 # VBSPA Single-Page Application Framework
 
-VBSPA is JavaScript framework that allows you to easily create amazing fast and slick Single-Page Web Applications [SPA](https://en.wikipedia.org/wiki/Single-page_application).
+**VBSPA** is JavaScript Framework that offers simple and easy way to create amazing fast and slick **Single-Page Web Applications** [SPA](https://en.wikipedia.org/wiki/Single-page_application).
 
-SPA web applications don't require reload on every request. As result they are extremly fast and slick and user session is preserved. 
-That means that SPA application provide user with full, native, desktop-like user experiencem, without annoying reloads and without loosing user session or work.
+SPA web applications don't require and don't do any reload on view request. As result they are extremly fast and slick and user session is preserved. 
 
-That doesn't mean that SPA applications are not suitable for large and complex webs like news portals or blogs that need to server thousands 
-of pages. That is common myth about SPA applications. Views (text templates and/or modules) can be loaded dynamically and when needed.
+That means that SPA applications can offer **full, native, desktop-like user experience** - without annoying reloads and without loosing user session or work.
 
-This framework is built for simplicity and speed. Doesn't need or use any transpiling or parsing. Runtime code, when minified is around **7.5KB**.
+This Framework was built from ground-up for simplicity and speed - with having primarly on mind building **web-based tools** and web apps with desktop-like experince.
 
-It also doesn't introduce any new syntax, special markup or anything like that. So learning curve should be shallow and you can get started fast. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework.
+However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sites like news portals or blogs that need to server thousands of pages. Views can be loaded dynamically and when needed. 
 
-To achieve all of this - framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically, 
-again, to achieve simplicity and speed. But that also means that it cannot be transpiled into old JavaScript ES5. Good news is that doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to 
+It supports cross-domain views, so it can be also used for microservice-based composite web UI's that can be scaled to the moon and back.
+
+Runtime code, when minified is around **7.5KB**. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have **28 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
+
+New syntax or special markup is minimal, almost none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework.
+
+Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically to achieve simplicity and speed. That also means that it cannot be transpiled into JavaScript ES5. Good news is that doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to 
 use different browser. 
 
 ## Feature list
