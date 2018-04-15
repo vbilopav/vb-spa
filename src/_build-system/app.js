@@ -124,13 +124,13 @@ const build = config => {
         files = getSourceFiles(config, to);
     
     for (let file in files) {
-        let fileValue = files[file];    
-        let fromFile = path.join(from, fileValue.fileClean);         
-        let toFile = fileValue.fileFull;           
+        let fileValue = files[file];
+        let fromFile = path.join(from, fileValue.fileClean);
+        let toFile = fileValue.fileFull;
         
         if (fileValue.minify !== false) {
             
-            let content = fsutil.readFileSync(fromFile, "utf8");   
+            let content = fsutil.readFileSync(fromFile, "utf8");
             if (content == null) {
                 continue;
             }
@@ -175,7 +175,7 @@ const build = config => {
 
             log(`copying ${fromFile} ...`);
             try {
-                fs.copyFileSync(fromFile, toFile);  
+                fs.copyFileSync(fromFile, toFile);
             } catch (error) {
                 log(error);
                 continue;

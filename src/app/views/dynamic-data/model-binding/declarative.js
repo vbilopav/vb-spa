@@ -45,7 +45,7 @@ define(["spa/model"], Model => {
                 // If name and id don't exist it will be skipped.
                 // Binds events also with data-event-eventname
                 //
-                model.bind(element.find("#model-area"));      
+                model.bind(element.find("#model-area"));
                 
                 element.find("#btn-set-name").on("click", () => {
                     let value = prompt("Please enter new value for model.name", model.name.value);

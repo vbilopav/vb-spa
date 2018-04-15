@@ -357,9 +357,9 @@ const parseApp = config => {
 
     parseAppItem(config.app, "config.app");
 
-    if (!(config.app.bundles instanceof Array)) {
-        config.app.bundles = [];
-        log("config.app.bundles set to default empty array");
+    if (typeof config.app.moduleBundles !== "object") {
+        config.app.moduleBundles = {};
+        log("config.app.moduleBundles set to default empty object");
     }
 }
 
