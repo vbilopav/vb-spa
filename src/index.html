@@ -39,14 +39,32 @@
 </head>
 <body>
 
-    <div id="loading-screen" style="display: none">
-        Loading ...
-    </div>
+    <div id="loading-screen" style="display: none"></div>
+    <script type="text/javascript">
+        document.getElementById("loading-screen").innerHTML = "Detecting features...";
+        document.write('<script src="' + (window._spa.libsUrl ? window._spa.libsUrl : "") + 'feature-detect.js">\x3C/script>');
+    </script>
     <script id="loading-screen-script" type="text/javascript">
-        setTimeout(function(){
-            var e = document.getElementById("loading-screen"); 
-            if (e) e.removeAttribute("style");
-        }, 500);
+        (function() {
+            var supported = true;
+            for (var feature in Modernizr) {
+                if (typeof Modernizr[feature] === "boolean" && Modernizr[feature] == false) {
+                    supported = false;
+                    break;
+                }
+            }
+            if (!supported) {
+                window.location = "/not-supported.html";
+                return;
+            }
+            var e = document.getElementById("loading-screen");
+            e.innerHTML = "Loading...";
+            setTimeout(function(){
+                if (e) { 
+                    e.removeAttribute("style");
+                }
+            }, 500);
+        })()
     </script>
 
     <div id="app-container" style="display: none">

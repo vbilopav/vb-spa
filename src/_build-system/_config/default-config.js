@@ -65,6 +65,7 @@
             'main': {
                 includes: "all",
                 excludes: [
+                    "../libs/feature-detect",
                     "../libs/require",
                     "../libs/text",
                     "spa/template",

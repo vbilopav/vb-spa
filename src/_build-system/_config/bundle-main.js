@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-15T13:18:02.179Z      ***
+***     auto-generated at 2018-04-15T14:55:18.476Z      ***
 ***     to re-create delete run build.js --force        ***
 
 targetModule: target module which will be replace by this bundle
@@ -9,16 +9,14 @@ includes: [] list of modules to bundle
 ({
     targetModule: "main",
     includes: [
+        "../libs/feature-detect",
         "app",
         "main",
         "routes",
-        "spa/cors-template",
-        "spa/cors-text",
         "spa/extensions",
         "spa/model",
         "spa/router",
         "spa/template-helpers",
-        "spa/template",
         "spa/view-manager",
         "template!templates/layout.html",
         "template!templates/navigation.html",
