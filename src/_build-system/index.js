@@ -28,7 +28,7 @@ module.exports = {
             log(`Copying from ${from} to ${to} ...`);
 
             try {
-                fs.copyFileSync(from, to);  
+                fs.copyFileSync(from, to);
             } catch (error) {
                 log(error);
                 return;

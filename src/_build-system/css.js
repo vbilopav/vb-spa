@@ -153,7 +153,8 @@ const build = config => {
         let scr = dom.window.document.querySelector("#" + config.css.index.id);
         if (scr) {
             let content =
-            scr.innerHTML = `(function () {var u = window._spa.cssUrl ? window._spa.cssUrl : "", q = window._spa.version ? "?" + require.urlArgs : ""; document.write(`;
+            scr.innerHTML = '(function () {var u = (window._spa.cssUrl ? window._spa.cssUrl : "") + "/", ' + 
+                            'q = window._spa.version ? "?" + require.urlArgs : ""; document.write(';
             for (let idx in overallFiles) {
                 let file = overallFiles[idx];
                 content = content + `'<link rel="stylesheet" href="' + u + '${file}"' + q + '" />'`;
