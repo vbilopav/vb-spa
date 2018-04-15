@@ -67,9 +67,9 @@
                 excludes: [
                     "../libs/require",
                     "../libs/text",
-                    "sys/template",
-                    "sys/cors-template",
-                    "sys/cors-text",
+                    "spa/template",
+                    "spa/cors-template",
+                    "spa/cors-text",
                     "template!views/templates/unbundled-parametrized-view.html",
                     "text!views/templates/unbundled-text-view.html",
                     "text!views/modules/new-bundle/template.html",

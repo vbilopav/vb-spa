@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-12T19:03:36.242Z      ***
+***     auto-generated at 2018-04-15T13:18:49.926Z      ***
 ***     to re-create delete run build.js --force        ***
 
 {
@@ -33,49 +33,49 @@
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/cors-template"
+        module: "spa/cors-template"
     },
     'spa/cors-text.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/cors-text"
+        module: "spa/cors-text"
     },
     'spa/extensions.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/extensions"
+        module: "spa/extensions"
     },
     'spa/model.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/model"
+        module: "spa/model"
     },
     'spa/router.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/router"
+        module: "spa/router"
     },
     'spa/template-helpers.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/template-helpers"
+        module: "spa/template-helpers"
     },
     'spa/template.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/template"
+        module: "spa/template"
     },
     'spa/view-manager.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "sys/view-manager"
+        module: "spa/view-manager"
     },
     'templates/layout.html': {
         minify: true,

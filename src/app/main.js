@@ -1,1 +1,1 @@
-define(["app", "sys/extensions"], app => app());
+define(["app", "spa/extensions"], app => app());

@@ -64,10 +64,10 @@
         requirejs.config({
             paths: {
                 text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", (window._spa.libsUrl ? "../" + window._spa.libsUrl : "") + "text"],
-                sys: (window._spa.sysPath ? window._spa.sysPath : "sys/"),
-                template: (window._spa.sysPath ? window._spa.sysPath + "/" : "sys/") + "template",
-                "cors-text": (window._spa.sysPath ? window._spa.sysPath + "/" : "sys/") + "cors-text",
-                "cors-template": (window._spa.sysPath ? window._spa.sysPath + "/" : "sys/") + "cors-template"
+                sys: (window._spa.sysPath ? window._spa.sysPath : "spa/"),
+                template: (window._spa.sysPath ? window._spa.sysPath + "/" : "spa/") + "template",
+                "cors-text": (window._spa.sysPath ? window._spa.sysPath + "/" : "spa/") + "cors-text",
+                "cors-template": (window._spa.sysPath ? window._spa.sysPath + "/" : "spa/") + "cors-template"
             }
         });
     </script>

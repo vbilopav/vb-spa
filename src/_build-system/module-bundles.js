@@ -86,9 +86,9 @@ const build = config => {
     if (!config.app || !config.app.moduleBundles || !Object.keys(config.app.moduleBundles).length) {
         return true;
     }
-    const appDir = path.join(config.targetDir, config.app.targetDir);    
+    const appDir = path.join(config.targetDir, config.app.targetDir);
     const app = configutil.read(appBuilder.configFile);
-    const libs = configutil.read(libsBuilder.configFile);    
+    const libs = configutil.read(libsBuilder.configFile);
     const modules = {};
 
     for (let key in libs) {  
@@ -133,7 +133,7 @@ const build = config => {
                 
                 } else if (moduleId.startsWith("template!")) {
 
-                    content = "define('" + moduleId + "',['sys/template-helpers'], helper => { var name = '" + 
+                    content = "define('" + moduleId + "',['" + config.app.sysPath + "/template-helpers'], helper => { var name = '" + 
                         moduleId + "'.replace('template!', '');  return (data, locale) => helper.parse(name, '" + 
                         content.replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "', data, locale);});" + 
                         os.EOL;

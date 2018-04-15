@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-12T19:03:36.295Z      ***
+***     auto-generated at 2018-04-15T13:18:02.179Z      ***
 ***     to re-create delete run build.js --force        ***
 
 targetModule: target module which will be replace by this bundle
@@ -12,11 +12,14 @@ includes: [] list of modules to bundle
         "app",
         "main",
         "routes",
-        "sys/extensions",
-        "sys/model",
-        "sys/router",
-        "sys/template-helpers",
-        "sys/view-manager",
+        "spa/cors-template",
+        "spa/cors-text",
+        "spa/extensions",
+        "spa/model",
+        "spa/router",
+        "spa/template-helpers",
+        "spa/template",
+        "spa/view-manager",
         "template!templates/layout.html",
         "template!templates/navigation.html",
         "views/dynamic-data/di/class-module",

@@ -1,6 +1,6 @@
 define([
     "module", 
-    "sys/template-helpers"
+    "spa/template-helpers"
 ], (
     _,
     helper

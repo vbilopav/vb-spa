@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-12T19:03:36.313Z      ***
+***     auto-generated at 2018-04-15T13:18:02.186Z      ***
 ***     to re-create delete run build.js --force        ***
 
 targetModule: target module which will be replace by this bundle

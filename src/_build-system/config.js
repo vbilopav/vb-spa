@@ -60,7 +60,7 @@ const getModule = (sourceFile, file, config) => {
     }
     if (config.app.sysPath) {
         if (file.startsWith(config.app.sysPath)) {
-            file = file.replace(config.app.sysPath, "sys");
+            file = file.replace(config.app.sysPath, "spa");
         }
     }
     return file;

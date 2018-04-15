@@ -1,6 +1,6 @@
 define([
     "views/dynamic-data/remote-data-example/data",
-    "sys/model"
+    "spa/model"
 ], (
     fetchData,
     Model

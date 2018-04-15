@@ -1,4 +1,4 @@
-define(["sys/template-helpers"], (templateHelper) => {
+define(["spa/template-helpers"], (templateHelper) => {
 
     const 
         nameStartsWithPrefix = name => {

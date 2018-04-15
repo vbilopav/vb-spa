@@ -1,11 +1,11 @@
 /*
-***     auto-generated at 2018-04-12T19:03:36.207Z      ***
+***     auto-generated at 2018-04-15T13:18:49.899Z      ***
 ***     to re-create delete run build.js --force        ***
 
 {
     'file name relative to libs dir': {
         minify: false to copy, true for default minify config or minify options object,
-        minifyEngine: uglify-es, uglify-js     
+        minifyEngine: uglify-es, uglify-js
     }
 }, ...
 */
