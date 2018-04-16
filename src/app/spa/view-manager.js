@@ -100,24 +100,25 @@ define(["spa/template-helpers"], (templateHelper) => {
                     if (found.type === types.class || found.type === types.object) {
                         if (found.uriHash !== uriHash) {
                             let newContent;
+                            
                             if (found.instance.change) {
                                 newContent = found.instance.change(args.params, element);
-                            } else {
-                                if (!found.instance.renderOnceIfChangeNotPresent) {
-                                    newContent = found.instance.render(args.params, element);
-                                }
+                            } else if (!found.instance.renderOnce) {
+                                newContent = found.instance.render(args.params, element);                            
                             }
+
                             if (newContent) {
                                 element.html(newContent);
                             }
+
                             element.show();
+                            
                             if (found.instance.changed) {
                                 found.instance.changed(args.params, element);
-                            } else {
-                                if (found.instance.rendered) {
-                                    found.instance.rendered(args.params, element);
-                                }
+                            } else if (found.instance.rendered) {
+                                found.instance.rendered(args.params, element);                                
                             }
+                            
                             found.uriHash = uriHash;
                         }  
                         this._current = element.show();
@@ -147,7 +148,9 @@ define(["spa/template-helpers"], (templateHelper) => {
                     let type = getViewType(view, viewName),
                         element = "span".createElement(elementId),
                         data = {type: type, uriHash: uriHash, x: 0, y: 0, id: args.id};
+                    
                     element.dataset.id = args.id;
+                    
                     if (type === types.string) {          
                         data.element = element.html(view);
                     } else if (type === types.template) {
@@ -168,6 +171,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                         }
                         !data.instance.rendered || data.instance.rendered(args.params, element);
                     }
+                    
                     this._views[args.id] = data;
                     this._container.append(element);
                     this._current = element;

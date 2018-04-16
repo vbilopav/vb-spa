@@ -1,14 +1,14 @@
 define(["template!views/modules/_default.html"], template => class {
 
     //
-    // if renderOnceIfChangeNotPresent view option is set to true (false is default)
+    // if renderOnce view option is set to true (false is default)
     // render method will be called only once, first time reagrdless of parameters change 
     // and the fact that change method is missing.
     //
     // we do this to execute render once and take reference of element which will be changed later in events example (rendered and changed)
     //
     constructor() {
-        this.renderOnceIfChangeNotPresent = true;
+        this.renderOnce = true;
     }
 
     render(params, element) {
