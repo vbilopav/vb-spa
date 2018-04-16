@@ -22,7 +22,7 @@ define([], () => class {
                 id: data.id || route.replace(/\//g, ""),
                 name: route,
                 view: data.view,
-                paramsMap: data.paramsMap || ((...args) => (args.length === 0 ? {} : false)),
+                paramsMap: data.paramsMap || (args => (args.length === 0 ? {} : false)),
                 data: data.data
             }
         }
@@ -96,7 +96,7 @@ define([], () => class {
             if (uriPieces[uriPieces.length - 1] == "") {
                 uriPieces.splice(-1, 1);
             }
-            params = route.paramsMap(...uriPieces.slice(sliceIndex));
+            params = route.paramsMap(uriPieces.slice(sliceIndex));
         }
 
         if (route === undefined || !params) {

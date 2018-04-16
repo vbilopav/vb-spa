@@ -28,7 +28,7 @@ define([], () => {
 
         "/parameterized": {
             view: "template!views/templates/parameterized.html", 
-            paramsMap: (...params) => {
+            paramsMap: params => {
                 if (params.length > 3) {
                     return false;
                 }
@@ -46,7 +46,7 @@ define([], () => {
 
         "/parameterized/sub-route": {
             view: "template!views/templates/parameterized-sub-route.html", 
-            paramsMap: (...params) => {
+            paramsMap: params => {
                 if (params.length > 1) {
                     return false;
                 }
@@ -66,7 +66,7 @@ define([], () => {
                 title: "Composite template",
                 category: "templates"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
 
         "/unbundled-text-view": {
@@ -83,7 +83,7 @@ define([], () => {
                 title: "Unbundled parametrized view template",
                 category: "templates"
             },         
-            paramsMap: (...params) => {
+            paramsMap: params => {
                 if (params.length > 1) {
                     return false;
                 }
@@ -115,7 +115,7 @@ define([], () => {
                 title: "Simple text from class module",
                 category: "modules"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
  
         "/class-module-change-element": {
@@ -124,7 +124,7 @@ define([], () => {
                 title: "Class module with change method",
                 category: "modules"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
  
         "/class-module-element-manipulation": {
@@ -133,7 +133,7 @@ define([], () => {
                 title: "Class module - element manipulation",
                 category: "modules"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
  
         "/object-module-simple": {
@@ -142,7 +142,7 @@ define([], () => {
                 title: "Simple text from object module",
                 category: "modules"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
  
         "/object-module-change-element": {
@@ -151,7 +151,7 @@ define([], () => {
                 title: "Object module with change method",
                 category: "modules"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
  
         "/object-module-element-manipulation": {
@@ -160,7 +160,7 @@ define([], () => {
                 title: "Object module - element manipulation",
                 category: "modules"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
 
         "/view-events": {
@@ -169,7 +169,7 @@ define([], () => {
                 title: "View events",
                 category: "modules"
             },
-            paramsMap: (...params) => params
+            paramsMap: params => params
         },
 
         "/events-handlings": {
@@ -259,7 +259,7 @@ define([], () => {
 
         "/remote-data-example/details": {
             view: "views/dynamic-data/remote-data-example/framework-details",
-            paramsMap: (...params) => {
+            paramsMap: params => {
                 if (params.length !== 1) {
                     return false;
                 }
@@ -281,7 +281,7 @@ define([], () => {
                 title: "Crossdomain template example",
                 category: "dynamic"
             },
-            paramsMap: (...params) => {
+            paramsMap: params => {
                 return {
                     foo: "bar"
                 }

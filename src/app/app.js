@@ -22,7 +22,7 @@ define([
         });
         
     return () => {
-        routerData = router.getData();
+        const routerData = router.getData();
         const app = document.body.find("#app-container").html(
             layout({
                 home: routerData.filter(item => item.id == "home")[0],
