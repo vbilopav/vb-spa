@@ -8,6 +8,12 @@ define([], () => class {
         this._hash === "#" || this._hash === "#!" || (() => {throw this._hash})();
         this._test = options.test || (route => /^[ A-Za-z0-9_@()/.-]*$/.test(route));
         let routes = options.routes || (() => {throw options.routes})();
+        if (routes instanceof Array) {
+            routes = routes.reduce(function(result, item, index) {
+                result[item] = {};
+                return result;
+              }, {});
+        }
         this._routes = {};
         for(let route in routes) {
             let data = routes[route];
@@ -22,8 +28,8 @@ define([], () => class {
         }
         this._current = undefined; 
         this._manager = {
-            reveal: ({id,view,params,uri}) => {}, // --> Promise --> elementId
-            leave: (viewId, elementId) => this._manager // --> this
+            reveal: ({id,view,params,uri}) => {return new Promise(resolve=>resolve())},
+            leave: (viewId, elementId) => this._manager
         };
     }
 
