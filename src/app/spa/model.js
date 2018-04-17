@@ -7,9 +7,9 @@ define([], () => class {
     bind(element) {
         let search = "input, select, button, span, div, a";
         if (!this._model) {
-            element.findAll(search).forEach((e) => {this._forEachDeclarative(e)});
+            element.findAll(search).forEach(e => {this._forEachDeclarative(e)});
         } else {
-            element.findAll(search).forEach((e) => {this._forEachProgrammatic(e)});
+            element.findAll(search).forEach(e => {this._forEachProgrammatic(e)});
         }
         return this;
     }
