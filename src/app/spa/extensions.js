@@ -9,7 +9,7 @@ define([], () => {
     }
 
     testPrototypeExtension(HTMLElement, [
-        "find", "findAll", "show", "hide", "html", "appendTo", "addClass", "removeClass", "on", "off", "createElement"
+        "find", "findAll", "show", "hide", "html", "appendTo", "addClass", "removeClass", "on", "off", "html"
     ]);
 
     HTMLElement.prototype.find = function(search) {
@@ -86,6 +86,8 @@ define([], () => {
         return this;
     }
     
+    testPrototypeExtension(String, ["hashCode", "createElement"]);
+    
     String.prototype.createElement = function(id, content) {
         let e = document.createElement(this);
         if (id) {
@@ -96,8 +98,6 @@ define([], () => {
         }
         return e;
     }    
-
-    testPrototypeExtension(String, ["hashCode", "html"]);
 
     String.prototype.hashCode = function() {
         let h = 0;
