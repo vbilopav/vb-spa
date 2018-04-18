@@ -163,7 +163,8 @@ const build = config => {
                 fs.writeFileSync(fileValue.fileFull, content.toString(), "utf8");
             } else {
                 let final;
-                if (fileValue.minifyEngine === "uglify-js" || fileValue.minifyEngine === "uglify-es") {
+                if (fileValue.minifyInlineHtml !== false && (fileValue.minifyEngine === "uglify-js" || fileValue.minifyEngine === "uglify-es")) {
+                    htmlMinifyOpts = typeof fileValue.minifyInlineHtml === "object" ? fileValue.minifyInlineHtml : htmlMinifyOpts;
                     final = minifyInlineHtml(result.code, htmlMinifyOpts);
                 } else {
                     final = result.code;

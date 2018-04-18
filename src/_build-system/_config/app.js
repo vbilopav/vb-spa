@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-15T16:04:34.323Z      ***
+***     auto-generated at 2018-04-18T07:44:57.286Z      ***
 ***     to re-create delete or run build.js --force        ***
 
 {
@@ -151,10 +151,21 @@
         minifyEngine: "uglify-es",
         module: "views/dynamic-data/remote-data-example/frameworks"
     },
+    'views/dynamic-data/remote-data-example/github-user-info.js': {
+        minify: true,
+        minifyInlineHtml: false,
+        minifyEngine: "uglify-es",
+        module: "views/dynamic-data/remote-data-example/github-user-info"
+    },
     'views/home.html': {
         minify: true,
         minifyEngine: "html-minifier",
         module: "text!views/home.html"
+    },
+    'views/modules/_default.html': {
+        minify: true,
+        minifyEngine: "html-minifier",
+        module: "template!views/modules/_default.html"
     },
     'views/modules/class-module-change-element.js': {
         minify: true,
@@ -226,11 +237,6 @@
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
         module: "views/modules/view-events"
-    },
-    'views/modules/_default.html': {
-        minify: true,
-        minifyEngine: "html-minifier",
-        module: "template!views/modules/_default.html"
     },
     'views/not-found.html': {
         minify: true,

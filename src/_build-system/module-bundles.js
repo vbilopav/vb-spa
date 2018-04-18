@@ -19,8 +19,10 @@ const configExists = config => {
         return true;
     }
     Object.keys(config.app.moduleBundles).forEach(name => {
-        config.app.moduleBundles[name.replace(/(')/mg, "")] = config.app.moduleBundles[name];
-        delete config.app.moduleBundles[name];
+        if (name.startsWith("'") && name.endsWith("'")) {
+            config.app.moduleBundles[name.replace(/(')/mg, "")] = config.app.moduleBundles[name];
+            delete config.app.moduleBundles[name];
+        }        
     });
     for (let moduleName in config.app.moduleBundles) {
         if (!fs.existsSync(fileName(moduleName))) {
