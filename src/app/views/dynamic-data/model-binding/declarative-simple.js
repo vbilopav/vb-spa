@@ -22,7 +22,7 @@ define(["spa/model"], Model => class {
     showButtonClick() {
         console.log("*** current model state ***");
         console.log("model.name.value: " + this.model.text.value);
-        console.log("model.email.value: " + this.model.check.value);
+        console.log("model.email.value: " + this.model.check.checked);
         console.log("----------------------------------------------------------");
     }
 
