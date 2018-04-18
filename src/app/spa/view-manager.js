@@ -169,36 +169,33 @@ define(["spa/template-helpers"], (templateHelper) => {
                         }
                         data.instance = view;
                     }
-                    
-                    if (type === types.object || type === types.class) {
-                        let content = data.instance.render(args.params, element);
-                        if (content instanceof Promise) {
-                            return content.then(s => {
-                                element.html(s);
-                                !data.instance.rendered || data.instance.rendered(args.params, element);
 
-                                this._views[args.id] = data;
-                                this._container.append(element);
-                                this._current = element;
-                                showView(data, element);
-                                return resolve(element.id);
-                            });
-                        } else if (content) {
-                            element.html(content);
-                            !data.instance.rendered || data.instance.rendered(args.params, element);
-
-                            this._views[args.id] = data;
-                            this._container.append(element);
-                            this._current = element;
-                            showView(data, element);
-                            return resolve(element.id);
-                        }
-                    } else {
+                    let resolveFunc = () => {
                         this._views[args.id] = data;
                         this._container.append(element);
                         this._current = element;
                         showView(data, element);
                         return resolve(element.id);
+                    }
+
+                    let contentFunc = c => {
+                        element.html(c);
+                        !data.instance.rendered || data.instance.rendered(args.params, element);
+                    }
+                    
+                    if (type === types.object || type === types.class) {
+                        let content = data.instance.render(args.params, element);
+                        if (content instanceof Promise) {
+                            return content.then(s => {
+                                contentFunc(s);
+                                return resolveFunc();
+                            });
+                        } else if (content) {
+                            contentFunc(content);                            
+                            return resolveFunc();
+                        }
+                    } else {
+                        return resolveFunc();
                     }
                     
                 });
