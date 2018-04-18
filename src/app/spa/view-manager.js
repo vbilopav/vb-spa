@@ -107,20 +107,8 @@ define(["spa/template-helpers"], (templateHelper) => {
                                 newContent = found.instance.render(args.params, element);
                             }
 
-                            if (newContent instanceof Promise) {
-                                newContent.then(s => {
-                                    element.html(s).show();
-                                    if (found.instance.changed) {
-                                        found.instance.changed(args.params, element);
-                                    } else if (found.instance.rendered) {
-                                        found.instance.rendered(args.params, element);
-                                    }
-                                    this._current = element.show();
-                                    showView(found, element);
-                                    found.uriHash = uriHash;
-                                });
-                            } else if (newContent) {
-                                element.html(newContent).show();
+                            let updateFunc = c => {
+                                element.html(c).show();
                                 if (found.instance.changed) {
                                     found.instance.changed(args.params, element);
                                 } else if (found.instance.rendered) {
@@ -130,8 +118,17 @@ define(["spa/template-helpers"], (templateHelper) => {
                                 showView(found, element);
                                 found.uriHash = uriHash;
                             }
+
+                            if (newContent instanceof Promise) {
+                                return newContent.then(s => {
+                                    updateFunc(s);
+                                    return resolve(element.id);
+                                });
+                            } else if (newContent) {
+                                updateFunc(newContent);
+                                return resolve(element.id);
+                            }
                         }
-                        return resolve(element.id);
                     }
                     return reject("unknown type");
                 }
