@@ -98,6 +98,11 @@ define(["spa/template-helpers"], (templateHelper) => {
                     }
 
                     if (found.type === types.class || found.type === types.object) {
+                        let showFunc = () => {
+                            this._current = element.show();
+                            showView(found, element);
+                            found.uriHash = uriHash;
+                        } 
                         if (found.uriHash !== uriHash) {
                             let newContent;
                             
@@ -114,9 +119,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                                 } else if (found.instance.rendered) {
                                     found.instance.rendered(args.params, element);
                                 }
-                                this._current = element.show();
-                                showView(found, element);
-                                found.uriHash = uriHash;
+                                showFunc();
                             }
 
                             if (newContent instanceof Promise) {
@@ -128,6 +131,9 @@ define(["spa/template-helpers"], (templateHelper) => {
                                 updateFunc(newContent);
                                 return resolve(element.id);
                             }
+                        } else {
+                            showFunc();
+                            return resolve(element.id);
                         }
                     }
                     return reject("unknown type");
