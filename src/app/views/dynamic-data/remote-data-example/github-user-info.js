@@ -4,7 +4,7 @@ define([], () => class {
         let response = await fetch(`https://api.github.com/users/${param}`);        
         let result = String.html`
             <p>
-                <h3>Githbub user data</h3>
+                <h3>Github user data</h3>
                 <div class='panel panel-default'>
                 <div class='panel-heading'>${param}</div>
                 <div class='panel-body'>
