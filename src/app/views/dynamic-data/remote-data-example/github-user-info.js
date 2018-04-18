@@ -1,7 +1,7 @@
 define([], () => class {
-     
+
     async render(param, element) {
-        let response = await fetch(`https://api.github.com/users/${param}`);        
+        let response = await fetch(`https://api.github.com/users/${param}`);
         let result = String.html`
             <p>
                 <h3>Github user data</h3>
@@ -11,7 +11,7 @@ define([], () => class {
                     <ul>`;
 
         for (let [key, value] of Object.entries(await response.json())) {
-            result += String.html`                
+            result += String.html`
                         <li>
                             <span>${key}: </span>
                             <span>${value}</span>
@@ -24,5 +24,5 @@ define([], () => class {
             </p>`
         return result;
     }
-    
+
 });

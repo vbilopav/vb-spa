@@ -241,6 +241,10 @@ define([], () => {
             }
         }, 
 
+        "/declarative-simple": {
+            view: "views/dynamic-data/model-binding/declarative-simple"
+        }, 
+
         "/programmatic-model-binding": {
             view: "views/dynamic-data/model-binding/programmatic",
             data: {

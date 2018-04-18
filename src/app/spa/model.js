@@ -2,10 +2,12 @@ define([], () => class {
 
     constructor(model) {
         this._model = model;
+        this._instance = undefined;
     }
 
-    bind(element) {
+    bind(element, instance) {
         let search = "input, select, button, span, div, a";
+        this._instance = instance;
         if (!this._model) {
             element.findAll(search).forEach(e => {this._forEachDeclarative(e)});
         } else {
@@ -23,7 +25,12 @@ define([], () => class {
             if (!dataset.startsWith("event")) {
                 continue;
             }
-            element.on(dataset.replace("event", "").toLowerCase(), this[element.dataset[dataset]]);
+            let name = element.dataset[dataset]; 
+            let instance = this._instance || this;
+
+            element.on(dataset.replace("event", "").toLowerCase(), function(e) {
+                instance[name].call(instance);
+            });
         }
     }
 
