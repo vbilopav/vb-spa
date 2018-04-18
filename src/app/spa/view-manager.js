@@ -54,8 +54,8 @@ define(["spa/template-helpers"], (templateHelper) => {
             return this;
         }
 
-        reveal(args) { //id,view,params,uri
-            return new Promise((resolve, reject) => {
+        async reveal(args) { //id,view,params,uri
+            await new Promise((resolve, reject) => {
                 let found = this._views[args.id],
                     uriHash = args.uri.hashCode(),
                     elementId = getId(uriHash);
@@ -104,25 +104,33 @@ define(["spa/template-helpers"], (templateHelper) => {
                             if (found.instance.change) {
                                 newContent = found.instance.change(args.params, element);
                             } else if (!found.instance.renderOnce) {
-                                newContent = found.instance.render(args.params, element);                            
+                                newContent = found.instance.render(args.params, element);
                             }
 
-                            if (newContent) {
-                                element.html(newContent);
+                            if (newContent instanceof Promise) {
+                                newContent.then(s => {
+                                    element.html(s).show();
+                                    if (found.instance.changed) {
+                                        found.instance.changed(args.params, element);
+                                    } else if (found.instance.rendered) {
+                                        found.instance.rendered(args.params, element);
+                                    }
+                                    this._current = element.show();
+                                    showView(found, element);
+                                    found.uriHash = uriHash;
+                                });
+                            } else if (newContent) {
+                                element.html(newContent).show();
+                                if (found.instance.changed) {
+                                    found.instance.changed(args.params, element);
+                                } else if (found.instance.rendered) {
+                                    found.instance.rendered(args.params, element);
+                                }
+                                this._current = element.show();
+                                showView(found, element);
+                                found.uriHash = uriHash;
                             }
-
-                            element.show();
-                            
-                            if (found.instance.changed) {
-                                found.instance.changed(args.params, element);
-                            } else if (found.instance.rendered) {
-                                found.instance.rendered(args.params, element);                                
-                            }
-                            
-                            found.uriHash = uriHash;
-                        }  
-                        this._current = element.show();
-                        showView(found, element);
+                        }
                         return resolve(element.id);
                     }
                     return reject("unknown type");
@@ -151,7 +159,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                     
                     element.dataset.id = args.id;
                     
-                    if (type === types.string) {          
+                    if (type === types.string) {
                         data.element = element.html(view);
                     } else if (type === types.template) {
                         data.instance = view;
@@ -164,19 +172,38 @@ define(["spa/template-helpers"], (templateHelper) => {
                         }
                         data.instance = view;
                     }
+                    
                     if (type === types.object || type === types.class) {
                         let content = data.instance.render(args.params, element);
-                        if (content) {
+                        if (content instanceof Promise) {
+                            return content.then(s => {
+                                element.html(s);
+                                !data.instance.rendered || data.instance.rendered(args.params, element);
+
+                                this._views[args.id] = data;
+                                this._container.append(element);
+                                this._current = element;
+                                showView(data, element);
+                                return resolve(element.id);
+                            });
+                        } else if (content) {
                             element.html(content);
+                            !data.instance.rendered || data.instance.rendered(args.params, element);
+
+                            this._views[args.id] = data;
+                            this._container.append(element);
+                            this._current = element;
+                            showView(data, element);
+                            return resolve(element.id);
                         }
-                        !data.instance.rendered || data.instance.rendered(args.params, element);
+                    } else {
+                        this._views[args.id] = data;
+                        this._container.append(element);
+                        this._current = element;
+                        showView(data, element);
+                        return resolve(element.id);
                     }
                     
-                    this._views[args.id] = data;
-                    this._container.append(element);
-                    this._current = element;
-                    showView(data, element);
-                    return resolve(element.id);
                 });
             });  
         }

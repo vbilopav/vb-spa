@@ -22,7 +22,7 @@ define([], () => class {
                 id: data.id || route.replace(/\//g, ""),
                 name: route,
                 view: data.view,
-                paramsMap: data.paramsMap || (args => args.length === 0),
+                paramsMap: data.paramsMap || (args => (args.length === 0 ? {} : false)),
                 data: data.data
             }
         }

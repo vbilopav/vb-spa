@@ -265,7 +265,17 @@ define([], () => {
                 }
                 return params[0];
             },
-        }, 
+        },
+
+        "/github-user-info": {
+            view: "views/dynamic-data/remote-data-example/github-user-info",
+            paramsMap: params => {
+                if (params.length !== 1) {
+                    return false;
+                }
+                return params[0];
+            },
+        },
 
         "/crossdomain-module-example": {
             view: "http://localhost:8080/module1.js",
