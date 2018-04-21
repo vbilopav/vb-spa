@@ -2,6 +2,7 @@ define(["spa/model"], Model => class {
 
     constructor() {
         this.model = new Model();
+        this.text = "initial text";
     }
 
     render() {
@@ -11,7 +12,7 @@ define(["spa/model"], Model => class {
             <input type="text" name="text">
             <input type="checkbox" name="check" checked>
             <br />
-            <button name="showButton" data-event-click="showButtonClick">Check model</button>
+            <button name="showButton" onclick="showButtonClick">Check model</button>
         </p>`;
     }
 

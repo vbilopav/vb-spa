@@ -233,16 +233,20 @@ define([], () => {
             }
         },
 
+        "/declarative-binding-simple": {
+            view: "views/dynamic-data/model-binding/declarative-simple",
+            data: {
+                title: "Model binding - declarative - simple",
+                category: "dynamic"
+            }
+        }, 
+
         "/declarative-model-binding": {
             view: "views/dynamic-data/model-binding/declarative",
             data: {
                 title: "Model binding - declarative",
                 category: "dynamic"
             }
-        }, 
-
-        "/declarative-simple": {
-            view: "views/dynamic-data/model-binding/declarative-simple"
         }, 
 
         "/programmatic-model-binding": {

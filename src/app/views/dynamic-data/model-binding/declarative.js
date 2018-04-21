@@ -28,7 +28,7 @@ define(["spa/model"], Model => {
                         <br />
                         <input type="checkbox" name="check" checked>&nbsp;&nbsp;Yes, I might not need those frameworks!<br />
                         <br />
-                        <button name="showButton" data-event-click="showButtonClick">Check model state in console output</button>
+                        <button name="showButton" onclick="showButtonClick">Check model state in console output</button>
                     </span>
                     <hr />
                     <button id="btn-set-name">Set new value for "name" model propery</button><br /><br />
@@ -40,6 +40,11 @@ define(["spa/model"], Model => {
             </div>`,
 
             rendered: (params, element) => {
+
+                // set some initial values
+                model.name = "Initial name"
+                model.email = "Initial email"
+
                 //
                 // Binds everything inside element argument, creates properties on model, first by name, then by id 
                 // If name and id don't exist it will be skipped.

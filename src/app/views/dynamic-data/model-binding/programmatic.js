@@ -34,7 +34,7 @@ define(["spa/model"], Model => {
                         <br />
                         <input type="checkbox" name="check" id="check_id" checked>&nbsp;&nbsp;Yes, I might not need those frameworks!<br />
                         <br />
-                        <button name="showButton">Check model state in console output</button>
+                        <button name="showButton" onclick="showButtonClick">Check model state in console output</button>
                     </span>
                     <hr />
                     <button id="btn-set-name">Set new value for "name" model propery</button><br /><br />
@@ -43,13 +43,15 @@ define(["spa/model"], Model => {
                     <button id="btn-set-check">Set new value for "check" model propery (true or false)</button><br /><br />
                     <hr />
                 </p>
-            </div>`,    
+            </div>`,
 
             rendered: (params, element) => {
-                model
-                    .bind(element.find("#model-area")) // bind returns created model
-                    .showButton.on("click", model.showButtonClick) // events must be assigned manually
-                                
+                // set some initial values
+                model.name = "Initial name"
+                model.email = "Initial email"
+                
+                model.bind(element.find("#model-area")); // bind returns created model
+
                 element.find("#btn-set-name").on("click", () => {
                     let value = prompt("Please enter new value for model.name", model.name.value);
                     if (value != null) {

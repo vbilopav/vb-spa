@@ -7,7 +7,7 @@ define([], () => class {
 
     bind(element, instance) {
         let search = "input, select, button, span, div, a";
-        this._instance = instance;
+        this._instance = instance || Object.assign({}, this);
         if (!this._model) {
             element.findAll(search).forEach(e => {this._forEachDeclarative(e)});
         } else {
@@ -20,17 +20,6 @@ define([], () => class {
         // name first, id second
         if (!this._assignProps(element.name || element.id, element)) {
             return;
-        }
-        for(let dataset in element.dataset) {
-            if (!dataset.startsWith("event")) {
-                continue;
-            }
-            let name = element.dataset[dataset]; 
-            let instance = this._instance || this;
-
-            element.on(dataset.replace("event", "").toLowerCase(), function(e) {
-                instance[name].call(instance);
-            });
         }
     }
 
@@ -49,33 +38,62 @@ define([], () => class {
         }
     }
 
+    _assignEvents(element) {
+        let attrs = element.getAttributeNames();
+        for(let i in attrs) {
+            let attr = attrs[i];
+            if (!attr.startsWith("on")) {
+                continue;
+            }
+            let val = this._instance[element.getAttribute(attr)];
+            if (typeof val !== "function") {
+                continue;
+            }
+            element.removeAttribute(attr);
+            let instance = this._instance;
+            element.on(attr.replace("on", "").toLowerCase(), function(e) {
+                val.call(instance);
+            });
+        }
+    }
+
+    _assignValue(node, element, value) {
+        if (node === "SELECT" || node === "INPUT") {
+            if (node === "INPUT" && element.type === "checkbox") {
+                element.checked = value;
+            } else {
+                element.value = value;
+            }
+        } else {
+            element.html(value);
+            if (node === "A") {
+                element.href = value;
+            }
+        }
+    }
+
+    _getValue(node, element) {
+        if (node === "SELECT") {
+            return element.options[element.selectedIndex];
+        }
+        return element;
+    }
+
     _assignProps(name, element) {
         if (!name) {
             return false;
         }
-        let node = element.nodeName;
+        this._assignEvents(element);
+        let node = element.nodeName, that = this;
         Object.defineProperty(this, name, {
-            get: () => {
-                if (node === "SELECT") {
-                    return element.options[element.selectedIndex];
-                }
-                return element;
-            },
-            set: value => {
-                if (node === "SELECT" || node === "INPUT") {
-                    if (node === "INPUT" && element.type === "checkbox") {
-                        element.checked = value;
-                    } else {
-                        element.value = value;
-                    }
-                } else {
-                    element.html(value);
-                    if (node === "A") {
-                        element.href = value;
-                    }
-                }
-            }
+            get: () => that._getValue(node, element),
+            set: value => that._assignValue(node, element, value)
         });
+        let value = this._instance[name];
+        if (value === undefined) {
+            return true;
+        }
+        this._assignValue(node, element, value);
         return true;
     }
 });
