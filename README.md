@@ -12,7 +12,7 @@ However, that doesn't mean that SPA applications in general, and this Framework 
 
 It supports cross-domain views, so it can be also used for microservice-based composite web UI's that can be scaled to the moon and back.
 
-Runtime code, when minified is around ~~**4.5KB**~~ ~~**7.0KB**~~ ~~**7.5KB**~~ ~~**8KB**~~ **8.37**. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
+Runtime code, when minified is around ~~**4.5KB**~~ ~~**7.0KB**~~ ~~**7.5KB**~~ ~~**8KB**~~ **8.37KB**. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
 
 New syntax or special markup is none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework. If want to bind data model to html, also, no markup or new syntax is required. And so on...
 
