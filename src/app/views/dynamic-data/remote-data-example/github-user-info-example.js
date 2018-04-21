@@ -7,12 +7,12 @@ define(["spa/model"], Model => class {
                 <h3>Github user data</h3>
                 <input type="text" name="username">
                 <br />
-                <button name="show" onclick="showClick">Check model</button>
+                <button name="show" onclick="showClick">Show github user data</button>
                 </div>
             </p>`
         );
-        
-        this.username = "vbilopav"; // default value for the model
+
+        this.username = "vbilopav"; // default value for the model element username
         this.model = new Model().bind(element, this);
     }
 

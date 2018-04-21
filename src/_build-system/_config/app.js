@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-18T07:44:57.286Z      ***
+***     auto-generated at 2018-04-21T12:10:53.900Z      ***
 ***     to re-create delete or run build.js --force        ***
 
 {
@@ -23,11 +23,29 @@
         minifyEngine: "uglify-es",
         module: "main"
     },
-    'routes.js': {
+    'routes/dynamic.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "routes"
+        module: "routes/dynamic"
+    },
+    'routes/main.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es",
+        module: "routes/main"
+    },
+    'routes/modules.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es",
+        module: "routes/modules"
+    },
+    'routes/templates.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es",
+        module: "routes/templates"
     },
     'spa/cors-template.js': {
         minify: true,
@@ -121,6 +139,12 @@
         minifyEngine: "html-minifier",
         module: "template!views/dynamic-data/di/template.html"
     },
+    'views/dynamic-data/model-binding/declarative-simple.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es",
+        module: "views/dynamic-data/model-binding/declarative-simple"
+    },
     'views/dynamic-data/model-binding/declarative.js': {
         minify: true,
         minifyInlineHtml: true,
@@ -151,6 +175,12 @@
         minifyEngine: "uglify-es",
         module: "views/dynamic-data/remote-data-example/frameworks"
     },
+    'views/dynamic-data/remote-data-example/github-user-info-example.js': {
+        minify: true,
+        minifyInlineHtml: true,
+        minifyEngine: "uglify-es",
+        module: "views/dynamic-data/remote-data-example/github-user-info-example"
+    },
     'views/dynamic-data/remote-data-example/github-user-info.js': {
         minify: true,
         minifyInlineHtml: false,
@@ -161,11 +191,6 @@
         minify: true,
         minifyEngine: "html-minifier",
         module: "text!views/home.html"
-    },
-    'views/modules/_default.html': {
-        minify: true,
-        minifyEngine: "html-minifier",
-        module: "template!views/modules/_default.html"
     },
     'views/modules/class-module-change-element.js': {
         minify: true,
@@ -237,6 +262,11 @@
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
         module: "views/modules/view-events"
+    },
+    'views/modules/_default.html': {
+        minify: true,
+        minifyEngine: "html-minifier",
+        module: "template!views/modules/_default.html"
     },
     'views/not-found.html': {
         minify: true,

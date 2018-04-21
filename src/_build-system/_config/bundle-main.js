@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-18T07:59:27.521Z      ***
+***     auto-generated at 2018-04-21T12:12:00.207Z      ***
 ***     to re-create delete or run build.js --force        ***
 
 targetModule: target module which will be replace by this bundle
@@ -11,7 +11,10 @@ includes: [] list of modules to bundle
     includes: [
         "app",
         "main",
-        "routes",
+        "routes/dynamic",
+        "routes/main",
+        "routes/modules",
+        "routes/templates",
         "spa/extensions",
         "spa/model",
         "spa/router",
@@ -25,14 +28,15 @@ includes: [] list of modules to bundle
         "template!views/dynamic-data/di/injected/template.html",
         "views/dynamic-data/di/object-module",
         "template!views/dynamic-data/di/template.html",
+        "views/dynamic-data/model-binding/declarative-simple",
         "views/dynamic-data/model-binding/declarative",
         "views/dynamic-data/model-binding/programmatic",
         "views/dynamic-data/remote-data-example/data",
         "views/dynamic-data/remote-data-example/framework-details",
         "views/dynamic-data/remote-data-example/frameworks",
+        "views/dynamic-data/remote-data-example/github-user-info-example",
         "views/dynamic-data/remote-data-example/github-user-info",
         "text!views/home.html",
-        "template!views/modules/_default.html",
         "views/modules/class-module-change-element",
         "views/modules/class-module-element-manipulation",
         "views/modules/class-module-simple",
@@ -43,6 +47,7 @@ includes: [] list of modules to bundle
         "views/modules/object-module-element-manipulation",
         "views/modules/object-module-simple",
         "views/modules/view-events",
+        "template!views/modules/_default.html",
         "text!views/not-found.html",
         "template!views/templates/composite/template1.html",
         "template!views/templates/composite/template2.html",
