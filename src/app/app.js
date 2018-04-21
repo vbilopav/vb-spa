@@ -2,7 +2,7 @@ define([
     "template!templates/layout.html",
     "spa/router",
     "spa/view-manager",
-    "routes"
+    "routes/main"
 ], (
     layout,
     Router,

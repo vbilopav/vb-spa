@@ -7,22 +7,25 @@ define([], () => class {
             <p>
                 <h3>Github user data</h3>
                 <div class='panel panel-default'>
-                <div class='panel-heading'>${user}</div>
-                <div class='panel-body'>
-                    <ul>`;
+                    <div class='panel-heading'>${user}</div>
+                    <div class='panel-body'>
+                        <ul>`;
 
         for (let [key, value] of Object.entries(await response.json())) {
             result += String.html`
-                        <li>
-                            <span>${key}: </span>
-                            <span>${value}</span>
-                        </li>`;
+                            <li>
+                                <span>${key}: </span>
+                                <span>${value}</span>
+                            </li>`;
         }
 
         result += String.html`
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </p>`
+            </p>
+            <button onclick="window.history.back();">Go back</button>
+            `
         return result;
     }
 
