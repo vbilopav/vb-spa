@@ -12,9 +12,9 @@ However, that doesn't mean that SPA applications in general, and this Framework 
 
 It supports cross-domain views, so it can be also used for microservice-based composite web UI's that can be scaled to the moon and back.
 
-Runtime code, when minified is around ~~**4.5KB**~~ ~~**7.0KB**~~ ~~**7.5KB**~~ **8KB**. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have **28 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
+Runtime code, when minified is around ~~**4.5KB**~~ ~~**7.0KB**~~ ~~**7.5KB**~~ ~~**8KB**~~ **8.37**. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
 
-New syntax or special markup is minimal, almost none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework.
+New syntax or special markup is none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework. If want to bind data model to html, also, no markup or new syntax is required. And so on...
 
 Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically to achieve simplicity and speed. That also means that it cannot be transpiled into JavaScript ES5. Good news is that doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. 
 
@@ -45,8 +45,10 @@ With hashes or with hashbangs. For example `yourwebsite.com#/route1/param1/.../`
 - Custom module that can be JavaScript object or class. That module can then import other modules or templates, etc.
 - Remote, crossdomain module or remote, crossdomain template that uses cors internally and works like any other module or template to support extreme
 vertical scalability with composite web pages and microservices.
+- View engine can resolve promises, so you can use `async` and `await` to build state machines when fetchinbg data from remote server.
+- Dependency injection of another template or module trough router definition
 
-It also supports dependency injection of another template or module trough router definition. For more details see wiki pages.
+For more details see wiki pages...
 
 #### Mixing of JavaScript and HTML inside module
 
