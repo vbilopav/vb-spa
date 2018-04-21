@@ -12,12 +12,17 @@
 
 <p>It supports cross-domain views, so it can be also used for microservice-based composite web UI's that can be scaled to the moon and back.</p>
 
-<p>Runtime code, when minified is around <strong>7.5KB</strong>. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have <strong>28 views</strong> with various feature demos and minified and bundled with Framework is less then <strong>60KB</strong>.</p>
+<p>Runtime code, when minified is around ~~<strong>4.5KB</strong>~~ ~~<strong>7.0KB</strong>~~ ~~<strong>7.5KB</strong>~~ ~~<strong>8KB</strong>~~ <strong>8.37KB</strong>. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have <strong>30 views</strong> with various feature demos and minified and bundled with Framework is less then <strong>60KB</strong>.</p>
 
-<p>New syntax or special markup is minimal, almost none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">ES6 template strings syntax</a> then you already know template syntax for this framework.</p>
+<p>New syntax or special markup is none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">ES6 template strings syntax</a> then you already know template syntax for this framework. If want to bind data model to html, also, no markup or new syntax is required. And so on...</p>
 
-<p>Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically to achieve simplicity and speed. That also means that it cannot be transpiled into JavaScript ES5. Good news is that doesn't have to. Here is curent <a href="https://kangax.github.io/compat-table/es6/">compatibility table for ES6</a>. This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to 
-use different browser. </p>
+<p>Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically to achieve simplicity and speed. That also means that it cannot be transpiled into JavaScript ES5. Good news is that doesn't have to. Here is curent <a href="https://kangax.github.io/compat-table/es6/">compatibility table for ES6</a>. This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. </p>
+
+<blockquote>
+  <p><strong>If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of their time to install better browser!</strong>  </p>
+</blockquote>
+
+<h1 id="nomoretranspiling">nomoretranspiling</h1>
 
 <h2 id="featurelist">Feature list</h2>
 
@@ -44,9 +49,13 @@ use different browser. </p>
 
 <li>Remote, crossdomain module or remote, crossdomain template that uses cors internally and works like any other module or template to support extreme
 vertical scalability with composite web pages and microservices.</li>
+
+<li>View engine can resolve promises, so you can use <code>async</code> and <code>await</code> to build state machines when fetchinbg data from remote server.</li>
+
+<li>Dependency injection of another template or module trough router definition</li>
 </ul>
 
-<p>It also supports dependency injection of another template or module trough router definition. For more details see wiki pages.</p>
+<p>For more details see wiki pages...</p>
 
 <h4 id="mixingofjavascriptandhtmlinsidemodule">Mixing of JavaScript and HTML inside module</h4>
 
