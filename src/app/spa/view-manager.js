@@ -113,7 +113,9 @@ define(["spa/template-helpers"], (templateHelper) => {
                             }
 
                             let updateFunc = c => {
-                                element.html(c).show();
+                                if (c) {
+                                    element.html(c).show();
+                                }
                                 if (found.instance.changed) {
                                     found.instance.changed(args.params, element);
                                 } else if (found.instance.rendered) {
@@ -127,7 +129,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                                     updateFunc(s);
                                     return resolve(element.id);
                                 });
-                            } else if (newContent) {
+                            } else {
                                 updateFunc(newContent);
                                 return resolve(element.id);
                             }
@@ -185,7 +187,9 @@ define(["spa/template-helpers"], (templateHelper) => {
                     }
 
                     let contentFunc = c => {
-                        element.html(c);
+                        if (c) {
+                            element.html(c);
+                        }
                         !data.instance.rendered || data.instance.rendered(args.params, element);
                     }
                     
@@ -196,8 +200,8 @@ define(["spa/template-helpers"], (templateHelper) => {
                                 contentFunc(s);
                                 return resolveFunc();
                             });
-                        } else if (content) {
-                            contentFunc(content);                            
+                        } else {
+                            contentFunc(content);
                             return resolveFunc();
                         }
                     } else {
