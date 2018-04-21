@@ -8,7 +8,6 @@ define(["spa/model"], Model => class {
                 <input type="text" name="username">
                 <br />
                 <button name="show" onclick="showClick">Show github user data</button>
-                </div>
             </p>`
         );
 
