@@ -1,10 +1,10 @@
-define(["template!views/modules/_default.html"], template => class {        
+define(["template!views/modules/_default.html"], template => class {
 
     //
     // constructor is optional, it receives view id and view element
     //
 
-    constructor(id) {
+    constructor({id}) {
         console.log(id + " created");
     }
 
@@ -14,7 +14,7 @@ define(["template!views/modules/_default.html"], template => class {
     // The render will render any string it returns ... if it is returned
     //
 
-    render(params) {
+    render({params}) {
         return template({
             header: 
                 "This is simple class module.",

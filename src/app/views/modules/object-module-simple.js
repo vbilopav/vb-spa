@@ -6,7 +6,7 @@ define(["template!views/modules/_default.html"], template => {
         // constructor is init method, and it is optional, it receives view id and view element
         //
 
-        init: id => console.log(id + " created"),
+        init: args => console.log(args.id + " created"),
 
         //
         // The render method is required.
@@ -14,7 +14,7 @@ define(["template!views/modules/_default.html"], template => {
         // The render will render any string it returns ... if it is returned
         //
 
-        render: params => template({
+        render: args => template({
             header: 
                 "This is simple object module.",
             firstLine: 
@@ -36,7 +36,7 @@ define(["template!views/modules/_default.html"], template => {
             closingLine: 
                 "For more info see comments in module js code...<br /><br />" +
                 "Here is the list of current params for this view (type them in address bar manually):<br /><span id='params'>" +
-                params.join("<br />") + "</span>"
+                args.params.join("<br />") + "</span>"
         })
     }
 });

@@ -16,7 +16,7 @@ define(["spa/model"], Model => class {
         </p>`;
     }
 
-    rendered(_, element) {
+    rendered({element}) {
         this.model.bind(element, this);
     }
 

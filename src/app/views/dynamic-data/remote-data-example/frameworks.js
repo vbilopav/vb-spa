@@ -22,7 +22,7 @@ define([
     //
     //
     //
-    async rendered(params, element) {
+    async rendered({element}) {
         let 
             data = await fetchData(),
             anchorsHtml = Object.keys(data).map(

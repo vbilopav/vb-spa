@@ -6,7 +6,7 @@ define(["template!views/modules/_default.html"], template => {
         // constructor is init method, and it is optional, it receives view id and view element
         //
 
-        init: (id, element) => {
+        init: ({id, element}) => {
             console.log(id + " created");
             // remember element reference (note: element is also second parameter in render and change)
             this.element = element
@@ -19,7 +19,7 @@ define(["template!views/modules/_default.html"], template => {
         // You coud also use addChildren, append, some your special jQuery magic perhaps, or whatever...
         //
 
-        render: params => {
+        render: ({params}) => {
             this.element.html(template({
                 header: 
                     "Object module with direct element manipulation.",
@@ -49,7 +49,7 @@ define(["template!views/modules/_default.html"], template => {
             this.paramsElement = this.element.find("#params");
         },
 
-        change: params => {
+        change: ({params}) => {
             this.paramsElement.html(params.join("<br />"))
         }
 

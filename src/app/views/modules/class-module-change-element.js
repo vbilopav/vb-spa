@@ -4,7 +4,7 @@ define(["template!views/modules/_default.html"], template => class {
     // constructor is optional, it receives only id and newly created view element
     //
 
-    constructor(id, element) {
+    constructor({id, element}) {
         console.log(id + " created");
         // remember element reference (note: element is also second parameter in render and change)
         this.element = element
@@ -15,7 +15,7 @@ define(["template!views/modules/_default.html"], template => class {
     // However, when "change" method is present, "render" will be called only once - the first time
     //
 
-    render(params) {
+    render({params}) {
         return template({
             header: 
                 "Class module with change method handler.",
@@ -49,7 +49,7 @@ define(["template!views/modules/_default.html"], template => class {
     // If we return string here, it will replace entire content.
     //
 
-    change(params) {
+    change({params}) {
         // #params should be cached, this is just an example
         this.element.find("#params").html(params.join("<br />"))
     }

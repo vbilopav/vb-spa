@@ -1,4 +1,4 @@
-define(["template!views/modules/_default.html"], template => {        
+define(["template!views/modules/_default.html"], template => {
 
     return {
 
@@ -6,7 +6,7 @@ define(["template!views/modules/_default.html"], template => {
         // constructor is init method, and it is optional, it receives only id and newly created view element
         //
 
-        init: (id, element) => {
+        init: ({id, element}) => {
             console.log(id + " created");
             // remember element reference (note: element is also second parameter in render and change)
             this.element = element
@@ -17,7 +17,7 @@ define(["template!views/modules/_default.html"], template => {
         // However, when "change" method is present, "render" will be called only once - the first time
         //
 
-        render: params => template({
+        render: ({params}) => template({
             header: 
                 "Object module with change method handler.",
             firstLine: 
@@ -26,7 +26,7 @@ define(["template!views/modules/_default.html"], template => {
             secondLine: 
                 "In this example render is used to return text template to be rendered.<br />" +
                 "Change is called when parameters are changed and it renders them trough direct element manipulation.<br />" +
-                "If change returns string it will replace current element content.",            
+                "If change returns string it will replace current element content.",
             viewLocation: 
                 "/app/views/modules/object-module-change-element.js",
             routeDefintion: 
@@ -51,7 +51,7 @@ define(["template!views/modules/_default.html"], template => {
         //
 
         // #params should be cached, this is just an example
-        change: params => {
+        change: ({params}) => {
             this.element.find("#params").html(params.join("<br />"));
         }
     }

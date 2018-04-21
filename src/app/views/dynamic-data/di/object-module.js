@@ -2,7 +2,7 @@ define([], () => {
 
      return {
 
-        init: (id, element, template1, module1, module2) => {
+        init: ({}, template1, module1, module2) => {
             this.template1 = template1;
             this.module1 = module1; 
             this.module2 = module2;

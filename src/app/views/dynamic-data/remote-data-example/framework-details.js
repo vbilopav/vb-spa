@@ -6,7 +6,8 @@ define([
     Model
  ) => class {
      
-    render(name) { 
+    render({params}) {
+        let name = params;
         return String.html`
         <style>
             .framowrk-label {
@@ -58,13 +59,14 @@ define([
         </div>`
     }
 
-    rendered(name, element) {
+    rendered({params, element}) {
+        let name = params;
         this.model = new Model().bind(element);
         this.changed(name);
     }
 
-    async changed(name) {
-        let 
+    async changed({params}) {
+        let name = params,
             data = await fetchData(),
             item = data[name];
         if (item) {

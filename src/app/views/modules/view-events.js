@@ -11,7 +11,7 @@ define(["template!views/modules/_default.html"], template => class {
         this.renderOnce = true;
     }
 
-    render(params, element) {
+    render({params, element}) {
         element.html(template({
                 header: 
                     "View events",
@@ -46,7 +46,7 @@ define(["template!views/modules/_default.html"], template => class {
     //
     //  rendered is triggered first time view is rendered (after it is shown for the first time)
     //
-    rendered(params, element) {
+    rendered({params, element}) {
         let msg  = 
             `view with element id "${element.id}" and view id "${element.dataset.id}" and with parameters ${params.join(", ")} has just been rendered!`;
         this.panel.html("> " + msg + "<br /><br />") 
@@ -56,7 +56,7 @@ define(["template!views/modules/_default.html"], template => class {
     //
     //  change is triggered every time after parameters are changed
     //
-    changed(params, element) {
+    changed({params, element}) {
         let msg  = 
             `view with element id "${element.id}" and view id "${element.dataset.id}" and with parameters ${params.join(", ")} has just been changed!`;
         this.panel.html(this.panel.html() + "> " + msg + "<br /><br />") 

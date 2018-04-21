@@ -13,7 +13,7 @@ define(["template!views/modules/_default.html"], template => {
             module = this;
         }
         
-        render(params, element) {
+        render({params, element}) {
             return template({
                 header: 
                     "Event handlings",
@@ -46,7 +46,7 @@ define(["template!views/modules/_default.html"], template => {
             });
         }
 
-        rendered(params, element) {
+        rendered({params, element}) {
             this.panel = element.find(".panel-body");
             element.find("#button1").on("click", (e) => {
                 this.handleButtonClickEvent(e);

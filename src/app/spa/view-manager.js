@@ -107,9 +107,9 @@ define(["spa/template-helpers"], (templateHelper) => {
                             let newContent;
                             
                             if (found.instance.change) {
-                                newContent = found.instance.change(args.params, element);
+                                newContent = found.instance.change({params: args.params, element: element});
                             } else if (!found.instance.renderOnce) {
-                                newContent = found.instance.render(args.params, element);
+                                newContent = found.instance.render({params: args.params, element: element});
                             }
 
                             let updateFunc = c => {
@@ -117,9 +117,9 @@ define(["spa/template-helpers"], (templateHelper) => {
                                     element.html(c).show();
                                 }
                                 if (found.instance.changed) {
-                                    found.instance.changed(args.params, element);
+                                    found.instance.changed({params: args.params, element: element});
                                 } else if (found.instance.rendered) {
-                                    found.instance.rendered(args.params, element);
+                                    found.instance.rendered({params: args.params, element: element});
                                 }
                                 showFunc();
                             }
@@ -170,10 +170,10 @@ define(["spa/template-helpers"], (templateHelper) => {
                         data.instance = view;
                         element.html(view(args.params, {injected: injected}));
                     } else if (type === types.class) {
-                        data.instance = new view(args.id, element, ...injected);
+                        data.instance = new view({id: args.id, element: element}, ...injected);
                     } else if (type === types.object) {
                         if (view.init) {
-                            view.init(args.id, element, ...injected);
+                            view.init({id: args.id, element: element}, ...injected);
                         }
                         data.instance = view;
                     }
@@ -190,11 +190,11 @@ define(["spa/template-helpers"], (templateHelper) => {
                         if (c) {
                             element.html(c);
                         }
-                        !data.instance.rendered || data.instance.rendered(args.params, element);
+                        !data.instance.rendered || data.instance.rendered({params: args.params, element: element});
                     }
                     
                     if (type === types.object || type === types.class) {
-                        let content = data.instance.render(args.params, element);
+                        let content = data.instance.render({params: args.params, element: element});
                         if (content instanceof Promise) {
                             return content.then(s => {
                                 contentFunc(s);

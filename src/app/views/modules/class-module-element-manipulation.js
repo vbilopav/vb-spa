@@ -1,10 +1,10 @@
-define(["template!views/modules/_default.html"], template => class {        
+define(["template!views/modules/_default.html"], template => class {
     
     //
     // constructor is optional, it receives only id and newly created view element
     //
 
-    constructor(id, element) {
+    constructor({id, element}) {
         console.log(id + " created");
         // remember element reference (note: element is also second parameter in render and change)
         this.element = element
@@ -17,13 +17,13 @@ define(["template!views/modules/_default.html"], template => class {
     // You coud also use addChildren, append, some your special jQuery magic perhaps, or whatever...
     //
 
-    render(params) {
+    render({params}) {
         this.element.html(template({
             header: 
                 "Class module with direct element manipulation.",
             firstLine: 
                 "Change and render method doesn't have to return anything to render content.<br />",
-            secondLine:                 
+            secondLine:
                 "In this example render and change will not return template string to render.<br />" +
                 "Instead, element is directly manipulated by using HTMLElement methods.",
             viewLocation: 
@@ -37,7 +37,7 @@ define(["template!views/modules/_default.html"], template => class {
                 '    },\n' +
                 '    paramsMap: (...params) => params\n' +
                 '}',
-            closingLine: 
+            closingLine:
                 "For more info see comments in module js code...<br /><br />" +
                 "Here is the list of current params for this view (type them in address bar manually):<br /><span id='params'>" +
                 params.join("<br />") + "</span>"
@@ -47,7 +47,7 @@ define(["template!views/modules/_default.html"], template => class {
         this.paramsElement = this.element.find("#params");
     }
 
-    change(params) {
+    change({params}) {
         this.paramsElement.html(params.join("<br />"))
     }
 });

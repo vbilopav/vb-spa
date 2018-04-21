@@ -39,7 +39,7 @@ define(["spa/model"], Model => {
                 </p>
             </div>`,
 
-            rendered: (params, element) => {
+            rendered: ({element}) => {
 
                 // set some initial values
                 model.name = "Initial name"

@@ -1,12 +1,13 @@
 define([], () => class {
 
-    async render(param, element) {
-        let response = await fetch(`https://api.github.com/users/${param}`);
+    async render({params}) {
+        let user = params;
+        let response = await fetch(`https://api.github.com/users/${user}`);
         let result = String.html`
             <p>
                 <h3>Github user data</h3>
                 <div class='panel panel-default'>
-                <div class='panel-heading'>${param}</div>
+                <div class='panel-heading'>${user}</div>
                 <div class='panel-body'>
                     <ul>`;
 
