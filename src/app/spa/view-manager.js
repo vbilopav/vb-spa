@@ -100,12 +100,12 @@ define(["spa/template-helpers"], (templateHelper) => {
                             showView(found, element);
                             found.uriHash = uriHash;
                         } 
-                        if ((found.uriHash !== uriHash || found.instance.runAlways)) {
+                        if ((found.uriHash !== uriHash || found.instance._options.disableCaching)) {
                             let newContent;
                             
                             if (found.instance.change) {
                                 newContent = found.instance.change({params: args.params, element: element});
-                            } else if (!found.instance.renderOnce) {
+                            } else if (!found.instance._options.callRenderOnlyOnce) {
                                 newContent = found.instance.render({params: args.params, element: element});
                             }
 
@@ -167,7 +167,12 @@ define(["spa/template-helpers"], (templateHelper) => {
                         data.instance = view;
                         element.html(view(args.params, {injected: injected}));
                     } else if (type === types.class) {
-                        data.instance = new view({id: args.id, element: element}, ...injected);
+                        let options = {
+                            disableCaching: false,
+                            callRenderOnlyOnce: false
+                        };
+                        data.instance = new view({id: args.id, element: element, options: options}, ...injected);
+                        data.instance._options = options;
                     }
 
                     let resolveFunc = () => {
@@ -199,7 +204,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                     } else {
                         return resolveFunc();
                     }
-                    
+
                 });
             });  
         }

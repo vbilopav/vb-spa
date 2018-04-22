@@ -1,7 +1,10 @@
 define([], () => class {
 
-    constructor() {
-        this.runAlways = true;
+    constructor({options}) {
+        //
+        // when disableCaching option is set to true view will be rendered on every navigate
+        //
+        options.disableCaching = true;
     }
 
     async render({params}) {
