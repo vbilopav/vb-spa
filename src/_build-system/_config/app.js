@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-21T12:10:53.900Z      ***
+***     auto-generated at 2018-04-22T16:51:23.506Z      ***
 ***     to re-create delete or run build.js --force        ***
 
 {
@@ -128,12 +128,6 @@
         minifyEngine: "html-minifier",
         module: "template!views/dynamic-data/di/injected/template.html"
     },
-    'views/dynamic-data/di/object-module.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "views/dynamic-data/di/object-module"
-    },
     'views/dynamic-data/di/template.html': {
         minify: true,
         minifyEngine: "html-minifier",
@@ -238,24 +232,6 @@
         minify: true,
         minifyEngine: "html-minifier",
         module: "text!views/modules/new-bundle/template.html"
-    },
-    'views/modules/object-module-change-element.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "views/modules/object-module-change-element"
-    },
-    'views/modules/object-module-element-manipulation.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "views/modules/object-module-element-manipulation"
-    },
-    'views/modules/object-module-simple.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "views/modules/object-module-simple"
     },
     'views/modules/view-events.js': {
         minify: true,

@@ -17,21 +17,6 @@ define([], () => {
             }
         }, 
 
-        "/dependency-injection-object-module": {
-            view: {
-                name: "views/dynamic-data/di/object-module",
-                inject: [
-                    "template!views/dynamic-data/di/injected/template.html",
-                    "views/dynamic-data/di/injected/custom-module1",
-                    "views/dynamic-data/di/injected/custom-module2"
-                ]
-            },
-            data: {
-                title: "Dependency injection - object module",
-                category: "dynamic"
-            }
-        },
-
         "/dependency-injection-class-module": {
             view: {
                 name: "views/dynamic-data/di/class-module",

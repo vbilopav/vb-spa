@@ -8,44 +8,46 @@ define(["spa/model"], Model => {
             check: "check_id",
             showButton: "showButton"
         }),
-        module = {
-            render: () => String.html`
-            <div>
-                <h3>Model binding support - programmatic</h3>
-                <p>
-                    Demonstration for programmatic bi-directional model binding support
-                    <br /><br />
-                    View location: <pre>/app/views/dynamic-data/model-binding/programmatic.js</pre>
-                    <br />
-                    <span id="model-area">
-                        <label for="name" style="width: 50px">Name: </label><input name="name" type="text"><br />
-                        <label for="email" style="width: 50px">Email: </label><input name="email" type="email"><br />
-                        <label for="frameworks">Frameworks: </label>
-                        <select name="select">
-                            <option value="">select framework ...</option>
-                            <option value="Ember">Ember</option>
-                            <option value="Angular2">Angular2</option>
-                            <option value="Angular">AngularJS</option>
-                            <option value="Vue">Vue</option>
-                            <option value="Inferno">Inferno</option>
-                            <option value="Preact">Preact</option>
-                            <option value="React">React</option>
-                        </select>
+        module = class {
+            render() {
+                return String.html`
+                <div>
+                    <h3>Model binding support - programmatic</h3>
+                    <p>
+                        Demonstration for programmatic bi-directional model binding support
+                        <br /><br />
+                        View location: <pre>/app/views/dynamic-data/model-binding/programmatic.js</pre>
                         <br />
-                        <input type="checkbox" name="check" id="check_id" checked>&nbsp;&nbsp;Yes, I might not need those frameworks!<br />
-                        <br />
-                        <button name="showButton" onclick="showButtonClick">Check model state in console output</button>
-                    </span>
-                    <hr />
-                    <button id="btn-set-name">Set new value for "name" model propery</button><br /><br />
-                    <button id="btn-set-email">Set new value for "email" model propery</button><br /><br />
-                    <button id="btn-set-select">Set new value for "select" model propery</button><br /><br />
-                    <button id="btn-set-check">Set new value for "check" model propery (true or false)</button><br /><br />
-                    <hr />
-                </p>
-            </div>`,
+                        <span id="model-area">
+                            <label for="name" style="width: 50px">Name: </label><input name="name" type="text"><br />
+                            <label for="email" style="width: 50px">Email: </label><input name="email" type="email"><br />
+                            <label for="frameworks">Frameworks: </label>
+                            <select name="select">
+                                <option value="">select framework ...</option>
+                                <option value="Ember">Ember</option>
+                                <option value="Angular2">Angular2</option>
+                                <option value="Angular">AngularJS</option>
+                                <option value="Vue">Vue</option>
+                                <option value="Inferno">Inferno</option>
+                                <option value="Preact">Preact</option>
+                                <option value="React">React</option>
+                            </select>
+                            <br />
+                            <input type="checkbox" name="check" id="check_id" checked>&nbsp;&nbsp;Yes, I might not need those frameworks!<br />
+                            <br />
+                            <button name="showButton" onclick="showButtonClick">Check model state in console output</button>
+                        </span>
+                        <hr />
+                        <button id="btn-set-name">Set new value for "name" model propery</button><br /><br />
+                        <button id="btn-set-email">Set new value for "email" model propery</button><br /><br />
+                        <button id="btn-set-select">Set new value for "select" model propery</button><br /><br />
+                        <button id="btn-set-check">Set new value for "check" model propery (true or false)</button><br /><br />
+                        <hr />
+                    </p>
+                </div>`
+            }
 
-            rendered: ({element}) => {
+            rendered({element}) {
                 // set some initial values
                 model.name = "Initial name"
                 model.email = "Initial email"

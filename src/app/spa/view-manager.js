@@ -11,7 +11,7 @@ define(["spa/template-helpers"], (templateHelper) => {
         },
         prefix = "_view",
         getId = (uriHash) => prefix + uriHash,
-        types = {template: 1, class: 2, object: 3, string: 4},
+        types = {template: 1, class: 2, string: 3},
         getViewType = (view, name) => {
             let t = typeof view;
             if (t === "function") {
@@ -20,13 +20,10 @@ define(["spa/template-helpers"], (templateHelper) => {
                 }
                 return types.class;
             }
-            if (t === "object") {
-                return types.object;
-            }
             if (t === "string") {
                 return types.string;
             }
-            throw view;
+            throw new Error("unknown view type " + view);
         },
         showView = (item, element) => {
             window.scrollTo(item.x, item.y);
@@ -97,7 +94,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                         element = "span".createElement(elementId).appendTo(this._container);
                     }
 
-                    if (found.type === types.class || found.type === types.object) {
+                    if (found.type === types.class) {
                         let showFunc = () => {
                             this._current = element.show();
                             showView(found, element);
@@ -171,11 +168,6 @@ define(["spa/template-helpers"], (templateHelper) => {
                         element.html(view(args.params, {injected: injected}));
                     } else if (type === types.class) {
                         data.instance = new view({id: args.id, element: element}, ...injected);
-                    } else if (type === types.object) {
-                        if (view.init) {
-                            view.init({id: args.id, element: element}, ...injected);
-                        }
-                        data.instance = view;
                     }
 
                     let resolveFunc = () => {
@@ -193,7 +185,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                         !data.instance.rendered || data.instance.rendered({params: args.params, element: element});
                     }
                     
-                    if (type === types.object || type === types.class) {
+                    if (type === types.class) {
                         let content = data.instance.render({params: args.params, element: element});
                         if (content instanceof Promise) {
                             return content.then(s => {

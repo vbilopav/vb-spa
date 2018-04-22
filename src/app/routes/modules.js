@@ -45,33 +45,6 @@ define([], () => {
             paramsMap: params => params
         },
  
-        "/object-module-simple": {
-            view: "views/modules/object-module-simple",
-            data: {
-                title: "Simple text from object module",
-                category: "modules"
-            },
-            paramsMap: params => params
-        },
- 
-        "/object-module-change-element": {
-            view: "views/modules/object-module-change-element",
-            data: {
-                title: "Object module with change method",
-                category: "modules"
-            },
-            paramsMap: params => params
-        },
- 
-        "/object-module-element-manipulation": {
-            view: "views/modules/object-module-element-manipulation",
-            data: {
-                title: "Object module - element manipulation",
-                category: "modules"
-            },
-            paramsMap: params => params
-        },
-
         "/view-events": {
             view: "views/modules/view-events",
             data: {

@@ -1,5 +1,5 @@
 /*
-***     auto-generated at 2018-04-21T12:12:00.207Z      ***
+***     auto-generated at 2018-04-22T16:51:23.546Z      ***
 ***     to re-create delete or run build.js --force        ***
 
 targetModule: target module which will be replace by this bundle
@@ -26,7 +26,6 @@ includes: [] list of modules to bundle
         "views/dynamic-data/di/injected/custom-module1",
         "views/dynamic-data/di/injected/custom-module2",
         "template!views/dynamic-data/di/injected/template.html",
-        "views/dynamic-data/di/object-module",
         "template!views/dynamic-data/di/template.html",
         "views/dynamic-data/model-binding/declarative-simple",
         "views/dynamic-data/model-binding/declarative",
@@ -43,9 +42,6 @@ includes: [] list of modules to bundle
         "views/modules/events-handlings",
         "views/modules/module-plain-text-template",
         "views/modules/module-plain-text",
-        "views/modules/object-module-change-element",
-        "views/modules/object-module-element-manipulation",
-        "views/modules/object-module-simple",
         "views/modules/view-events",
         "template!views/modules/_default.html",
         "text!views/not-found.html",
