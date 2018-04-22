@@ -103,7 +103,7 @@ define(["spa/template-helpers"], (templateHelper) => {
                             showView(found, element);
                             found.uriHash = uriHash;
                         } 
-                        if (found.uriHash !== uriHash) {
+                        if ((found.uriHash !== uriHash || found.instance.runAlways)) {
                             let newContent;
                             
                             if (found.instance.change) {

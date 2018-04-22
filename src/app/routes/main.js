@@ -6,9 +6,7 @@ define([
     templates,
     modules,
     dynamic
-) => {
-
-    return Object.assign({
+) => Object.assign({
 
         "/": {
             id: "home",
@@ -26,5 +24,6 @@ define([
 
     templates,
     modules,
-    dynamic)
-});
+    dynamic
+    
+));

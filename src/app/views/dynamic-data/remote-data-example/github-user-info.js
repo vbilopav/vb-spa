@@ -1,5 +1,9 @@
 define([], () => class {
 
+    constructor() {
+        this.runAlways = true;
+    }
+
     async render({params}) {
         let user = params;
         let response = await fetch(`https://api.github.com/users/${user}`);
