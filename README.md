@@ -57,10 +57,9 @@ Wiki pages...
 
 #### Bi-directional model binding
 
-Model binding means ability to declare some data model in you model and when you change some value in your data model, 
-some UI should change also. That means that model and UI model are bind. Bi-directional means when you change value in your 
-UI element, model should change too. This can be achieved declaratively (trough HTML, without any special syntax) or 
-programmatically (trough code telling your model with whom to bind). More info on wiki...
+Model binding means that you can declare some data model that can be binded to your UI easily. When you change the stae of UI, model changes too. When you change your model, UI changes too. That is awesome.
+
+More info on wiki...
 
 #### Build tool
 
@@ -70,7 +69,7 @@ Build tool is also included that allows you to:
 - Create bundles for your your modules, html or css
 - Fine tune and tweak your SPA application
 
-Bundling is important process in SPA applications because of its modular nature. 
+Bundling is important process in SPA applications because of its complex and modular nature. 
 Modular fronted application need to be bundled to avoid high netowork traffic when loading all of those bundles. On the other side, you don't want everything to be bundled, perhaps you want
 something to be loaded on demand or you just want to left out some portions of application used rarely. In other words - fine tuning. More info on this on wiki. 
 
