@@ -32,7 +32,7 @@ It just uses RequireJS module loader directly. AMD (Asynchronous Module Definiti
 
 #### Templating engine with familiar syntax. 
 
-It uses ES6 template string which are supported nativly by browsers. Templating includes processing custom data and template composition (ability to import another template into specific place. See wiki for more information.
+It uses ES6 template string which are supported nativly by browsers. Templating includes processing custom data and template composition  - ability to import another template into specific place. See wiki for more information.
 
 #### Client side router 
 
