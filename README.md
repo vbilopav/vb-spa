@@ -40,13 +40,12 @@ With hashes or with hashbangs. For example `yourwebsite.com#/route1/param1/.../`
 
 ####  View engine that works seamlessly with router to map:
 
-- Appropriate html text template, 
-- Parametrized html text template that can process custom data parameters from router using templating engine,
-- Custom module that can be JavaScript object or class. That module can then import other modules or templates, etc.
-- Remote, crossdomain module or remote, crossdomain template that uses cors internally and works like any other module or template to support extreme
-vertical scalability with composite web pages and microservices.
-- View engine can resolve promises, so you can use `async` and `await` to build state machines when fetchinbg data from remote server.
-- Dependency injection of another template or module trough router definition
+- Appropriate html text template.
+- Parametrized html text template that can process custom data parameters from router using templating engine.
+- Custom module that is your JavaScript ES6 class. That module can then import other modules or templates, etc.
+- Remote, crossdomain module or remote, crossdomain template that uses CORS internally and works like any other module or template to support extreme vertical scalability with composite web pages and microservices.
+- View engine can resolve promises, so you can use `async` and `await` to build state machines when working with async opreations like fetching data from remote server.
+- Dependency injection of another template or module too loose couple your front-end arhitecture.
 
 For more details see wiki pages...
 
