@@ -1,12 +1,13 @@
 define([], () => {
-    
-    testPrototypeExtension = (object, extensions) => {
-        extensions.forEach(e => {
-            if (object.prototype[e] !== undefined) {
-                throw new Error(`Error: Name collision - object ${object} already have defined "${e}" !`);
-            }
-        });
-    }
+        
+    const 
+        testPrototypeExtension = (object, extensions) => {
+            extensions.forEach(e => {
+                if (object.prototype[e] !== undefined) {
+                    throw new Error(`Error: Name collision - object ${object} already have defined "${e}" !`);
+                }
+            });
+        };
 
     testPrototypeExtension(HTMLElement, [
         "find", "findAll", "show", "hide", "html", "appendTo", "addClass", "removeClass", "on", "off", "html"
