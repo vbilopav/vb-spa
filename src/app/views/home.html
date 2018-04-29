@@ -32,7 +32,7 @@
 
 <h4 id="templatingenginewithfamiliarsyntax">Templating engine with familiar syntax.</h4>
 
-<p>It uses ES6 template string which are supported nativly by browsers. Templating includes processing custom data and template composition (ability to import another template into specific place. See wiki for more information.</p>
+<p>It uses ES6 template string which are supported nativly by browsers. Templating includes processing custom data and template composition  - ability to import another template into specific place. See wiki for more information.</p>
 
 <h4 id="clientsiderouter">Client side router</h4>
 
@@ -41,18 +41,17 @@
 <h4 id="viewenginethatworksseamlesslywithroutertomap">View engine that works seamlessly with router to map:</h4>
 
 <ul>
-<li>Appropriate html text template, </li>
+<li>Appropriate html text template.</li>
 
-<li>Parametrized html text template that can process custom data parameters from router using templating engine,</li>
+<li>Parametrized html text template that can process custom data parameters from router using templating engine.</li>
 
-<li>Custom module that can be JavaScript object or class. That module can then import other modules or templates, etc.</li>
+<li>Custom module that is your JavaScript ES6 class. That module can then import other modules or templates, etc.</li>
 
-<li>Remote, crossdomain module or remote, crossdomain template that uses cors internally and works like any other module or template to support extreme
-vertical scalability with composite web pages and microservices.</li>
+<li>Remote, crossdomain module or remote, crossdomain template that uses CORS internally and works like any other module or template to support extreme vertical scalability with composite web pages and microservices.</li>
 
-<li>View engine can resolve promises, so you can use <code>async</code> and <code>await</code> to build state machines when fetchinbg data from remote server.</li>
+<li>View engine can resolve promises, so you can use <code>async</code> and <code>await</code> to build state machines when working with async opreations like fetching data from remote server.</li>
 
-<li>Dependency injection of another template or module trough router definition</li>
+<li>Dependency injection of another template or module too loose couple your front-end arhitecture.</li>
 </ul>
 
 <p>For more details see wiki pages...</p>
@@ -65,10 +64,9 @@ Wiki pages...</p>
 
 <h4 id="bidirectionalmodelbinding">Bi-directional model binding</h4>
 
-<p>Model binding means ability to declare some data model in you model and when you change some value in your data model, 
-some UI should change also. That means that model and UI model are bind. Bi-directional means when you change value in your 
-UI element, model should change too. This can be achieved declaratively (trough HTML, without any special syntax) or 
-programmatically (trough code telling your model with whom to bind). More info on wiki...</p>
+<p>Model binding means that you can declare some data model that can be binded to your UI easily. When you change the stae of UI, model changes too. When you change your model, UI changes too. That is awesome.</p>
+
+<p>More info on wiki...</p>
 
 <h4 id="buildtool">Build tool</h4>
 
@@ -82,7 +80,7 @@ programmatically (trough code telling your model with whom to bind). More info o
 <li>Fine tune and tweak your SPA application</li>
 </ul>
 
-<p>Bundling is important process in SPA applications because of its modular nature. 
+<p>Bundling is important process in SPA applications because of its complex and modular nature. 
 Modular fronted application need to be bundled to avoid high netowork traffic when loading all of those bundles. On the other side, you don't want everything to be bundled, perhaps you want
 something to be loaded on demand or you just want to left out some portions of application used rarely. In other words - fine tuning. More info on this on wiki. </p>
 

@@ -17,7 +17,7 @@
             collapseWhitespace: true
         },
         globalObject: {
-            scriptContainerId: "_spa-obj",
+            scriptContainerId: "_spa",
             name: "_spa",
             mode: "always",
             expression:
@@ -42,7 +42,7 @@
         },
         index: {
             nameExp: "${this.index.targetFile}",
-            id: "_spa-css"
+            id: "_css"
         }
     },
     app: {

@@ -144,7 +144,7 @@ const parseIndex = config => {
         (config.index.globalObject && typeof config.index.globalObject !== "object")
      ) {
         config.index.globalObject = {
-            scriptContainerId: "_spa-obj",
+            scriptContainerId: "_spa",
             name: "_spa",
             mode: "always",
             expression: 
@@ -162,11 +162,11 @@ const parseIndex = config => {
         let obj = config.index.globalObject;
 
         if (typeof obj.scriptContainerId !== "string") {
-            obj.scriptContainerId = "_spa-obj";
+            obj.scriptContainerId = "_spa";
             log("config.index.globalObject.scriptContainerId set to default " + obj.scriptContainerId);    
         }
         if (typeof obj.name !== "string") {
-            obj.name = "_spa-obj";
+            obj.name = "_spa";
             log("config.index.globalObject.name set to default " + obj.name);    
         }
         if (["always", "not-exists"].indexOf(obj.mode) === -1) {
@@ -260,7 +260,7 @@ const parseCss = config => {
         log("config.css.bundle set to false, it will be skipped.");
     } else {
         if (typeof config.css.bundle !== "object") {
-            config.css.bundle = {result: "default.css", files: "all", scriptId: "_spa-css"}
+            config.css.bundle = {result: "default.css", files: "all", scriptId: "_css"}
             log("config.css.bundle  set to default " + JSON.stringify(config.css.bundle ));
         } else {
 
@@ -275,7 +275,7 @@ const parseCss = config => {
             }
 
             if (config.css.index && typeof config.css.index !== "object") {
-                config.css.index = {name: "${this.index.targetFile}", id: "_spa-css"};
+                config.css.index = {name: "${this.index.targetFile}", id: "_css"};
                 log("config.css.index set to default " + config.css.index);
             }
 
@@ -285,7 +285,7 @@ const parseCss = config => {
             }
 
             if (config.css.index && typeof config.css.index.id !== "string") {
-                config.css.index.id = "_spa-css";
+                config.css.index.id = "_css";
                 log("config.css.index.id set to default " + config.css.index.id);
             }
         }
