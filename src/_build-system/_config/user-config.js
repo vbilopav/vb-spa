@@ -1,6 +1,12 @@
+/*
+***     auto-generated at 2018-04-15T20:37:25.380Z      ***
+***     to re-create delete or run build.js --force        ***
+
+copy of default-config.js
+*/
 ({
-    sourceDir: null,
-    buildDir: null,
+    sourceDir: "C:\\Users\\Vedran\\Source\\Repos\\vb-spa\\src\\",
+    buildDir: "C:\\Users\\Vedran\\Source\\Repos\\vb-spa\\src\\_build-system\\build",
     targetDir: null,
     autoTargetDirExp: "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}",
     copy: "all",
@@ -20,8 +26,7 @@
             scriptContainerId: "_spa",
             name: "_spa",
             mode: "always",
-            expression:
-                "{version:'${this.scriptsVersion ? this.scriptsVersion : ''}', appUrl: '${this.app ? this.app.targetDir : 'app'}', cssUrl: '${this.css ? this.css.targetDir : 'css'}', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}', sysPath: '${this.app.sysPath ? this.app.sysPath : 'spa'}', settings: {usePreloadedTemplates: false}}"
+            expression: "{version:'${this.scriptsVersion ? this.scriptsVersion : ''}', appUrl: '${this.app ? this.app.targetDir : 'app'}', cssUrl: '${this.css ? this.css.targetDir : 'css'}', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}', sysPath: '${this.app.sysPath ? this.app.sysPath : 'spa'}', settings: {usePreloadedTemplates: false}}"
         }
     },
     libs: {
@@ -52,8 +57,6 @@
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "auto",
-        minifyJsOptions: null,
-        minifyEsOptions: null,
         htmlMinifierOptions: {
             minifyJS: true,
             minifyCSS: true,
@@ -71,9 +74,20 @@
                     "../libs/text",
                     "spa/template",
                     "spa/cors-template",
-                    "spa/cors-text"
+                    "spa/cors-text",
+                    "template!views/templates/unbundled-parametrized-view.html",
+                    "text!views/templates/unbundled-text-view.html",
+                    "text!views/modules/new-bundle/template.html",
+                    "views/modules/new-bundle/module-view"
                 ],
                 entryPoint: true
+            },
+            'views/modules/new-bundle/module-view': {
+                includes: [
+                    "text!views/modules/new-bundle/template.html",
+                    "views/modules/new-bundle/module-view"
+                ],
+                excludes: []
             }
         }
     }
