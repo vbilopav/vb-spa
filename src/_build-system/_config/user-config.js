@@ -5,8 +5,8 @@
 copy of default-config.js
 */
 ({
-    sourceDir: "C:\\Users\\Vedran\\Source\\Repos\\vb-spa\\src\\",
-    buildDir: "C:\\Users\\Vedran\\Source\\Repos\\vb-spa\\src\\_build-system\\build",
+    sourceDir: null,
+    buildDir: null,
     targetDir: null,
     autoTargetDirExp: "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}",
     copy: "all",
