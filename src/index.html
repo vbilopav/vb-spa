@@ -18,7 +18,6 @@
     <title>SPA app demo</title>
 
     <script id="_css">
-    (function () {
         var u = (window._spa.cssUrl ? window._spa.cssUrl : "") + "/", 
             q = window._spa.version ? "?" + require.urlArgs : "";
         document.write(
@@ -26,7 +25,6 @@
             '<link rel="stylesheet" href="' + u + 'default.css"' + q + '" />' +
             '<link rel="stylesheet" href="' + u + 'navigation.css"' + q + '" />'
         );
-    })();
     </script>
 </head>
 <body>
