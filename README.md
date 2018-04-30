@@ -12,9 +12,11 @@ However, that doesn't mean that SPA applications in general, and this Framework 
 
 It supports cross-domain views, so it can be also used for microservice-based composite web UI's that can be scaled to the moon and back.
 
-Runtime code, when minified is around ~~**4.5KB**~~ ~~**7.0KB**~~ ~~**7.5KB**~~ ~~**8KB**~~ **8.37KB**. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
+Runtime code, when minified is around stable **8.4KB**. Entire Framework can be minified and bundled - build tools provided)- together with the rest of the application. 
 
-New syntax or special markup is none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework. If want to bind data model to html, also, no markup or new syntax is required. And so on...
+Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
+
+New syntax or special markup is virtually none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework. If want to bind data model to html, also, no markup or new syntax is required. Simplicity is important as speed.
 
 Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically to achieve simplicity and speed. That also means that it cannot be transpiled into JavaScript ES5. Good news is that doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. 
 
@@ -40,20 +42,20 @@ With hashes or with hashbangs. For example `yourwebsite.com#/route1/param1/.../`
 
 ####  View engine that works seamlessly with router to map:
 
-- Appropriate html text template.
-- Parametrized html text template that can process custom data parameters from router using templating engine.
-- Custom module that is your JavaScript ES6 class. That module can then import other modules or templates, etc.
-- Remote, crossdomain module or remote, crossdomain template that uses CORS internally and works like any other module or template to support extreme vertical scalability with composite web pages and microservices.
-- View engine can resolve promises, so you can use `async` and `await` to build state machines when working with async opreations like fetching data from remote server.
-- Dependency injection of another template or module too loose couple your front-end arhitecture.
+- Appropriate HTML text template.
+- Parametrized HTML text template that can process custom data parameters.
+- Code module that is your JavaScript ES6 class.
+- Remote, crossdomain module or remote, crossdomain template that uses CORS internally and works like any other module or template to support **extreme vertical scalability** with composite web pages and microservices.
+- View engine can resolve promises, so you can use `async` and `await` with easy to build state machines when working with async opreations like fetching data from remote server.
+- Dependency injection of another template or module too decouple your front-end arhitecture.
 
 For more details see wiki pages...
 
-#### Mixing of JavaScript and HTML inside module
+#### Declarative programming model - mixing of JavaScript and HTML inside module
 
-If you prefer this style of frontend architecture (I do), there is ability to seamlessly mix your JavaScript code with HTML without 
-having to use JSX parsing and still have full languague support for HTML (for Visual Studio Code and JetBrains development enviorments).
-Wiki pages...
+Yes, language support (hints, autocomplete, etc) for both JavaScript and HTML at the same time.
+Declarative programming model is awesome, it lets you focus on what, rather then why. Very much lean thinking.
+
 
 #### Bi-directional model binding
 
