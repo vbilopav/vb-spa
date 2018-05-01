@@ -19,13 +19,13 @@ module.exports = {
             to = path.join(config.targetDir, config.index.targetFile);
 
         if (!fs.existsSync(from)) {
-            log(`Error: file ${from} doesn't seem to exist, skipping index processing...`);
+            log(`ERROR: file "${from}" doesn't seem to exist, skipping index processing ...`);
             return;
         }
 
         if (!config.index.minify) {
 
-            log(`Copying from ${from} to ${to} ...`);
+            log(`Copying from "${from}" to "${to}" ...`);
 
             try {
                 fs.copyFileSync(from, to);
@@ -36,7 +36,7 @@ module.exports = {
 
         } else {
 
-            log(`minifying from ${from} to ${to} ...`);
+            log(`minifying from "${from}" to "${to}" ...`);
             let opts = typeof config.index.minify === "object" ? config.index.minify : undefined;
             var result = htmlMinifier.minify(fs.readFileSync(from, "utf8"), opts);
             fs.writeFileSync(to, result, "utf8");
@@ -70,7 +70,7 @@ module.exports = {
         }
         if (changed) {
             fs.writeFileSync(to, dom.serialize(), "utf8");
-            log(`updating header script content #${obj.scriptContainerId} of file ${to} with content ${content}`);
+            log(`updating header script content "#${obj.scriptContainerId}" of file "${to}" with content "${content}" ...`);
         }
     }
 }

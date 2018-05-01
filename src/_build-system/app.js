@@ -41,7 +41,7 @@ const createConfig = (config, createModuleMap) => {
             module: configutil.getModule(fileObj.full, file, config)
         }
     }
-    log(`creating ${configFile} ...`);
+    log(`creating "${configFile}" ...`);
     configutil.write(configFile, result, false, 
 `{
     'file name relative to app dir': {
@@ -59,14 +59,14 @@ const createConfig = (config, createModuleMap) => {
 
 const getSourceFiles = (config, to) => {
     if (!configExists()) {
-        log(`${configFile} is missing, skipping app processing ...`);
+        log(`"${configFile}" is missing, skipping app processing ...`);
         return {};
     }
 
-    log(`reading ${configFile} ...`);
+    log(`reading "${configFile}" ...`);
     let result = configutil.read(configFile);
     if (!result)  {
-        log(`warning: ${configFile} empty, skipping app processing ...`)
+        log(`warning: "${configFile}" empty, skipping app processing ...`)
         return {};
     }            
     for (let name in result) {
@@ -78,7 +78,7 @@ const getSourceFiles = (config, to) => {
         item.fileFull = path.join(to, item.fileClean); 
         item.dirTo = path.dirname(item.fileFull);
         if (!fs.existsSync(item.dirTo)) {
-            log(`creating ${item.dirTo} ...`)
+            log(`creating "${item.dirTo}" ...`)
             fsutil.mkDirByPathSync(item.dirTo);
         }
     }
@@ -116,7 +116,7 @@ const build = config => {
     const to = path.join(config.targetDir, config.app.targetDir);
 
     if (!fs.existsSync(to)) {
-        log(`creating ${to} ...`);
+        log(`creating "${to}" ...`);
         fsutil.mkDirByPathSync(to);
     }
 
@@ -134,7 +134,7 @@ const build = config => {
             if (content == null) {
                 continue;
             }
-            log(`minifying ${fromFile} ...`);
+            log(`minifying "${fromFile}" ...`);
 
             let result;
             let htmlMinifyOpts = typeof fileValue.minify === "object" ? fileValue.minify : config.app.htmlMinifierOptions;
@@ -156,7 +156,7 @@ const build = config => {
             }
 
             if (result.error) {
-                log(`Warning: file ${path.join(from, file)} could not be minified, copying instead...`);
+                log(`WARNING: file "${path.join(from, file)}" could not be minified, copying instead ...`);
                 if (result.error != true) {
                     console.log(result.error);
                 }
@@ -174,7 +174,7 @@ const build = config => {
 
         } else {
 
-            log(`copying ${fromFile} ...`);
+            log(`copying "${fromFile}" ...`);
             try {
                 fs.copyFileSync(fromFile, toFile);
             } catch (error) {

@@ -24,7 +24,7 @@ const createConfig = config => {
             module: configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config)
         }
     }
-    log(`creating ${configFile} ...`);
+    log(`creating "${configFile}" ...`);
     configutil.write(configFile, result, false, 
 `{
     'file name relative to libs dir': {
@@ -41,14 +41,14 @@ const createConfig = config => {
 
 const getSourceFiles = (config, to) => {
     if (!configExists()) {
-        log(`${configFile} is missing, skipping libs processing ...`);
+        log(`file "${configFile}" is missing, skipping libs processing ...`);
         return {};
     }
 
-    log(`reading ${configFile} ...`);
+    log(`reading "${configFile}" ...`);
     let result = configutil.read(configFile);
     if (!result)  {
-        log(`warning: ${configFile} empty, skipping libs processing ...`)
+        log(`WARNING: "${configFile}" empty, skipping libs processing ...`)
         return {};
     }
     for (let name in result) {
@@ -57,7 +57,7 @@ const getSourceFiles = (config, to) => {
         item.fileFull = path.join(to, item.fileClean);
         item.dirTo = path.dirname(item.fileFull);
         if (!fs.existsSync(item.dirTo)) {
-            log(`creating ${item.dirTo} ...`)
+            log(`creating "${item.dirTo}" ...`);
             fsutil.mkDirByPathSync(item.dirTo);
         }
     }
@@ -73,7 +73,7 @@ const build = config => {
     const to = path.join(config.targetDir, config.libs.targetDir);
                 
     if (!fs.existsSync(to)) {
-        log(`creating ${to} ...`);
+        log(`creating "${to}" ...`);
         fsutil.mkDirByPathSync(to);
     }
 
@@ -90,7 +90,7 @@ const build = config => {
             if (content == null) {
                 continue;
             }
-            log(`minifying ${fromFile} ...`);
+            log(`minifying "${fromFile}" ...`);
 
             let result;
             if (fileValue.minifyEngine === "uglify-js") {
@@ -102,7 +102,7 @@ const build = config => {
             }
 
             if (result.error) {
-                log(`Warning: file ${path.join(from, file)} could not be minified, copying instead...`);
+                log(`WARNING: file "${path.join(from, file)}" could not be minified, copying instead ...`);
                 console.log(result.error);
                 fs.writeFileSync(fileValue.fileFull, content.toString(), "utf8");
             } else {
@@ -111,7 +111,7 @@ const build = config => {
 
         } else {
 
-            log(`copying ${fromFile} ...`);
+            log(`copying "${fromFile}" ...`);
             try {
                 fs.copyFileSync(fromFile, fileValue.fileFull);
             } catch (error) {

@@ -1,6 +1,7 @@
-/*
-***     auto-generated at 2018-04-22T16:51:23.506Z      ***
-***     to re-create delete or run build.js --force        ***
+/**********************************************************
+***     auto-generated at 2018-05-01T19:26:17.392Z      ***
+***     to re-create delete or run build.js --force     ***
+***********************************************************
 
 {
     'file name relative to app dir': {

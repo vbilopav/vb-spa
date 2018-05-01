@@ -9,6 +9,7 @@ Options:
   -b, --bundles              recreate all bundle configuration files in _config dir
   -f, --force                force recreate all configuration files in _config dir
   -t=str, --target=str       set target dir inside build dir, or set target dir expession (same as autoTargetDirExp config)
+  -c=str, --config=str       set user config file that will be used or created from default-config.js (default is user-config.js)
 `)
     return;
 }
@@ -39,24 +40,28 @@ if (recrateAll) {
 const log = fsutil.log;
 var config;
 var targetDirArg;
+var userConfig = "user-config.js";
 
 process.argv.forEach(val => {
-    if (val.startsWith("--target=")) {
+    if (val.startsWith("--target=") || val.startsWith("-t=")) {
         targetDirArg = val.split("=")[1];
+    }
+    if (val.startsWith("--config=") || val.startsWith("-c=")) {
+        userConfig = val.split("=")[1];
     }
 });
 
 try {
 
     log("");
-    log("reading user-config.js...");
+    log(`reading "${userConfig}" ...`);
     let defaultConfig = false;
-    config = configutil.read("user-config.js", true);
+    config = configutil.read(userConfig, true);
     if (!config)  {
-        log("falling back to reading default-config.js...");
+        log(`falling back to reading "default-config.js" ...`);
         config = configutil.read("default-config.js", true);
         if (!config) {
-            log("neither user-config.js or default-config.js couldn't be found, now exiting...");
+            log(`ERROR: neither "${userConfig}" or "default-config.js" couldn't be found, now exiting ...`);
             return;
         }
         defaultConfig = true;
@@ -68,28 +73,28 @@ try {
     console.log(config.autoTargetDirExp);
 
     log("");
-    log("parsing configuration...");
+    log("parsing configuration ...");
     configutil.parse(config);
     if (defaultConfig || targetDirArg) {
-        log(`creating new config -> ${configutil.configFile("user-config.js")}...`);  
-        configutil.write("user-config.js", config, true, "copy of default-config.js");
+        log(`creating new config -> "${configutil.configFile(userConfig)}" ...`);
+        configutil.write(userConfig, config, true, "copy of default-config.js");
     }
 
     let libs, app;
     if (recrateLibs) {
-        log(`force recreating ${libsBuilder.configFile}...`);
+        log(`force recreating "${libsBuilder.configFile}" ...`);
         libs = libsBuilder.createConfig(config);
     }
     if (recrateCss) {
-        log(`force recreating ${cssBuilder.configFile}...`);
+        log(`force recreating "${cssBuilder.configFile}" ...`);
         cssBuilder.createConfig(config);
     }
     if (recrateApp) {
-        log(`force recreating ${appBuilder.configFile}...`);
+        log(`force recreating "${appBuilder.configFile}" ...`);
         app = appBuilder.createConfig(config);
     }
     if (recrateBundles) {
-        log(`force recreating all bundle files...`);
+        log(`force recreating all bundle files ...`);
         bundlerBuilder.createConfig(config);
     }
     
@@ -99,7 +104,7 @@ try {
         !bundlerBuilder.configExists(config)
     ) {
 
-        log(`Warning:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
+        log(`WARNING:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
 
         if (!libsBuilder.configExists()) {
             libs = libsBuilder.createConfig(config);
@@ -118,10 +123,10 @@ try {
 
         log("");
         if (fs.existsSync(config.targetDir)) {
-            log(`destroying ${config.targetDir} ...`)
+            log(`destroying "${config.targetDir}" ...`);
             fsutil.rmdirSync(config.targetDir);
         }
-        log(`creating ${config.targetDir} ...`)
+        log(`creating "${config.targetDir}" ...`);
         fsutil.mkDirByPathSync(config.targetDir);
 
         let fileMask;
@@ -157,11 +162,11 @@ try {
             let targetFile = path.join(config.targetDir, fileObj.full.replace(config.sourceDir, ""));
             let targetDir = path.dirname(targetFile);
             if (!fs.existsSync(targetDir)) {
-                log(`creating ${targetDir} ...`)
+                log(`creating "${targetDir}" ...`)
                 fsutil.mkDirByPathSync(targetDir);
             }
 
-            log(`copying ${targetFile} ...`);
+            log(`copying "${targetFile}" ...`);
             try {
                 fs.copyFileSync(fileObj.full, targetFile);  
             } catch (error) {
@@ -191,7 +196,7 @@ try {
 } catch (error) {
 
     log(error, true);
-    log("finished prematurely due the exception!!!");
+    log("ERROR: finished prematurely due the unhandled exceptions!!!");
     fsutil.dumpLog(config.targetDir + ".log");
 
     throw error;

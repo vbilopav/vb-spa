@@ -24,25 +24,25 @@ const createConfig = config => {
         }
     }
 
-    log(`creating ${configFile} ...`);
+    log(`creating "${configFile}" ...`);
     configutil.write(configFile, result, false, 
 `{
     'file name relative to css dir': {
-        minify: false to copy, true for default minify config or minify options object,        
+        minify: false to copy, true for default minify config or minify options object,
     }
 }, ...`);
 }
 
-const getSourceFiles = (config, to) => {    
+const getSourceFiles = (config, to) => {
     if (!configExists()) {
-        log(`${configFile} is missing, skipping css processing ...`);
+        log(`"${configFile}" is missing, skipping css processing ...`);
         return {};
     }
 
-    log(`reading ${configFile} ...`);
+    log(`reading "${configFile}" ...`);
     let result = configutil.read(configFile);
     if (!result)  {
-        log(`Warning: ${configFile} empty, skipping css processing ...`)
+        log(`WARNING: "${configFile}" empty, skipping css processing ...`)
         return {};
     }
     for (let name in result) {
@@ -57,7 +57,7 @@ const getSourceFiles = (config, to) => {
             }
         }
         if (createNewDir) {
-            log(`creating ${item.dirTo} ...`)
+            log(`creating "${item.dirTo}" ...`)
             fsutil.mkDirByPathSync(item.dirTo);
         }
     }
@@ -74,7 +74,7 @@ const build = config => {
     const to = path.join(config.targetDir, config.css.targetDir);
 
     if (!fs.existsSync(to)) {
-        log(`creating ${to} ...`);
+        log(`creating "${to}" ...`);
         fsutil.mkDirByPathSync(to);
     }
     
@@ -104,11 +104,11 @@ const build = config => {
                 let content = fs.readFileSync(fromFile, "utf8");
                 if (fileValue.minify !== false) {
                     let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
-                    log(`minifying ${file} for bundle ${bundleFile} ...`)
+                    log(`minifying "${file}" for bundle "${bundleFile}" ...`);
                     let result = new cleanCss(opts).minify(content);
                     content = result.styles;
                 }
-                log(`writing bundle ${bundleFile} segment ${file}`)
+                log(`writing bundle "${bundleFile}" segment "${file}" ...`)
                 fs.appendFileSync(bundleFile, content);
                 realBundleList.push(file);
             } catch (error) {
@@ -127,20 +127,20 @@ const build = config => {
             continue;
         }
         if (config.css.bundle && file === config.css.bundle.targetFile) {
-            log(`WARNING: bundle ${config.css.bundle.targetFile} will be overwritten. Check your config...`)
+            log(`WARNING: bundle "${config.css.bundle.targetFile}" will be overwritten. Check your config ...`)
         }
             
         if (fileValue.minify !== false) {
     
-            log(`minifying ${fromFile} ...`);
+            log(`minifying "${fromFile}" ...`);
             let opts = typeof fileValue.minify === "object" ? fileValue.minify : undefined;
             let content = new cleanCss(opts).minify(fs.readFileSync(fromFile, "utf8"));
             fs.writeFileSync(toFile, content.styles, "utf8"); 
 
         } else {
 
-            log(`copying ${path.join(from, file)} ...`);
-            fs.copyFileSync(path.join(from, file), toFile);  
+            log(`copying "${path.join(from, file)}" ...`);
+            fs.copyFileSync(path.join(from, file), toFile);
 
         }
         overallFiles.push(file);
@@ -165,7 +165,7 @@ const build = config => {
             content = content + ");})();";
             scr.innerHTML = content;  
             fs.writeFileSync(path.join(config.targetDir, index), dom.serialize(), "utf8");
-            log(`updating header script content #${scr.id} of file ${path.join(config.targetDir, index)} with content ${content}`);
+            log(`updating header script content "#${scr.id}" of file "${path.join(config.targetDir, index)}" with content "${content}" ...`);
         }
     }
 }

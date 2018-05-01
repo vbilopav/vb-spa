@@ -31,9 +31,10 @@ const write = (name, value, addPath=false, additionalComment="") => {
     if (addPath) {
         name = configFile(name);
     }
-    let header = `/*
+    let header = `/**********************************************************
 ***     auto-generated at ${new Date().toISOString()}      ***
-***     to re-create delete or run build.js --force        ***
+***     to re-create delete or run build.js --force     ***
+***********************************************************
 
 ${additionalComment}
 */
@@ -67,9 +68,9 @@ const getModule = (sourceFile, file, config) => {
 }
 
 const parseRoot = config => {
-    if (!config.sourceDir) {    
+    if (!config.sourceDir) {
         config.sourceDir = splitted.slice(0, splitted.length-1).join(path.sep) + path.sep;
-        log("config.sourceDir set to default " + config.sourceDir)
+        log(`config.sourceDir set to default "${config.sourceDir}"`);
     }
 
     if (!fs.existsSync(config.sourceDir)) {
@@ -79,54 +80,54 @@ const parseRoot = config => {
 
     if (!config.buildDir) {
         config.buildDir =  path.join(__dirname, "build");
-        log("config.buildDir set to default " + config.buildDir)
+        log(`config.buildDir set to default "${config.buildDir}"`);
         if (!fs.existsSync(config.buildDir)) {
-            log(`creating ${config.buildDir} ...`)
+            log(`creating "${config.buildDir}" ...`)
             fsutil.mkDirByPathSync(config.buildDir);
         }
     }
 
     if (!config.autoTargetDirExp || typeof config.autoTargetDirExp !== "string") {
         config.autoTargetDirExp = "output";
-        log("config.autoTargetDirExp set to default " + config.autoTargetDirExp)
+        log(`config.autoTargetDirExp set to default "${config.autoTargetDirExp}"`)
     }
 
     if (!config.targetDir) {
         config.targetDir = path.join(config.buildDir, templateStr(config.autoTargetDirExp));
-        log("config.targetDir set to auto " + config.targetDir)
+        log(`config.targetDir set to auto "${config.targetDir}"`)
     }
 
     if (!(typeof config.copy === "string" || (config.copy instanceof Array))) {
         config.copy = "all";
-        log("config.copy set to default " + config.copy);
+        log(`config.copy set to default "${config.copy}"`);
     }
 }
 
 const parseIndex = config => {
     if (!config.index) {
         config.index = false;
-        log("config.index section will be skipped! ");
+        log("config.index section will be skipped ...");
         return;
     }
 
     if (!config.index.sourceFile || typeof config.index.sourceFile !== "string") {
         config.index.sourceFile = "index.html";
-        log("config.index.sourceFile set to default " + config.index.sourceFile)
+        log(`config.index.sourceFile set to default ${config.index.sourceFile}`)
     }
 
     var check = path.join(config.sourceDir, config.index.sourceFile)
     if (!fs.existsSync(check)) {
-        throw new Error(`error: config.index.sourceFile ${check} doesn't seem to exist!`);
+        throw new Error(`ERROR: config.index.sourceFile "${check}" doesn't seem to exist!`);
     }
 
     if (!config.index.targetFile || typeof config.index.targetFile !== "string") {
         config.index.targetFile = "index.html";
-        log("config.index.targetFile set to default " + config.index.targetFile);
+        log(`config.index.targetFile set to default "${config.index.targetFile}"`);
     }
 
     if (!config.index.minify) {
         config.index.minify = false;
-        log("config.index.minify set to default false, index will be copied...");
+        log("config.index.minify set to default false, index will be copied ...");
     } else if (typeof config.index.minify !== "object") {
         config.index.minify = {
             minifyJS: true, 
@@ -163,11 +164,11 @@ const parseIndex = config => {
 
         if (typeof obj.scriptContainerId !== "string") {
             obj.scriptContainerId = "_spa";
-            log("config.index.globalObject.scriptContainerId set to default " + obj.scriptContainerId);    
+            log("config.index.globalObject.scriptContainerId set to default " + obj.scriptContainerId);
         }
         if (typeof obj.name !== "string") {
             obj.name = "_spa";
-            log("config.index.globalObject.name set to default " + obj.name);    
+            log("config.index.globalObject.name set to default " + obj.name);
         }
         if (["always", "not-exists"].indexOf(obj.mode) === -1) {
             obj.id = "always";
@@ -175,7 +176,7 @@ const parseIndex = config => {
         }
         if (typeof obj.expression !== "string") {
             obj.expression = "window._spa={version:'', appUrl: '${this.app ? this.app.targetDir : 'app'}/', cssUrl: '${this.css ? this.css.targetDir : 'css'}/', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}/', sysPath: '${this.app.sysPath ? this.app.sysPath : 'spa'}', settings: {usePreloadedTemplates: false}};";
-            log("config.index.globalObject.expression set to default " + obj.expression);    
+            log("config.index.globalObject.expression set to default " + obj.expression);
         }
     }
 }
@@ -203,17 +204,17 @@ const parseLibs = config => {
 
     if (!config.libs.sourceDir || typeof config.libs.sourceDir !== "string") {
         config.libs.sourceDir = "libs";
-        log("config.libs.sourceDir set to default " + config.libs.sourceDir)
+        log(`config.libs.sourceDir set to default "${config.libs.sourceDir}"`)
     }
 
     var check = path.join(config.sourceDir, config.libs.sourceDir)
     if (!fs.existsSync(check)) {
-        throw new Error(`error: config.libs.sourceDir ${check} doesn't seem to exist!`);
+        throw new Error(`ERROR: config.libs.sourceDir ${check} doesn't seem to exist!`);
     }
 
     if (!config.libs.targetDir || typeof config.libs.targetDir !== "string") {
         config.libs.targetDir = "libs";
-        log("config.libs.targetDir set to default " + config.libs.targetDir);
+        log(`config.libs.targetDir set to default "${config.libs.targetDir}"`);
     }
 
     parseLibsItem(config.libs, "config.libs");
@@ -236,7 +237,7 @@ const parseCss = config => {
 
     if (!config.css.sourceDir || typeof config.css.sourceDir !== "string") {
         config.css.sourceDir = "css";
-        log("config.css.sourceDir set to default " + config.css.sourceDir)
+        log(`config.css.sourceDir set to default "${config.css.sourceDir}"`)
     }
 
     var check = path.join(config.sourceDir, config.css.sourceDir)
@@ -246,7 +247,7 @@ const parseCss = config => {
 
     if (!config.css.targetDir || typeof config.css.targetDir !== "string") {
         config.css.targetDir = "css";
-        log("config.css.targetDir set to default " + config.css.targetDir);
+        log(`config.css.targetDir set to default "${config.css.targetDir}"`);
     }
 
     if (typeof config.css.minify !== "boolean" && typeof config.css.minify !== "object") {
@@ -266,27 +267,27 @@ const parseCss = config => {
 
             if (typeof config.css.bundle.targetFile !== "string") {
                 config.css.bundle.targetFile = "default.css";
-                log("config.css.bundle.targetFile set to default " + config.css.bundle.targetFile);
+                log(`config.css.bundle.targetFile set to default "${config.css.bundle.targetFile}"`);
             }
 
             if (!(config.css.bundle.files === "all" || (config.css.bundle.files instanceof Array))) {
                 config.css.bundle.files = "all";
-                log("config.css.bundle.files set to default " + config.css.bundle.files);
+                log(`config.css.bundle.files set to default "${config.css.bundle.files}"`);
             }
 
             if (config.css.index && typeof config.css.index !== "object") {
                 config.css.index = {name: "${this.index.targetFile}", id: "_css"};
-                log("config.css.index set to default " + config.css.index);
+                log(`config.css.index set to default "${config.css.index}"`);
             }
 
             if (config.css.index && typeof config.css.index.nameExp !== "string") {
                 config.css.index.nameExp = "${this.index.targetFile}";
-                log("config.css.index.nameExp set to default " + config.css.index.nameExp);
+                log(`config.css.index.nameExp set to default "${config.css.index.nameExp}"`);
             }
 
             if (config.css.index && typeof config.css.index.id !== "string") {
                 config.css.index.id = "_css";
-                log("config.css.index.id set to default " + config.css.index.id);
+                log(`config.css.index.id set to default "${config.css.index.id}"`);
             }
         }
     }
@@ -348,17 +349,17 @@ const parseApp = config => {
 
     if (!config.app.sourceDir || typeof config.app.sourceDir !== "string") {
         config.app.sourceDir = "app";
-        log("config.app.sourceDir set to default " + config.app.sourceDir)
+        log(`config.app.sourceDir set to default "${config.app.sourceDir}"`)
     }
 
     var check = path.join(config.sourceDir, config.app.sourceDir)
     if (!fs.existsSync(check)) {
-        throw new Error(`error: config.app.sourceDir ${check} doesn't seem to exist!`);
+        throw new Error(`ERROR: config.app.sourceDir "${check}" doesn't seem to exist!`);
     }
 
     if (!config.app.targetDir || typeof config.app.targetDir !== "string") {
         config.app.targetDir = "app";
-        log("config.app.targetDir set to default " + config.app.targetDir);
+        log(`config.app.targetDir set to default "${config.app.targetDir}"`);
     }
 
     parseAppItem(config.app, "config.app");

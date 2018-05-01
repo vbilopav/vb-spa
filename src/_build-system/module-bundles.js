@@ -57,7 +57,7 @@ const createConfig = (config, libs, app) => {
     for (let bundleName in config.app.moduleBundles) {
         let bundleObj = config.app.moduleBundles[bundleName];
         if (modulesList.indexOf(bundleName) === -1) {
-            log(`Error: ${bundleName} couldn't be found in app config ${appBuilder.configFile}, skipping...`);
+            log(`ERROR: "${bundleName}" couldn't be found in app config "${appBuilder.configFile}", skipping...`);
             continue;
         }
 
@@ -75,7 +75,7 @@ const createConfig = (config, libs, app) => {
             replacementExp: bundleObj.entryPoint ? entryPointreplacementExp : undefined
         }
         let bundleConfigName = fileName(bundleName)
-        log(`creating ${bundleConfigName} ...`);
+        log(`creating "${bundleConfigName}" ...`);
         configutil.write(bundleConfigName, result, false,
 `targetModule: target module which will be replace by this bundle
 includes: [] list of modules to bundle
@@ -122,7 +122,7 @@ const build = config => {
                 const include = modules[moduleId];
                 content = fsutil.readFileSync(include);
                 if (!content) {
-                    log(`warning: skipping ${moduleId} in bundle ${j}`);
+                    log(`WARNING: skipping module "${moduleId}" in bundle "${j}" ...`);
                     continue;
                 }
                 content = content.toString();
@@ -148,10 +148,10 @@ const build = config => {
                 }
             }
 
-            log(`adding to bundle ${bundleName} module ${moduleId}...`);
+            log(`adding to bundle "${bundleName}" module "${moduleId}" ...`);
             fs.appendFileSync(temp, content);
         }
-        log(`writting bundle file ${bundleTarget} ...`);
+        log(`writting bundle file "${bundleTarget}" ...`);
         fs.copyFileSync(temp, bundleTarget);
     }
 

@@ -1,6 +1,7 @@
-/*
-***     auto-generated at 2018-04-15T20:37:25.380Z      ***
-***     to re-create delete or run build.js --force        ***
+/**********************************************************
+***     auto-generated at 2018-05-01T19:26:17.323Z      ***
+***     to re-create delete or run build.js --force     ***
+***********************************************************
 
 copy of default-config.js
 */
