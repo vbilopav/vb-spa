@@ -13,7 +13,7 @@ const cleanPath = name => name
     .replace(new RegExp("/", "g"), path.sep)
     .replace(/\.\./g, bellow)
     .replace(/\./g, dirname)
-    .replace(new RegExp(path.sep + path.sep, "g"), path.sep);
+    .replace(new RegExp(path.sep.repeat((path.sep === "/" ? 2 : 4)), "g"), path.sep);
 
 const log = (msg, fileOnly=false) => {
     if (msg) {

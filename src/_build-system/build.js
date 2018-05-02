@@ -179,7 +179,7 @@ try {
 
             log(`copying "${targetFile}" ...`);
             try {
-                fs.copyFileSync(fileObj.full, targetFile);  
+                fs.copyFileSync(fileObj.full, targetFile);
             } catch (error) {
                 log(error);
                 continue;
