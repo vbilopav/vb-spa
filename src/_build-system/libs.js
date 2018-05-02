@@ -29,7 +29,8 @@ const createConfig = config => {
 `{
     'file name relative to libs dir': {
         minify: false to copy, true for default minify config or minify options object,
-        minifyEngine: uglify-es, uglify-js
+        minifyEngine: uglify-es, uglify-js,
+        module: module id if required inside application
     }
 }, ...`);
     Object.keys(result).forEach(name => {

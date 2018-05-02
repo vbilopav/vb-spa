@@ -91,7 +91,7 @@ const parseRoot = (config, configTmp) => {
     }
 
     if (!config.autoTargetDirExp || typeof config.autoTargetDirExp !== "string") {
-        configTmp.autoTargetDirExp = "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}";
+        configTmp.autoTargetDirExp = "${new Date().toISOString().replace(/[-T:]/g, '').substring(0, 14)}";
         log(`config.autoTargetDirExp set to default "${configTmp.autoTargetDirExp}"`)
     } else {
         configTmp.autoTargetDirExp = config.autoTargetDirExp;
@@ -100,8 +100,10 @@ const parseRoot = (config, configTmp) => {
     if (!config.targetDir) {
         configTmp.targetDirResult = templateStr(config.autoTargetDirExp);
         log(`config.targetDir set to auto "${configTmp.targetDirResult}"`)
+    } else {
+        configTmp.targetDirResult = config.targetDir;
     }
-    configTmp.targetDir = path.join(configTmp.buildDir, configTmp.targetDirResult);
+    
 
     if (!(typeof config.copy === "string" || (config.copy instanceof Array))) {
         config.copy = "all";

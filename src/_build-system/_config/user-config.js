@@ -9,7 +9,7 @@ copy of default-config.js
     sourceDir: "../",
     buildDir: "./build",
     targetDir: null,
-    autoTargetDirExp: "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}",
+    autoTargetDirExp: "${new Date().toISOString().replace(/[-T:]/g, '').substring(0, 14)}",
     copy: "all",
     scriptsVersion: "",
     index: {

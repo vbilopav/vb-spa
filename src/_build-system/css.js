@@ -12,7 +12,7 @@ const configExists = () => fs.existsSync(configFile);
 const createConfig = config => {
     const from = path.join(config.sourceDir, config.css.sourceDir);
     const to = path.join(config.targetDir, config.css.targetDir);
-    const files = fsutil.walkSync(from, ".css");    
+    const files = fsutil.walkSync(from, ".css");
     const result = {};
 
     for (let i in files) {
