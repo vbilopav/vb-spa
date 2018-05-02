@@ -380,7 +380,7 @@ module.exports = {
     },
     configFile: configFile,
     read: read,
-    write: write,   
+    write: write,
     parseLibsItem: parseLibsItem,
     parseCssItem: parseCssItem,
     parseAppItem: parseAppItem,

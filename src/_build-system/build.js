@@ -75,9 +75,13 @@ try {
     log("");
     log("parsing configuration ...");
     configutil.parse(config);
+    
     if (defaultConfig || targetDirArg) {
         log(`creating new config -> "${configutil.configFile(userConfig)}" ...`);
-        configutil.write(userConfig, config, true, "copy of default-config.js");
+        configutil.write(userConfig, config, true, `copy of "default-config.js"`);
+        log(`WARNING: copy of "default-config.js" with name "${configutil.configFile(userConfig)}" has been successufuly created for you.`);
+        log("You may want to run build again to use that configuration.");
+        return;
     }
 
     let libs, app;
