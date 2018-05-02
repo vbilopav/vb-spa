@@ -39,6 +39,7 @@ if (recrateAll) {
 
 const log = fsutil.log;
 var config;
+var configTmp = {};
 var targetDirArg;
 var userConfig = "user-config.js";
 
@@ -68,21 +69,27 @@ try {
     }
     if (targetDirArg) {
         config.autoTargetDirExp = targetDirArg;
+        console.log(`INFO: autoTargetDirExp set to "${config.autoTargetDirExp}"`);
         config.targetDir = null;
     }
-    console.log(config.autoTargetDirExp);
 
     log("");
     log("parsing configuration ...");
-    configutil.parse(config);
-    
+    configutil.parse(config, configTmp);
+
     if (defaultConfig || targetDirArg) {
         log(`creating new config -> "${configutil.configFile(userConfig)}" ...`);
         configutil.write(userConfig, config, true, `copy of "default-config.js"`);
-        log(`WARNING: copy of "default-config.js" with name "${configutil.configFile(userConfig)}" has been successufuly created for you.`);
-        log("You may want to run build again to use that configuration.");
+        log(`INFO: copy of "default-config.js" with name "${configutil.configFile(userConfig)}" has been successufuly created for you.`);
+        log("WARNING: You may want to run build again to use that configuration.");
         return;
     }
+
+    config.sourceDir = configTmp.sourceDir;
+    config.buildDir = configTmp.buildDir;
+    config.targetDir = configTmp.targetDir;
+    config.autoTargetDirExp = configTmp.autoTargetDirExp;
+    config.targetDir = path.join(config.buildDir, configTmp.targetDirResult);
 
     let libs, app;
     if (recrateLibs) {

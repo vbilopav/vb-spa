@@ -10,13 +10,14 @@
 ({
     //Full directory path with default os path separators of source application directory.
     //Default (null) will set to directory one level bellow location of build tool.
-    sourceDir: null,
+    sourceDir: "../",
     
     //Full directory for build outputs. Default (null) will be "build" dir in build tool directoy.
-    buildDir: null,
+    buildDir: "./build",
     
     //
     targetDir: null,
+    
     autoTargetDirExp: "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}",
     copy: "all",
     scriptsVersion: "",

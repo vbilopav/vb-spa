@@ -3,7 +3,8 @@ const fsutil = require("./fs-util");
 const path = require("path");
 
 const log = fsutil.log;
-const splitted = __dirname.split(path.sep);
+//const splitted = __dirname.split(path.sep);
+const cleanPath = fsutil.cleanPath;
 
 const configPath = path.join(__dirname, "_config");
 const configFile = name => path.join(configPath, name);
@@ -67,35 +68,40 @@ const getModule = (sourceFile, file, config) => {
     return file;
 }
 
-const parseRoot = config => {
+const parseRoot = (config, configTmp) => {
     if (!config.sourceDir) {
-        config.sourceDir = splitted.slice(0, splitted.length-1).join(path.sep) + path.sep;
+        config.sourceDir = "../";
         log(`config.sourceDir set to default "${config.sourceDir}"`);
     }
+    configTmp.sourceDir = cleanPath(config.sourceDir);
 
-    if (!fs.existsSync(config.sourceDir)) {
-        throw new Error(`error: config.sourceDir ${config.sourceDir} doesn't seem to exist!`);
+    if (!fs.existsSync(configTmp.sourceDir)) {
+        throw new Error(`error: config.sourceDir ${configTmp.sourceDir} doesn't seem to exist!`);
     }
-    fsutil.setSourceDir(config.sourceDir)
+    fsutil.setSourceDir(configTmp.sourceDir)
 
     if (!config.buildDir) {
-        config.buildDir =  path.join(__dirname, "build");
+        config.buildDir =  "../build";
         log(`config.buildDir set to default "${config.buildDir}"`);
-        if (!fs.existsSync(config.buildDir)) {
-            log(`creating "${config.buildDir}" ...`)
-            fsutil.mkDirByPathSync(config.buildDir);
-        }
+    }
+    configTmp.buildDir = cleanPath(config.buildDir);
+    if (!fs.existsSync(configTmp.buildDir)) {
+        log(`creating "${configTmp.buildDir}" ...`)
+        fsutil.mkDirByPathSync(configTmp.buildDir);
     }
 
     if (!config.autoTargetDirExp || typeof config.autoTargetDirExp !== "string") {
-        config.autoTargetDirExp = "output";
-        log(`config.autoTargetDirExp set to default "${config.autoTargetDirExp}"`)
+        configTmp.autoTargetDirExp = "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}";
+        log(`config.autoTargetDirExp set to default "${configTmp.autoTargetDirExp}"`)
+    } else {
+        configTmp.autoTargetDirExp = config.autoTargetDirExp;
     }
 
     if (!config.targetDir) {
-        config.targetDir = path.join(config.buildDir, templateStr(config.autoTargetDirExp));
-        log(`config.targetDir set to auto "${config.targetDir}"`)
+        configTmp.targetDirResult = templateStr(config.autoTargetDirExp);
+        log(`config.targetDir set to auto "${configTmp.targetDirResult}"`)
     }
+    configTmp.targetDir = path.join(configTmp.buildDir, configTmp.targetDirResult);
 
     if (!(typeof config.copy === "string" || (config.copy instanceof Array))) {
         config.copy = "all";
@@ -103,7 +109,7 @@ const parseRoot = config => {
     }
 }
 
-const parseIndex = config => {
+const parseIndex = (config, configTmp) => {
     if (!config.index) {
         config.index = false;
         log("config.index section will be skipped ...");
@@ -115,7 +121,7 @@ const parseIndex = config => {
         log(`config.index.sourceFile set to default ${config.index.sourceFile}`)
     }
 
-    var check = path.join(config.sourceDir, config.index.sourceFile)
+    var check = path.join(configTmp.sourceDir, config.index.sourceFile)
     if (!fs.existsSync(check)) {
         throw new Error(`ERROR: config.index.sourceFile "${check}" doesn't seem to exist!`);
     }
@@ -194,7 +200,7 @@ const parseLibsItem = (item, name) => {
     }
 }
 
-const parseLibs = config => {
+const parseLibs = (config, configTmp) => {
 
     if (!config.libs) {
         config.libs = false;
@@ -207,7 +213,7 @@ const parseLibs = config => {
         log(`config.libs.sourceDir set to default "${config.libs.sourceDir}"`)
     }
 
-    var check = path.join(config.sourceDir, config.libs.sourceDir)
+    var check = path.join(configTmp.sourceDir, config.libs.sourceDir)
     if (!fs.existsSync(check)) {
         throw new Error(`ERROR: config.libs.sourceDir ${check} doesn't seem to exist!`);
     }
@@ -227,7 +233,7 @@ const parseCssItem = (item, name) => {
     }
 }
 
-const parseCss = config => {
+const parseCss = (config, configTmp) => {
 
     if (!config.css) {
         config.css = false;
@@ -240,7 +246,7 @@ const parseCss = config => {
         log(`config.css.sourceDir set to default "${config.css.sourceDir}"`)
     }
 
-    var check = path.join(config.sourceDir, config.css.sourceDir)
+    var check = path.join(configTmp.sourceDir, config.css.sourceDir)
     if (!fs.existsSync(check)) {
         throw new Error(`error: config.css.sourceDir ${check} doesn't seem to exist!`);
     }
@@ -339,7 +345,7 @@ const parseAppItem = (item, name) => {
     }
 }
 
-const parseApp = config => {
+const parseApp = (config, configTmp) => {
 
     if (!config.app) {
         config.app = false;
@@ -352,7 +358,7 @@ const parseApp = config => {
         log(`config.app.sourceDir set to default "${config.app.sourceDir}"`)
     }
 
-    var check = path.join(config.sourceDir, config.app.sourceDir)
+    var check = path.join(configTmp.sourceDir, config.app.sourceDir)
     if (!fs.existsSync(check)) {
         throw new Error(`ERROR: config.app.sourceDir "${check}" doesn't seem to exist!`);
     }
@@ -371,12 +377,12 @@ const parseApp = config => {
 }
 
 module.exports = {
-    parse: config => {
-        parseRoot(config);
-        parseIndex(config);
-        parseLibs(config);
-        parseCss(config);
-        parseApp(config);
+    parse: (config, configTmp) => {
+        parseRoot(config, configTmp);
+        parseIndex(config, configTmp);
+        parseLibs(config, configTmp);
+        parseCss(config, configTmp);
+        parseApp(config, configTmp);
     },
     configFile: configFile,
     read: read,

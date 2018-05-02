@@ -5,6 +5,16 @@ const os = require('os');
 var logContent = "";
 var sourceDir;
 
+const dirname = __dirname;
+const splitted = dirname.split(path.sep);
+const bellow = splitted.slice(0, splitted.length-1).join(path.sep) + path.sep;
+
+const cleanPath = name => name
+    .replace(new RegExp("/", "g"), path.sep)
+    .replace(/\.\./g, bellow)
+    .replace(/\./g, dirname)
+    .replace(new RegExp(path.sep + path.sep, "g"), path.sep);
+
 const log = (msg, fileOnly=false) => {
     if (msg) {
         if (typeof msg === "object") {
@@ -93,6 +103,7 @@ const walkSync = function (dir, pathnames, filelist) {
 };
 
 module.exports = {
+    cleanPath: cleanPath,
     log: log,
     dumpLog: dumpLog,
     readFileSync: readFileSync,

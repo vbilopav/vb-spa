@@ -6,8 +6,8 @@
 copy of default-config.js
 */
 ({
-    sourceDir: null,
-    buildDir: null,
+    sourceDir: "../",
+    buildDir: "./build",
     targetDir: null,
     autoTargetDirExp: "${new Date().toISOString().replace(/-/g, '').substring(0, 8)}",
     copy: "all",
