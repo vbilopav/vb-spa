@@ -59,7 +59,9 @@ Declarative programming model is awesome, it lets you focus on what, rather then
 
 #### Bi-directional model binding
 
-Model binding means that you can declare some data model that can be binded to your UI easily. When you change the stae of UI, model changes too. When you change your model, UI changes too. That is awesome.
+Model binding means that you can declare some data model that can be binded to your UI easily. When you change the something in the UI, model changes too. When you change your model, UI changes too. 
+
+That is awesome.
 
 More info on wiki...
 
