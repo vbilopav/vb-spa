@@ -42,6 +42,7 @@ var config;
 var configTmp = {};
 var targetDirArg;
 var userConfig = "user-config.js";
+var defaultConfigName = "default-config.js";
 
 process.argv.forEach(val => {
     if (val.startsWith("--target=") || val.startsWith("-t=")) {
@@ -59,10 +60,10 @@ try {
     let defaultConfig = false;
     config = configutil.read(userConfig, true);
     if (!config)  {
-        log(`falling back to reading "default-config.js" ...`);
-        config = configutil.read("default-config.js", true);
+        log(`falling back to reading "${defaultConfigName}" ...`);
+        config = configutil.read(path.join(__dirname, defaultConfigName), false);
         if (!config) {
-            log(`ERROR: neither "${userConfig}" or "default-config.js" couldn't be found, now exiting ...`);
+            log(`ERROR: neither "${userConfig}" or ${defaultConfigName}" couldn't be found, now exiting ...`);
             return;
         }
         defaultConfig = true;
@@ -79,8 +80,8 @@ try {
 
     if (defaultConfig || targetDirArg) {
         log(`creating new config -> "${configutil.configFile(userConfig)}" ...`);
-        configutil.write(userConfig, config, true, `copy of "default-config.js"`);
-        log(`INFO: copy of "default-config.js" with name "${configutil.configFile(userConfig)}" has been successufuly created for you.`);
+        configutil.write(userConfig, config, true);
+        log(`INFO: copy of "${defaultConfigName}" with name "${configutil.configFile(userConfig)}" has been successufuly created for you.`);
         log("WARNING: You may want to run build again to use that configuration.");
         return;
     }

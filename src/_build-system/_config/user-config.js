@@ -1,9 +1,9 @@
 /**********************************************************
-***     auto-generated at 2018-05-01T19:26:17.323Z      ***
+***     auto-generated at 2018-05-03T04:20:05.109Z      ***
 ***     to re-create delete or run build.js --force     ***
 ***********************************************************
 
-copy of default-config.js
+
 */
 ({
     sourceDir: "../",

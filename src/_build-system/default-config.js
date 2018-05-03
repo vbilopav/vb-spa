@@ -256,7 +256,7 @@
                 ],
 
                 // For entry point modules, all modules in bundle need to be required first after they are defined.
-                // Only way to cahieve this is with replacement expression that is generated for entry point modules,
+                // Only way to achieve this is with replacement expression that is generated for entry point modules,
                 // that will require all defined module in first bundle and require and execute "app" module.
                 entryPoint: true
             }
