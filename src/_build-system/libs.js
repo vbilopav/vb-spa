@@ -21,7 +21,7 @@ const createConfig = config => {
         result["'" + file + "'"] = {
             minify: config.libs.minify,
             minifyEngine: config.libs.minifyEngine,
-            module: configutil.getModule(fileObj.full, "../" + config.libs.targetDir + "/" + file, config)
+            module: configutil.getModule(fileObj.full, config.libs.targetDir + "/" + file, config)
         }
     }
     log(`creating "${configFile}" ...`);

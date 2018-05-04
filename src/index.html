@@ -55,8 +55,9 @@
             data-main="main.js" 
             src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js">
     </script>
-    <script type="text/javascript">    
+    <script type="text/javascript">
         var libsUrl = window._spa && window._spa.libsUrl ? window._spa.libsUrl : "",
+            libs = libsUrl ? "../" + libsUrl: "../libs"
             sysUrl = (window._spa.sysPath ? window._spa.sysPath : "spa") + "/";
         window.requirejs || 
             document.write(
@@ -64,13 +65,14 @@
             );
         requirejs.config({
             paths: {
-                text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", (libsUrl ? "../" + libsUrl + "/" : "") + "text"],
+                libs: libs,
+                text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],
                 sys: sysUrl,
                 template: sysUrl + "template",
                 "cors-text": sysUrl + "cors-text",
                 "cors-template": sysUrl + "cors-template"
             }
-        });    
+        });
     </script>
 
 </body>
