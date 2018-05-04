@@ -9,7 +9,7 @@
     sourceDir: "../",
     buildDir: "./build",
     targetDir: null,
-    autoTargetDirExp: "${new Date().toISOString().replace(/[-T:]/g, '').substring(0, 14)}",
+    autoTargetDirExp: "${new Date().toISOString().replace(/[-T:]/g, '').substring(0, 12)}",
     copy: "all",
     scriptsVersion: "",
     index: {
@@ -70,9 +70,10 @@
             'main': {
                 includes: "all",
                 excludes: [
-                    "../libs/feature-detect",
-                    "../libs/require",
-                    "../libs/text",
+                    "libs/feature-detect",
+                    "libs/require",
+                    "libs/text",
+                    "libs/test",
                     "spa/template",
                     "spa/cors-template",
                     "spa/cors-text",

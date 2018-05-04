@@ -30,7 +30,7 @@
 
     // Expression to atumatically generate targetDir value that will be used for target directory and log file.
     // Default is current utc date and time in format "YYYYMMDDHHmmSS"
-    autoTargetDirExp: "${new Date().toISOString().replace(/[-T:]/g, '').substring(0, 14)}",
+    autoTargetDirExp: "${new Date().toISOString().replace(/[-T:]/g, '').substring(0, 12)}",
 
     // List of custom files, not part of application system (not in app, libs or css directory) to be copied into build.
     // Accepts array of strings with file names, or "all" for all files.
@@ -247,9 +247,9 @@
                 // Exclude following module id's from this bundle - array of strings.
                 // Makes only sense when includes is "all".
                 excludes: [
-                    "../libs/feature-detect",
-                    "../libs/require",
-                    "../libs/text",
+                    "libs/feature-detect",
+                    "libs/require",
+                    "libs/text",
                     "spa/template",
                     "spa/cors-template",
                     "spa/cors-text"
