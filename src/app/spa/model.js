@@ -45,7 +45,7 @@ define([], () => class {
             if (!attr.startsWith("on")) {
                 continue;
             }
-            let val = this._instance[element.getAttribute(attr)];
+            let val = this._instance[node.value];
             if (typeof val !== "function") {
                 continue;
             }
