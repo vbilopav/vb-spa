@@ -39,9 +39,9 @@ define([], () => class {
     }
 
     _assignEvents(element) {
-        let attrs = element.getAttributeNames();
-        for(let i in attrs) {
-            let attr = attrs[i];
+        let attrs = element.attributes;
+        for(let i = 0, l = attrs.length; i < l; i++) {
+            let node = attrs[i], attr = node.name;
             if (!attr.startsWith("on")) {
                 continue;
             }
