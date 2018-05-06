@@ -116,7 +116,7 @@ try {
         !bundlerBuilder.configExists(config)
     ) {
 
-        log(`WARNING:  *** some config files are missing, they will be recretaed first, so you may want rerun build!!! ***`);
+        log(`WARNING:  *** some config files are missing, they will be recreated first, so you may want rerun build!!! ***`);
 
         if (!libsBuilder.configExists()) {
             libs = libsBuilder.createConfig(config);
