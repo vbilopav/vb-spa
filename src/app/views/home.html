@@ -1,88 +1,88 @@
 <h1 id="vbspasinglepageapplicationframework">VBSPA Single-Page Application Framework</h1>
 
-<p><strong>VBSPA</strong> is JavaScript Framework that offers simple and easy way to create amazing fast and slick <strong>Single-Page Web Applications</strong> <a href="https://en.wikipedia.org/wiki/Single-page_application">SPA</a>.</p>
+<blockquote>
+  <p><strong>VBSPA</strong> is JavaScript Framework that offers simple and easy way to create amazing fast and slick <a href="https://en.wikipedia.org/wiki/Single-page_application"><strong>Single-Page Web Applications</strong></a>.</p>
+</blockquote>
 
-<p>SPA web applications don't require and don't do any reload on view request. As result they are extremly fast and slick and user session is preserved. </p>
+<p>SPA Web Applications don't require and <strong>don't do any reloads</strong> on view request. As result they are extremly <strong>fast and slick</strong> and user session is preserved. </p>
 
 <p>That means that SPA applications can offer <strong>full, native, desktop-like user experience</strong> - without annoying reloads and without loosing user session or work.</p>
 
-<p>This Framework was built from ground-up for simplicity and speed - with having primarly on mind building <strong>web-based tools</strong> and web apps with desktop-like experince.</p>
+<p>This Framework was built from ground-up for <strong>simplicity and speed</strong> - with having primarly on mind building <strong>web-based tools</strong> and other web apps that would like to have desktop-like experince.</p>
 
-<p>However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sites like news portals or blogs that need to server thousands of pages. Views can be loaded dynamically and when needed. </p>
+<p>However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sitesthat need to server thousands of pages. Views or even other bundles - can be loaded dynamically - <strong>lazy loading</strong> - and only when they are needed. </p>
 
-<p>It supports cross-domain views, so it can be also used for microservice-based composite web UI's that can be scaled to the moon and back.</p>
+<p>Framework supports cross-domain views, so it can be also used for microservice-based composite web UI's  - that can be <strong>scaled to the moon and back.</strong></p>
 
-<p>Runtime code, when minified is around ~~<strong>4.5KB</strong>~~ ~~<strong>7.0KB</strong>~~ ~~<strong>7.5KB</strong>~~ ~~<strong>8KB</strong>~~ <strong>8.37KB</strong>. Entire Framework can be minified and bundled (build tool provided) - together with the rest of the application. Demo app in this repository have <strong>30 views</strong> with various feature demos and minified and bundled with Framework is less then <strong>60KB</strong>.</p>
+<p>Runtime code, when minified is around stable <strong>8.4KB</strong>. </p>
 
-<p>New syntax or special markup is none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">ES6 template strings syntax</a> then you already know template syntax for this framework. If want to bind data model to html, also, no markup or new syntax is required. And so on...</p>
+<p>Entire Framework can be simply minified and bundled - build tools are provided together with the rest of the application. </p>
 
-<p>Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically to achieve simplicity and speed. That also means that it cannot be transpiled into JavaScript ES5. Good news is that doesn't have to. Here is curent <a href="https://kangax.github.io/compat-table/es6/">compatibility table for ES6</a>. This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. </p>
+<p>Demo app in this repository have <strong>30 views</strong> with various feature demos and minified and bundled with Framework is less then <strong>60KB</strong>.</p>
+
+<p><strong>New syntax or special markup is virtually none-existing.</strong> </p>
+
+<p>That means shallow learning curve and you can start quickly. For example, if you already know JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">ES6 template strings syntax</a> then you already know template syntax for this framework. If want to bind data model to HTML, also, no new markup or new syntax is required. </p>
+
+<p>Framework relays heavily and takes advantage of new JavaScript ECMA6 (JS ES6) features and it cannot be transpiled to ECMA5. </p>
+
+<p>Good. 
+It doesn't have to. 
+Here is curent <a href="https://kangax.github.io/compat-table/es6/">compatibility table for ES6</a>. This means that this <strong>framework doesn't support Internet Explorer.</strong> It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. Feature detection script is provided.</p>
 
 <blockquote>
   <p><strong>If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of their time to install better browser!</strong>  </p>
+  
+  <h1 id="nomoretranspiling">nomoretranspiling</h1>
 </blockquote>
-
-<h1 id="nomoretranspiling">nomoretranspiling</h1>
 
 <h2 id="featurelist">Feature list</h2>
 
-<h4 id="javascriptmodularitywithouttranspilation">JavaScript modularity without transpilation</h4>
+<h3 id="javascriptmodularitywithouttranspilationhttpsgithubcomvbilopavvbspawiki1modularity"><a href="https://github.com/vbilopav/vb-spa/wiki/1.-Modularity">JavaScript modularity without transpilation</a></h3>
 
-<p>It just uses RequireJS module loader directly. AMD (Asynchronous Module Definition), and its most popular implementation RequireJS is favored to CommonJS because of its asynchronous features to achieve effeciency. This is only dependency (6KB).</p>
+<h3 id="useremotecrossdomainmodulesorhtmltemplateshttpsgithubcomvbilopavvbspawiki3crossoriginmodules"><a href="https://github.com/vbilopav/vb-spa/wiki/3.-Cross-origin-modules">Use remote, cross-domain modules or HTML templates</a></h3>
 
-<h4 id="templatingenginewithfamiliarsyntax">Templating engine with familiar syntax.</h4>
+<h3 id="templatingenginewithfamiliarsyntaxhttpsgithubcomvbilopavvbspawiki2templateengine"><a href="https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine">Templating engine with familiar syntax</a></h3>
 
-<p>It uses ES6 template string which are supported nativly by browsers. Templating includes processing custom data and template composition  - ability to import another template into specific place. See wiki for more information.</p>
+<h3 id="clientsiderouterhttpsgithubcomvbilopavvbspawiki4clientrouter"><a href="https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router">Client side router</a></h3>
 
-<h4 id="clientsiderouter">Client side router</h4>
-
-<p>With hashes or with hashbangs. For example <code>yourwebsite.com#/route1/param1/.../</code> is hash route. That is how single page applications work, since they have to implement entire framework, including routing on client. There is also possibility of hasbangs, for example <code>yourwebsite.com#!/route1/param1/.../</code>. Hashbang routes have better search engine optimization. More info in wiki...</p>
-
-<h4 id="viewenginethatworksseamlesslywithroutertomap">View engine that works seamlessly with router to map:</h4>
+<h3 id="viewenginethatworksseamlesslywithrouterthatcanhttpsgithubcomvbilopavvbspawiki5viewengine"><a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine">View engine that works seamlessly with router that can:</a></h3>
 
 <ul>
-<li>Appropriate html text template.</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#text-templates">Map HTML text templates</a></li>
 
-<li>Parametrized html text template that can process custom data parameters from router using templating engine.</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#parametrized-text-templates">Map parametrized HTML text templates</a></li>
 
-<li>Custom module that is your JavaScript ES6 class. That module can then import other modules or templates, etc.</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#class-modules">Map code modules</a></li>
 
-<li>Remote, crossdomain module or remote, crossdomain template that uses CORS internally and works like any other module or template to support extreme vertical scalability with composite web pages and microservices.</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#resolving-promises-and-async-and-await">View engine can resolve promises, so you can use <code>async</code> and <code>await</code></a></li>
 
-<li>View engine can resolve promises, so you can use <code>async</code> and <code>await</code> to build state machines when working with async opreations like fetching data from remote server.</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#injected">Dependency injection of another template or module to loose couple your front-end arhitecture</a></li>
 
-<li>Dependency injection of another template or module too loose couple your front-end arhitecture.</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules">Use declarative programming model</a></li>
 </ul>
 
-<p>For more details see wiki pages...</p>
+<h3 id="declarativeprogrammingmodelmixingofjavascriptandhtmlinsidemodulehttpsgithubcomvbilopavvbspawiki6htmlelementextensions"><a href="https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions">Declarative programming model - mixing of JavaScript and HTML inside module</a></h3>
 
-<h4 id="mixingofjavascriptandhtmlinsidemodule">Mixing of JavaScript and HTML inside module</h4>
-
-<p>If you prefer this style of frontend architecture (I do), there is ability to seamlessly mix your JavaScript code with HTML without 
-having to use JSX parsing and still have full languague support for HTML (for Visual Studio Code and JetBrains development enviorments).
-Wiki pages...</p>
-
-<h4 id="bidirectionalmodelbinding">Bi-directional model binding</h4>
-
-<p>Model binding means that you can declare some data model that can be binded to your UI easily. When you change the stae of UI, model changes too. When you change your model, UI changes too. That is awesome.</p>
-
-<p>More info on wiki...</p>
-
-<h4 id="buildtool">Build tool</h4>
-
-<p>Build tool is also included that allows you to:</p>
+<h4 id="bidirectionalmodelbindingeitherhttpsgithubcomvbilopavvbspawiki8modelbinding"><a href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding">Bi-directional model binding, either:</a></h4>
 
 <ul>
-<li>Minify and copy your modules, html and css</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#declarative-binding">Declarative</a></li>
 
-<li>Create bundles for your your modules, html or css</li>
-
-<li>Fine tune and tweak your SPA application</li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#programmatic-binding">Programmatic</a></li>
 </ul>
 
-<p>Bundling is important process in SPA applications because of its complex and modular nature. 
-Modular fronted application need to be bundled to avoid high netowork traffic when loading all of those bundles. On the other side, you don't want everything to be bundled, perhaps you want
-something to be loaded on demand or you just want to left out some portions of application used rarely. In other words - fine tuning. More info on this on wiki. </p>
+<h4 id="buildtoolthatcanhttpsgithubcomvbilopavvbspawiki11buildsystem"><a href="https://github.com/vbilopav/vb-spa/wiki/11.-Build-system">Build tool that can</a></h4>
+
+<ul>
+<li>#### <a href="">Minify and copy your modules, HTML and or CSS files</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration">Create bundles for your your modules, html or css</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration">Lazy load your application moduels, another bundles or html and css</a></li>
+
+<li>#### <a href="">Fine tune and tweak your SPA application</a></li>
+</ul>
 
 <h2 id="gettingstarted">Getting Started</h2>
 
