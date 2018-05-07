@@ -69,10 +69,10 @@ More info on wiki...
 
 Build tool is also included that allows you to:
 
-**- Minify and copy your modules, html and css**
-**- Create bundles for your your modules, html or css**
-**- Lazy load html or css modules**
-**- Fine tune and tweak your SPA application**
+- Minify and copy your modules, html and css
+- Create bundles for your your modules, html or css
+- Lazy load html or css modules
+- Fine tune and tweak your SPA application
 
 Bundling is important process in SPA applications because of its complex and modular nature. 
 Modular fronted application need to be bundled to avoid high netowork traffic when loading all of those bundles. On the other side, you don't want everything to be bundled, perhaps you want
