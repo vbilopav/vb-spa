@@ -30,7 +30,7 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 > **If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of their time to install better browser!**  
 
-#nomoretranspiling
+> **** #nomoretranspiling ****
 
 
 ## Feature list
