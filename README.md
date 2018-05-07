@@ -43,12 +43,12 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ###  View engine that works seamlessly with router that can:
 
-    - #### Map HTML text templates.
+- #### Map HTML text templates.
 - #### Map parametrized HTML text templates.
-    #### - Map code modules.
-    #### - Map remote, cross-domain modules or HTML templates    .
-    #### - View engine can resolve promises, so you can use `async` and `await`.
-    #### - Dependency injection of another template or module too decouple your front-end arhitecture.
+- #### Map code modules.
+- #### Map remote, cross-domain modules or HTML templates    .
+- #### View engine can resolve promises, so you can use `async` and `await`.
+- #### Dependency injection of another template or module too decouple your front-end arhitecture.
 
 ### Declarative programming model - mixing of JavaScript and HTML inside module
 
@@ -56,10 +56,10 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 #### Build tool that can
 
-    #### - Minify and copy your modules, html and css
-    #### - Create bundles for your your modules, html or css
-    #### - Lazy load html or css modules
-    #### - Fine tune and tweak your SPA application
+- #### Minify and copy your modules, HTML and or CSS files
+- #### Create bundles for your your modules, html or css
+- #### Lazy load html or css modules
+- #### Fine tune and tweak your SPA application
 
 
 ## Getting Started
