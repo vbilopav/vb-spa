@@ -66,7 +66,7 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 - #### [Minify and copy your modules, HTML and or CSS files]()
 - #### [Create bundles for your your modules, html or css](https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration)
 - #### [Lazy load your application modules, another bundles or html and css](https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration)
-- #### [Fine tune and tweak your SPA application]()
+- #### [Fine tune and tweak your SPA application](https://github.com/vbilopav/vb-spa/wiki/14.-Bundle-configurations-and-fine-tuning)
 
 
 ## Getting Started
