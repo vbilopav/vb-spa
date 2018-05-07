@@ -1,6 +1,6 @@
 # VBSPA Single-Page Application Framework
 
-> **VBSPA** is JavaScript Framework that offers simple and easy way to create amazing fast and slick **Single-Page Web Applications** [SPA](https://en.wikipedia.org/wiki/Single-page_application).
+> **VBSPA** is JavaScript Framework that offers simple and easy way to create amazing fast and slick [**Single-Page Web Applications**](https://en.wikipedia.org/wiki/Single-page_application).
 
 SPA web applications don't require and don't do any reload on view request. As result they are extremly fast and slick and user session is preserved. 
 
