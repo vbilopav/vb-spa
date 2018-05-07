@@ -35,31 +35,31 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ## Feature list
 
-### [JavaScript modularity without transpilation](/vbilopav/vb-spa/wiki/1.-Modularity)
+### [JavaScript modularity without transpilation](https://github.com/vbilopav/vb-spa/wiki/1.-Modularity)
 
-### [Use remote, cross-domain modules or HTML templates](/vbilopav/vb-spa/wiki/3.-Cross-origin-modules)
+### [Use remote, cross-domain modules or HTML templates](https://github.com/vbilopav/vb-spa/wiki/3.-Cross-origin-modules)
 
-### [Templating engine with familiar syntax](/vbilopav/vb-spa/wiki/2.-Template-engine)
+### [Templating engine with familiar syntax](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine)
 
-### [Client side router](/vbilopav/vb-spa/wiki/4.-Client-Router)
+### [Client side router](https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router)
 
-### [View engine that works seamlessly with router that can:](/vbilopav/vb-spa/wiki/5.-View-Engine)
+### [View engine that works seamlessly with router that can:](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine)
 
-- #### [Map HTML text templates](/vbilopav/vb-spa/wiki/5.-View-Engine#text-templates)
-- #### [Map parametrized HTML text templates](/vbilopav/vb-spa/wiki/5.-View-Engine#parametrized-text-templates)
-- #### [Map code modules](/vbilopav/vb-spa/wiki/5.-View-Engine#class-modules)
-- #### [View engine can resolve promises, so you can use `async` and `await`](/vbilopav/vb-spa/wiki/5.-View-Engine#resolving-promises-and-async-and-await)
-- #### [Dependency injection of another template or module to loose couple your front-end arhitecture](/vbilopav/vb-spa/wiki/5.-View-Engine#injected)
-- #### [Use declarative programming model](/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules)
+- #### [Map HTML text templates](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#text-templates)
+- #### [Map parametrized HTML text templates](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#parametrized-text-templates)
+- #### [Map code modules](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#class-modules)
+- #### [View engine can resolve promises, so you can use `async` and `await`](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#resolving-promises-and-async-and-await)
+- #### [Dependency injection of another template or module to loose couple your front-end arhitecture](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#injected)
+- #### [Use declarative programming model](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules)
 
-### [Declarative programming model - mixing of JavaScript and HTML inside module](/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
+### [Declarative programming model - mixing of JavaScript and HTML inside module](https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
 
-#### [Bi-directional model binding, either:](/vbilopav/vb-spa/wiki/8.-Model-Binding)
+#### [Bi-directional model binding, either:](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding)
 
-- #### [Declarative](/vbilopav/vb-spa/wiki/8.-Model-Binding#declarative-binding)
-- #### [Programmatic](/vbilopav/vb-spa/wiki/8.-Model-Binding#programmatic-binding)
+- #### [Declarative](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#declarative-binding)
+- #### [Programmatic](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#programmatic-binding)
 
-#### [Build tool that can](/vbilopav/vb-spa/wiki/11.-Build-system)
+#### [Build tool that can](https://github.com/vbilopav/vb-spa/wiki/11.-Build-system)
 
 - #### Minify and copy your modules, HTML and or CSS files
 - #### Create bundles for your your modules, html or css
