@@ -54,7 +54,7 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ### [Declarative programming model - mixing of JavaScript and HTML inside module](/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
 
-#### Bi-directional model binding, either:(/vbilopav/vb-spa/wiki/8.-Model-Binding)
+#### [Bi-directional model binding, either:](/vbilopav/vb-spa/wiki/8.-Model-Binding)
 
 - #### [Declarative](/vbilopav/vb-spa/wiki/8.-Model-Binding#declarative-binding)
 - #### [Programmatic](/vbilopav/vb-spa/wiki/8.-Model-Binding#programmatic-binding)
