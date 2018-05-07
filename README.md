@@ -2,15 +2,15 @@
 
 > **VBSPA** is JavaScript Framework that offers simple and easy way to create amazing fast and slick [**Single-Page Web Applications**](https://en.wikipedia.org/wiki/Single-page_application).
 
-SPA web applications don't require and don't do any reload on view request. As result they are extremly fast and slick and user session is preserved. 
+SPA Web Applications don't require and **don't do any reloads** on view request. As result they are extremly **fast and slick** and user session is preserved. 
 
 That means that SPA applications can offer **full, native, desktop-like user experience** - without annoying reloads and without loosing user session or work.
 
-This Framework was built from ground-up for simplicity and speed - with having primarly on mind building **web-based tools** and other web apps that would like to have desktop-like experince.
+This Framework was built from ground-up for **simplicity and speed** - with having primarly on mind building **web-based tools** and other web apps that would like to have desktop-like experince.
 
-However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sites like news portals or blogs that need to server thousands of pages. Views can be loaded dynamically (lazy loading) and only when they are needed. 
+However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sitesthat need to server thousands of pages. Views or even other bundles - can be loaded dynamically - **lazy loading** - and only when they are needed. 
 
-IFramework supports cross-domain views, so it can be also used for microservice-based composite web UI's  - that can be **scaled to the moon and back.**
+Framework supports cross-domain views, so it can be also used for microservice-based composite web UI's  - that can be **scaled to the moon and back.**
 
 Runtime code, when minified is around stable **8.4KB**. 
 
@@ -22,11 +22,11 @@ Demo app in this repository have **30 views** with various feature demos and min
 
 That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework. If want to bind data model to HTML, also, no new markup or new syntax is required. 
 
-Simplicity is important as it is speed.
-
 Framework relays heavily and takes advantage of new JavaScript ECMA6 (JS ES6) features and it cannot be transpiled to ECMA5. 
 
-Good. It doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this **framework doesn't support Internet Explorer.** It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. Feature detection script is provided.
+Good. 
+It doesn't have to. 
+Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this **framework doesn't support Internet Explorer.** It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. Feature detection script is provided.
 
 > **If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of their time to install better browser!**  
 
@@ -43,7 +43,7 @@ Good. It doesn't have to. Here is curent [compatibility table for ES6](https://k
 
 ###  View engine that works seamlessly with router that can:
 
-    #### - Map HTML text templates.
+    #### Map HTML text templates.
     #### - Map parametrized HTML text templates.
     #### - Map code modules.
     #### - Map remote, cross-domain modules or HTML templates    .
