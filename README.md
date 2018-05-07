@@ -43,8 +43,8 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ###  View engine that works seamlessly with router that can:
 
-    #### Map HTML text templates.
-    #### - Map parametrized HTML text templates.
+    - #### Map HTML text templates.
+- #### Map parametrized HTML text templates.
     #### - Map code modules.
     #### - Map remote, cross-domain modules or HTML templates    .
     #### - View engine can resolve promises, so you can use `async` and `await`.
