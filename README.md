@@ -54,12 +54,12 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ### [Declarative programming model - mixing of JavaScript and HTML inside module](https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
 
-#### [Bi-directional model binding, either:](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding)
+### [Bi-directional model binding, either:](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding)
 
 - #### [Declarative](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#declarative-binding)
 - #### [Programmatic](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#programmatic-binding)
 
-#### [Build tool that can](https://github.com/vbilopav/vb-spa/wiki/11.-Build-system)
+### [Build tool that can](https://github.com/vbilopav/vb-spa/wiki/11.-Build-system)
 
 - #### [Minify and copy your modules, HTML and or CSS files]()
 - #### [Create bundles for your your modules, html or css](https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration)
