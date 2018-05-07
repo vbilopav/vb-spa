@@ -50,9 +50,11 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 - #### [Map code modules](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#class-modules)
 - #### [View engine can resolve promises, so you can use `async` and `await`](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#resolving-promises-and-async-and-await)
 - #### [Dependency injection of another template or module to loose couple your front-end arhitecture](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#injected)
-- #### [Use declarative programming model](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules)
 
-### [Declarative programming model - mixing of JavaScript and HTML inside module](https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
+### [Declarative programming model - mixing of JavaScript and HTML inside module](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules)
+
+- #### [with full languague support in your favorite ide](https://github.com/vbilopav/vb-spa/wiki/7.-JavaScript-and-HTML-Mixing)
+- #### [and familiar HTML element extensions)(https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
 
 ### [Bi-directional model binding, either:](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding)
 
