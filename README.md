@@ -53,8 +53,8 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ### [Declarative programming model - mixing of JavaScript and HTML inside module](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules)
 
-- #### [with full languague support in your favorite ide](https://github.com/vbilopav/vb-spa/wiki/7.-JavaScript-and-HTML-Mixing)
-- #### [and familiar HTML element extensions)(https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
+- #### [with full languague support in your favorite IDE](https://github.com/vbilopav/vb-spa/wiki/7.-JavaScript-and-HTML-Mixing)
+- #### [and familiar HTML element extensions](https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions)
 
 ### [Bi-directional model binding, either:](https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding)
 
