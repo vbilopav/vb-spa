@@ -6,20 +6,27 @@ SPA web applications don't require and don't do any reload on view request. As r
 
 That means that SPA applications can offer **full, native, desktop-like user experience** - without annoying reloads and without loosing user session or work.
 
-This Framework was built from ground-up for simplicity and speed - with having primarly on mind building **web-based tools** and web apps with desktop-like experince.
+This Framework was built from ground-up for simplicity and speed - with having primarly on mind building **web-based tools** and other web apps that would like to have desktop-like experince.
 
-However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sites like news portals or blogs that need to server thousands of pages. Views can be loaded dynamically and when needed. 
+However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sites like news portals or blogs that need to server thousands of pages. Views can be loaded dynamically (lazy loading) and only when they are needed. 
 
-It supports cross-domain views, so it can be also used for microservice-based composite web UI's that can be scaled to the moon and back.
+IFramework supports cross-domain views, so it can be also used for microservice-based composite web UI's  - that can be **scaled to the moon and back.**
 
-Runtime code, when minified is around stable **8.4KB**. Entire Framework can be minified and bundled - build tools provided)- together with the rest of the application. 
+Runtime code, when minified is around stable **8.4KB**. 
+
+Entire Framework can be simply minified and bundled - build tools are provided together with the rest of the application. 
 
 Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
 
-New syntax or special markup is virtually none-existing. That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework. If want to bind data model to html, also, no markup or new syntax is required. Simplicity is important as speed.
+**New syntax or special markup is virtually none-existing.** 
 
-Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain places, they are used dynamically to achieve simplicity and speed. That also means that it cannot be transpiled into JavaScript ES5. Good news is that doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this framework doesn't support Internet Explorer. It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. 
+That means shallow learning curve and you can start quickly. For example, if you already know JavaScript [ES6 template strings syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) then you already know template syntax for this framework. If want to bind data model to HTML, also, no new markup or new syntax is required. 
 
+Simplicity is important as it is speed.
+
+Framework relays heavily and takes advantage of new JavaScript ECMA6 (JS ES6) features and it cannot be transpiled to ECMA5. 
+
+Good. It doesn't have to. Here is curent [compatibility table for ES6](https://kangax.github.io/compat-table/es6/). This means that this **framework doesn't support Internet Explorer.** It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. Feature detection script is provided.
 
 > **If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of their time to install better browser!**  
 
@@ -28,55 +35,32 @@ Framework relays heavily on new JavaScript ECMA6 (JS ES6) features. On certain p
 
 ## Feature list
 
-#### JavaScript modularity without transpilation
+### JavaScript modularity without transpilation
 
-It just uses RequireJS module loader directly. AMD (Asynchronous Module Definition), and its most popular implementation RequireJS is favored to CommonJS because of its asynchronous features to achieve effeciency. This is only dependency (6KB).
+### Templating engine with familiar syntax. 
 
-#### Templating engine with familiar syntax. 
+### Client side router 
 
-It uses ES6 template string which are supported nativly by browsers. Templating includes processing custom data and template composition  - ability to import another template into specific place. See wiki for more information.
+###  View engine that works seamlessly with router that can:
 
-#### Client side router 
+    #### - Map HTML text templates.
+    #### - Map parametrized HTML text templates.
+    #### - Map code modules.
+    #### - Map remote, cross-domain modules or HTML templates    .
+    #### - View engine can resolve promises, so you can use `async` and `await`.
+    #### - Dependency injection of another template or module too decouple your front-end arhitecture.
 
-With hashes or with hashbangs. For example `yourwebsite.com#/route1/param1/.../` is hash route. That is how single page applications work, since they have to implement entire framework, including routing on client. There is also possibility of hasbangs, for example `yourwebsite.com#!/route1/param1/.../`. Hashbang routes have better search engine optimization. More info in wiki...
-
-####  View engine that works seamlessly with router to map:
-
-- Appropriate HTML text template.
-- Parametrized HTML text template that can process custom data parameters.
-- Code module that is your JavaScript ES6 class.
-- Remote, crossdomain module or remote, crossdomain template that uses CORS internally and works like any other module or template to support **extreme vertical scalability** with composite web pages and microservices.
-- View engine can resolve promises, so you can use `async` and `await` with easy to build state machines when working with async opreations like fetching data from remote server.
-- Dependency injection of another template or module too decouple your front-end arhitecture.
-
-For more details see wiki pages...
-
-#### Declarative programming model - mixing of JavaScript and HTML inside module
-
-Yes, language support (hints, autocomplete, etc) for both JavaScript and HTML at the same time.
-Declarative programming model is awesome, it lets you focus on what, rather then why. Very much lean thinking.
-
+### Declarative programming model - mixing of JavaScript and HTML inside module
 
 #### Bi-directional model binding
 
-Model binding means that you can declare some data model that can be binded to your UI easily. When you change the something in the UI, model changes too. When you change your model, UI changes too. 
+#### Build tool that can
 
-That is awesome.
+    #### - Minify and copy your modules, html and css
+    #### - Create bundles for your your modules, html or css
+    #### - Lazy load html or css modules
+    #### - Fine tune and tweak your SPA application
 
-More info on wiki...
-
-#### Build tool
-
-Build tool is also included that allows you to:
-
-- Minify and copy your modules, html and css
-- Create bundles for your your modules, html or css
-- Lazy load html or css modules
-- Fine tune and tweak your SPA application
-
-Bundling is important process in SPA applications because of its complex and modular nature. 
-Modular fronted application need to be bundled to avoid high netowork traffic when loading all of those bundles. On the other side, you don't want everything to be bundled, perhaps you want
-something to be loaded on demand or you just want to left out some portions of application used rarely. In other words - fine tuning. More info on this on wiki. 
 
 ## Getting Started
 
