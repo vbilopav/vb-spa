@@ -34,8 +34,8 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ## Online demo
 
-**[SPA demo application - build version (minified and bundled)](https://vb-spa-demo-build.netlify.com/)**
-**[SPA demo application - development version](https://vb-spa-demo-build.netlify.com/)**
+** - [SPA demo application - build version (minified and bundled)](https://vb-spa-demo-build.netlify.com/)**
+** - [SPA demo application - development version](https://vb-spa-demo-build.netlify.com/)**
 
 ## Feature list
 
