@@ -30,8 +30,12 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 > **If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of their time to install better browser!**  
 
-> #nomoretranspiling
+**#nomoretranspiling**
 
+## Online demo
+
+**[SPA demo application - build version (minified and bundled)](https://vb-spa-demo-build.netlify.com/)**
+**[SPA demo application - development version](https://vb-spa-demo-build.netlify.com/)**
 
 ## Feature list
 
