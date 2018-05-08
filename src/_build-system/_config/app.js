@@ -1,5 +1,5 @@
 /**********************************************************
-***     auto-generated at 2018-05-01T19:26:17.392Z      ***
+***     auto-generated at 2018-05-08T05:18:03.866Z      ***
 ***     to re-create delete or run build.js --force     ***
 ***********************************************************
 
@@ -181,6 +181,11 @@
         minifyInlineHtml: false,
         minifyEngine: "uglify-es",
         module: "views/dynamic-data/remote-data-example/github-user-info"
+    },
+    'views/dynamic-data/remote-data-example/promise-in-template.html': {
+        minify: true,
+        minifyEngine: "html-minifier",
+        module: "template!views/dynamic-data/remote-data-example/promise-in-template.html"
     },
     'views/home.html': {
         minify: true,

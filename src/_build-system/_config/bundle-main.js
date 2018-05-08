@@ -1,5 +1,5 @@
 /**********************************************************
-***     auto-generated at 2018-05-01T19:45:50.252Z      ***
+***     auto-generated at 2018-05-08T05:18:03.868Z      ***
 ***     to re-create delete or run build.js --force     ***
 ***********************************************************
 
@@ -36,6 +36,7 @@ includes: [] list of modules to bundle
         "views/dynamic-data/remote-data-example/frameworks",
         "views/dynamic-data/remote-data-example/github-user-info-example",
         "views/dynamic-data/remote-data-example/github-user-info",
+        "template!views/dynamic-data/remote-data-example/promise-in-template.html",
         "text!views/home.html",
         "views/modules/class-module-change-element",
         "views/modules/class-module-element-manipulation",
