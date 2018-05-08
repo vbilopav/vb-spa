@@ -44,7 +44,7 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 - #### [Have familiar syntax](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#passing-values)
 - #### [Helper methods for common template tasks](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#template-helpers)
 
-### [Client side router](https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router)
+### [Client side router](https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router#ok-so-have-does-it-work)
 
 ### [View engine that works seamlessly with router that can:](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine)
 
