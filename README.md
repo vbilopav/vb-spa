@@ -85,7 +85,7 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 #### Node.js
 
-- [Intstall node.js](https://nodejs.org/en/download/) to restore dependend modules and to run build tool
+- **Install [node.js](https://nodejs.org/en/download/)** to restore dependend modules and to run build tool
 
 #### Local web server
 
