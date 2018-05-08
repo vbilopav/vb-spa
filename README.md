@@ -39,7 +39,10 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ### [Use remote, cross-domain modules or HTML templates](https://github.com/vbilopav/vb-spa/wiki/3.-Cross-origin-modules)
 
-### [Templating engine with familiar syntax](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine)
+### [Templating engine that:](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine)
+
+- #### [Have familiar syntax](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#passing-values)
+- #### [Helper methods for common template tasks](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#template-helpers)
 
 ### [Client side router](https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router)
 
@@ -47,6 +50,8 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 - #### [Map HTML text templates](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#text-templates)
 - #### [Map parametrized HTML text templates](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#parametrized-text-templates)
+- #### [Send data context to template](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#sending-data-context-to-parametrized-templates)
+- #### [Send promises for data context to template](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#returning-promises-in-paramsmap)
 - #### [Map code modules](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#class-modules)
 - #### [View engine can resolve promises, so you can use `async` and `await`](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#resolving-promises-and-async-and-await)
 - #### [Dependency injection of another template or module to loose couple your front-end arhitecture](https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#injected)
