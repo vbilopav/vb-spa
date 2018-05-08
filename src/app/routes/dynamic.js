@@ -111,6 +111,7 @@ define([], () => {
 
         "/crossdomain-module-example": {
             view: "https://crossdomain-example.netlify.com/module1.js",
+            //view: "http://127.0.0.1:8081/module1.js",
             data: {
                 title: "Crossdomain module example",
                 category: "dynamic"
@@ -119,6 +120,7 @@ define([], () => {
 
         "/crossdomain-template-example": {
             view: "cors-template!https://crossdomain-example.netlify.com/template1.html",
+            //view: "cors-template!http://127.0.0.1:8081/template1.html",
             data: {
                 title: "Crossdomain template example",
                 category: "dynamic"
@@ -132,6 +134,7 @@ define([], () => {
 
         "/crossdomain-text-example": {
             view: "cors-text!https://crossdomain-example.netlify.com/text-module1.html",
+            //view: "cors-template!http://127.0.0.1:8081/template1.html",
             data: {
                 title: "Crossdomain text example",
                 category: "dynamic"
