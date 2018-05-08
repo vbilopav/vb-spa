@@ -92,8 +92,25 @@ define([], () => {
             },
         },
 
+        "/promise-in-template": {
+            view: "template!views/dynamic-data/remote-data-example/promise-in-template.html",
+            paramsMap: async(params) => {
+                if (params.length !== 0) {
+                    return false;
+                }
+                const response = await fetch("/remote-data-example/frameworks.json", {cache: "no-store"});
+                return {
+                    data: await response.json()
+                }
+            },
+            data: {
+                title: "Promise in template",
+                category: "dynamic"
+            }
+        },
+
         "/crossdomain-module-example": {
-            view: "http://localhost:8080/module1.js",
+            view: "https://crossdomain-example.netlify.com/module1.js",
             data: {
                 title: "Crossdomain module example",
                 category: "dynamic"
@@ -101,7 +118,7 @@ define([], () => {
         }, 
 
         "/crossdomain-template-example": {
-            view: "cors-template!http://localhost:8080/template1.html",
+            view: "cors-template!https://crossdomain-example.netlify.com/template1.html",
             data: {
                 title: "Crossdomain template example",
                 category: "dynamic"
@@ -114,7 +131,7 @@ define([], () => {
         }, 
 
         "/crossdomain-text-example": {
-            view: "cors-text!http://localhost:8080/text-module1.html",
+            view: "cors-text!https://crossdomain-example.netlify.com/text-module1.html",
             data: {
                 title: "Crossdomain text example",
                 category: "dynamic"

@@ -52,6 +52,9 @@ define(["spa/template-helpers"], (templateHelper) => {
         }
 
         async reveal(args) { //id,view,params,uri
+            if (args.params instanceof Promise) {
+                args.params = await args.params
+            }
             await new Promise((resolve, reject) => {
                 let found = this._views[args.id],
                     uriHash = args.uri.hashCode(),
@@ -99,10 +102,10 @@ define(["spa/template-helpers"], (templateHelper) => {
                             this._current = element.show();
                             showView(found, element);
                             found.uriHash = uriHash;
-                        } 
+                        }
                         if ((found.uriHash !== uriHash || found.instance._options.disableCaching)) {
                             let newContent;
-                            
+
                             if (found.instance.change) {
                                 newContent = found.instance.change({params: args.params, element: element});
                             } else if (!found.instance._options.callRenderOnlyOnce) {

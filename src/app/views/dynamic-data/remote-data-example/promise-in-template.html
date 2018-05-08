@@ -1,0 +1,32 @@
+<div class="">
+    <h3>Promise in template</h3>
+    <p>
+        Parameter functions can return promises that view manager know how to resolve.<br />
+        They can load remote data asynchronously and return prmoise, for example:
+<pre>
+    paramsMap: async(params) => {
+        if (params.length !== 0) {
+            return false;
+        }
+        const response = await fetch("/remote-data-example/frameworks.json", {cache: "no-store"});
+        return {
+            data: await response.json()
+        }
+    }
+</pre>
+        <br />
+        This parameter function doesnt allow any parameters, instead, it return content of remote json file. Here is the result:
+        <br /><hr />
+        ${this.template.forEach(this.data, (name1, value1) => 
+            `<p>
+                ${name1}
+                ${this.template.forEach(value1, (name2, value2) => 
+                    `<div>
+                        <span>${name2}: </span><span>${value2}</span>
+                    </div>`
+                )}
+            </p>`
+        )}
+        <hr />
+    </p>
+</div>
