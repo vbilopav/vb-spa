@@ -1,182 +1,151 @@
-<h1><a id="VBSPA_SinglePage_Application_Framework_0"></a>VBSPA Single-Page Application Framework</h1>
+<h1 id="vbspasinglepageapplicationframework">VBSPA Single-Page Application Framework</h1>
+
 <blockquote>
-    <p><strong>VBSPA</strong> is JavaScript Framework that offers simple and easy way to create amazing fast and slick
-        <a href="https://en.wikipedia.org/wiki/Single-page_application"><strong>Single-Page Web
-            Applications</strong></a>.</p>
+  <p><strong>VBSPA</strong> is JavaScript Framework that offers simple and easy way to create amazing fast and slick <a href="https://en.wikipedia.org/wiki/Single-page_application"><strong>Single-Page Web Applications</strong></a>.</p>
 </blockquote>
-<p>SPA Web Applications don’t require and <strong>don’t do any reloads</strong> on view request. As result they are
-    extremly <strong>fast and slick</strong> and user session is preserved.</p>
-<p>That means that SPA applications can offer <strong>full, native, desktop-like user experience</strong> - without
-    annoying reloads and without loosing user session or work.</p>
-<p>This Framework was built from ground-up for <strong>simplicity and speed</strong> - with having primarly on mind
-    building <strong>web-based tools</strong> and other web apps that would like to have desktop-like experince.</p>
-<p>However, that doesn’t mean that SPA applications in general, and this Framework in particular - arn’t suitable for
-    large and complex web sitesthat need to server thousands of pages. Views or even other bundles - can be loaded
-    dynamically - <strong>lazy loading</strong> - and only when they are needed.</p>
-<p>Framework supports cross-domain views, so it can be also used for microservice-based composite web UI’s - that can be
-    <strong>scaled to the moon and back.</strong></p>
-<p>Runtime code, when minified is around stable <strong>8.4KB</strong>.</p>
-<p>Entire Framework can be simply minified and bundled - build tools are provided together with the rest of the
-    application.</p>
-<p>Demo app in this repository have <strong>30 views</strong> with various feature demos and minified and bundled with
-    Framework is less then <strong>60KB</strong>.</p>
-<p><strong>New syntax or special markup is virtually none-existing.</strong></p>
-<p>That means shallow learning curve and you can start quickly. For example, if you already know JavaScript <a
-        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">ES6 template strings
-    syntax</a> then you already know template syntax for this framework. If want to bind data model to HTML, also, no
-    new markup or new syntax is required.</p>
-<p>Framework relays heavily and takes advantage of new JavaScript ECMA6 (JS ES6) features and it cannot be transpiled to
-    ECMA5.</p>
-<p>Good.<br>
-    It doesn’t have to.<br>
-    Here is curent <a href="https://kangax.github.io/compat-table/es6/">compatibility table for ES6</a>. This means that
-    this <strong>framework doesn’t support Internet Explorer.</strong> It works perfecly fast and slick on latest
-    Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. Feature detection
-    script is provided.</p>
+
+<p>SPA Web Applications don't require and <strong>don't do any reloads</strong> on view request. As result they are extremly <strong>fast and slick</strong> and user session is preserved. </p>
+
+<p>That means that SPA applications can offer <strong>full, native, desktop-like user experience</strong> - without annoying reloads and without loosing user session or work.</p>
+
+<p>This Framework was built from ground-up for <strong>simplicity and speed</strong> - with having primarly on mind building <strong>web-based tools</strong> and other web apps that would like to have desktop-like experince.</p>
+
+<p>However, that doesn't mean that SPA applications in general, and this Framework in particular - arn't suitable for large and complex web sitesthat need to server thousands of pages. Views or even other bundles - can be loaded dynamically - <strong>lazy loading</strong> - and only when they are needed. </p>
+
+<p>Framework supports cross-domain views, so it can be also used for microservice-based composite web UI's  - that can be <strong>scaled to the moon and back.</strong></p>
+
+<p>Runtime code, when minified is around stable <strong>8.4KB</strong>. </p>
+
+<p>Entire Framework can be simply minified and bundled - build tools are provided together with the rest of the application. </p>
+
+<p>Demo app in this repository have <strong>30 views</strong> with various feature demos and minified and bundled with Framework is less then <strong>60KB</strong>.</p>
+
+<p><strong>New syntax or special markup is virtually none-existing.</strong> </p>
+
+<p>That means shallow learning curve and you can start quickly. For example, if you already know JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">ES6 template strings syntax</a> then you already know template syntax for this framework. If want to bind data model to HTML, also, no new markup or new syntax is required. </p>
+
+<p>Framework relays heavily and takes advantage of new JavaScript ECMA6 (JS ES6) features and it cannot be transpiled to ECMA5. </p>
+
+<p>Good. 
+It doesn't have to. 
+Here is curent <a href="https://kangax.github.io/compat-table/es6/">compatibility table for ES6</a>. This means that this <strong>framework doesn't support Internet Explorer.</strong> It works perfecly fast and slick on latest Chrome, Firefox, Edge and Safari. Internet Explorer users will have to use different browser. Feature detection script is provided.</p>
+
 <blockquote>
-    <p><strong>If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of
-        their time to install better browser!</strong></p>
+  <p><strong>If your application have any, any value whatsoever - users would go extra three clicks and 20 seconds of their time to install better browser!</strong>  </p>
+  
+  <h1 id="nomoretranspiling">nomoretranspiling</h1>
 </blockquote>
-<blockquote>
-    <p>#nomoretranspiling</p>
-</blockquote>
-<h2><a id="Feature_list_35"></a>Feature list</h2>
-<h3><a id="JavaScript_modularity_without_transpilationhttpsgithubcomvbilopavvbspawiki1Modularity_37"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/1.-Modularity">JavaScript modularity without transpilation</a>
-</h3>
-<h3><a id="Use_remote_crossdomain_modules_or_HTML_templateshttpsgithubcomvbilopavvbspawiki3Crossoriginmodules_39"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/3.-Cross-origin-modules">Use remote, cross-domain modules or HTML
-    templates</a></h3>
-<h3><a id="Templating_engine_with_familiar_syntaxhttpsgithubcomvbilopavvbspawiki2Templateengine_41"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine">Templating engine with familiar syntax</a>
-</h3>
-<h3><a id="Client_side_routerhttpsgithubcomvbilopavvbspawiki4ClientRouter_43"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router">Client side router</a></h3>
-<h3><a id="View_engine_that_works_seamlessly_with_router_that_canhttpsgithubcomvbilopavvbspawiki5ViewEngine_45"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine">View engine that works seamlessly with router that
-    can:</a></h3>
+
+<h2 id="featurelist">Feature list</h2>
+
+<h3 id="javascriptmodularitywithouttranspilationhttpsgithubcomvbilopavvbspawiki1modularity"><a href="https://github.com/vbilopav/vb-spa/wiki/1.-Modularity">JavaScript modularity without transpilation</a></h3>
+
+<h3 id="useremotecrossdomainmodulesorhtmltemplateshttpsgithubcomvbilopavvbspawiki3crossoriginmodules"><a href="https://github.com/vbilopav/vb-spa/wiki/3.-Cross-origin-modules">Use remote, cross-domain modules or HTML templates</a></h3>
+
+<h3 id="templatingenginethathttpsgithubcomvbilopavvbspawiki2templateengine"><a href="https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine">Templating engine that:</a></h3>
+
 <ul>
-    <li>
-        <h4><a id="Map_HTML_text_templateshttpsgithubcomvbilopavvbspawiki5ViewEnginetexttemplates_47"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#text-templates">Map HTML text templates</a>
-        </h4>
-    </li>
-    <li>
-        <h4>
-            <a id="Map_parametrized_HTML_text_templateshttpsgithubcomvbilopavvbspawiki5ViewEngineparametrizedtexttemplates_48"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#parametrized-text-templates">Map
-            parametrized HTML text templates</a></h4>
-    </li>
-    <li>
-        <h4><a id="Map_code_moduleshttpsgithubcomvbilopavvbspawiki5ViewEngineclassmodules_49"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#class-modules">Map code modules</a></h4>
-    </li>
-    <li>
-        <h4>
-            <a id="View_engine_can_resolve_promises_so_you_can_use_async_and_awaithttpsgithubcomvbilopavvbspawiki5ViewEngineresolvingpromisesandasyncandawait_50"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#resolving-promises-and-async-and-await">View
-            engine can resolve promises, so you can use <code>async</code> and <code>await</code></a></h4>
-    </li>
-    <li>
-        <h4>
-            <a id="Dependency_injection_of_another_template_or_module_to_loose_couple_your_frontend_arhitecturehttpsgithubcomvbilopavvbspawiki5ViewEngineinjected_51"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#injected">Dependency injection of another
-            template or module to loose couple your front-end arhitecture</a></h4>
-    </li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#passing-values">Have familiar syntax</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#template-helpers">Helper methods for common template tasks</a></li>
 </ul>
-<h3>
-    <a id="Declarative_programming_model__mixing_of_JavaScript_and_HTML_inside_modulehttpsgithubcomvbilopavvbspawiki5ViewEnginedeclarativecodeinmodules_53"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules">Declarative
-    programming model - mixing of JavaScript and HTML inside module</a></h3>
+
+<h3 id="clientsiderouterhttpsgithubcomvbilopavvbspawiki4clientrouteroksohavedoesitwork"><a href="https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router#ok-so-have-does-it-work">Client side router</a></h3>
+
+<h3 id="viewenginethatworksseamlesslywithrouterthatcanhttpsgithubcomvbilopavvbspawiki5viewengine"><a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine">View engine that works seamlessly with router that can:</a></h3>
+
 <ul>
-    <li>
-        <h4>
-            <a id="with_full_languague_support_in_your_favorite_IDEhttpsgithubcomvbilopavvbspawiki7JavaScriptandHTMLMixing_55"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/7.-JavaScript-and-HTML-Mixing">with full languague support
-            in your favorite IDE</a></h4>
-    </li>
-    <li>
-        <h4><a id="and_familiar_HTML_element_extensionshttpsgithubcomvbilopavvbspawiki6HTMLElementExtensions_56"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions">and familiar HTML element
-            extensions</a></h4>
-    </li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#text-templates">Map HTML text templates</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#parametrized-text-templates">Map parametrized HTML text templates</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#sending-data-context-to-parametrized-templates">Send data context to template</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#returning-promises-in-paramsmap">Send promises for data context to template</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#class-modules">Map code modules</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#resolving-promises-and-async-and-await">View engine can resolve promises, so you can use <code>async</code> and <code>await</code></a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#injected">Dependency injection of another template or module to loose couple your front-end arhitecture</a></li>
 </ul>
-<h3><a id="Bidirectional_model_binding_eitherhttpsgithubcomvbilopavvbspawiki8ModelBinding_58"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding">Bi-directional model binding, either:</a></h3>
+
+<h3 id="declarativeprogrammingmodelmixingofjavascriptandhtmlinsidemodulehttpsgithubcomvbilopavvbspawiki5viewenginedeclarativecodeinmodules"><a href="https://github.com/vbilopav/vb-spa/wiki/5.-View-Engine#declarative-code-in-modules">Declarative programming model - mixing of JavaScript and HTML inside module</a></h3>
+
 <ul>
-    <li>
-        <h4><a id="Declarativehttpsgithubcomvbilopavvbspawiki8ModelBindingdeclarativebinding_60"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#declarative-binding">Declarative</a></h4>
-    </li>
-    <li>
-        <h4><a id="Programmatichttpsgithubcomvbilopavvbspawiki8ModelBindingprogrammaticbinding_61"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#programmatic-binding">Programmatic</a>
-        </h4>
-    </li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/7.-JavaScript-and-HTML-Mixing">with full languague support in your favorite IDE</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/6.-HTML-Element-Extensions">and familiar HTML element extensions</a></li>
 </ul>
-<h3><a id="Build_tool_that_canhttpsgithubcomvbilopavvbspawiki11Buildsystem_63"></a><a
-        href="https://github.com/vbilopav/vb-spa/wiki/11.-Build-system">Build tool that can</a></h3>
+
+<h3 id="bidirectionalmodelbindingeitherhttpsgithubcomvbilopavvbspawiki8modelbinding"><a href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding">Bi-directional model binding, either:</a></h3>
+
 <ul>
-    <li>
-        <h4><a id="Minify_and_copy_your_modules_HTML_and_or_CSS_files_65"></a><a href="">Minify and copy your modules,
-            HTML and or CSS files</a></h4>
-    </li>
-    <li>
-        <h4>
-            <a id="Create_bundles_for_your_your_modules_html_or_csshttpsgithubcomvbilopavvbspawiki12Buildtoolmainconfiguration_66"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration">Create bundles for your
-            your modules, html or css</a></h4>
-    </li>
-    <li>
-        <h4>
-            <a id="Lazy_load_your_application_modules_another_bundles_or_html_and_csshttpsgithubcomvbilopavvbspawiki12Buildtoolmainconfiguration_67"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration">Lazy load your
-            application modules, another bundles or html and css</a></h4>
-    </li>
-    <li>
-        <h4>
-            <a id="Fine_tune_and_tweak_your_SPA_applicationhttpsgithubcomvbilopavvbspawiki14Bundleconfigurationsandfinetuning_68"></a><a
-                href="https://github.com/vbilopav/vb-spa/wiki/14.-Bundle-configurations-and-fine-tuning">Fine tune and
-            tweak your SPA application</a></h4>
-    </li>
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#declarative-binding">Declarative</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/8.-Model-Binding#programmatic-binding">Programmatic</a></li>
 </ul>
-<h2><a id="Getting_Started_71"></a>Getting Started</h2>
-<h3><a id="Prerequisite_73"></a>Prerequisite</h3>
-<h4><a id="Nodejs_75"></a>Node.js</h4>
+
+<h3 id="buildtoolthatcanhttpsgithubcomvbilopavvbspawiki11buildsystem"><a href="https://github.com/vbilopav/vb-spa/wiki/11.-Build-system">Build tool that can</a></h3>
+
 <ul>
-    <li><a href="https://nodejs.org/en/download/">Intstall node.js</a> to restore dependend modules and to run build
-        tool
-    </li>
+<li>#### <a href="">Minify and copy your modules, HTML and or CSS files</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration">Create bundles for your your modules, html or css</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/12.-Build-tool-main-configuration">Lazy load your application modules, another bundles or html and css</a></li>
+
+<li>#### <a href="https://github.com/vbilopav/vb-spa/wiki/14.-Bundle-configurations-and-fine-tuning">Fine tune and tweak your SPA application</a></li>
 </ul>
-<h4><a id="Local_web_server_79"></a>Local web server</h4>
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<h3 id="prerequisite">Prerequisite</h3>
+
+<h4 id="nodejs">Node.js</h4>
+
 <ul>
-    <li>If you don’t have one, install node’s <a href="https://www.npmjs.com/package/http-server">http-server</a> with
-    </li>
+<li><a href="https://nodejs.org/en/download/">Intstall node.js</a> to restore dependend modules and to run build tool</li>
 </ul>
+
+<h4 id="localwebserver">Local web server</h4>
+
+<ul>
+<li>If you don't have one, install node's <a href="https://www.npmjs.com/package/http-server">http-server</a> with</li>
+</ul>
+
 <pre><code>npm install http-server -g
 </code></pre>
-<h3><a id="Steps_86"></a>Steps:</h3>
+
+<h3 id="steps">Steps:</h3>
+
 <ul>
-    <li>Clone this repo:</li>
+<li>Clone this repo:</li>
 </ul>
+
 <pre><code>$ git clone https://github.com/vbilopav/vb-spa
 </code></pre>
+
 <ul>
-    <li>Restore npm modules:</li>
+<li>Restore npm modules:</li>
 </ul>
+
 <pre><code>$ npm install
 </code></pre>
+
 <ul>
-    <li>To open source code example web site in you browser just point your local web server to<br>
-        <code>src</code> dir, or using http-server:
-    </li>
+<li>To open source code example web site in you browser just point your local web server to
+<code>src</code> dir, or using http-server:</li>
 </ul>
+
 <pre><code>$ cd src/
 $ http-server -o
 </code></pre>
+
 <ul>
-    <li>To build and open minified and bundled version:</li>
+<li>To build and open minified and bundled version:</li>
 </ul>
+
 <pre><code>$ cd src/_build-system/
 $ node build.js --target=mybuild
 
@@ -188,6 +157,7 @@ build.js &gt; finished!
 $ cd build/mybuild/
 $ http-server -o
 </code></pre>
-<h2><a id="License_122"></a>License</h2>
-<p>This project is licensed under the <strong>MIT License</strong> - see the <a href="LICENSE.md">LICENSE.md</a> file
-    for details.</p>
+
+<h2 id="license">License</h2>
+
+<p>This project is licensed under the <strong>MIT License</strong> - see the <a href="LICENSE.md">LICENSE.md</a> file for details.</p>
