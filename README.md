@@ -39,7 +39,10 @@ Here is curent [compatibility table for ES6](https://kangax.github.io/compat-tab
 
 ### [Use remote, cross-domain modules or HTML templates](https://github.com/vbilopav/vb-spa/wiki/3.-Cross-origin-modules)
 
-### [Templating engine with familiar syntax](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine)
+### [Templating engine that:](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine)
+
+- #### [Have familiar syntax](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#passing-values)
+- #### [Helper methods for common template tasks](https://github.com/vbilopav/vb-spa/wiki/2.-Template-engine#template-helpers)
 
 ### [Client side router](https://github.com/vbilopav/vb-spa/wiki/4.-Client-Router)
 
