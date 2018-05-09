@@ -261,6 +261,6 @@ __pycache__/
 *.pyc
 src/libs/require.js
 src/libs/text.js
-src/_build-system/build/
+_build-system/build/
 .vscode/launch.json
 .vscode/

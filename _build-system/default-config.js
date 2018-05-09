@@ -13,8 +13,8 @@
 ({
     // Directory path for source application directory (absolute or relative). 
     // This is where your source files are.
-    // Default is set to directory one level bellow location of build tool.
-    sourceDir: "../",
+    // Default is set src directory at same level as directrory of build tool.
+    sourceDir: "../src",
     
     // Directory path for build results (absolute or relative). 
     // Build results include build log file and new directory with build results. 

@@ -8,13 +8,13 @@
             "type": "node",
             "request": "launch",
             "name": "test.js",
-            "program": "${workspaceFolder}/src/_build-system/test.js"
+            "program": "${workspaceFolder}/_build-system/test.js"
         },
         {
             "type": "node",
             "request": "launch",
             "name": "build.js",
-            "program": "${workspaceFolder}/src/_build-system/build.js"
+            "program": "${workspaceFolder}/_build-system/build.js"
         }
     ]
 }

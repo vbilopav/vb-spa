@@ -3,7 +3,7 @@ const path = require("path");
 const os = require('os');
 
 var logContent = "";
-var sourceDir;
+
 
 const dirname = __dirname;
 const splitted = dirname.split(path.sep);
@@ -15,13 +15,15 @@ const cleanPath = name => name
     .replace(/\./g, dirname)
     .replace(new RegExp(path.sep.repeat((path.sep === "/" ? 2 : 4)), "g"), path.sep);
 
+const rootDir = cleanPath("../");
+
 const log = (msg, fileOnly=false) => {
     if (msg) {
         if (typeof msg === "object") {
             msg = msg.message + os.EOL + msg.stack;
         }
-        if (sourceDir) {
-            msg = msg.split(sourceDir).join("." + path.sep);
+        if (rootDir) {
+            msg = msg.split(rootDir).join("." + path.sep);
         }
         logContent += new Date().toISOString() + " > " + msg + os.EOL;
     }
@@ -110,8 +112,5 @@ module.exports = {
     parse: parse,
     rmdirSync: rmdirSync,
     mkDirByPathSync: mkDirByPathSync,
-    walkSync: walkSync,
-    setSourceDir: dir => {
-        sourceDir = dir;
-    }
+    walkSync: walkSync
 };

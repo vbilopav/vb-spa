@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "uglify-js": "3.3.18",
+    "uglify-es": "3.3.9",
+    "html-minifier": "3.5.13",
+    "clean-css": "4.1.11",
+    "jsdom": "11.7.0"
+  }
+}

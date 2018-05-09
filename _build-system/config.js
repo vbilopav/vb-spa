@@ -70,7 +70,7 @@ const getModule = (sourceFile, file, config) => {
 
 const parseRoot = (config, configTmp) => {
     if (!config.sourceDir) {
-        config.sourceDir = "../";
+        config.sourceDir = "../src";
         log(`config.sourceDir set to default "${config.sourceDir}"`);
     }
     configTmp.sourceDir = cleanPath(config.sourceDir);
@@ -78,7 +78,7 @@ const parseRoot = (config, configTmp) => {
     if (!fs.existsSync(configTmp.sourceDir)) {
         throw new Error(`error: config.sourceDir ${configTmp.sourceDir} doesn't seem to exist!`);
     }
-    fsutil.setSourceDir(configTmp.sourceDir)
+    //fsutil.setSourceDir(configTmp.sourceDir)
 
     if (!config.buildDir) {
         config.buildDir =  "../build";

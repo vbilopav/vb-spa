@@ -6,7 +6,7 @@
 
 */
 ({
-    sourceDir: "../",
+    sourceDir: "../src",
     buildDir: "./build",
     targetDir: null,
     autoTargetDirExp: "${new Date().toISOString().replace(/[-T:]/g, '').substring(0, 12)}",
