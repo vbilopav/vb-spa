@@ -16,7 +16,7 @@ Runtime code, when minified is around stable **8.4KB**.
 
 Entire Framework can be simply minified and bundled - build tools are provided together with the rest of the application. 
 
-Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **60KB**.
+Demo app in this repository have **30 views** with various feature demos and minified and bundled with Framework is less then **14KB**.
 
 **New syntax or special markup is virtually none-existing.** 
 
