@@ -118,7 +118,7 @@ $ http-server -o
 
 - To build and open minified and bundled version:
 ```
-$ cd src/_build-system/
+$ cd _build-system/
 $ node build.js --target=mybuild
 
 ...
