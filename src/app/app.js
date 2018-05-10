@@ -22,6 +22,8 @@ define([
         });
         
     return () => {
+        document.title = "SPA app demo";
+        
         const routerData = router.getData();
         const app = document.body.find("#app-container").html(
             layout({
