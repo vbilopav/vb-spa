@@ -73,7 +73,6 @@
                     "libs/feature-detect",
                     "libs/require",
                     "libs/text",
-                    "libs/test",
                     "spa/template",
                     "spa/cors-template",
                     "spa/cors-text",
