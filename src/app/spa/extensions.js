@@ -1,7 +1,7 @@
 define([], () => {
         
     const 
-        testPrototypeExtension = (object, extensions) => {
+        test = (object, extensions) => {
             extensions.forEach(e => {
                 if (object.prototype[e] !== undefined) {
                     throw new Error(`Error: Name collision - object ${object} already have defined "${e}" !`);
@@ -9,8 +9,17 @@ define([], () => {
             });
         };
 
-    testPrototypeExtension(HTMLElement, [
-        "find", "findAll", "show", "hide", "html", "appendTo", "addClass", "removeClass", "on", "off", "html"
+    test(HTMLElement, [
+        "find", 
+        "findAll", 
+        "show", 
+        "hide", 
+        "html", 
+        "appendTo", 
+        "addClass", 
+        "removeClass", 
+        "on", 
+        "off"
     ]);
 
     HTMLElement.prototype.find = function(search) {
@@ -87,7 +96,7 @@ define([], () => {
         return this;
     }
     
-    testPrototypeExtension(String, ["hashCode", "createElement"]);
+    test(String, ["hashCode", "createElement"]);
     
     String.prototype.createElement = function(id, content) {
         let e = document.createElement(this);
