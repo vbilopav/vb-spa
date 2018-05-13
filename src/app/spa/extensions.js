@@ -10,16 +10,12 @@ define([], () => {
         };
 
     test(HTMLElement, [
-        "find", 
-        "findAll", 
-        "show", 
-        "hide", 
-        "html", 
-        "appendTo", 
-        "addClass", 
-        "removeClass", 
-        "on", 
-        "off"
+        "find", "findAll", 
+        "show", "hide", 
+        "html", "appendTo",
+        "css", "_styles", "addClass", "removeClass", 
+        "on", "off",
+        "data", "_data"
     ]);
 
     HTMLElement.prototype.find = function(search) {
@@ -60,6 +56,11 @@ define([], () => {
         return this;
     }
 
+    HTMLElement.prototype.append = function(element) {
+        this.appendChild(element);
+        return this;
+    }
+
     HTMLElement.prototype.addClass = function(className) {
         if (this.classList) {
             this.classList.add(className);
@@ -76,8 +77,31 @@ define([], () => {
             this.className = this.className.replace(
                 new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " "
             );
-        }        
+        }
         return this;
+    }
+
+    HTMLElement.prototype.css = function(property, value) {
+        if (!this._styles) {
+            this._styles = {};
+            let styles = window.getComputedStyle(this);
+            for(let style in styles) {
+                if (!isNaN(style)) {
+                    continue;
+                }
+                this._styles[style] = styles[style];
+            }
+        }
+        if (value !== undefined) {
+            this._styles[property] = value;
+            this.style[property] = value;
+            return this
+        }
+        let result = this._styles[property];
+        if (result === undefined) {
+            return this._styles[property.toCamelCase()];
+        }
+        return result;
     }
 
     HTMLElement.prototype.on = function(eventName, eventHandler) {
@@ -90,13 +114,18 @@ define([], () => {
         return this;
     }
 
-    
-    HTMLElement.prototype.append = function(element) {
-        this.appendChild(element);
-        return this;
+    HTMLElement.prototype.data = function(key, value) {
+        if (!this._data) {
+            this._data = Object.assign({}, this.dataset);
+        }
+        if (value !== undefined) {
+            this._data[key] = value;
+            return this;
+        }
+        return this._data[key];
     }
     
-    test(String, ["hashCode", "createElement"]);
+    test(String, ["hashCode", "createElement", "toCamelCase"]);
     
     String.prototype.createElement = function(id, content) {
         let e = document.createElement(this);
@@ -118,6 +147,15 @@ define([], () => {
         }
         return h;
     }
+
+    String.prototype.toCamelCase = function() {
+        return this.replace(/-([a-z])/g, g => g[1].toUpperCase())
+    }
+
+    test(Document, ["on", "off"]);
+    test(Window, ["on", "off"]);
+    Document.prototype.on = HTMLElement.prototype.on;
+    Window.prototype.off = HTMLElement.prototype.off;
 
     //
     // lit-html vs code extension support
