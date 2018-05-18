@@ -1,8 +1,10 @@
 define([], () => class {
 
-    constructor(model) {
+    constructor({model, oncreate}={}) {
         this._model = model;
+        this._oncreate = oncreate || (()=>{});
         this._instance = undefined;
+        this._names = [];
     }
 
     bind(element, instance) {
@@ -15,7 +17,13 @@ define([], () => class {
         }
         return this;
     }
-    
+
+    each(callback) {
+        for(var name of this._names) {
+            callback(this[name], name);
+        }
+    }
+
     _forEachDeclarative(element) {
         // name first, id second
         if (!this._assignProps(element.name || element.id, element)) {
@@ -89,6 +97,8 @@ define([], () => class {
             get: () => that._getValue(node, element),
             set: value => that._assignValue(node, element, value)
         });
+        this._names.push(name);
+        this._oncreate(element);
         let value = this._instance[name];
         if (value === undefined) {
             return true;

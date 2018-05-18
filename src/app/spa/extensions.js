@@ -13,7 +13,9 @@ define([], () => {
         "find", "findAll", 
         "show", "hide", 
         "html", "appendTo",
-        "css", "_styles", "addClass", "removeClass", 
+        "css", "_styles", 
+        "addClass", "removeClass", "hasClass", "toggleClass",
+        "attr",
         "on", "off",
         "data", "_data"
     ]);
@@ -33,7 +35,12 @@ define([], () => {
         return this.querySelectorAll(search);
     }
 
-    HTMLElement.prototype.show = function() {
+    HTMLElement.prototype.show = function(state) {
+        if (state !== undefined) {
+            if (!state) {
+                return this.hide();
+            }
+        }
         this.style.display = ""; 
         return this;
     }
@@ -78,6 +85,31 @@ define([], () => {
                 new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " "
             );
         }
+        return this;
+    }
+
+    HTMLElement.prototype.hasClass = function(className) {
+        if (this.classList) {
+            return this.classList.contains(className);
+        } else {
+            return new RegExp('(^| )' + className + '( |$)', 'gi').test(this.className);
+        }
+    }
+
+    HTMLElement.prototype.toggleClass = function(className) {
+        if (this.hasClass(className)) {
+            this.removeClass(className)
+        } else {
+            this.addClass(className)
+        }
+        return this;
+    }
+
+    HTMLElement.prototype.attr = function(key, value) {
+        if (value === undefined) {
+            return this.getAttribute(key);
+        }
+        this.setAttribute(key, value);
         return this;
     }
 
