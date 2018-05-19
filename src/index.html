@@ -51,9 +51,9 @@
     <div id="app-container" style="display: none">
     </div>
 
-    <script type="text/javascript" 
-            data-main="main.js" 
-            src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js">
+    <script type="text/javascript" data-main="main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script type="text/javascript">
+        window.requirejs || document.write('<script data-main="main.js" src="' + (window._spa && window._spa.libsUrl ? window._spa.libsUrl : "") + '/require.js">\x3C/script>');
     </script>
     <script type="text/javascript">
         var libsUrl = window._spa && window._spa.libsUrl ? window._spa.libsUrl : "",
@@ -63,10 +63,11 @@
             document.write(
                 '<script data-main="main.js" src="' + libsUrl + '/require.js">\x3C/script>'
             );
-        requirejs.config({
+        window.requirejs.config({
             paths: {
                 libs: libs,
                 text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],
+                spa: sysUrl,
                 sys: sysUrl,
                 template: sysUrl + "template",
                 "cors-text": sysUrl + "cors-text",
