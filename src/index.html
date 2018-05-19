@@ -59,10 +59,6 @@
         var libsUrl = window._spa && window._spa.libsUrl ? window._spa.libsUrl : "",
             libs = libsUrl ? "../" + libsUrl: "../libs"
             sysUrl = (window._spa.sysPath ? window._spa.sysPath : "spa") + "/";
-        window.requirejs || 
-            document.write(
-                '<script data-main="main.js" src="' + libsUrl + '/require.js">\x3C/script>'
-            );
         window.requirejs.config({
             paths: {
                 libs: libs,
