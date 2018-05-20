@@ -58,7 +58,7 @@
     <script type="text/javascript">
         var libsUrl = window._spa && window._spa.libsUrl ? window._spa.libsUrl : "",
             libs = libsUrl ? "../" + libsUrl: "../libs"
-            sysUrl = (window._spa.sysPath ? window._spa.sysPath : "spa") + "/";
+            sysUrl = window._spa.sysPath ? window._spa.sysPath : "spa";
         window.requirejs.config({
             paths: {
                 libs: libs,
