@@ -5,6 +5,7 @@ define([], () => class {
         oncreate=(()=>{})
     }={}) {
         this._model = model;
+        this._oncreate = oncreate || (()=>{});
         this._instance = undefined;
         this._names = [];
         this._oncreate = oncreate;
