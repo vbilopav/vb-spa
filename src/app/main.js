@@ -1,1 +1,1 @@
-define(["app", "spa/extensions"], app => app());
+define(["spa/extensions"], () => require(["app"], app => app()));
