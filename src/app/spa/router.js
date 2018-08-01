@@ -1,13 +1,19 @@
 define([], () => class {
 
-    constructor(options) {
-        this._navigate = options.navigate || (() => {});
-        this._leave = options.leave || (() => {});
-        this._error = options.error || (() => {});
-        this._hash = options.hash || "#";
+    constructor({
+        navigate=(()=>{}),
+        leave=(()=>{}),
+        error=(()=>{}),
+        hash="#",
+        test=(route => /^[ A-Za-z0-9_@()/.-]*$/.test(route)),
+        routes=(()=>{throw routes})()
+    }) {
+        this._navigate = navigate;
+        this._leave = leave;
+        this._error = error;
+        this._hash = hash;
         this._hash === "#" || this._hash === "#!" || (() => {throw this._hash})();
-        this._test = options.test || (route => /^[ A-Za-z0-9_@()/.-]*$/.test(route));
-        let routes = options.routes || (() => {throw options.routes})();
+        this._test = test;
         if (routes instanceof Array) {
             routes = routes.reduce(function(result, item, index) {
                 result[item] = {};

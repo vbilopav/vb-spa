@@ -31,7 +31,7 @@ define(["spa/template-helpers"], (templateHelper) => {
 
     return class {
         constructor(
-            container=(() => {throw container})()
+            container=(()=>{throw container})()
         ) {
             this._container = container;
             this._views = {} //id,uri,type,instance
