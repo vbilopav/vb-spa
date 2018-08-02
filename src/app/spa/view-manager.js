@@ -1,21 +1,14 @@
-define(["spa/template-helpers"], (templateHelper) => {
+define([], () => {
 
     const 
-        nameStartsWithPrefix = name => {
-            for (let p in templateHelper._prefixes) {
-                if (name.startsWith(templateHelper._prefixes[p])) {
-                    return true;
-                }
-            }
-            return false;
-        },
+        isTemplate = name => name.indexOf("template!") !== -1,
         prefix = "_view",
-        getId = (uriHash) => prefix + uriHash,
+        getId = uriHash => prefix + uriHash,
         types = {template: 1, class: 2, string: 3},
         getViewType = (view, name) => {
             let t = typeof view;
             if (t === "function") {
-                if (nameStartsWithPrefix(name)) {
+                if (isTemplate(name)) {
                     return types.template;
                 }
                 return types.class;

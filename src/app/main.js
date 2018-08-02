@@ -1,1 +1,5 @@
-define(["spa/core-extensions"], () => require(["app"], app => app()));
+define([
+    "spa/extensions/core", 
+    "ext-element/addClass",
+    "ext-element/removeClass"
+], () => require(["app"], app => app()));

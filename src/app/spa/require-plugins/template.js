@@ -1,29 +1,30 @@
 define([
     "module", 
-    "spa/template-helpers"
+    "spa/template-parser"
 ], (
     _, 
-    helper
+    parse
 ) => {
 
     const
-        _search = "{this.template.import(",
-        _length = _search.length;
+        searchImport = "{this.template.import(",
+        len = searchImport.length,
+        preloaded = ((window._spa  && window._spa.settings) ? (window._spa.settings.usePreloadedTemplates == true) : false); 
     
     return {
         version: '1.0.0',
         load(name, req, onload, config) {
-            if (helper._usingPreloaded()) {
-                return req(["text!" + name], text => onload((data, locale) => helper.parse(name, text, data, locale)))
+            if (preloaded) {
+                return req(["text!" + name], text => onload((data, locale) => parse(name, text, data, locale)))
             }
             return req(["text!" + name], text => {
-                let from = 0, found = [], length = text.length;
+                let from = 0, found = [];
                 while (from > -1) {
-                    let index = text.indexOf(_search, from)
+                    let index = text.indexOf(searchImport, from)
                     if (index === -1) {
                         break;
                     }
-                    index = index + _length
+                    index = index + len
                     from = text.indexOf(")", index);
                     if (from !== -1) {
                         let quoted = text.substring(index, from);
@@ -31,9 +32,9 @@ define([
                     }
                 }
                 if (found.length) {
-                    require(found, () => onload((data, locale) => helper.parse(name, text, data, locale))); 
+                    require(found, () => onload((data, locale) => parse(name, text, data, locale))); 
                 } else {
-                    onload((data, locale) => helper.parse(name, text, data, locale));
+                    onload((data, locale) => parse(name, text, data, locale));
                 }
             });
         }
