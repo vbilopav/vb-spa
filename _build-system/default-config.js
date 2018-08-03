@@ -77,10 +77,10 @@
         globalObject: {
 
             // Value of `id` attribute for inline script containing definition of global application object.
-            scriptContainerId: "_spa",
+            scriptContainerId: "_app",
 
             // Name for global application object that will be created and available in global scope (JavaScript `window`).
-            name: "_spa",
+            name: "_app",
 
             // Allowed values are self-explanatory - `always` or `not-exists`:
             // - `not-exists` will update global object script only if element doesn't exist and
@@ -91,8 +91,7 @@
             // Expression have this script values as prototype object (`this` reference) available, 
             // so any value from this configuration object can be accessed when expression is executed.
             // By default, this expression is taking appropriate values from this configuration.
-            expression:
-                "{version:'${this.scriptsVersion ? this.scriptsVersion : ''}', appUrl: '${this.app ? this.app.targetDir : 'app'}', cssUrl: '${this.css ? this.css.targetDir : 'css'}', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}', sysPath: '${this.app.sysPath ? this.app.sysPath : 'spa'}', settings: {usePreloadedTemplates: false}}"
+            expression: "{dev: false, version:'${this.scriptsVersion ? this.scriptsVersion : ''}', appUrl: '${this.app ? this.app.targetDir : 'app'}', cssUrl: '${this.css ? this.css.targetDir : 'css'}', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}', sysPath: '${this.app.sysPath ? this.app.sysPath : '../_sys'}', settings: {usePreloadedTemplates: false}}"
         }
     },
 
@@ -199,7 +198,7 @@
         targetDir: "app",
 
         // System directory containing framework modules, relative to `app.targetDir`. Needed by build tool.
-        sysPath: "spa",
+        sysPath: "../_sys",
         
         // Should application files be minified, `true` or `false`.
         // This value is on level of individual file, and it is used as template value in multistage build. 
@@ -263,7 +262,8 @@
                     "libs/text",
                     "sys/template",
                     "sys/cors-template",
-                    "sys/cors-text"
+                    "sys/cors-text",
+                    "sys/extensions"
                 ],
 
                 // If your bundle is application entry point - build tool needs to know about that. Another reason to re-write `requirejs.

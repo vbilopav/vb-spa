@@ -1,5 +1,5 @@
 /**********************************************************
-***     auto-generated at 2018-05-08T05:18:03.866Z      ***
+***     auto-generated at 2018-08-03T14:11:24.764Z      ***
 ***     to re-create delete or run build.js --force     ***
 ***********************************************************
 
@@ -47,54 +47,6 @@
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
         module: "routes/templates"
-    },
-    'spa/cors-template.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/cors-template"
-    },
-    'spa/cors-text.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/cors-text"
-    },
-    'spa/extensions.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/extensions"
-    },
-    'spa/model.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/model"
-    },
-    'spa/router.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/router"
-    },
-    'spa/template-helpers.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/template-helpers"
-    },
-    'spa/template.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/template"
-    },
-    'spa/view-manager.js': {
-        minify: true,
-        minifyInlineHtml: true,
-        minifyEngine: "uglify-es",
-        module: "sys/view-manager"
     },
     'templates/layout.html': {
         minify: true,
@@ -178,7 +130,7 @@
     },
     'views/dynamic-data/remote-data-example/github-user-info.js': {
         minify: true,
-        minifyInlineHtml: false,
+        minifyInlineHtml: true,
         minifyEngine: "uglify-es",
         module: "views/dynamic-data/remote-data-example/github-user-info"
     },
@@ -191,6 +143,11 @@
         minify: true,
         minifyEngine: "html-minifier",
         module: "text!views/home.html"
+    },
+    'views/modules/_default.html': {
+        minify: true,
+        minifyEngine: "html-minifier",
+        module: "template!views/modules/_default.html"
     },
     'views/modules/class-module-change-element.js': {
         minify: true,
@@ -244,11 +201,6 @@
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
         module: "views/modules/view-events"
-    },
-    'views/modules/_default.html': {
-        minify: true,
-        minifyEngine: "html-minifier",
-        module: "template!views/modules/_default.html"
     },
     'views/not-found.html': {
         minify: true,

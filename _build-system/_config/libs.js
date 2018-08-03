@@ -1,5 +1,5 @@
 /**********************************************************
-***     auto-generated at 2018-05-04T05:00:57.597Z      ***
+***     auto-generated at 2018-08-03T14:11:24.759Z      ***
 ***     to re-create delete or run build.js --force     ***
 ***********************************************************
 
@@ -13,7 +13,7 @@
 */
 ({
     'feature-detect.js': {
-        minify: false,
+        minify: true,
         minifyEngine: "uglify-js",
         module: "libs/feature-detect"
     },
@@ -21,7 +21,7 @@
         minify: true,
         minifyEngine: "uglify-js",
         module: "libs/require"
-    },    
+    },
     'text.js': {
         minify: true,
         minifyEngine: "uglify-js",

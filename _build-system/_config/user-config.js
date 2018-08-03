@@ -1,5 +1,5 @@
 /**********************************************************
-***     auto-generated at 2018-05-03T04:20:05.109Z      ***
+***     auto-generated at 2018-08-03T14:10:07.544Z      ***
 ***     to re-create delete or run build.js --force     ***
 ***********************************************************
 
@@ -24,10 +24,10 @@
             collapseWhitespace: true
         },
         globalObject: {
-            scriptContainerId: "_spa",
-            name: "_spa",
+            scriptContainerId: "_app",
+            name: "_app",
             mode: "always",
-            expression: "{version:'${this.scriptsVersion ? this.scriptsVersion : ''}', appUrl: '${this.app ? this.app.targetDir : 'app'}', cssUrl: '${this.css ? this.css.targetDir : 'css'}', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}', sysPath: '${this.app.sysPath ? this.app.sysPath : 'spa'}', settings: {usePreloadedTemplates: false}}"
+            expression: "{dev: false, version:'${this.scriptsVersion ? this.scriptsVersion : ''}', appUrl: '${this.app ? this.app.targetDir : 'app'}', cssUrl: '${this.css ? this.css.targetDir : 'css'}', libsUrl: '${this.libs ? this.libs.targetDir : 'libs'}', sysPath: '${this.app.sysPath ? this.app.sysPath : '../_sys'}', settings: {usePreloadedTemplates: false}}"
         }
     },
     libs: {
@@ -54,7 +54,7 @@
     app: {
         sourceDir: "app",
         targetDir: "app",
-        sysPath: "spa",
+        sysPath: "../_sys",
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "auto",
@@ -76,19 +76,9 @@
                     "sys/template",
                     "sys/cors-template",
                     "sys/cors-text",
-                    "template!views/templates/unbundled-parametrized-view.html",
-                    "text!views/templates/unbundled-text-view.html",
-                    "text!views/modules/new-bundle/template.html",
-                    "views/modules/new-bundle/module-view"
+                    "sys/extensions"
                 ],
                 entryPoint: true
-            },
-            'views/modules/new-bundle/module-view': {
-                includes: [
-                    "text!views/modules/new-bundle/template.html",
-                    "views/modules/new-bundle/module-view"
-                ],
-                excludes: []
             }
         }
     }

@@ -7,5 +7,6 @@ define([
     "e-Element/on",
     "e-Element/html",
     "e-String/hashCode",
-    "e-String/createElement"
+    "e-String/createElement",
+    "e-String/html"
 ]);
