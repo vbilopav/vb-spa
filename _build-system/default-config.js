@@ -261,9 +261,9 @@
                     "libs/feature-detect",
                     "libs/require",
                     "libs/text",
-                    "spa/template",
-                    "spa/cors-template",
-                    "spa/cors-text"
+                    "sys/template",
+                    "sys/cors-template",
+                    "sys/cors-text"
                 ],
 
                 // If your bundle is application entry point - build tool needs to know about that. Another reason to re-write `requirejs.

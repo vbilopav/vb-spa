@@ -1,4 +1,4 @@
-define(["spa/model"], Model => class {
+define(["sys/model"], Model => class {
 
     render({element}) {
         element.html(

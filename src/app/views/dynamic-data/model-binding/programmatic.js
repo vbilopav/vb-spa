@@ -1,4 +1,4 @@
-define(["spa/model"], Model => {
+define(["sys/model"], Model => {
 
     const
         model = new Model({

@@ -1,48 +1,49 @@
 define([
+    "sys/router",
+    "sys/view-manager",
+    "sys/model",
     "template!templates/layout.html",
-    "spa/router",
-    "spa/view-manager",
-    "routes/main"
+    "routes/main",
+    "e-Element/addClass",
+    "e-Element/removeClass"
 ], (
-    layout,
     Router,
     Manager,
+    Model,
+    layout,
     routes
 ) => {
 
-    var 
-        navigation;
-        
-    const
-        router = new Router({
-            routes: routes,
-            navigate: event => navigation.find("#" + event.route.id).addClass("active"),
-            leave: event => !event.route.id || navigation.find("#" + event.route.id).removeClass("active"),
-            error: event => event.router.reveal("/not-found")
-        });
+    document.title = "SPA app demo";
         
     return () => {
-        document.title = "SPA app demo";
-        
-        const routerData = router.getData();
-        const app = document.body.find("#app-container").html(
+        var app;
+
+        const 
+            page = new Model().bind(document.body),
+            validRoute = route => route && route.id && route.id !== "not-found",
+            router = new Router({
+                routes: routes,
+                navigate: event => validRoute(event.route) && app[event.route.id.toCamelCase()].addClass("active"),
+                leave: event => validRoute(event.route) && app[event.route.id.toCamelCase()].removeClass("active"),
+                error: event => event.router.reveal("/not-found")
+            }),
+            routerData = router.getData();
+
+        page.appContainer.html(
             layout({
                 home: routerData.filter(item => item.id == "home")[0],
-                templates: routerData.filter(item => item.category == "templates"),
-                modules: routerData.filter(item => item.category == "modules"),
-                dynamic: routerData.filter(item => item.category == "dynamic")
+                templates: routerData.filter(item => item.category === "templates"),
+                modules: routerData.filter(item => item.category === "modules"),
+                dynamic: routerData.filter(item => item.category === "dynamic")
             })
         );
 
-        document.body.find("#loading-screen").remove();
-        document.body.find("#loading-screen-script").remove();
+        app = new Model().bind(page.appContainer);
 
-        navigation = document.body.find("#navigation");
-
-        router.useViewManager(
-            new Manager(document.body.find("#container"))
-        ).start();
-
-        app.show();
+        page.loadingScreen.remove();
+        page.loadingScreenScript.remove();
+        router.useViewManager(new Manager(app.container)).start();
+        page.appContainer.show();
     }
 });

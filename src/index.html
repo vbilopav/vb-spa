@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" id="_spa">
-        window._spa = {version: "", appUrl: "app", cssUrl: "css", libsUrl: "libs", sysPath: "spa", settings: {usePreloadedTemplates: false}};
+    <script type="text/javascript" id="_app">
+        window._app = {
+            dev: true, 
+            version: "", 
+            appUrl: "app", 
+            cssUrl: "css", 
+            libsUrl: "libs",
+             sysPath: "../_sys", 
+             settings: {usePreloadedTemplates: false}
+        };
     </script>
     <script>
-        var require = {baseUrl: window._spa.appUrl};
-        if (window._spa && window._spa.version) {
-            require.urlArgs = "v=" + window._spa.version;
+        var require = {baseUrl: window._app.appUrl};
+        if (window._app && window._app.version) {
+            require.urlArgs = "v=" + window._app.version;
         }
     </script>
     <meta charset="utf-8">
@@ -18,64 +26,83 @@
     <title></title>
 
     <script id="_css">
-        var u = (window._spa.cssUrl ? window._spa.cssUrl : "") + "/", 
-            q = window._spa.version ? "?" + require.urlArgs : "";
-        document.write(
-            '<link rel="stylesheet" href="' + u + 'bootstrap.css"' + q + '" />' +
-            '<link rel="stylesheet" href="' + u + 'default.css"' + q + '" />' +
-            '<link rel="stylesheet" href="' + u + 'navigation.css"' + q + '" />'
-        );
+        (function() {
+            var u = (window._app.cssUrl ? window._app.cssUrl : "") + "/", q = window._app.version ? "?" + require.urlArgs : "";
+            (function(ss) {
+                for (var i=0, l=ss.length; i<l; i++) {
+                    var s = document.createElement("link");
+                    s.rel  = 'stylesheet';
+                    s.type = 'text/css';
+                    s.href = u + ss[i] + q;
+                    s.media = 'all';
+                    document.head.appendChild(s);
+                }
+            })(
+                ["bootstrap.css", "default.css", "navigation.css"]
+            );
+        })();
     </script>
 </head>
 <body>
 
     <div id="loading-screen" style="display: none"></div>
-    <script type="text/javascript">
-        document.getElementById("loading-screen").innerHTML = "Detecting features...";
-        document.write('<script src="' + (window._spa && window._spa.libsUrl ? window._spa.libsUrl : "") + '/feature-detect.js">\x3C/script>');
-    </script>
+
     <script id="loading-screen-script" type="text/javascript">
-    (function() {
-        for (var feature in Modernizr) {
-            if (!Modernizr[feature]) {
-                window.location = "/not-supported.html";
-                return;
-            }
-        }
-        var e = document.getElementById("loading-screen");
-        e.innerHTML = "Loading...";
-        setTimeout(function(){e.removeAttribute("style")}, 500);
-    })()
+        (function () {
+            var s = document.createElement("script"),
+                e = document.getElementById("loading-screen");
+            e.innerHTML = "Detecting features...";
+            s.async = true;
+            s.src = (window._app && window._app.libsUrl ? window._app.libsUrl : "") + "/feature-detect.js";
+            document.head.appendChild(s);
+            s.onload = function() {
+                for (var feature in Modernizr) {
+                    if (!Modernizr[feature]) {
+                        window.location = "/not-supported.html";
+                        return;
+                    }
+                }
+                e.innerHTML = "Loading...";
+                setTimeout(function(){e.style.display = ""}, 250);
+            };
+        })();
     </script>
 
     <div id="app-container" style="display: none">
     </div>
 
-    <script type="text/javascript" 
-            data-main="main.js" 
-            src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js">
-    </script>
+    <script type="text/javascript" data-main="main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
     <script type="text/javascript">
-        const 
-            libsUrl = window._spa && window._spa.libsUrl ? window._spa.libsUrl : "",
-            sysUrl = (window._spa.sysPath ? window._spa.sysPath : "spa") + "/";
-        window.requirejs || 
-            document.write(
-                '<script data-main="main.js" src="' + libsUrl + '/require.js">\x3C/script>'
-            );
-        requirejs.config({
-            paths: {
-                libs: libsUrl ? "../" + libsUrl : "../libs",
-                text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],
-                sys: sysUrl,
-                template: sysUrl + "require-plugins/template",
-                "cors-text": sysUrl + "require-plugins/cors-text",
-                "cors-template": sysUrl + "require-plugins/cors-template",
-                "ext-element": sysUrl + "extensions/HTMLElement",
-                "ext-string": sysUrl + "extensions/String"
+        (function () {
+            var libsUrl = window._app && window._app.libsUrl ? window._app.libsUrl : "",
+                libs = libsUrl ? "../" + libsUrl: "../libs"
+                sysUrl = window._app.sysPath ? window._app.sysPath : "../_sys",
+                configure = function () {
+                    window.requirejs.config({
+                        paths: {
+                            libs: libsUrl ? "../" + libsUrl : "../libs",
+                            text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],
+                            sys: sysUrl,
+                            template: sysUrl + "/require-plugins/template",
+                            "cors-text": sysUrl + "/require-plugins/cors-text",
+                            "cors-template": sysUrl + "/require-plugins/cors-template",
+                            "e-Element": sysUrl + "/extensions/HTMLElement",
+                            "e-String": sysUrl + "/extensions/String",
+                            e: sysUrl + "/require-plugins/extensions"
+                        }
+                    });
+                }
+            if (window.requirejs) {
+                configure();
+                return;
             }
-        });
+            var s = document.createElement("script");
+            s.async = true;
+            s.src = libsUrl + "/require.js";
+            s.setAttribute("data-main", "main.js")
+            document.head.appendChild(s);
+            s.onload = configure;
+        })();
     </script>
-
 </body>
 </html>

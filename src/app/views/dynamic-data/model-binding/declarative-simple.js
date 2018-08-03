@@ -1,4 +1,4 @@
-define(["spa/model"], Model => class {
+define(["sys/model"], Model => class {
 
     constructor() {
         this.model = new Model();

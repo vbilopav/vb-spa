@@ -52,49 +52,49 @@
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/cors-template"
+        module: "sys/cors-template"
     },
     'spa/cors-text.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/cors-text"
+        module: "sys/cors-text"
     },
     'spa/extensions.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/extensions"
+        module: "sys/extensions"
     },
     'spa/model.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/model"
+        module: "sys/model"
     },
     'spa/router.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/router"
+        module: "sys/router"
     },
     'spa/template-helpers.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/template-helpers"
+        module: "sys/template-helpers"
     },
     'spa/template.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/template"
+        module: "sys/template"
     },
     'spa/view-manager.js': {
         minify: true,
         minifyInlineHtml: true,
         minifyEngine: "uglify-es",
-        module: "spa/view-manager"
+        module: "sys/view-manager"
     },
     'templates/layout.html': {
         minify: true,
