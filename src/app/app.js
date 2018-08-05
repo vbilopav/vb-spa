@@ -4,8 +4,8 @@ define([
     "sys/model",
     "template!templates/layout.html",
     "routes/main",
-    "e-Element/addClass",
-    "e-Element/removeClass"
+    "extension-Element/addClass",
+    "extension-Element/removeClass"
 ], (
     Router,
     Manager,
@@ -35,7 +35,8 @@ define([
                 home: routerData.filter(item => item.id == "home")[0],
                 templates: routerData.filter(item => item.category === "templates"),
                 modules: routerData.filter(item => item.category === "modules"),
-                dynamic: routerData.filter(item => item.category === "dynamic")
+                dynamic: routerData.filter(item => item.category === "dynamic"),
+                components: routerData.filter(item => item.category === "components"),
             })
         );
 

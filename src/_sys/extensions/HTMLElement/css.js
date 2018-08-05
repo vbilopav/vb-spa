@@ -1,4 +1,4 @@
-define(["sys/test-prototype", "e-String/toCamelCase"], test => {
+define(["sys/test-prototype", "extension-String/toCamelCase"], test => {
         
     test(HTMLElement, ["css", "_styles"]);
 

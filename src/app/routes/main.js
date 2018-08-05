@@ -1,11 +1,13 @@
 define([
     "routes/templates",
     "routes/modules",
-    "routes/dynamic"
+    "routes/dynamic",
+    "routes/components",
 ], (
     templates,
     modules,
-    dynamic
+    dynamic,
+    components
 ) => Object.assign({
 
         "/": {
@@ -24,6 +26,7 @@ define([
 
     templates,
     modules,
-    dynamic
+    dynamic,
+    components
     
 ));

@@ -1,12 +1,12 @@
 define([
-    "e-Element/find",
-    "e-Element/forEachChild",
-    "e-Element/show",
-    "e-Element/hide",
-    "e-Element/appendTo",
-    "e-Element/on",
-    "e-Element/html",
-    "e-String/hashCode",
-    "e-String/createElement",
-    "e-String/html"
+    "extension-Element/find",
+    "extension-Element/forEachChild",
+    "extension-Element/show",
+    "extension-Element/hide",
+    "extension-Element/appendTo",
+    "extension-Element/on",
+    "extension-Element/html",
+    "extension-String/hashCode",
+    "extension-String/createElement",
+    "extension-String/html"
 ]);

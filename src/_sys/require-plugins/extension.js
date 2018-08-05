@@ -25,11 +25,11 @@ define(["module", "sys/test-prototype"], (_, test) => {
                 throw new Error(`"${name}" is not valid element for extension!`);
             }
             if (!window[elementName].prototype[extensionName]) {
-                req(["e-Element/" + extensionName], () => {
+                req(["extension-Element/" + extensionName], () => {
                     if (!window[elementName].prototype[extensionName]) {
                         applyExtension(elementName, extensionName);
-                        onload();
                     }
+                    onload();
                 });
             } else {
                 applyExtension(elementName, extensionName);

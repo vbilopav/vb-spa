@@ -1,4 +1,4 @@
-define(["sys/test-prototype", "e-Element/css"], test => {
+define(["sys/test-prototype", "extension-Element/css"], test => {
         
     test(HTMLElement, ["hide"]);
 

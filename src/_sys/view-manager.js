@@ -1,7 +1,7 @@
 define([], () => {
 
     const 
-        isTemplate = name => name.indexOf("template!") !== -1,
+        isTemplate = name => name.indexOf("template!") !== -1 || name.indexOf("component!") !== -1,
         prefix = "_view",
         getId = uriHash => prefix + uriHash,
         types = {template: 1, class: 2, string: 3},

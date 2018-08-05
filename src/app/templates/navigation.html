@@ -32,6 +32,15 @@
             </div>
         </div>
 
+        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
+            <button class="dropbtn">Components&nbsp;&#11206;</button>
+            <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
+                ${this.template.forEach(this.components, item =>
+                    `<a id="${item.id}" href="${item.url}">${item.title}</a>`
+                )}
+            </div>
+        </div>
+
     </div>
 
 </div>

@@ -20,7 +20,6 @@ define([], () => {
         };
 
     return {
-
         tagToElement: tagToElement,
         strToElement: str => getTemplate(str).content.firstChild,
         strToElements: str => getTemplate(str).content.childNodes,
@@ -30,5 +29,4 @@ define([], () => {
             return div.textContent || div.innerText || "";
         }
     }
-
 });

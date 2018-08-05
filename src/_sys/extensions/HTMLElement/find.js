@@ -1,11 +1,11 @@
-define(["sys/html", "sys/test-prototype"], (html, test) => {
+define(["sys/html-parsers", "sys/test-prototype"], (parser, test) => {
         
     test(HTMLElement, ["find"]);
     
     HTMLElement.prototype.find = function(search) {
         let e = this.querySelector(search);
         if (!e) {
-            e = html.tagToElement("dummy");
+            e = parser.tagToElement("dummy");
             e.length = 0;
             return e;
         }
