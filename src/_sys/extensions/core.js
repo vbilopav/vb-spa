@@ -7,6 +7,6 @@ define([
     "extension-Element/on",
     "extension-Element/html",
     "extension-String/hashCode",
-    "extension-String/createElement",
-    "extension-String/html"
+    "extension-String/html",
+    "extension!Window/on",
 ]);

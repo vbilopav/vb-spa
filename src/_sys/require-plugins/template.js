@@ -9,11 +9,12 @@ define([
     return {
         version: '1.0.0',
         load(name, req, onload) {
-            return req(["text!" + name], text => 
-                parser.parseImports(text, () => 
+            req(["text!" + name], text => 
+                parser.parseImportsAsync(text).then(() => 
                     onload((data, locale) => 
                         parser.parseTemplate(name, text, data, locale))));
         }
+        
     };
 
 });

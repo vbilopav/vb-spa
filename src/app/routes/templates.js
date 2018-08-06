@@ -85,5 +85,43 @@ define([], () => {
             },
         },
 
+        "/promise-in-template": {
+            view: "template!views/templates/promise-in-template.html",
+            paramsMap: async(params) => {
+                if (params.length !== 0) {
+                    return false;
+                }
+                const response = await fetch("/remote-data-example/frameworks.json", {cache: "no-store"});
+                return {
+                    data: await response.json()
+                }
+            },
+            data: {
+                title: "Promise in template",
+                category: "templates"
+            }
+        },
+
+        "/template-variables": {
+            view: "template!views/templates/template-variables.html",
+            data: {
+                title: "Template variables",
+                category: "templates"
+            },
+            paramsMap: () => {
+                return {
+                    myVariable4: ""
+                };
+            },
+        },
+
+        "/async-in-template": {
+            view: "async-template!views/templates/async-template.html",
+            data: {
+                title: "Async template",
+                category: "templates"
+            }
+        },
+
     }
 });

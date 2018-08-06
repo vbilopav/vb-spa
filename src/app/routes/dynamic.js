@@ -92,23 +92,6 @@ define([], () => {
             },
         },
 
-        "/promise-in-template": {
-            view: "template!views/dynamic-data/remote-data-example/promise-in-template.html",
-            paramsMap: async(params) => {
-                if (params.length !== 0) {
-                    return false;
-                }
-                const response = await fetch("/remote-data-example/frameworks.json", {cache: "no-store"});
-                return {
-                    data: await response.json()
-                }
-            },
-            data: {
-                title: "Promise in template",
-                category: "dynamic"
-            }
-        },
-
         "/crossdomain-module-example": {
             view: "https://crossdomain-example.netlify.com/module1.js",
             //view: "http://127.0.0.1:8081/module1.js",

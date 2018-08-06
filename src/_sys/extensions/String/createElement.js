@@ -1,8 +1,8 @@
-define(["sys/html-parsers", "sys/test-prototype"], (parser, test) => {
+define(["sys/html-helpers", "sys/test-prototype"], (html, test) => {
 
     test(String, ["createElement"]);
 
     String.prototype.createElement = function(id, content) {
-        return parser.tagToElement(this, id, content);
+        return html.tagToElement(this, id, content);
     }
 });

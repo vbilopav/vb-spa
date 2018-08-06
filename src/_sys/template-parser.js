@@ -1,49 +1,47 @@
-define([], () => {
-    
-    window._app.customElements = {
-        _tags: {},
-        define: (tag, Class, options) => {
-            let dashIndex = tag.indexOf("-");
-            if (dashIndex === -1 || dashIndex === 0 || dashIndex === tag.length - 1) {
-                throw new Error(`tag name "${tag}" malformed, it needs to have dashes inside name.`)
+define(["sys/template-helpers", "sys/test-prototype"], (helpers, test) => {
+
+    test(String, ["_async"]);
+
+    String._async = (pieces, ...subs) => {
+        return async () => {
+            for(let i = 0, l = subs.length; i < l; i++) {
+                let sub = subs[i];
+                if (sub instanceof Promise) {
+                    subs[i] = await sub;
+                }
+                if (typeof sub === "function") {
+                    let result = sub();
+                    if (result instanceof Promise) {
+                        result = await result;
+                    }
+                    subs[i] = result === undefined ? "" : result;
+                }
             }
-            window._app.customElements[tag] = {
-                tag: tag,
-                Class: Class,
-                options: options
-            }
+            return String.raw(pieces, ...subs);
         }
     };
 
-    const
-        helpers = {
-            forEach: (obj, template) => (
-                obj instanceof Array ? obj : Object.entries(obj)
-            ).map((item, index) => template(...(item instanceof Array ? item : [item]), index)).join(''),
-            import: name => require(name),
-            if: (condition, templateTrue, templateFalse) => (condition ? templateTrue : templateFalse)
-        },
-        parseTemplate = (name, text, data, locale) => {
-            data = data || {};
-            if (!data.template) {
-                data.template = helpers;
+    test(String, ["_template"]);
+
+    String._template = (pieces, ...subs) => {
+        for(let i = 0, l = subs.length; i < l; i++) {
+            let sub = subs[i];
+            if (typeof sub === "function") {
+                let result = sub();
+                subs[i] = result === undefined ? "" : result;
             }
-            if (locale) {
-                data.template = Object.assign(data.template, locale);
-            }
-            data.template.name = name;
-            return new Function("return `" + text + "`;").call(data)
-        };
-    
+        }
+        return String.raw(pieces, ...subs);
+    }
+
+
     const
         preloaded = ((window._app  && window._app.settings) ? (window._app.settings.usePreloadedTemplates == true) : false),
         searchImport = ".import(",
-        searchImportLen = searchImport.length;
-    
-    const
-        parseImports = (text, callback) => {
+        searchImportLen = searchImport.length,
+        parseImportsAsync = async text => await new Promise(resolve => {
             if (preloaded) {
-                callback();
+                resolve();
             }
             let from = 0, found = [];
             while (from > -1) {
@@ -58,14 +56,32 @@ define([], () => {
                 }
             }
             if (found.length) {
-                require(found, () => callback()); 
+                require(found, () => resolve()); 
             } else {
-                callback();
+                resolve();
             }
-        };
+        });
+
+    const
+        prepareTemplate = (data, name, locale) => {
+            data = data || {};
+            if (!data.template) {
+                data.template = helpers;
+            }
+            if (locale) {
+                data.template = Object.assign(data.template, locale);
+            }
+            data.template.name = name;
+            return data;
+        },
+        parseTemplate = (name, text, data, locale) => 
+            new Function("return String._template`" + text + "`;").call(prepareTemplate(data, name, locale)),
+        parseTemplateAsync = async (name, text, data, locale) => 
+            new Function("return String._async`" + text + "`;").call(prepareTemplate(data, name, locale))();
 
     return {
         parseTemplate: parseTemplate,
-        parseImports: parseImports
+        parseTemplateAsync: parseTemplateAsync,
+        parseImportsAsync: parseImportsAsync,
     }
 });

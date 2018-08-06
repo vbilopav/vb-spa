@@ -13,9 +13,8 @@ define([
                 response => response.text()
             ).then(
                 response => 
-                    parser.parseImports(response, () => 
-                        onload((data, locale) => 
-                            parser.parseTemplate(name, response, data, locale)))
+                    parser.parseImports(response).then(() => 
+                        onload((data, locale) => parser.parseTemplate(name, response, data, locale)))
             );
         }
     };

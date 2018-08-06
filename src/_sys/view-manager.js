@@ -1,7 +1,7 @@
 define([], () => {
 
     const 
-        isTemplate = name => name.indexOf("template!") !== -1 || name.indexOf("component!") !== -1,
+        isTemplate = name => name.indexOf("template!") !== -1,
         prefix = "_view",
         getId = uriHash => prefix + uriHash,
         types = {template: 1, class: 2, string: 3},
@@ -161,7 +161,13 @@ define([], () => {
                         data.element = element.html(view);
                     } else if (type === types.template) {
                         data.instance = view;
-                        element.html(view(args.params, {injected: injected}));
+                        let result = view(args.params, {injected: injected});
+                        if (typeof result === "string") {
+                            element.html(result);
+                        } else if (result instanceof Promise) {
+                            result.then(r => element.html(r));
+                        }
+                        
                     } else if (type === types.class) {
                         let options = {
                             disableCaching: false,

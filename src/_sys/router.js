@@ -49,7 +49,7 @@ define([], () => class {
     start() {
         this._onChangeEvent(undefined, true);
         var that = this;
-        window.addEventListener('hashchange', event => {
+        window.on('hashchange', event => {
             that._onChangeEvent.call(that, event)
         });
         return this;

@@ -1,0 +1,29 @@
+
+<div class="">
+    <h3>async template</h3>
+    <p>
+        Templates can contain async expressions<br />
+        For example:
+    ${
+        async () => { 
+            let response = await fetch("/remote-data-example/frameworks.json", {cache: "no-store"}); 
+            this.data = await response.json();
+        }
+    }
+<pre>
+...
+</pre>
+    <br /><hr />
+    ${() => this.template.forEach(this.data, (name1, value1) => 
+        `<p>
+            ${name1}
+            ${this.template.forEach(value1, (name2, value2) => 
+                `<div>
+                    <span>${name2}: </span><span>${value2}</span>
+                </div>`
+            )}
+        </p>`)
+    }
+    <hr />
+    </p>
+</div>
