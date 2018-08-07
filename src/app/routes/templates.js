@@ -107,12 +107,7 @@ define([], () => {
             data: {
                 title: "Template variables",
                 category: "templates"
-            },
-            paramsMap: () => {
-                return {
-                    myVariable4: ""
-                };
-            },
+            }
         },
 
         "/async-in-template": {
@@ -122,6 +117,29 @@ define([], () => {
                 category: "templates"
             }
         },
+
+        "/crossdomain-text-example": {
+            view: "cors-text!https://crossdomain-example.netlify.com/text-module1.html",
+            //view: "cors-template!http://127.0.0.1:8081/template1.html",
+            data: {
+                title: "Crossdomain text example",
+                category: "templates"
+            }
+        }, 
+
+        "/crossdomain-template-example": {
+            view: "cors-template!https://crossdomain-example.netlify.com/template1.html",
+            //view: "cors-template!http://127.0.0.1:8081/template1.html",
+            data: {
+                title: "Crossdomain template example",
+                category: "templates"
+            },
+            paramsMap: params => {
+                return {
+                    foo: "bar"
+                }
+            },
+        }, 
 
     }
 });

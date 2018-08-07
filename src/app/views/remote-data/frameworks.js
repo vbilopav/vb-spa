@@ -1,10 +1,4 @@
-define([
-    "views/dynamic-data/remote-data-example/data",
-    "sys/model"
-], (
-    fetchData,
-    Model
- ) => class {
+define(["sys/model"], Model => class {
      
     render() { 
         return String.html`
@@ -24,7 +18,7 @@ define([
     //
     async rendered({element}) {
         let 
-            data = await fetchData(),
+            data = await(await fetch("/remote-data-example/frameworks.json", {cache: "no-store"})).json(),
             anchorsHtml = Object.keys(data).map(
                 item => `<a href="#/remote-data-example/details/${item}">View details for ${item}</a><br />`
             ).join("");

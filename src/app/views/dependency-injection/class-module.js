@@ -15,7 +15,7 @@ define([], () => class {
                 <br />
                 This class  module, and all injected templates and modules are loaded at the same time asynchronously.
                 <br /><br />
-                View location: <pre>/app/views/dynamic-data/di/class-module.js</pre>
+                View location: <pre>/app/views/remote-data/di/class-module.js</pre>
                 <br />
                 injected template.html:
                 ${this.template1({

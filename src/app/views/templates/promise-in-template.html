@@ -16,7 +16,23 @@
     }
 </pre>
         <br />
-        This parameter function doesnt allow any parameters, instead, it return content of remote json file. Here is the result:
+        This parameter function doesnt allow any parameters, instead, it returns content of remote json file. 
+        <br />
+        Following template expression iterates the results:
+
+<pre>
+&dollar;{this.template.forEach(this.data, (name1, value1) =&gt; 
+    &#96;&lt;p&gt;
+        &dollar;{name1}
+        &dollar;{this.template.forEach(value1, (name2, value2) =&gt; 
+            &#96;&lt;div&gt;
+                &lt;span&gt;&dollar;{name2}: &lt;/span&gt;&lt;span&gt;&dollar;{value2}&lt;/span&gt;
+            &lt;/div&gt;&#96;
+        )}
+    &lt;/p&gt;&#96;
+)}
+</pre>
+        And here is the result:
         <br /><hr />
         ${this.template.forEach(this.data, (name1, value1) => 
             `<p>

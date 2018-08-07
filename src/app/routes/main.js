@@ -2,15 +2,17 @@ define([
 
     "routes/templates",
     "routes/modules",
-    "routes/dynamic",
-    "routes/components",
-    
+    "routes/dependency-injection",
+    "routes/model-binding",
+    "routes/remote-data",
+
 ], (
 
     templates,
     modules,
-    dynamic,
-    // components
+    di,
+    binding,
+    remote
 
 ) => Object.assign({
 
@@ -30,7 +32,8 @@ define([
 
     templates,
     modules,
-    dynamic,
-    // components
+    di,
+    binding,
+    remote,
     
 ));

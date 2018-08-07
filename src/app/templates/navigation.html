@@ -24,9 +24,27 @@
         </div> 
 
         <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-            <button class="dropbtn">Dynamic data&nbsp;&#11206;</button>
+                <button class="dropbtn">Dependency injection&nbsp;&#11206;</button>
+                <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
+                    ${this.template.forEach(this.di, item =>
+                        `<a id="${item.id}" href="${item.url}">${item.title}</a>`
+                    )}
+                </div>
+        </div>
+
+        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
+                <button class="dropbtn">Model binding&nbsp;&#11206;</button>
+                <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
+                    ${this.template.forEach(this.binding, item =>
+                        `<a id="${item.id}" href="${item.url}">${item.title}</a>`
+                    )}
+                </div>
+        </div>
+
+        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
+            <button class="dropbtn">Remote data&nbsp;&#11206;</button>
             <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
-                ${this.template.forEach(this.dynamic, item =>
+                ${this.template.forEach(this.remote, item =>
                     `<a id="${item.id}" href="${item.url}">${item.title}</a>`
                 )}
             </div>

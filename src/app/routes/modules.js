@@ -70,6 +70,15 @@ define([], () => {
             }
         }, 
 
+        "/crossdomain-module-example": {
+            view: "https://crossdomain-example.netlify.com/module1.js",
+            //view: "http://127.0.0.1:8081/module1.js",
+            data: {
+                title: "Crossdomain module example",
+                category: "modules"
+            }
+        }, 
+
 
     }
 });

@@ -1,10 +1,4 @@
-define([
-    "views/dynamic-data/remote-data-example/data",
-    "sys/model"
-], (
-    fetchData,
-    Model
- ) => class {
+define(["sys/model"], Model => class {
      
     render({params}) {
         let name = params;
@@ -62,12 +56,12 @@ define([
     rendered({params, element}) {
         let name = params;
         this.model = new Model().bind(element);
-        this.changed(name);
+        this.changed({name});
     }
 
     async changed({params}) {
         let name = params,
-            data = await fetchData(),
+            data = await(await fetch("/remote-data-example/frameworks.json")).json(),
             item = data[name];
         if (item) {
             this.model.name = name;

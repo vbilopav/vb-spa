@@ -62,7 +62,7 @@ define([], () => class {
             if (!attr.startsWith("on")) {
                 continue;
             }
-            const val = this._instance[node.value];
+            const val = this._instance[node.value.toCamelCase()];
             if (typeof val !== "function") {
                 continue;
             }
@@ -97,13 +97,15 @@ define([], () => class {
     }
 
     _assignProps(name, element) {
+        this._assignEvents(element);
+        
         if (!name) {
             return false;
         }
         if (name.indexOf("-") !== -1) {
             name = name.toCamelCase();
         }
-        this._assignEvents(element);
+        
         const node = element.nodeName;
         const that = this;
         Object.defineProperty(this, name, {

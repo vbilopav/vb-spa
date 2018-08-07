@@ -25,7 +25,7 @@ define([], () => class {
             let data = routes[route];
             this._test(route) || (() => {throw route})();
             this._routes[route] = {
-                id: data.id || route.replace(/\//g, ""),
+                id: data.id || route.replace(/\//g, "-"),
                 name: route,
                 view: data.view,
                 paramsMap: data.paramsMap || (args => (args.length === 0 ? {} : false)),

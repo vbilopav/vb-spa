@@ -24,7 +24,7 @@ define([
 
     const 
         page = new Model().bind(document.body),
-        validRoute = route => route && route.id && route.id !== "not-found",
+        validRoute = route => route && route.data,
         router = new Router({
             routes: routes,
             navigate: event => validRoute(event.route) && app[event.route.id.toCamelCase()].addClass("active"),
@@ -38,8 +38,9 @@ define([
             home: routerData.filter(item => item.id == "home")[0],
             templates: routerData.filter(item => item.category === "templates"),
             modules: routerData.filter(item => item.category === "modules"),
-            dynamic: routerData.filter(item => item.category === "dynamic"),
-            //components: routerData.filter(item => item.category === "components"),
+            di: routerData.filter(item => item.category === "dependency-injection"),
+            binding: routerData.filter(item => item.category === "model-binding"),
+            remote: routerData.filter(item => item.category === "remote-data"),
         })
     );
 
