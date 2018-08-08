@@ -5,6 +5,7 @@ define([
     "routes/dependency-injection",
     "routes/model-binding",
     "routes/remote-data",
+    "routes/components"
 
 ], (
 
@@ -12,7 +13,8 @@ define([
     modules,
     di,
     binding,
-    remote
+    remote,
+    components
 
 ) => Object.assign({
 
@@ -35,5 +37,6 @@ define([
     di,
     binding,
     remote,
-    
+    components,
+
 ));

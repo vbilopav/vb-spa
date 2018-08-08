@@ -3,9 +3,9 @@ define([], () => {
     return {
 
         "/component-demo": {
-            view: "views/components/components-demo",
+            view: "views/components/simple-component-demo",
             data: {
-                title: "Component demo - html tag",
+                title: "Simple component demo",
                 category: "components"
             }
         },

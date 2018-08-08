@@ -12,7 +12,7 @@ define([
             req(["text!" + name], text => 
                 parser.parseImportsAsync(text).then(() => 
                     onload((data, locale) => 
-                        parser.parseTemplate(name, text, data, locale))));
+                        parser.parseTemplate(text, data, locale, name))));
         }
         
     };

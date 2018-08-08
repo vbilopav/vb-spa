@@ -41,6 +41,7 @@ define([
             di: routerData.filter(item => item.category === "dependency-injection"),
             binding: routerData.filter(item => item.category === "model-binding"),
             remote: routerData.filter(item => item.category === "remote-data"),
+            components: routerData.filter(item => item.category === "components"),
         })
     );
 

@@ -10,10 +10,18 @@ define([], () => {
             }
         }, 
 
-        "/declarative-model-binding": {
-            view: "views/model-binding/declarative",
+        "/declarative-model-model-events": {
+            view: "views/model-binding/declarative-model-events",
             data: {
-                title: "Model binding - declarative",
+                title: "Declarative model binding and model events",
+                category: "model-binding"
+            }
+        }, 
+
+        "/declarative-model-view-events": {
+            view: "views/model-binding/declarative-view-events",
+            data: {
+                title: "Declarative model binding and view events",
                 category: "model-binding"
             }
         }, 

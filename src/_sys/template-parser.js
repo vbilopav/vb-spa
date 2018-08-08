@@ -1,8 +1,9 @@
 define(["sys/template-helpers", "sys/test-prototype"], (helpers, test) => {
 
-    test(String, ["_async"]);
+    _app.Template = {};
+    const template = window._app.Template;
 
-    String._async = (pieces, ...subs) => {
+    template.async = (pieces, ...subs) => {
         return async () => {
             for(let i = 0, l = subs.length; i < l; i++) {
                 let sub = subs[i];
@@ -21,9 +22,7 @@ define(["sys/template-helpers", "sys/test-prototype"], (helpers, test) => {
         }
     };
 
-    test(String, ["_template"]);
-
-    String._template = (pieces, ...subs) => {
+    template.template = (pieces, ...subs) => {
         for(let i = 0, l = subs.length; i < l; i++) {
             let sub = subs[i];
             if (typeof sub === "function") {
@@ -32,8 +31,7 @@ define(["sys/template-helpers", "sys/test-prototype"], (helpers, test) => {
             }
         }
         return String.raw(pieces, ...subs);
-    }
-
+    };
 
     const
         preloaded = ((window._app  && window._app.settings) ? (window._app.settings.usePreloadedTemplates == true) : false),
@@ -74,14 +72,32 @@ define(["sys/template-helpers", "sys/test-prototype"], (helpers, test) => {
             data.template.name = name;
             return data;
         },
-        parseTemplate = (name, text, data, locale) => 
-            new Function("return String._template`" + text + "`;").call(prepareTemplate(data, name, locale)),
-        parseTemplateAsync = async (name, text, data, locale) => 
-            new Function("return String._async`" + text + "`;").call(prepareTemplate(data, name, locale))();
+        parseTemplate = (text, data, locale, name) => 
+            new Function("return _app.Template.template`" + text + "`;").call(prepareTemplate(data, name, locale)),
+        parseTemplateAsync = async (text, data, locale, name) => 
+            new Function("return _app.Template.async`" + text + "`;").call(prepareTemplate(data, name, locale))(),
+
+        parseAsync = async (template, data, locale, name) => {
+            let text;
+            if (typeof template === "string") {
+                text = template;
+            } else {
+                text = template.toString();
+                let index = text.indexOf("`", 0);
+                if (index === -1) {
+                    throw new Error("Invalid template");
+                }
+                text =  text.substring(index+1, text.indexOf("`", index+1));
+            }
+            await parseImportsAsync(text);
+            return await parseTemplateAsync(text, data, locale, name)
+        }
+            
 
     return {
         parseTemplate: parseTemplate,
         parseTemplateAsync: parseTemplateAsync,
         parseImportsAsync: parseImportsAsync,
+        parseAsync: parseAsync
     }
 });

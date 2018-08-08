@@ -14,7 +14,7 @@ define([
             ).then(
                 response => 
                     parser.parseImports(response).then(() => 
-                        onload((data, locale) => parser.parseTemplate(name, response, data, locale)))
+                        onload((data, locale) => parser.parseTemplate(text, data, locale, name)))
             );
         }
     };

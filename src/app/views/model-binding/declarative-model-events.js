@@ -52,11 +52,13 @@ define(["sys/model"], Model => {
             <div>
                 <h3>Model binding support - declarative</h3>
                 <p>
-                    Demonstration for declarative bi-directional model binding support.
+                    Demonstration for declarative bi-directional model binding support. 
+                    Declarative model binding dynamically creates properties on model, based on your HTML markup.
+                    If element has id or name (in that order) - property with sam name (camel cased) will be available on your model.
                     <br />
-                    Also demonstrates event binding on model object.
+                    Also demonstrates event binding on model object. Element events are binded to methods with same name (camel cased) on model object
                     <br /><br />
-                    View location: <pre>/app/views/remote-data/model-binding/declarative.js</pre>
+                    View location: <pre>/app/views/model-binding/declarative-model-events.js</pre>
                     <br />
                   
                     <label for="name" style="width: 50px">Name: </label><input name="name" type="text"><br />

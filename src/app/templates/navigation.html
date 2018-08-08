@@ -5,50 +5,12 @@
 
     <div class="nav navbar-nav">
 
-        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-            <button class="dropbtn">Templates&nbsp;&#11206;</button>
-            <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
-                ${this.template.forEach(this.templates, item => 
-                    `<a id="${item.id}" href="${item.url}">${item.title}</a>`
-                )}
-            </div>
-        </div> 
-
-        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-            <button class="dropbtn">Modules&nbsp;&#11206;</button>
-            <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
-                ${this.template.forEach(this.modules, item => 
-                    `<a id="${item.id}" href="${item.url}">${item.title}</a>`
-                )}
-            </div>
-        </div> 
-
-        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-                <button class="dropbtn">Dependency injection&nbsp;&#11206;</button>
-                <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
-                    ${this.template.forEach(this.di, item =>
-                        `<a id="${item.id}" href="${item.url}">${item.title}</a>`
-                    )}
-                </div>
-        </div>
-
-        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-                <button class="dropbtn">Model binding&nbsp;&#11206;</button>
-                <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
-                    ${this.template.forEach(this.binding, item =>
-                        `<a id="${item.id}" href="${item.url}">${item.title}</a>`
-                    )}
-                </div>
-        </div>
-
-        <div class="dropdown" onmouseover="javascript: this.find('.dropdown-content').show();">
-            <button class="dropbtn">Remote data&nbsp;&#11206;</button>
-            <div class="dropdown-content navbar-inverse" onclick="javascript: this.hide();">
-                ${this.template.forEach(this.remote, item =>
-                    `<a id="${item.id}" href="${item.url}">${item.title}</a>`
-                )}
-            </div>
-        </div>
+        ${this.template.import("template!templates/menu.html")({title: "Templates", data: this.templates})}
+        ${this.template.import("template!templates/menu.html")({title: "Modules", data: this.modules})}
+        ${this.template.import("template!templates/menu.html")({title: "Dependency injection", data: this.di})}
+        ${this.template.import("template!templates/menu.html")({title: "Model binding", data: this.binding})}
+        ${this.template.import("template!templates/menu.html")({title: "Remote data", data: this.remote})}
+        ${this.template.import("template!templates/menu.html")({title: "Components", data: this.components})}
 
     </div>
 </div>
