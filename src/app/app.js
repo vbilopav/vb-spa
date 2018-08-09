@@ -39,7 +39,7 @@ define([
             templates: routerData.filter(item => item.category === "templates"),
             modules: routerData.filter(item => item.category === "modules"),
             models: routerData.filter(item => ["dependency-injection", "model-binding"].includes(item.category)),
-            advanced: routerData.filter(item => ["remote-data", "components"].includes(item.category)),
+            advanced: routerData.filter(item => ["remote-data", "components", "todo"].includes(item.category)),
         })
     );
 
