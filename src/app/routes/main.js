@@ -1,20 +1,10 @@
 define([
 
-    "routes/templates",
-    "routes/modules",
-    "routes/dependency-injection",
-    "routes/model-binding",
-    "routes/remote-data",
-    "routes/components"
+    "routes/templates", "routes/modules", "routes/dependency-injection", "routes/model-binding", "routes/remote-data", "routes/components"
 
 ], (
 
-    templates,
-    modules,
-    di,
-    binding,
-    remote,
-    components
+    templates,           modules,          di,                            binding,                remote,               components
 
 ) => Object.assign({
 

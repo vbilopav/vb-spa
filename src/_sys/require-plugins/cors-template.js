@@ -1,9 +1,7 @@
 define([
-    "module", 
-    "sys/template-parser"
+    "module", "sys/template/parser", "sys/template/import"
 ], (
-    _,
-    parser
+    _, parser, importParser
 ) => {
     
     return {
@@ -13,8 +11,7 @@ define([
                 response => response.text()
             ).then(
                 response => 
-                    parser.parseImports(response).then(() => 
-                        onload((data, locale) => parser.parseTemplate(text, data, locale, name)))
+                    importParser.parseImportsAsync(response).then(() => onload((data, locale) => parser.parseTemplate(text, data, locale, name)))
             );
         }
     };

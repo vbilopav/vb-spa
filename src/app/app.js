@@ -38,10 +38,8 @@ define([
             home: routerData.filter(item => item.id == "home")[0],
             templates: routerData.filter(item => item.category === "templates"),
             modules: routerData.filter(item => item.category === "modules"),
-            di: routerData.filter(item => item.category === "dependency-injection"),
-            binding: routerData.filter(item => item.category === "model-binding"),
-            remote: routerData.filter(item => item.category === "remote-data"),
-            components: routerData.filter(item => item.category === "components"),
+            models: routerData.filter(item => ["dependency-injection", "model-binding"].includes(item.category)),
+            advanced: routerData.filter(item => ["remote-data", "components"].includes(item.category)),
         })
     );
 

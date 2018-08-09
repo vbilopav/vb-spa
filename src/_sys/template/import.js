@@ -1,0 +1,35 @@
+define([], () => {
+
+    _app.import = m => new Promise(resolve => require([m], r => resolve(r)));
+
+    const
+        preloaded = ((window._app  && window._app.settings) ? (window._app.settings.usePreloadedTemplates == true) : false),
+        searchImport = ".import(",
+        searchImportLen = searchImport.length,
+        parseImportsAsync = text => new Promise(resolve => {
+            if (preloaded) {
+                resolve();
+            }
+            let from = 0, found = [];
+            while (from > -1) {
+                let index = text.indexOf(searchImport, from)
+                if (index === -1) {
+                    break;
+                }
+                index = index + searchImportLen
+                from = text.indexOf(")", index);
+                if (from !== -1) {
+                    found = found.concat(eval("[" + text.substring(index, from) + "]"))
+                }
+            }
+            if (found.length) {
+                require(found, () => resolve()); 
+            } else {
+                resolve();
+            }
+        });
+
+    return {
+        parseImportsAsync: parseImportsAsync
+    }
+});
