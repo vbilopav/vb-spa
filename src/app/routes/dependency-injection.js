@@ -30,7 +30,7 @@ define([], () => {
                 title: "Dependency injection - class module",
                 category: "dependency-injection"
             }
-        },
+        }
     }
 
 });

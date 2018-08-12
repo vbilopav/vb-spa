@@ -70,7 +70,7 @@
 
     <div id="app-container" style="display: none"></div>
 
-    <script type="text/javascript" data-main="main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script type="text/javascript" data-main="spa-main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
     <script type="text/javascript">
         (function () {
             var libsUrl = window._app && window._app.libsUrl ? window._app.libsUrl : "",
@@ -83,12 +83,9 @@
                             text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],
                             sys: sysUrl,
                             "template": sysUrl + "/require-plugins/template",
-                            "async-template": sysUrl + "/require-plugins/async-template",
-                            "composite-async-template": sysUrl + "/require-plugins/composite-async-template",
-                            "composite-template": sysUrl + "/require-plugins/composite-template",
+                            "composite": sysUrl + "/require-plugins/composite",
                             "cors-text": sysUrl + "/require-plugins/cors-text",
                             "cors-template": sysUrl + "/require-plugins/cors-template",
-                            "cors-async-template": sysUrl + "/require-plugins/cors-async-template",
                             "extension-Element": sysUrl + "/extensions/HTMLElement",
                             "extension-String": sysUrl + "/extensions/String",
                             "extension": sysUrl + "/require-plugins/extension"
@@ -102,7 +99,7 @@
             var s = document.createElement("script");
             s.async = true;
             s.src = libsUrl + "/require.js";
-            s.setAttribute("data-main", "main.js")
+            s.setAttribute("data-main", "spa-main.js")
             document.head.appendChild(s);
             s.onload = configure;
         })();

@@ -77,8 +77,6 @@ define([], () => {
                 title: "Crossdomain module example",
                 category: "modules"
             }
-        }, 
-
-
+        }
     }
 });

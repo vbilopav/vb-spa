@@ -40,6 +40,6 @@ define([
     binding,
     remote,
     components,
-    todo,
+    todo
 
 ));

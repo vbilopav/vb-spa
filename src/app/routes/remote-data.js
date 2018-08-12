@@ -36,7 +36,7 @@ define([], () => {
                     return false;
                 }
                 return params[0];
-            },
-        },
+            }
+        }
     }
 });

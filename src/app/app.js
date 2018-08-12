@@ -6,7 +6,7 @@ define([
     "template!templates/layout.html",
     "routes/main",
     "extension-Element/addClass",
-    "extension-Element/removeClass",
+    "extension-Element/removeClass"
 
 ], (
     
@@ -14,7 +14,7 @@ define([
     Manager,
     Model,
     layout,
-    routes,
+    routes
 
 ) => () => {
 

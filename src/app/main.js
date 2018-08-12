@@ -1,1 +1,0 @@
-define(["sys/extensions/core"], () => require(["app"], app => app()));

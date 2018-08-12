@@ -32,7 +32,7 @@ define([], () => {
                 title: "Model binding - programmatic",
                 category: "model-binding"
             }
-        }, 
+        }
 
     }
 });

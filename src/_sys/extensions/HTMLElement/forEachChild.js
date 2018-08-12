@@ -6,10 +6,8 @@ define(["sys/test-prototype"], test => {
         if (callFirst) {
             callback(this);
         }
-        if (this.children.length) {
-            for(let e of this.children) {
-                e.forEachChild(callback, true);
-            }
+        for(let i = 0, l = this.children.length; i < l; i++) {
+            this.children[i].forEachChild(callback, true);
         }
         return this;
     }

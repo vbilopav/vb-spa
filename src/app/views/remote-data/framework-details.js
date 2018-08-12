@@ -54,9 +54,8 @@ define(["sys/model"], Model => class {
     }
 
     rendered({params, element}) {
-        let name = params;
         this.model = new Model().bind(element);
-        this.changed({name});
+        this.changed({params});
     }
 
     async changed({params}) {

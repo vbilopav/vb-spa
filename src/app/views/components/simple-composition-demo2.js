@@ -5,8 +5,6 @@ define(["views/components/example-view"], ExampleView => class {
     }
 
     render(args) {
-        this.composedView.render(args);
-        
         return _app.parse(() => String.html`
             <div class="">
                 <h3>Simple parse html inside class view demonstration</h3>

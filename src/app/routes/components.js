@@ -25,5 +25,13 @@ define([], () => {
                 category: "components"
             }
         },
+
+        "/composition-template-demo": {
+            view: "template!views/components/composite-template.html",
+            data: {
+                title: "Simple template composition demo",
+                category: "components"
+            }
+        }
     }
 });

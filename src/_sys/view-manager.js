@@ -164,6 +164,7 @@ define([], () => {
                         let result = view(args.params, {injected: injected});
                         if (typeof result === "string") {
                             element.html(result);
+                            args.params.___rendered(element);
                         } else if (result instanceof Promise) {
                             result.then(r => element.html(r));
                         }

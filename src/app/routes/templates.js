@@ -111,7 +111,7 @@ define([], () => {
         },
 
         "/async-in-template": {
-            view: "async-template!views/templates/async-template.html",
+            view: "template!views/templates/async-template.html",
             data: {
                 title: "Async template",
                 category: "templates"
@@ -138,8 +138,8 @@ define([], () => {
                 return {
                     foo: "bar"
                 }
-            },
-        }, 
+            }
+        }
 
     }
 });

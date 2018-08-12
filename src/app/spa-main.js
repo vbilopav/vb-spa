@@ -1,0 +1,1 @@
+define(["sys/spa-core-define"], () => require(["app"], app => app()));
