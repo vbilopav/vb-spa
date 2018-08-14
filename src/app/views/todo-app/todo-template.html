@@ -13,11 +13,11 @@ ${
 <div class="ToDo">
     <h1 class="ToDo-Header">VB SPA template To Do</h1>
     <div class="ToDo-Container">
-    <div class="ToDo-Content" id="content">
-        ${() => this.template.forEach(this.list, item => this.item(item))}
-    </div>
-    <input type="text" id="input" value="${()=>this.value}" />
-    <div class="ToDo-Add" onclick="createNewToDoItem">+</div>
+        <div class="ToDo-Content" id="content">
+            ${() => this.template.forEach(this.list, item => this.item(item))}
+        </div>
+        <input type="text" id="input" value="${()=>this.value}" />
+        <div class="ToDo-Add" onclick="createNewToDoItem">+</div>
     </div>
 </div>
 ${

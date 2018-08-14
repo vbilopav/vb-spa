@@ -72,8 +72,23 @@ define([], () => {
                             element = "span".createElement(elementId).appendTo(this._container);
                         }
                         if (found.uriHash !== uriHash) {
-                            element.html(found.instance(args.params));
-                            found.uriHash = uriHash;
+                            let result = found.instance(args.params);
+                            if (typeof result === "string") {
+                                element.html(result);
+                                args.params.___rendered(element);
+                            } else if (result instanceof HTMLElement) {
+                                element.html("").append(result);
+                                args.params.___rendered(element);
+                            } else if (result instanceof Promise) {
+                                result.then(r => {
+                                    if (typeof r === "string") {
+                                        element.html(r);
+                                    } else {
+                                        element.html("").append(r);
+                                    }
+                                    args.params.___rendered(element);
+                                });
+                            }
                         }
                         this._current = element.show();
                         showView(found, element);
@@ -106,15 +121,41 @@ define([], () => {
                             }
 
                             let updateFunc = c => {
-                                if (c) {
-                                    element.html(c).show();
+                                if (typeof c === "function" || c instanceof Array) {
+                                    c = _app.parse(...c);
+                                    c.then(s => {
+                                        if (typeof s === "string") {
+                                            element.html(s).show();
+                                        } else {
+                                            element.html("").append(s).show();
+                                        }
+                                        if (found.instance.changed) {
+                                            found.instance.changed({params: args.params, element: element});
+                                        } else if (found.instance.rendered) {
+                                            found.instance.rendered({params: args.params, element: element});
+                                        }
+                                        showFunc();
+                                    })
+                                } else if (typeof c === "string" || c instanceof HTMLElement) {
+                                    if (typeof c === "string") {
+                                        element.html(c).show();
+                                    } else {
+                                        element.html("").append(c).show();
+                                    }
+                                    if (found.instance.changed) {
+                                        found.instance.changed({params: args.params, element: element});
+                                    } else if (found.instance.rendered) {
+                                        found.instance.rendered({params: args.params, element: element});
+                                    }
+                                    showFunc();
                                 }
-                                if (found.instance.changed) {
-                                    found.instance.changed({params: args.params, element: element});
-                                } else if (found.instance.rendered) {
-                                    found.instance.rendered({params: args.params, element: element});
-                                }
-                                showFunc();
+                            }
+
+                            if (typeof newContent === "function") {
+                                newContent = _app.parse(newContent);
+                            }
+                            if (newContent instanceof Array) {
+                                newContent = _app.parse(...newContent);
                             }
 
                             if (newContent instanceof Promise) {
@@ -165,8 +206,18 @@ define([], () => {
                         if (typeof result === "string") {
                             element.html(result);
                             args.params.___rendered(element);
+                        } else if (result instanceof HTMLElement) {
+                            element.html("").append(result);
+                            args.params.___rendered(element);
                         } else if (result instanceof Promise) {
-                            result.then(r => element.html(r));
+                            result.then(r => {
+                                if (typeof r === "string") {
+                                    element.html(r);
+                                } else {
+                                    element.html("").append(r);
+                                }
+                                args.params.___rendered(element);
+                            });
                         }
                         
                     } else if (type === types.class) {
@@ -187,14 +238,31 @@ define([], () => {
                     }
 
                     let contentFunc = c => {
-                        if (c) {
-                            element.html(c);
+                        if (typeof c === "function" || c instanceof Array) {
+                            c = _app.parse(...c);
+                            c.then(s => {
+                                if (typeof s === "string") {
+                                    element.html(s);
+                                } else {
+                                    element.html("").append(s);
+                                }
+                                !data.instance.rendered || data.instance.rendered({params: args.params, element: element});
+                            })
+                        } else if (typeof c === "string" || c instanceof HTMLElement) {
+                            if (typeof c === "string") {
+                                element.html(c);
+                            } else {
+                                element.html("").append(c);
+                            }
+                            !data.instance.rendered || data.instance.rendered({params: args.params, element: element});
                         }
-                        !data.instance.rendered || data.instance.rendered({params: args.params, element: element});
                     }
-                    
+
                     if (type === types.class) {
                         let content = data.instance.render({params: args.params, element: element});
+                        if (typeof content === "function" || content instanceof Array) {
+                            content = _app.parse(...content);
+                        }
                         if (content instanceof Promise) {
                             return content.then(s => {
                                 contentFunc(s);

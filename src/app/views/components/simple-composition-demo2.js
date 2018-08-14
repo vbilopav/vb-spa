@@ -5,7 +5,7 @@ define(["views/components/example-view"], ExampleView => class {
     }
 
     render(args) {
-        return _app.parse(() => String.html`
+        return [() => String.html`
             <div class="">
                 <h3>Simple parse html inside class view demonstration</h3>
                 <p>
@@ -20,7 +20,7 @@ define(["views/components/example-view"], ExampleView => class {
                     ${this.composed}
                 </p>
             </div>`, {composed: this.composedView.render(args)}
-        )
+        ]
     }
 
     rendered(args) {

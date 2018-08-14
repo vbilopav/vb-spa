@@ -8,6 +8,14 @@ define([], () => {
                 title: "todo app demo implemented in template",
                 category: "todo"
             }
+        },
+
+        "/todo-app-module-demo": {
+            view: "views/todo-app/todo-module",
+            data: {
+                title: "todo app demo implemented in module",
+                category: "todo"
+            }
         }
 
     }

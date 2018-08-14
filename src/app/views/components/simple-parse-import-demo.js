@@ -1,7 +1,7 @@
 define([], () => class {
 
     render() {
-        return _app.parse(() => String.html`
+        return [() => String.html`
             <div class="">
                 <h3>Simple parse html inside class view demonstration</h3>
                 <p>
@@ -18,6 +18,6 @@ define([], () => class {
                     ${new (this.template.import("views/components/example-view"))().render()}
                 </p>
             </div>`, {contextVar: "some value"}
-        )
+        ]
     }
 });

@@ -7,7 +7,7 @@ define([], () => class {
     async render(args) {
         this.composedView = new (await _app.import("views/components/example-view"))(this.ctorArgs);
         
-        return _app.parse(() => String.html`
+        return [() => String.html`
             <div class="">
                 <h3>Simple parse html inside class view demonstration</h3>
                 <p>
@@ -22,7 +22,7 @@ define([], () => class {
                     ${this.view.render(this.args)}
                 </p>
             </div>`, {view: this.composedView, args: args}
-        )
+        ]
     }
 
     rendered(args) {
