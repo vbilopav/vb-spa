@@ -9,10 +9,7 @@ define(["views/todo-app/todo-item-module"], Item => class {
 
     render() {
         return [() => String.html`
-            <style>
-                ${this.template.import("text!views/todo-app/todo.css")}
-                ${this.template.import("text!views/todo-app/todo-item.css")}
-            </style>
+            ${this.template.css.import("views/todo-app/todo.css", "views/todo-app/todo-item.css")}
             <div class="ToDo">
                 <h1 class="ToDo-Header">VB SPA template To Do</h1>
                 <div class="ToDo-Container">

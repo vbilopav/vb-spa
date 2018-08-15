@@ -12,6 +12,9 @@ define(["sys/template/helpers", "sys/template/import"], (helpers, importParser) 
             if (sub instanceof Promise) {
                 promises.push({index: i, sub: sub});
             }
+            if (sub === undefined) {
+                subs[i] = "";
+            }
         }
         if (!promises.length) {
             return String.raw(pieces, ...subs);
