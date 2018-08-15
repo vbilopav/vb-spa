@@ -10,7 +10,7 @@ define([], () => {
         css: {
             import: (...names) => 
                 `<style>
-                    ${(typeof names === "string" ? [names] : names).map(item => require(item.startsWith("text!") ? item : "text!" + item)).join("")}
+                    ${names.map(item => require(item.startsWith("text!") ? item : "text!" + item)).join("")}
                 </style>`
         },
 
