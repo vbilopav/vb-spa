@@ -1,9 +1,10 @@
 define(["sys/test-prototype"], test => {
 
-    //test(HTMLElement, ["append"]);
-
-    HTMLElement.prototype.appendTo = function(e) {
-        e.append(this);
-        return this;
+    if (!test(HTMLElement, ["append"], false)) {
+        HTMLElement.prototype.append = function(e) {
+            e.appendChild(this);
+            return this;
+        }
     }
+    
 });

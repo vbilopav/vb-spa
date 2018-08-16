@@ -16,7 +16,7 @@ define([
     layout,
     routes
 
-) => () => {
+) => (appElementId = "app") => {
 
     document.title = "SPA app demo";
 
@@ -33,7 +33,7 @@ define([
         }),
         routerData = router.getData();
 
-    page.appContainer.html(
+    page[appElementId].html(
         layout({
             home: routerData.filter(item => item.id == "home")[0],
             templates: routerData.filter(item => item.category === "templates"),
@@ -43,10 +43,10 @@ define([
         })
     );
 
-    app = new Model().bind(page.appContainer);
+    app = new Model().bind(page[appElementId]);
 
     page.loadingScreen.remove();
     page.loadingScreenScript.remove();
     router.useViewManager(new Manager(app.container)).start();
-    page.appContainer.show();
+    page[appElementId].show();
 });
