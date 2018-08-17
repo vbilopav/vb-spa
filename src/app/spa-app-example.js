@@ -4,10 +4,7 @@ define([
     "sys/view-manager",
     "sys/model",
     "template!templates/layout.html",
-    "routes/main",
-    "extension-Element/addClass",
-    "extension-Element/removeClass"
-
+    "routes/main"
 ], (
     
     Router,
@@ -16,7 +13,7 @@ define([
     layout,
     routes
 
-) => (appElementId = "app") => {
+) => appElementId => {
 
     document.title = "SPA app demo";
 
@@ -44,9 +41,6 @@ define([
     );
 
     app = new Model().bind(page[appElementId]);
-
-    page.loadingScreen.remove();
-    page.loadingScreenScript.remove();
     router.useViewManager(new Manager(app.container)).start();
     page[appElementId].show();
 });

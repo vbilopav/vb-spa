@@ -1,108 +1,25 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <script type="text/javascript" id="_app">
-        window._app = {
-            dev: true, 
-            version: "", 
-            appUrl: "app", 
-            cssUrl: "css", 
-            libsUrl: "libs",
-            sysPath: "../_sys", 
-            settings: {usePreloadedTemplates: false}
-        };
-    </script>
-    <script>
-        var require = {baseUrl: window._app.appUrl};
-        if (window._app && window._app.version) {
-            require.urlArgs = "v=" + window._app.version;
-        }
-    </script>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="vb spa demo">
-    <meta name="author" content="vb">
-
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="" />
+    
     <title></title>
+  </head>
+  <body>
 
-    <script id="_css">
-        (function() {
-            var u = (window._app.cssUrl ? window._app.cssUrl : "") + "/", q = window._app.version ? "?" + require.urlArgs : "";
-            (function(ss) {
-                for (var i=0, l=ss.length; i<l; i++) {
-                    var s = document.createElement("link");
-                    s.rel  = 'stylesheet';
-                    s.type = 'text/css';
-                    s.href = u + ss[i] + q;
-                    s.media = 'all';
-                    document.head.appendChild(s);
-                }
-            })(
-                ["bootstrap.css", "default.css", "navigation.css"]
-            );
-        })();
-    </script>
-</head>
-<body>
+    <div id="app">
+      <script src="libs/loading.js"></script>
+    </div>
 
-    <div id="loading-screen" style="display: none"></div>
-
-    <script id="loading-screen-script" type="text/javascript">
-        (function () {
-            var s = document.createElement("script"),
-                e = document.getElementById("loading-screen");
-            e.innerHTML = "Detecting features...";
-            s.async = true;
-            s.src = (window._app && window._app.libsUrl ? window._app.libsUrl : "") + "/feature-detect.js";
-            document.head.appendChild(s);
-            s.onload = function() {
-                for (var feature in Modernizr) {
-                    if (!Modernizr[feature]) {
-                        window.location = "/not-supported.html";
-                        return;
-                    }
-                }
-                e.innerHTML = "Loading...";
-                setTimeout(function(){e.style.display = ""}, 250);
-            };
-        })();
+    <script 
+      data-css-files="'bootstrap.css', 'default.css', 'navigation.css'",
+      data-app-module="spa-app-example",
+      src="_sys/index.js">
     </script>
 
-    <div id="app" style="display: none"></div>
-
-    <script type="text/javascript" data-main="spa-main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-            var libsUrl = window._app && window._app.libsUrl ? window._app.libsUrl : "",
-                libs = libsUrl ? "../" + libsUrl: "../libs"
-                sysUrl = window._app.sysPath ? window._app.sysPath : "../_sys",
-                configure = function () {
-                    window.requirejs.config({
-                        paths: {
-                            libs: libsUrl ? "../" + libsUrl : "../libs",
-                            text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],
-                            sys: sysUrl,
-                            "template": sysUrl + "/require-plugins/template",
-                            "composite": sysUrl + "/require-plugins/composite",
-                            "cors-text": sysUrl + "/require-plugins/cors-text",
-                            "cors-template": sysUrl + "/require-plugins/cors-template",
-                            "extension-Element": sysUrl + "/extensions/HTMLElement",
-                            "extension-String": sysUrl + "/extensions/String",
-                            "extension": sysUrl + "/require-plugins/extension"
-                        }
-                    });
-                }
-            if (window.requirejs) {
-                configure();
-                return;
-            }
-            var s = document.createElement("script");
-            s.async = true;
-            s.src = libsUrl + "/require.js";
-            s.setAttribute("data-main", "spa-main.js")
-            document.head.appendChild(s);
-            s.onload = configure;
-        })();
-    </script>
-</body>
+  </body>
 </html>

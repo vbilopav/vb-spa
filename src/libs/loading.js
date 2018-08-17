@@ -1,13 +1,18 @@
 (function () {
 
-    var element = document.createElement("div");
-    element.id = "loading-screen";
+    var 
+        element = document.createElement("div"),
+        id = document.currentScript.getAttribute("data-element-id") || "loading-screen",
+        parent = document.currentScript.parentElement;
+        
+    element.id = id;
     element.style.display = "none";
     element.style.width = "100%";
     element.style["margin-left"] = "40%";
     element.style["margin-top"] = "10%";
+    element.style["font-family"] = "Arial";
     element.style["font-size"] = "5em";
-    document.body.appendChild(element);
+    parent.appendChild(element);
 
     var script = document.createElement("script");
     element.innerHTML = "Detecting features...";
@@ -22,8 +27,12 @@
                 return;
             }
         }
+        
         element.innerHTML = "Loading...";
-        setTimeout(function(){element.style.display = ""}, 250);
+
+        setTimeout(function() {
+            element.style.display = "";
+        }, 250);
     };
 
 })();

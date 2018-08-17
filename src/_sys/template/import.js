@@ -1,7 +1,5 @@
 define([], () => {
 
-    _app.import = m => new Promise(resolve => require([m], r => resolve(r)));
-
     const
         preloaded = ((window._app  && window._app.settings) ? (window._app.settings.usePreloadedTemplates == true) : false),
         searchImport = ".import(",
