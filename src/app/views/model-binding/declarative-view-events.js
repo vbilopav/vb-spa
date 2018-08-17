@@ -1,7 +1,7 @@
-define(["sys/model"], Model => {
+define([], () => {
 
     const
-        model = new Model();
+        model = new _app.Model();
 
     return  class {
         render() {

@@ -1,4 +1,4 @@
-define(["sys/model"], Model => class {
+define([], () => class {
      
     render({params}) {
         let name = params;
@@ -54,7 +54,7 @@ define(["sys/model"], Model => class {
     }
 
     rendered({params, element}) {
-        this.model = new Model().bind(element);
+        this.model = new _app.Model().bind(element);
         this.changed({params});
     }
 

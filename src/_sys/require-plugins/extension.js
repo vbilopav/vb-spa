@@ -1,4 +1,4 @@
-define(["module", "sys/test-prototype"], (_, test) => {
+define(["module", "sys/test-proto"], (_, test) => {
     
     const 
         applyExtension = (element, extension) => {

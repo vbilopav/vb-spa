@@ -1,4 +1,4 @@
-define(["sys/html-helpers", "sys/test-prototype"], (html, test) => {
+define(["sys/template/html-helpers", "sys/test-proto"], (html, test) => {
 
     test(String, ["createElement"]);
 

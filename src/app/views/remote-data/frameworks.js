@@ -1,4 +1,4 @@
-define(["sys/model"], Model => class {
+define([], () => class {
      
     render() { 
         return String.html`
@@ -24,7 +24,7 @@ define(["sys/model"], Model => class {
             ).join("");
 
         // rendered event will only be triggered once since this view doesn't allow params
-        new Model().bind(element).anchors = anchorsHtml;
+        new _app.Model().bind(element).anchors = anchorsHtml;
     }
     
 })

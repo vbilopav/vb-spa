@@ -1,5 +1,5 @@
 define([
-    "sys/model",
+    "sys/models/model",
     "extension-Element/find",
     "extension-Element/forEachChild",
     "extension-Element/show",

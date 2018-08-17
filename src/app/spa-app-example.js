@@ -1,18 +1,14 @@
 define([
-
     "sys/router",
-    "sys/view-manager",
-    "sys/model",
+    "sys/view-manager/spa",
     "template!templates/layout.html",
     "routes/main"
 ], (
-    
     Router,
     Manager,
-    Model,
     layout,
     routes
-
+    
 ) => appElementId => {
 
     document.title = "SPA app demo";
@@ -20,7 +16,7 @@ define([
     var app;
 
     const 
-        page = new Model().bind(document.body),
+        page = new _app.Model().bind(document.body),
         validRoute = route => route && route.data,
         router = new Router({
             routes: routes,
@@ -40,7 +36,7 @@ define([
         })
     );
 
-    app = new Model().bind(page[appElementId]);
+    app = new _app.Model().bind(page[appElementId]);
     router.useViewManager(new Manager(app.container)).start();
     page[appElementId].show();
 });

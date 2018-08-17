@@ -1,7 +1,7 @@
-define(["sys/model"], Model => {
+define([], () => {
 
     const
-        model = new Model({
+        model = new _app.Model({
             name: "name", // when value is string bind will match id or name
             email: e => e.name === "email", // value can be function to test element
             select: e => e.matches("[name=select]"), // so that selector can also be used

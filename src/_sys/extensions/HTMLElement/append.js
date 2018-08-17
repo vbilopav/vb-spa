@@ -1,4 +1,4 @@
-define(["sys/test-prototype"], test => {
+define(["sys/test-proto"], test => {
 
     if (!test(HTMLElement, ["append"], false)) {
         HTMLElement.prototype.append = function(e) {

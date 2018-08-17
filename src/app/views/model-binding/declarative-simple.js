@@ -1,7 +1,7 @@
-define(["sys/model"], Model => class {
+define([], () => class {
 
     constructor() {
-        this.model = new Model();
+        this.model = new _app.Model();
         this.text = "initial text";
     }
 

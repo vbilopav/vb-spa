@@ -1,4 +1,4 @@
-define(["sys/test-prototype"], test => {
+define(["sys/test-proto"], test => {
 
     test(HTMLElement, ["toggleClass"]);
 

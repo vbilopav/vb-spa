@@ -1,4 +1,4 @@
-define(["sys/model"], Model => class {
+define([], () => class {
 
     render({element}) {
         element.html(
@@ -12,7 +12,7 @@ define(["sys/model"], Model => class {
         );
 
         this.username = "vbilopav"; // default value for the model element username
-        this.model = new Model().bind(element, this);
+        this.model = new _app.Model().bind(element, this);
     }
 
     showClick() {
