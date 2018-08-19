@@ -41,8 +41,8 @@
         cssFiles = attrValue !== null ? eval("[" + attrValue + "]") : [];
         
     if (cssFiles.length) {
-        for (var i=0, l=cssFiles.length; i<l; i++) {
-            var script = document.createElement("link");
+        for (let i=0, l=cssFiles.length; i<l; i++) {
+            let script = document.createElement("link");
             script.rel  = 'stylesheet';
             script.type = 'text/css';
             script.href = cssUrl + "/" + cssFiles[i] + (version ? "?" + require.urlArgs : "");
@@ -53,7 +53,7 @@
 
     const 
         loadLoader = (src, onload) => {
-            var script = document.createElement("script");
+            let script = document.createElement("script");
             script.async = true;
             script.src = src;
             script.setAttribute("data-main", sysUrl + "/main.js")
