@@ -2,8 +2,7 @@ ${this.template.css.import("views/todo-app/todo.css", "views/todo-app/todo-item.
 
 ${
     (() => {
-        let [item] = this.template.import("composite!views/todo-app/todo-item-template.html")();
-        this.item = item;
+        [this.item] = this.template.import("composite!views/todo-app/todo-item-template.html")();
         this.list = ["clean the house", "buy milk"];
         this.value = "";
     })()

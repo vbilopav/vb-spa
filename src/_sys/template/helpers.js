@@ -8,10 +8,13 @@ define([], () => {
         import: name => require(name),
 
         css: {
-            import: (...names) => 
-                `<style>
-                    ${names.map(item => require(item.startsWith("text!") ? item : "text!" + item)).join("")}
-                </style>`
+            import: (...names) => {
+                document.head.appendChild(
+                    `<style type="text/css">
+                        ${names.map(item => require(item.startsWith("text!") ? item : "text!" + item)).join("")}
+                    </style>`.toHTML()
+                )
+            }
         },
 
         if: (condition, templateTrue, templateFalse) => (condition ? templateTrue : templateFalse),

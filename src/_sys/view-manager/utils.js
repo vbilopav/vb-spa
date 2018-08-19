@@ -26,7 +26,13 @@ define([], () => {
         getId: getId,
         types: types,
         getViewType: getViewType,
-        showView: showView
+        showView: showView,
+        prepareParams: async params => {
+            if (params instanceof Promise) {
+                return await params
+            }
+            return params
+        }
     }
 
  });

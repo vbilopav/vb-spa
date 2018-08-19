@@ -19,7 +19,8 @@ define(["views/todo-app/todo-item-module"], Item => class {
                     <input type="text" id="input" value="${this.value}" />
                     <div class="ToDo-Add" onclick="createNewToDoItem">+</div>
                 </div>
-            </div>`, this
+            </div>`, 
+            this
         ];
     }
 

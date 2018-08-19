@@ -17,7 +17,7 @@ define([
 ], Model => {
 
     _app.Model = Model;
-    _app.import = m => new Promise(resolve => require([m], r => resolve(r)));
+    _app.import = m => new Promise(resolve => require(m, r => resolve(r)));
 
     require([_app.config.module], app => app(_app.config.elementId));
 

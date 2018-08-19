@@ -10,7 +10,8 @@
         cssUrl = scr.getAttribute("data-css-url") === null ? "css" : scr.getAttribute("data-css-url"),
         libsUrl = scr.getAttribute("data-libs-url") === null ? "libs" : scr.getAttribute("data-libs-url"),
         sysPath = scr.getAttribute("data-sys-url") === null ? "_sys" : scr.getAttribute("data-sys-url"),
-        appModule = scr.getAttribute("data-app-module") === null ? "app" : scr.getAttribute("data-app-module"),
+        appModule = scr.getAttribute("data-app-module") === null ? "sys/single-view-app" : scr.getAttribute("data-app-module"),
+        viewModule = scr.getAttribute("data-view-module"),
         appElementId = scr.getAttribute("data-app-container-id") || "app",
         settings = eval("(" + scr.getAttribute("data-settings") + ")") || "{usePreloadedTemplates: false}",
         sysUrl = "../" + sysPath;
@@ -25,6 +26,7 @@
         settings: settings,
         config: {
             module: appModule,
+            view: viewModule,
             elementId: appElementId
         }
     };

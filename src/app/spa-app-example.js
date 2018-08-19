@@ -1,6 +1,6 @@
 define([
-    "sys/router",
-    "sys/view-manager/spa",
+    "sys/spa/router",
+    "sys/spa/view-manager",
     "template!templates/layout.html",
     "routes/main"
 ], (
