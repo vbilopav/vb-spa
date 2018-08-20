@@ -1,18 +1,27 @@
 (function () {
 
-    const 
-        scr = document.currentScript;
-
     const
+        defaults = {
+            version: "",
+            appUrl: "app",
+            cssUrl: "css",
+            libsUrl: "libs",
+            sysPath: "_sys",
+            appModule: "sys/single-view-app",
+            appElementId: "app"
+        }
+        
+    const
+        scr = document.currentScript,
         dev = scr.getAttribute("data-dev") === null ? true : eval(scr.getAttribute("data-dev")),
-        version = scr.getAttribute("data-version") === null ? "" : scr.getAttribute("data-version"),
-        appUrl = scr.getAttribute("data-app-url") === null ? "app" : scr.getAttribute("data-app-url"),
-        cssUrl = scr.getAttribute("data-css-url") === null ? "css" : scr.getAttribute("data-css-url"),
-        libsUrl = scr.getAttribute("data-libs-url") === null ? "libs" : scr.getAttribute("data-libs-url"),
-        sysPath = scr.getAttribute("data-sys-url") === null ? "_sys" : scr.getAttribute("data-sys-url"),
-        appModule = scr.getAttribute("data-app-module") === null ? "sys/single-view-app" : scr.getAttribute("data-app-module"),
+        version = scr.getAttribute("data-version") === null ? defaults.version : scr.getAttribute("data-version"),
+        appUrl = scr.getAttribute("data-app-url") === null ? defaults.appUrl : scr.getAttribute("data-app-url"),
+        cssUrl = scr.getAttribute("data-css-url") === null ? defaults.cssUrl : scr.getAttribute("data-css-url"),
+        libsUrl = scr.getAttribute("data-libs-url") === null ? defaults.libsUrl : scr.getAttribute("data-libs-url"),
+        sysPath = scr.getAttribute("data-sys-url") === null ? defaults.sysPath : scr.getAttribute("data-sys-url"),
+        appModule = scr.getAttribute("data-app-module") === null ? defaults.appModule : scr.getAttribute("data-app-module"),
         viewModule = scr.getAttribute("data-view-module"),
-        appElementId = scr.getAttribute("data-app-container-id") || "app",
+        appElementId = scr.getAttribute("data-app-container-id") || defaults.appElementId,
         settings = eval("(" + scr.getAttribute("data-settings") + ")") || "{usePreloadedTemplates: false}",
         sysUrl = "../" + sysPath;
 

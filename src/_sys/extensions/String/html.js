@@ -1,4 +1,4 @@
-define(["sys/test-proto"], test => {
+define(["sys/models/test-proto"], test => {
 
     test(String, ["html"]);
     //

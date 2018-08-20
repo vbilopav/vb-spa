@@ -1,4 +1,4 @@
-define(["sys/template/html", "sys/test-proto"], (html, test) => {
+define(["sys/template/html", "sys/models/test-proto"], (html, test) => {
 
     test(String, ["createElement"]);
 
