@@ -1,3 +1,9 @@
+
+# **Warning**: this project is moved to [https://github.com/vbilopav/vbjs](https://github.com/vbilopav/vbjs)
+
+
+
+
 # VBSPA Single-Page Application Framework
 
 > **VBSPA** is JavaScript Framework that offers simple and easy way to create amazing fast and slick [**Single-Page Web Applications**](https://en.wikipedia.org/wiki/Single-page_application).
